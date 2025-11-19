@@ -418,14 +418,6 @@ h2 {
   .video-thumb {
     height: 140px;
   }
-
-  .dashboard-header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    align-items: center;
-  }
-
   .logo-row {
     justify-content: center;
   }
