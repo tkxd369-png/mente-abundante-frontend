@@ -117,14 +117,26 @@ async function loadDashboard() {
 
     const refId = user.refid || "";
 
-    if (refId && referralInput) {
+    if (refId) {
+      // Construimos el enlace con el dominio actual del frontend
       const referralUrl = `${window.location.origin}/?ref=${encodeURIComponent(refId)}`;
 
-      referralInput.value = referralUrl;
-      referralInput.dataset.url = referralUrl;
+      // Input de enlace
+      if (referralInput) {
+        referralInput.value = referralUrl;
+        referralInput.dataset.url = referralUrl;
+      }
 
+      // Badge de REF también conoce el enlace
+      if (refBadge) {
+        refBadge.textContent = `REF: ${refId}`;
+        refBadge.dataset.url = referralUrl;
+      }
+
+      // Guardamos también en localStorage por si se usa en otra parte
       localStorage.setItem("ma_ref_code", refId);
 
+      // Generar QR si la librería está disponible
       if (qrCanvas && window.QRious) {
         new QRious({
           element: qrCanvas,
@@ -232,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordForm = document.getElementById("passwordForm");
     const passwordMsg = document.getElementById("passwordMessage");
 
-    // Por ahora dejamos estos formularios "simulados" hasta que creemos las rutas en el backend
+    // Por ahora seguimos simulando hasta que conectemos al backend
     if (profileForm) {
       profileForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -292,6 +304,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (msg) {
           msg.textContent = "Enlace copiado. ¡Compártelo por mensaje, WhatsApp o redes! ✨";
+        }
+      } catch (err) {
+        console.error(err);
+        if (msg) {
+          msg.textContent = "No se pudo copiar automáticamente, pero puedes seleccionar y copiar el link.";
+        }
+      }
+    });
+  }
+
+  // Clic en REF (arriba) para copiar también el enlace
+  const refBadge = document.getElementById("dashRefBadge");
+  if (refBadge) {
+    refBadge.addEventListener("click", async () => {
+      const urlFromBadge = refBadge.dataset.url;
+      const linkInput = document.getElementById("referralLink");
+      const fallbackUrl = linkInput && linkInput.value;
+      const text = urlFromBadge || fallbackUrl;
+      const msg = document.getElementById("copyMessage") || document.getElementById("dashMessage");
+
+      if (!text) return;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          // Fallback
+          if (linkInput) {
+            linkInput.focus();
+            linkInput.select();
+            document.execCommand("copy");
+          }
+        }
+        if (msg) {
+          msg.textContent = "Enlace de invitación copiado desde tu código REF. ✨";
         }
       } catch (err) {
         console.error(err);
