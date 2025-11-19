@@ -446,3 +446,75 @@ h2 {
     padding: 6px 12px;
   }
 }
+/* ---- Feed tipo TikTok en dashboard ---- */
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0 4px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.feed-card {
+  border-radius: 18px;
+  background: #0b1120;
+  color: #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
+}
+
+.feed-media {
+  width: 100%;
+  /* Simula un video vertical 9:16 */
+  aspect-ratio: 9 / 16;
+  background: radial-gradient(circle at 20% 0, #fef9c3, #f97316 35%, #7c2d12 80%);
+}
+
+.feed-meta {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feed-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feed-caption {
+  font-size: 11px;
+  color: #cbd5f5;
+}
+
+/* Compactar info de conexión */
+.data-row-compact {
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.data-row-compact .pill-data {
+  font-size: 11px;
+  padding: 6px 10px;
+}
+
+/* Ajustes móviles específicos */
+@media (max-width: 480px) {
+  .feed-container {
+    max-height: none;
+    padding-right: 0;
+  }
+
+  .feed-card {
+    border-radius: 16px;
+  }
+
+  .feed-media {
+    aspect-ratio: 9 / 16;
+  }
+}
