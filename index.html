@@ -12,6 +12,19 @@
   <title>Mente Abundante – Inicio</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+<script>
+  // Cuando la landing carga, lee ?ref= de la URL y lo guarda
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const refFromUrl = params.get('ref');
+    if (refFromUrl) {
+      // Guardamos el código de invitación en localStorage
+      localStorage.setItem('ma_ref_code', refFromUrl);
+    }
+  })();
+</script>
+</body>
+</html>
  <body>
   <div class="main-shell">
     <div class="card">
