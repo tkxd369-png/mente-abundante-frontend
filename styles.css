@@ -57,6 +57,7 @@ body {
 
 .card-left {
   border-right: 1px solid var(--border-soft);
+  position: relative;
 }
 
 @media (max-width: 800px) {
@@ -80,7 +81,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 26px;
+  margin-bottom: 10px;
 }
 
 .logo-drop {
@@ -112,6 +113,17 @@ body {
   color: var(--text-soft);
   text-transform: uppercase;
   letter-spacing: 0.16em;
+}
+
+/* BLOQUE SUPERIOR FIJO (logo + nombre + REF) */
+
+.dashboard-top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #ffffff;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 /* TIPOGRAFÍA GENERAL */
@@ -289,12 +301,13 @@ h2 {
 .section-title {
   font-size: 18px;
   margin-bottom: 6px;
+  margin-top: 6px;
 }
 
 .section-sub {
   font-size: 12px;
   color: var(--text-soft);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .data-row {
@@ -316,7 +329,7 @@ h2 {
   margin-right: 4px;
 }
 
-/* Versión compacta de data-row */
+/* Versión compacta */
 
 .data-row-compact {
   gap: 6px;
@@ -328,19 +341,13 @@ h2 {
   padding: 6px 10px;
 }
 
-/* DASHBOARD HEADER */
+/* DASHBOARD HEADER (nombre + REF) */
 
 .dashboard-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: white;
-  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 6px;
 }
 
 .dashboard-name {
@@ -385,10 +392,20 @@ h2 {
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
 }
 
+/* Estas clases usan TUS IMÁGENES */
 .feed-media {
   width: 100%;
-  aspect-ratio: 9 / 16; /* simula video vertical */
-  background: radial-gradient(circle at 20% 0, #fef9c3, #f97316 35%, #7c2d12 80%);
+  aspect-ratio: 9 / 16;
+  background-size: cover;
+  background-position: center;
+}
+
+.feed-media-agua {
+  background-image: url("img/feed-agua.jpg");
+}
+
+.feed-media-dorado {
+  background-image: url("img/feed-dorado.jpg");
 }
 
 .feed-meta {
@@ -408,59 +425,17 @@ h2 {
   color: #cbd5f5;
 }
 
-/* (Opcional) Estilos de un strip motivacional anterior, por si se usan en otra página */
-
-.motivation-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.motivation-item {
-  display: flex;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 14px;
-  background: #f4f4f5;
-}
-
-.motivation-photo {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #facc15, #f97316, #ef4444);
-  flex-shrink: 0;
-}
-
-.motivation-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.motivation-title {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.motivation-caption {
-  font-size: 11px;
-  color: var(--text-soft);
-}
-
 /* -----------------------------------------------
    📱 OPTIMIZACIÓN MÓVIL
-   Para pantallas de 480px hacia abajo
 ------------------------------------------------ */
 @media (max-width: 480px) {
 
   html,
   body {
-    background: #ffffff !important; /* Fondo totalmente blanco en móvil */
+    background: #ffffff !important;
     margin: 0;
     padding: 0;
-    font-size: 16px; /* Texto base un poco más grande */
+    font-size: 16px;
   }
 
   .main-shell {
@@ -471,8 +446,8 @@ h2 {
   .card {
     max-width: 100%;
     width: 100%;
-    border-radius: 0; /* sensación de app móvil */
-    box-shadow: none; /* sin sombra en móvil */
+    border-radius: 0;
+    box-shadow: none;
     grid-template-columns: 1fr !important;
   }
 
@@ -508,9 +483,6 @@ h2 {
     height: 140px;
   }
 
-  /* En móvil el header se mantiene en línea:
-     nombre a la izquierda, REF a la derecha (no tocamos flex) */
-
   .feed-container {
     max-height: none;
     padding-right: 0;
@@ -518,10 +490,6 @@ h2 {
 
   .feed-card {
     border-radius: 16px;
-  }
-
-  .feed-media {
-    aspect-ratio: 9 / 16;
   }
 
   .data-row-compact .pill-data {
