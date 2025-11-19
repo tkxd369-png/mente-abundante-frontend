@@ -67,52 +67,57 @@
         <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
 
         <!-- CAMBIO DE CONTRASEÑA -->
-        <div>
-          <div class="section-title">Seguridad</div>
-          <div class="section-sub">
-            Cambia tu contraseña cuando lo consideres necesario. Te recomendamos no compartirla con nadie.
-          </div>
+        <form class="form" id="passwordForm">
+  <div>
+    <div class="label">Contraseña actual</div>
+    <input
+      class="input"
+      type="password"
+      name="currentPassword"
+      required
+      placeholder="••••••••"
+    />
+  </div>
 
-          <form class="form" id="passwordForm">
-            <div>
-              <div class="label">Contraseña actual</div>
-              <input
-                class="input"
-                type="password"
-                name="currentPassword"
-                required
-                placeholder="••••••••"
-              />
-            </div>
+  <div>
+    <div class="label">Nueva contraseña</div>
+    <input
+      class="input"
+      type="password"
+      name="newPassword"
+      id="newPassword"
+      required
+      placeholder="••••••••"
+    />
+  </div>
 
-            <div>
-              <div class="label">Nueva contraseña</div>
-              <input
-                class="input"
-                type="password"
-                name="newPassword"
-                required
-                placeholder="••••••••"
-              />
-            </div>
+  <div>
+    <div class="label">Confirmar nueva contraseña</div>
+    <input
+      class="input"
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      required
+      placeholder="••••••••"
+    />
+  </div>
 
-            <div>
-              <div class="label">Confirmar nueva contraseña</div>
-              <input
-                class="input"
-                type="password"
-                name="confirmPassword"
-                required
-                placeholder="••••••••"
-              />
-            </div>
+  <!-- Toggle mostrar/ocultar -->
+  <div class="small-note">
+    <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+      <input type="checkbox" id="showNewPassword" style="margin: 0;" />
+      <span>Mostrar la nueva contraseña mientras escribo</span>
+    </label>
+  </div>
 
-            <button type="submit" class="btn btn-secondary">
-              Actualizar contraseña
-            </button>
+  <button type="submit" class="btn btn-secondary">
+    Actualizar contraseña
+  </button>
 
-            <p class="small-note" id="passwordMessage"></p>
-          </form>
+  <p class="small-note" id="passwordMessage"></p>
+</form>
+
         </div>
 
         <div class="button-row" style="margin-top: 20px;">
