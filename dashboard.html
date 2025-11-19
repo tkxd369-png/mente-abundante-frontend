@@ -60,24 +60,62 @@
           <p class="small-note" id="dashMessage"></p>
         </div>
       </div>
+    <div class="card-right">
+  <div class="section-title">Próximos pasos</div>
+  <div class="section-sub">
+    Comparte tu enlace o QR con las personas que sabes que están listas para decidir ser abundantes.
+    Cada persona que entra con tu invitación suma a tus referidos.
+  </div>
 
-      <div class="card-right">
-        <div class="section-title">Próximos pasos</div>
-        <div class="section-sub">
-          Comparte tu enlace o QR (próximamente) con las personas que sabes que están listas para decidir ser abundantes.
-        </div>
+  <!-- Bloque de compartir enlace y QR -->
+  <div class="section-title" style="margin-top: 18px;">Copiar / compartir link o QR</div>
+  <div class="section-sub">
+    Usa tu enlace personal o tu código QR para invitar a otros. Tu código de invitación se agrega
+    automáticamente cuando ellos escanean o hacen clic.
+  </div>
 
-        <p class="small-note">
-          Más adelante aquí agregaremos: materiales diarios, contenidos para compartir en redes, seguimiento de pagos
-          y acceso opcional a “Fuente de Agua Viva” cuando cumplas las condiciones.
-        </p>
+  <div class="form">
+    <div>
+      <div class="label">Tu enlace de invitación</div>
+      <input
+        id="referralLink"
+        class="input"
+        type="text"
+        readonly
+        value="Cargando tu enlace…"
+      />
+    </div>
 
-        <div class="button-row">
-          <button class="btn btn-secondary" id="logoutBtn">
-            Cerrar sesión
-          </button>
-        </div>
-      </div>
+    <button type="button" class="btn btn-primary" id="copyLinkBtn">
+      Copiar enlace
+    </button>
+    <p class="small-note" id="copyMessage"></p>
+
+    <div style="margin-top: 12px;">
+      <div class="label">Tu QR de invitación</div>
+      <canvas
+        id="qrCanvas"
+        style="background: #ffffff; padding: 8px; border-radius: 12px;"
+      ></canvas>
+      <p class="small-note">
+        Guarda o comparte este código QR. Quien lo escanee llegará al inicio con tu invitación cargada
+        y el código se aplicará automáticamente en la página de pago.
+      </p>
+    </div>
+  </div>
+
+  <p class="small-note" style="margin-top: 18px;">
+    Recuerda: tu invitación es única. Cada persona que entra por tu enlace o QR cuenta para tus metas
+    de referidos y recompensas.
+  </p>
+
+  <div class="button-row">
+    <button class="btn btn-secondary" id="logoutBtn">
+      Cerrar sesión
+    </button>
+  </div>
+</div>
+
     </div>
   </div>
 </body>
