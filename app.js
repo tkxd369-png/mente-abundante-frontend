@@ -1,6 +1,4 @@
- // ----------------------------------------------------------
-//  CONFIGURACIÓN PRINCIPAL
-// ----------------------------------------------------------
+ 
  // ⚠️ IMPORTANTE: pon aquí tu URL real de la API en Render
 const API_BASE = "https://mente-abundante-api.onrender.com";
 
@@ -305,8 +303,9 @@ function setupRefBadgeCopy() {
 //  TOGGLE VER CONTRASEÑA NUEVA
 // ----------------------------------------------------------
 
-function setupPasswordToggle() {
+ function setupPasswordToggle() {
   const checkbox = document.getElementById("showNewPassword");
+  const current = document.getElementById("currentPassword");
   const newPass = document.getElementById("newPassword");
   const confirm = document.getElementById("confirmPassword");
 
@@ -314,6 +313,7 @@ function setupPasswordToggle() {
 
   checkbox.addEventListener("change", () => {
     const type = checkbox.checked ? "text" : "password";
+    if (current) current.type = type;
     if (newPass) newPass.type = type;
     if (confirm) confirm.type = type;
   });
