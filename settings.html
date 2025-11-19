@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mente Abundante – Configuración</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="main-shell">
+    <div class="card single">
+      <div class="card-left">
+        <div class="logo-row">
+          <div class="logo-drop"></div>
+          <div>
+            <div class="logo-text-main">Mente Abundante</div>
+            <div class="logo-text-sub">Configuración de cuenta</div>
+          </div>
+        </div>
+
+        <h2>Tu Información</h2>
+        <p class="lead">
+          Aquí puedes actualizar tus datos de contacto y cambiar tu contraseña cuando lo necesites.
+        </p>
+
+        <!-- DATOS DE CONTACTO -->
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+          <div class="section-title">Datos de contacto</div>
+          <div class="section-sub">
+            Mantén tu correo y teléfono actualizados. Usaremos estos datos para avisos importantes y contacto sobre pagos.
+          </div>
+
+          <form class="form" id="profileForm">
+            <div>
+              <div class="label">Correo electrónico</div>
+              <input
+                class="input"
+                type="email"
+                name="email"
+                id="settingsEmail"
+                required
+                placeholder="tucorreo@ejemplo.com"
+              />
+            </div>
+
+            <div>
+              <div class="label">Teléfono (WhatsApp)</div>
+              <input
+                class="input"
+                type="tel"
+                name="phone"
+                id="settingsPhone"
+                required
+                placeholder="+1 (555) 123-4567"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Guardar cambios
+            </button>
+
+            <p class="small-note" id="profileMessage"></p>
+          </form>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
+
+        <!-- CAMBIO DE CONTRASEÑA -->
+        <div>
+          <div class="section-title">Seguridad</div>
+          <div class="section-sub">
+            Cambia tu contraseña cuando lo consideres necesario. Te recomendamos no compartirla con nadie.
+          </div>
+
+          <form class="form" id="passwordForm">
+            <div>
+              <div class="label">Contraseña actual</div>
+              <input
+                class="input"
+                type="password"
+                name="currentPassword"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div>
+              <div class="label">Nueva contraseña</div>
+              <input
+                class="input"
+                type="password"
+                name="newPassword"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div>
+              <div class="label">Confirmar nueva contraseña</div>
+              <input
+                class="input"
+                type="password"
+                name="confirmPassword"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-secondary">
+              Actualizar contraseña
+            </button>
+
+            <p class="small-note" id="passwordMessage"></p>
+          </form>
+        </div>
+
+        <div class="button-row" style="margin-top: 20px;">
+          <a href="dashboard.html" class="btn btn-secondary">Volver a mi espacio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
