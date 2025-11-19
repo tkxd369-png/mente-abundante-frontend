@@ -86,15 +86,31 @@ async function loadDashboard() {
       }
       return;
     }
+    // ---- Enlace personal de invitación + QR ----
+    const referralInput = document.getElementById("referralLink");
+    const copyMsg = document.getElementById("copyMessage");
+    const qrCanvas = document.getElementById("qrCanvas");
 
-    const user = data.user;
-    nameEl.textContent = user.full_name || "Miembro Mente Abundante";
-    usernameEl.textContent = user.username || "—";
-    emailEl.textContent = user.email || "—";
-    phoneEl.textContent = user.phone || "—";
-    referralsEl.textContent = user.referrals ?? 0;
-    refBadge.textContent = `REF: ${user.refid || "—"}`;
-    msgEl.textContent = "Tu nueva vida ya empezó. Recuerda: Tú decides ser abundante.";
+    const refId = user.refid || "";
+    if (refId && referralInput) {
+      // Construimos el enlace con el dominio actual del frontend
+      const referralUrl = `${window.location.origin}/?ref=${encodeURIComponent(refId)}`;
+
+      referralInput.value = referralUrl;
+      referralInput.dataset.url = referralUrl;
+
+      // Guardamos también en localStorage por si se usa en otra parte
+      localStorage.setItem("ma_ref_code", refId);
+
+      // Generar QR si la librería está disponible
+      if (qrCanvas && window.QRious) {
+        new QRious({
+          element: qrCanvas,
+          value: referralUrl,
+          size: 140
+        });
+      }
+    }
   } catch (err) {
     console.error(err);
     msgEl.textContent = "Error al conectar con el servidor.";
