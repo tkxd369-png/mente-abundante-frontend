@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <title>Mente Abundante – Acceso</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="main-shell">
+    <div class="card single">
+      <div class="card-left">
+        <div class="logo-row">
+          <div class="logo-drop"></div>
+          <div>
+            <div class="logo-text-main">Mente Abundante</div>
+            <div class="logo-text-sub">Acceso seguro</div>
+          </div>
+        </div>
+
+        <h2>Inicia sesión</h2>
+        <p class="lead">
+          Usa el correo y la contraseña que registraste después de ver el video y completar el cuestionario.
+        </p>
+
+        <form class="form" id="loginForm">
+          <div>
+            <div class="label">Correo electrónico</div>
+            <input class="input" type="email" name="email" required placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div>
+            <div class="label">Contraseña</div>
+            <input class="input" type="password" name="password" required placeholder="••••••••" />
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Entrar
+          </button>
+
+          <p class="small-note" id="loginMessage"></p>
+        </form>
+
+        <p class="small-note">
+          ¿Aún no tienes cuenta? Recuerda que el registro se completa después de ver el video y responder el cuestionario.
+        </p>
+
+        <div class="button-row">
+          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
