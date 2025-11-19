@@ -60,7 +60,6 @@ async function handleLoginSubmit(event) {
 async function loadDashboard() {
   const token = getToken();
   if (!token) {
-    // Si no hay token, lo mandamos al login
     window.location.href = "login.html";
     return;
   }
@@ -90,7 +89,6 @@ async function loadDashboard() {
       if (msgEl) {
         msgEl.textContent = data.error || "No se pudo cargar tu perfil.";
       }
-      // Si el problema es de token, limpiamos y redirigimos
       if (data.error && data.error.toLowerCase().includes("token")) {
         clearToken();
         setTimeout(() => {
@@ -120,16 +118,13 @@ async function loadDashboard() {
     const refId = user.refid || "";
 
     if (refId && referralInput) {
-      // Construimos el enlace con el dominio actual del frontend
       const referralUrl = `${window.location.origin}/?ref=${encodeURIComponent(refId)}`;
 
       referralInput.value = referralUrl;
       referralInput.dataset.url = referralUrl;
 
-      // Guardamos también en localStorage por si se usa en otra parte
       localStorage.setItem("ma_ref_code", refId);
 
-      // Generar QR si la librería está disponible
       if (qrCanvas && window.QRious) {
         new QRious({
           element: qrCanvas,
@@ -151,6 +146,58 @@ async function loadDashboard() {
   }
 }
 
+// ------- CARGAR SETTINGS -------
+async function loadSettings() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const emailInput = document.getElementById("settingsEmail");
+  const phoneInput = document.getElementById("settingsPhone");
+  const profileMsg = document.getElementById("profileMessage");
+
+  if (profileMsg) {
+    profileMsg.textContent = "Cargando tus datos…";
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      if (profileMsg) {
+        profileMsg.textContent = data.error || "No se pudieron cargar tus datos.";
+      }
+      if (data.error && data.error.toLowerCase().includes("token")) {
+        clearToken();
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1500);
+      }
+      return;
+    }
+
+    const user = data.user;
+    if (emailInput) emailInput.value = user.email || "";
+    if (phoneInput) phoneInput.value = user.phone || "";
+    if (profileMsg) {
+      profileMsg.textContent = "";
+    }
+  } catch (err) {
+    console.error(err);
+    if (profileMsg) {
+      profileMsg.textContent = "Error al conectar con el servidor.";
+    }
+  }
+}
+
 // ------- LOGOUT -------
 function setupLogout() {
   const btn = document.getElementById("logoutBtn");
@@ -164,16 +211,65 @@ function setupLogout() {
 
 // ------- INIT POR PÁGINA -------
 document.addEventListener("DOMContentLoaded", () => {
-  // Si estamos en la página de login
+  // Login
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", handleLoginSubmit);
   }
 
-  // Si estamos en el dashboard
+  // Dashboard
   if (window.location.pathname.endsWith("dashboard.html")) {
     loadDashboard();
     setupLogout();
+  }
+
+  // Settings
+  if (window.location.pathname.endsWith("settings.html")) {
+    loadSettings();
+
+    const profileForm = document.getElementById("profileForm");
+    const profileMsg = document.getElementById("profileMessage");
+    const passwordForm = document.getElementById("passwordForm");
+    const passwordMsg = document.getElementById("passwordMessage");
+
+    // Por ahora dejamos estos formularios "simulados" hasta que creemos las rutas en el backend
+    if (profileForm) {
+      profileForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (profileMsg) {
+          profileMsg.textContent =
+            "Cambios simulados. Cuando tengamos las rutas del backend, se guardarán aquí tus datos de verdad.";
+        }
+      });
+    }
+
+    if (passwordForm) {
+      passwordForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const current = passwordForm.currentPassword.value;
+        const newPass = passwordForm.newPassword.value;
+        const confirm = passwordForm.confirmPassword.value;
+
+        if (newPass !== confirm) {
+          if (passwordMsg) {
+            passwordMsg.textContent = "La nueva contraseña y la confirmación no coinciden.";
+          }
+          return;
+        }
+
+        if (!current || !newPass) {
+          if (passwordMsg) {
+            passwordMsg.textContent = "Por favor completa todos los campos.";
+          }
+          return;
+        }
+
+        if (passwordMsg) {
+          passwordMsg.textContent =
+            "Solicitud simulada. Más adelante conectaremos este cambio con el backend.";
+        }
+      });
+    }
   }
 
   // Botón "Copiar enlace" en el dashboard
@@ -190,7 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(text);
         } else {
-          // Fallback para navegadores más viejos
           input.focus();
           input.select();
           document.execCommand("copy");
