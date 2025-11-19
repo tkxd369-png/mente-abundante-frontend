@@ -138,4 +138,33 @@ document.addEventListener("DOMContentLoaded", () => {
     loadDashboard();
     setupLogout();
   }
+    const copyBtn = document.getElementById("copyLinkBtn");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const input = document.getElementById("referralLink");
+      const msg = document.getElementById("copyMessage");
+      if (!input || !input.value) return;
+
+      const text = input.value;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          // Fallback para navegadores viejos
+          input.focus();
+          input.select();
+          document.execCommand("copy");
+        }
+        if (msg) {
+          msg.textContent = "Enlace copiado. ¡Compártelo por mensaje, WhatsApp o redes! ✨";
+        }
+      } catch (err) {
+        console.error(err);
+        if (msg) {
+          msg.textContent = "No se pudo copiar automáticamente, pero puedes seleccionar y copiar el link.";
+        }
+      }
+    });
+  }
 });
