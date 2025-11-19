@@ -210,62 +210,65 @@ async function loadSettings() {
   }
 }
 
-// ------- ACTUALIZAR PERFIL (email + teléfono) -------
-async function handleProfileUpdate(event) {
-  event.preventDefault();
-  const token = getToken();
-  if (!token) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  const emailInput = document.getElementById("settingsEmail");
-  const phoneInput = document.getElementById("settingsPhone");
-  const profileMsg = document.getElementById("profileMessage");
-
-  const email = emailInput?.value.trim();
-  const phone = phoneInput?.value.trim();
-
-  if (!email || !phone) {
-    if (profileMsg) {
-      profileMsg.textContent = "Por favor completa correo y teléfono.";
-    }
-    return;
-  }
-
-  if (profileMsg) {
-    profileMsg.textContent = "Guardando cambios…";
-  }
-
+ // ✅ Actualizar perfil (email y/o teléfono)
+app.post('/account/update-profile', authMiddleware, async (req, res) => {
   try {
-    const res = await fetch(`${API_BASE}/account/update-profile`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ email, phone }),
+    const { email, phone } = req.body;
+    const userId = req.user.id;
+
+    if (!email && !phone) {
+      return res
+        .status(400)
+        .json({ ok: false, error: 'Debes enviar al menos email o teléfono.' });
+    }
+
+    // Construimos dinámicamente los campos a actualizar
+    const fields = [];
+    const values = [];
+    let index = 1;
+
+    if (email) {
+      fields.push(`email = $${index++}`);
+      values.push(email);
+    }
+    if (phone) {
+      fields.push(`phone = $${index++}`);
+      values.push(phone);
+    }
+
+    values.push(userId);
+
+    const sql = `
+      UPDATE users
+      SET ${fields.join(', ')}
+      WHERE id = $${index}
+      RETURNING id, full_name, email, phone, username, refId, referredBy, referrals, created_at;
+    `;
+
+    const result = await pool.query(sql, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ ok: false, error: 'Usuario no encontrado.' });
+    }
+
+    const updatedUser = result.rows[0];
+
+    return res.json({
+      ok: true,
+      user: updatedUser,
     });
-
-    const data = await res.json();
-
-    if (!data.ok) {
-      if (profileMsg) {
-        profileMsg.textContent = data.error || "No se pudo actualizar tu perfil.";
-      }
-      return;
-    }
-
-    if (profileMsg) {
-      profileMsg.textContent = "Datos actualizados correctamente. ✅";
-    }
   } catch (err) {
-    console.error(err);
-    if (profileMsg) {
-      profileMsg.textContent = "Error al conectar con el servidor.";
+    console.error('Update profile error:', err);
+    if (err.code === '23505') {
+      return res
+        .status(400)
+        .json({ ok: false, error: 'El email ya está en uso por otra cuenta.' });
     }
+    return res
+      .status(500)
+      .json({ ok: false, error: 'Error interno al actualizar el perfil.' });
   }
-}
+});
 
 // ------- CAMBIAR CONTRASEÑA -------
 async function handlePasswordChange(event) {
