@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <title>Mente Abundante – Mi Espacio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="main-shell">
+    <div class="card">
+      <div class="card-left">
+        <div class="dashboard-header">
+          <div>
+            <div class="logo-row" style="margin-bottom: 6px;">
+              <div class="logo-drop"></div>
+              <div>
+                <div class="logo-text-main">Mente Abundante</div>
+                <div class="logo-text-sub">Tu espacio personal</div>
+              </div>
+            </div>
+            <div class="dashboard-name" id="dashName">Hola, …</div>
+          </div>
+          <div class="badge-ref" id="dashRefBadge">
+            REF: …
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">Tu conexión con la abundancia</div>
+          <div class="section-sub">
+            Aquí verás un resumen de tu cuenta, tu código de referencia y el avance de las personas que has invitado.
+          </div>
+
+          <div class="data-row">
+            <div class="pill-data">
+              <span class="pill-label">Usuario:</span>
+              <span id="dashUsername">…</span>
+            </div>
+            <div class="pill-data">
+              <span class="pill-label">Correo:</span>
+              <span id="dashEmail">…</span>
+            </div>
+            <div class="pill-data">
+              <span class="pill-label">Teléfono:</span>
+              <span id="dashPhone">…</span>
+            </div>
+          </div>
+
+          <div class="data-row">
+            <div class="pill-data">
+              <span class="pill-label">Referidos activos:</span>
+              <span id="dashReferrals">0</span>
+            </div>
+          </div>
+
+          <p class="small-note" id="dashMessage"></p>
+        </div>
+      </div>
+
+      <div class="card-right">
+        <div class="section-title">Próximos pasos</div>
+        <div class="section-sub">
+          Comparte tu enlace o QR (próximamente) con las personas que sabes que están listas para decidir ser abundantes.
+        </div>
+
+        <p class="small-note">
+          Más adelante aquí agregaremos: materiales diarios, contenidos para compartir en redes, seguimiento de pagos
+          y acceso opcional a “Fuente de Agua Viva” cuando cumplas las condiciones.
+        </p>
+
+        <div class="button-row">
+          <button class="btn btn-secondary" id="logoutBtn">
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
