@@ -14,48 +14,51 @@
     <div class="card">
       <!-- COLUMNA IZQUIERDA -->
       <div class="card-left">
-        <!-- Logo -->
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">Mente Abundante</div>
-            <div class="logo-text-sub">Tu espacio personal</div>
+        <!-- Bloque superior fijo (logo + nombre + REF) -->
+        <div class="dashboard-top">
+          <div class="logo-row">
+            <div class="logo-drop"></div>
+            <div>
+              <div class="logo-text-main">Mente Abundante</div>
+              <div class="logo-text-sub">Tu espacio personal</div>
+            </div>
+          </div>
+
+          <!-- Nombre + REF en la misma línea -->
+          <div class="dashboard-header">
+            <div class="dashboard-name" id="dashName">Hola, …</div>
+            <div class="badge-ref" id="dashRefBadge">
+              REF: …
+            </div>
           </div>
         </div>
 
-        <!-- Nombre + REF en la misma línea -->
-        <div class="dashboard-header">
-          <div class="dashboard-name" id="dashName">Hola, …</div>
-          <div class="badge-ref" id="dashRefBadge">
-            REF: …
-          </div>
-        </div>
-
-        <!-- FEED TIPO TIKTOK (debajo del nombre) -->
-        <div class="section-title" style="margin-top: 10px;">Inspiración en movimiento</div>
+        <!-- FEED TIPO TIKTOK DEBAJO DEL HEADER -->
+        <div class="section-title" style="margin-top: 4px;">Inspiración en movimiento</div>
         <div class="section-sub">
-          Una pequeña ventana a lo que está sucediendo en la comunidad. Imágenes y videos que se
+          Una pequeña ventana a lo que sucede en la comunidad. Imágenes y momentos que se
           actualizarán junto con la página principal de la comunidad.
         </div>
 
         <div class="feed-container">
-          <!-- Estas tarjetas luego podrán llenarse dinámicamente desde la comunidad -->
+          <!-- CARD 1: GOTA AZUL -->
           <div class="feed-card">
-            <div class="feed-media"></div>
+            <div class="feed-media feed-media-agua"></div>
             <div class="feed-meta">
-              <div class="feed-title">Momento de claridad</div>
+              <div class="feed-title">Cada gota cuenta</div>
               <div class="feed-caption">
-                “Hoy decidí dejar de pelear con la escasez y comenzar a confiar en la abundancia.”
+                Cada decisión es una gota que expande tu abundancia. Hoy elegiste avanzar.
               </div>
             </div>
           </div>
 
+          <!-- CARD 2: GOTA DORADA -->
           <div class="feed-card">
-            <div class="feed-media"></div>
+            <div class="feed-media feed-media-dorado"></div>
             <div class="feed-meta">
-              <div class="feed-title">Pasos que suman</div>
+              <div class="feed-title">Cosecha de abundancia</div>
               <div class="feed-caption">
-                Una nueva mente se conectó al programa. Tú también eres parte de este movimiento.
+                Lo que siembras en tu mente se refleja en tu realidad. Alinea tu enfoque con lo que deseas.
               </div>
             </div>
           </div>
@@ -68,7 +71,6 @@
             Un resumen rápido de tu cuenta y de cómo fluye la abundancia a través de ti hacia otros.
           </div>
 
-          <!-- Info compacta -->
           <div class="data-row data-row-compact">
             <div class="pill-data">
               <span class="pill-label">Usuario:</span>
@@ -94,10 +96,9 @@
 
       <!-- COLUMNA DERECHA -->
       <div class="card-right">
-        <!-- Bloque de compartir enlace y QR -->
         <div class="section-title">Comparte tu invitación</div>
         <div class="section-sub">
-          Usa tu enlace personal o tu código QR para invitar a otros. Tu código de invitación se agrega
+          Usa tu enlace personal o tu código QR para invitar a otros. Tu código se agrega
           automáticamente cuando ellos escanean o hacen clic.
         </div>
 
@@ -125,7 +126,7 @@
               style="background: #ffffff; padding: 8px; border-radius: 12px;"
             ></canvas>
             <p class="small-note">
-              Quien escanee este código llegará a la página inicial con tu invitación aplicada y podrá activar su membresía.
+              Quien escanee este código llegará al inicio con tu invitación aplicada y podrá activar su membresía.
             </p>
           </div>
         </div>
@@ -135,7 +136,6 @@
           de referidos y recompensas.
         </p>
 
-        <!-- Botones al fondo: Cerrar sesión + Configuración -->
         <div class="button-row" style="margin-top: 20px; justify-content: flex-end;">
           <button class="btn btn-secondary" id="logoutBtn">
             Cerrar sesión
