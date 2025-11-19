@@ -510,3 +510,11 @@ h2 {
     aspect-ratio: 9 / 16;
   }
 }
+.badge-ref {
+  cursor: pointer;              /* indica que se puede hacer clic */
+  user-select: none;
+}
+
+.badge-ref:hover {
+  opacity: 0.9;
+}
