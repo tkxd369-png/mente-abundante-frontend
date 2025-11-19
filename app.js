@@ -158,7 +158,7 @@ async function loadDashboard() {
   }
 }
 
-// ------- CARGAR SETTINGS -------
+// ------- CARGAR SETTINGS (datos actuales) -------
 async function loadSettings() {
   const token = getToken();
   if (!token) {
@@ -210,6 +210,130 @@ async function loadSettings() {
   }
 }
 
+// ------- ACTUALIZAR PERFIL (email + teléfono) -------
+async function handleProfileUpdate(event) {
+  event.preventDefault();
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const emailInput = document.getElementById("settingsEmail");
+  const phoneInput = document.getElementById("settingsPhone");
+  const profileMsg = document.getElementById("profileMessage");
+
+  const email = emailInput?.value.trim();
+  const phone = phoneInput?.value.trim();
+
+  if (!email || !phone) {
+    if (profileMsg) {
+      profileMsg.textContent = "Por favor completa correo y teléfono.";
+    }
+    return;
+  }
+
+  if (profileMsg) {
+    profileMsg.textContent = "Guardando cambios…";
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/account/update-profile`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ email, phone }),
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      if (profileMsg) {
+        profileMsg.textContent = data.error || "No se pudo actualizar tu perfil.";
+      }
+      return;
+    }
+
+    if (profileMsg) {
+      profileMsg.textContent = "Datos actualizados correctamente. ✅";
+    }
+  } catch (err) {
+    console.error(err);
+    if (profileMsg) {
+      profileMsg.textContent = "Error al conectar con el servidor.";
+    }
+  }
+}
+
+// ------- CAMBIAR CONTRASEÑA -------
+async function handlePasswordChange(event) {
+  event.preventDefault();
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const form = event.target;
+  const current = form.currentPassword.value;
+  const newPass = form.newPassword.value;
+  const confirm = form.confirmPassword.value;
+  const passwordMsg = document.getElementById("passwordMessage");
+
+  if (newPass !== confirm) {
+    if (passwordMsg) {
+      passwordMsg.textContent = "La nueva contraseña y la confirmación no coinciden.";
+    }
+    return;
+  }
+
+  if (!current || !newPass) {
+    if (passwordMsg) {
+      passwordMsg.textContent = "Por favor completa todos los campos.";
+    }
+    return;
+  }
+
+  if (passwordMsg) {
+    passwordMsg.textContent = "Actualizando contraseña…";
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/account/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ currentPassword: current, newPassword: newPass }),
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      if (passwordMsg) {
+        passwordMsg.textContent = data.error || "No se pudo actualizar la contraseña.";
+      }
+      return;
+    }
+
+    if (passwordMsg) {
+      passwordMsg.textContent = data.message || "Contraseña actualizada correctamente. ✅";
+    }
+
+    form.currentPassword.value = "";
+    form.newPassword.value = "";
+    form.confirmPassword.value = "";
+  } catch (err) {
+    console.error(err);
+    if (passwordMsg) {
+      passwordMsg.textContent = "Error al conectar con el servidor.";
+    }
+  }
+}
+
 // ------- LOGOUT -------
 function setupLogout() {
   const btn = document.getElementById("logoutBtn");
@@ -240,47 +364,13 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSettings();
 
     const profileForm = document.getElementById("profileForm");
-    const profileMsg = document.getElementById("profileMessage");
-    const passwordForm = document.getElementById("passwordForm");
-    const passwordMsg = document.getElementById("passwordMessage");
-
-    // Por ahora seguimos simulando hasta que conectemos al backend
     if (profileForm) {
-      profileForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (profileMsg) {
-          profileMsg.textContent =
-            "Cambios simulados. Cuando tengamos las rutas del backend, se guardarán aquí tus datos de verdad.";
-        }
-      });
+      profileForm.addEventListener("submit", handleProfileUpdate);
     }
 
+    const passwordForm = document.getElementById("passwordForm");
     if (passwordForm) {
-      passwordForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const current = passwordForm.currentPassword.value;
-        const newPass = passwordForm.newPassword.value;
-        const confirm = passwordForm.confirmPassword.value;
-
-        if (newPass !== confirm) {
-          if (passwordMsg) {
-            passwordMsg.textContent = "La nueva contraseña y la confirmación no coinciden.";
-          }
-          return;
-        }
-
-        if (!current || !newPass) {
-          if (passwordMsg) {
-            passwordMsg.textContent = "Por favor completa todos los campos.";
-          }
-          return;
-        }
-
-        if (passwordMsg) {
-          passwordMsg.textContent =
-            "Solicitud simulada. Más adelante conectaremos este cambio con el backend.";
-        }
-      });
+      passwordForm.addEventListener("submit", handlePasswordChange);
     }
   }
 
@@ -322,7 +412,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const linkInput = document.getElementById("referralLink");
       const fallbackUrl = linkInput && linkInput.value;
       const text = urlFromBadge || fallbackUrl;
-      const msg = document.getElementById("copyMessage") || document.getElementById("dashMessage");
+      const msg =
+        document.getElementById("copyMessage") || document.getElementById("dashMessage");
 
       if (!text) return;
 
@@ -330,7 +421,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(text);
         } else {
-          // Fallback
           if (linkInput) {
             linkInput.focus();
             linkInput.select();
