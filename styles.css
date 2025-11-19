@@ -314,46 +314,53 @@ h2 {
   border-radius: 999px;
   background: var(--accent-soft);
 }
-/* -----------------------------------------------
-   📱 OPTIMIZACIÓN MOVIL
+ /* -----------------------------------------------
+   📱 OPTIMIZACIÓN MÓVIL
    Para pantallas de 480px hacia abajo
 ------------------------------------------------ */
 @media (max-width: 480px) {
 
-  body {
+  html, body {
     background: #ffffff !important; /* Fondo totalmente blanco */
-    padding: 0;
     margin: 0;
+    padding: 0;
+    font-size: 16px; /* Texto base más grande */
   }
 
   .main-shell {
-    padding: 12px;
+    padding: 10px;
+    align-items: stretch;
   }
 
   .card {
     max-width: 100%;
     width: 100%;
-    border-radius: 16px;
-    box-shadow: none; /* Más limpio en móvil */
-    grid-template-columns: 1fr !important; /* Una sola columna */
+    border-radius: 0;  /* Que parezca app de móvil */
+    box-shadow: none;  /* Sin sombra en teléfono */
+    grid-template-columns: 1fr !important; /* Una sola columna siempre */
+  }
+
+  .card.single {
+    max-width: 100%;
   }
 
   .card-left,
   .card-right {
-    padding: 20px;
+    padding: 18px;
   }
 
   h1 {
-    font-size: 24px; /* Más grande y legible */
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .lead {
-    font-size: 15px; 
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .btn {
@@ -362,13 +369,14 @@ h2 {
   }
 
   .video-thumb {
-    height: 120px;
+    height: 140px;
   }
 
   .dashboard-header {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     text-align: center;
+    align-items: center;
   }
 
   .logo-row {
@@ -383,7 +391,7 @@ h2 {
   .pill-data {
     width: 100%;
     text-align: center;
-    padding: 10px;
+    padding: 10px 12px;
   }
 
   .badge-ref {
