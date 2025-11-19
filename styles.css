@@ -331,10 +331,16 @@ h2 {
 /* DASHBOARD HEADER */
 
 .dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: white;
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .dashboard-name {
