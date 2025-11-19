@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mente Abundante – Membresía</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="main-shell">
+    <div class="card single">
+      <div class="card-left">
+        <div class="logo-row">
+          <div class="logo-drop"></div>
+          <div>
+            <div class="logo-text-main">MENTE ABUNDANTE</div>
+            <div class="logo-text-sub">Membresía privada</div>
+          </div>
+        </div>
+
+        <h2>Activa tu acceso</h2>
+        <p class="lead">
+          La aportación única de <strong>$198 USD</strong> te da acceso al video principal
+          de 30 minutos, al programa “Yo Decido Ser Abundante” y al sistema de referidos.
+        </p>
+
+        <p class="small-note">
+          <strong>Importante:</strong> Es indispensable contar con un <strong>código de invitación</strong>.
+          Sin él no es posible procesar el pago ni continuar.
+        </p>
+
+        <form class="form" id="membershipForm">
+          <div>
+            <div class="label">Código de invitación</div>
+            <input
+              class="input"
+              type="text"
+              name="refCode"
+              id="refCode"
+              required
+              placeholder="Ej. ANA824"
+            />
+          </div>
+
+          <div>
+            <div class="label">Nombre completo</div>
+            <input
+              class="input"
+              type="text"
+              name="fullName"
+              required
+              placeholder="Tu nombre y apellidos"
+            />
+          </div>
+
+          <div>
+            <div class="label">Correo electrónico</div>
+            <input
+              class="input"
+              type="email"
+              name="email"
+              required
+              placeholder="tucorreo@ejemplo.com"
+            />
+          </div>
+
+          <div>
+            <div class="label">Teléfono (WhatsApp)</div>
+            <input
+              class="input"
+              type="tel"
+              name="phone"
+              required
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="payButton">
+            Pagar $198 USD
+          </button>
+
+          <p class="small-note" id="membershipMessage"></p>
+        </form>
+
+        <p class="small-note">
+          Si llegaste aquí por un <strong>código QR</strong>, tu código de invitación debería aparecer
+          automáticamente. Si no lo ves, regresa con la persona que te invitó para obtener tu código.
+        </p>
+
+        <div class="button-row">
+          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const refInput = document.getElementById('refCode');
+      const payButton = document.getElementById('payButton');
+      const msg = document.getElementById('membershipMessage');
+      const form = document.getElementById('membershipForm');
+
+      // 1. Intentamos leer ?ref= directamente de la URL
+      const params = new URLSearchParams(window.location.search);
+      const refFromUrl = params.get('ref');
+
+      // 2. Si no viene en la URL, intentamos leerlo de localStorage
+      const refFromStorage = localStorage.getItem('ma_ref_code');
+
+      const finalRef = refFromUrl || refFromStorage || '';
+
+      if (finalRef) {
+        refInput.value = finalRef;
+      }
+
+      // Función para validar si hay código
+      function validateRef() {
+        const value = refInput.value.trim();
+        if (!value) {
+          payButton.disabled = true;
+          msg.textContent = 'Necesitas un código de invitación válido para continuar.';
+        } else {
+          payButton.disabled = false;
+          msg.textContent = '';
+        }
+      }
+
+      // Validar al inicio
+      validateRef();
+
+      // Validar cuando se edite manualmente
+      refInput.addEventListener('input', validateRef);
+
+      // Manejar el envío (aquí luego conectaremos Stripe u otro)
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        validateRef();
+        if (payButton.disabled) return;
+
+        // Por ahora solo simulamos el pago
+        msg.textContent = 'Procesando pago… (aquí conectaremos el procesador de pagos)';
+        // TODO: llamar a tu backend / Stripe
+      });
+    })();
+  </script>
+</body>
+</html>
