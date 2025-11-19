@@ -22,6 +22,8 @@ body {
   color: var(--text-main);
 }
 
+/* CONTENEDOR GENERAL */
+
 .main-shell {
   min-height: 100vh;
   display: flex;
@@ -29,6 +31,8 @@ body {
   justify-content: center;
   padding: 24px;
 }
+
+/* TARJETA PRINCIPAL */
 
 .card {
   width: 100%;
@@ -64,7 +68,13 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-soft);
   }
+
+  .card-right {
+    padding-top: 20px;
+  }
 }
+
+/* LOGO Y CABECERA */
 
 .logo-row {
   display: flex;
@@ -104,6 +114,8 @@ body {
   letter-spacing: 0.16em;
 }
 
+/* TIPOGRAFÍA GENERAL */
+
 h1 {
   font-size: 30px;
   margin: 0 0 10px;
@@ -120,6 +132,8 @@ h2 {
   font-size: 14px;
   line-height: 1.6;
 }
+
+/* TAGS Y BOTONES */
 
 .tag-pill {
   display: inline-flex;
@@ -160,6 +174,7 @@ h2 {
   gap: 8px;
   text-decoration: none;
   justify-content: center;
+  background: transparent;
 }
 
 .btn-primary {
@@ -169,47 +184,9 @@ h2 {
 }
 
 .btn-secondary {
-  background: transparent;
+  background: #f4f4f5;
   color: var(--text-main);
   border-color: var(--border-soft);
-}
-.motivation-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.motivation-item {
-  display: flex;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 14px;
-  background: #f4f4f5;
-}
-
-.motivation-photo {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #facc15, #f97316, #ef4444);
-  flex-shrink: 0;
-}
-
-.motivation-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.motivation-title {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.motivation-caption {
-  font-size: 11px;
-  color: var(--text-soft);
 }
 
 .btn-primary:hover {
@@ -217,7 +194,7 @@ h2 {
 }
 
 .btn-secondary:hover {
-  background: #f4f4f5;
+  background: #e4e4e7;
 }
 
 .small-note {
@@ -225,6 +202,8 @@ h2 {
   color: var(--text-soft);
   margin-top: 8px;
 }
+
+/* VIDEO CARD (landing, intro, etc.) */
 
 .video-card {
   background: #050816;
@@ -235,6 +214,7 @@ h2 {
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 18px 35px rgba(15, 23, 42, 0.6);
+  margin-top: 8px;
 }
 
 .video-thumb {
@@ -276,6 +256,8 @@ h2 {
   color: #cbd5f5;
 }
 
+/* FORMULARIOS */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -302,6 +284,8 @@ h2 {
   box-shadow: 0 0 0 1px rgba(200, 155, 60, 0.2);
 }
 
+/* SECCIONES Y DATOS */
+
 .section-title {
   font-size: 18px;
   margin-bottom: 6px;
@@ -319,15 +303,6 @@ h2 {
   gap: 8px;
   margin-bottom: 10px;
 }
-.data-row-compact {
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.data-row-compact .pill-data {
-  font-size: 11px;
-  padding: 6px 10px;
-}
 
 .pill-data {
   padding: 6px 12px;
@@ -341,11 +316,25 @@ h2 {
   margin-right: 4px;
 }
 
+/* Versión compacta de data-row */
+
+.data-row-compact {
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.data-row-compact .pill-data {
+  font-size: 11px;
+  padding: 6px 10px;
+}
+
+/* DASHBOARD HEADER */
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .dashboard-name {
@@ -360,18 +349,112 @@ h2 {
   padding: 4px 10px;
   border-radius: 999px;
   background: var(--accent-soft);
+  cursor: pointer;
+  user-select: none;
 }
- /* -----------------------------------------------
+
+.badge-ref:hover {
+  opacity: 0.9;
+}
+
+/* FEED TIPO TIKTOK (dashboard) */
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.feed-card {
+  border-radius: 18px;
+  background: #0b1120;
+  color: #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
+}
+
+.feed-media {
+  width: 100%;
+  aspect-ratio: 9 / 16; /* simula video vertical */
+  background: radial-gradient(circle at 20% 0, #fef9c3, #f97316 35%, #7c2d12 80%);
+}
+
+.feed-meta {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feed-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feed-caption {
+  font-size: 11px;
+  color: #cbd5f5;
+}
+
+/* (Opcional) Estilos de un strip motivacional anterior, por si se usan en otra página */
+
+.motivation-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.motivation-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: #f4f4f5;
+}
+
+.motivation-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #facc15, #f97316, #ef4444);
+  flex-shrink: 0;
+}
+
+.motivation-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.motivation-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.motivation-caption {
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* -----------------------------------------------
    📱 OPTIMIZACIÓN MÓVIL
    Para pantallas de 480px hacia abajo
 ------------------------------------------------ */
 @media (max-width: 480px) {
 
-  html, body {
-    background: #ffffff !important; /* Fondo totalmente blanco */
+  html,
+  body {
+    background: #ffffff !important; /* Fondo totalmente blanco en móvil */
     margin: 0;
     padding: 0;
-    font-size: 16px; /* Texto base más grande */
+    font-size: 16px; /* Texto base un poco más grande */
   }
 
   .main-shell {
@@ -382,9 +465,9 @@ h2 {
   .card {
     max-width: 100%;
     width: 100%;
-    border-radius: 0;  /* Que parezca app de móvil */
-    box-shadow: none;  /* Sin sombra en teléfono */
-    grid-template-columns: 1fr !important; /* Una sola columna siempre */
+    border-radius: 0; /* sensación de app móvil */
+    box-shadow: none; /* sin sombra en móvil */
+    grid-template-columns: 1fr !important;
   }
 
   .card.single {
@@ -418,85 +501,10 @@ h2 {
   .video-thumb {
     height: 140px;
   }
-  .logo-row {
-    justify-content: center;
-  }
 
-  .data-row {
-    flex-direction: column;
-    gap: 10px;
-  }
+  /* En móvil el header se mantiene en línea:
+     nombre a la izquierda, REF a la derecha (no tocamos flex) */
 
-  .pill-data {
-    width: 100%;
-    text-align: center;
-    padding: 10px 12px;
-  }
-
-  .badge-ref {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-}
-/* ---- Feed tipo TikTok en dashboard ---- */
-
-.feed-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 10px 0 4px;
-  max-height: 260px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-.feed-card {
-  border-radius: 18px;
-  background: #0b1120;
-  color: #e5e7eb;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
-}
-
-.feed-media {
-  width: 100%;
-  /* Simula un video vertical 9:16 */
-  aspect-ratio: 9 / 16;
-  background: radial-gradient(circle at 20% 0, #fef9c3, #f97316 35%, #7c2d12 80%);
-}
-
-.feed-meta {
-  padding: 10px 12px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.feed-title {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.feed-caption {
-  font-size: 11px;
-  color: #cbd5f5;
-}
-
-/* Compactar info de conexión */
-.data-row-compact {
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.data-row-compact .pill-data {
-  font-size: 11px;
-  padding: 6px 10px;
-}
-
-/* Ajustes móviles específicos */
-@media (max-width: 480px) {
   .feed-container {
     max-height: none;
     padding-right: 0;
@@ -509,12 +517,8 @@ h2 {
   .feed-media {
     aspect-ratio: 9 / 16;
   }
-}
-.badge-ref {
-  cursor: pointer;              /* indica que se puede hacer clic */
-  user-select: none;
-}
 
-.badge-ref:hover {
-  opacity: 0.9;
+  .data-row-compact .pill-data {
+    width: 100%;
+  }
 }
