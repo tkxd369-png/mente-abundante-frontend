@@ -12,34 +12,34 @@
 <body>
   <div class="main-shell">
     <div class="card">
+      <!-- COLUMNA IZQUIERDA -->
       <div class="card-left">
+        <!-- Logo -->
+        <div class="logo-row">
+          <div class="logo-drop"></div>
+          <div>
+            <div class="logo-text-main">Mente Abundante</div>
+            <div class="logo-text-sub">Tu espacio personal</div>
+          </div>
+        </div>
+
+        <!-- Nombre + REF en la misma línea -->
         <div class="dashboard-header">
-  <div>
-    <div class="logo-row" style="margin-bottom: 6px;">
-      <div class="logo-drop"></div>
-      <div>
-        <div class="logo-text-main">Mente Abundante</div>
-        <div class="logo-text-sub">Tu espacio personal</div>
-      </div>
-    </div>
-    <div class="dashboard-name" id="dashName">Hola, …</div>
-  </div>
-  <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-    <div class="badge-ref" id="dashRefBadge">
-      REF: …
-    </div>
-    <a href="settings.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
-      Configuración
-    </a>
-  </div>
-</div>
-        <div>
+          <div class="dashboard-name" id="dashName">Hola, …</div>
+          <div class="badge-ref" id="dashRefBadge">
+            REF: …
+          </div>
+        </div>
+
+        <!-- Tu conexión con la abundancia (más compacto) -->
+        <div style="margin-top: 10px;">
           <div class="section-title">Tu conexión con la abundancia</div>
           <div class="section-sub">
-            Aquí verás un resumen de tu cuenta, tu código de referencia y el avance de las personas que has invitado.
+            Un resumen rápido de tu cuenta y de cómo fluye la abundancia a través de ti hacia otros.
           </div>
 
-          <div class="data-row">
+          <!-- Info compacta en una sola línea (o dos, según ancho) -->
+          <div class="data-row data-row-compact">
             <div class="pill-data">
               <span class="pill-label">Usuario:</span>
               <span id="dashUsername">…</span>
@@ -52,9 +52,6 @@
               <span class="pill-label">Teléfono:</span>
               <span id="dashPhone">…</span>
             </div>
-          </div>
-
-          <div class="data-row">
             <div class="pill-data">
               <span class="pill-label">Referidos activos:</span>
               <span id="dashReferrals">0</span>
@@ -64,62 +61,89 @@
           <p class="small-note" id="dashMessage"></p>
         </div>
       </div>
-    <div class="card-right">
-  <div class="section-title">Próximos pasos</div>
-  <div class="section-sub">
-    Comparte tu enlace o QR con las personas que sabes que están listas para decidir ser abundantes.
-    Cada persona que entra con tu invitación suma a tus referidos.
-  </div>
 
-  <!-- Bloque de compartir enlace y QR -->
-  <div class="section-title" style="margin-top: 18px;">Copiar / compartir link o QR</div>
-  <div class="section-sub">
-    Usa tu enlace personal o tu código QR para invitar a otros. Tu código de invitación se agrega
-    automáticamente cuando ellos escanean o hacen clic.
-  </div>
+      <!-- COLUMNA DERECHA -->
+      <div class="card-right">
+        <!-- Banner motivacional tipo feed -->
+        <div class="section-title">Inspiración de la comunidad</div>
+        <div class="section-sub">
+          Aunque aún no entres a la comunidad, aquí te compartimos un vistazo de la energía y la abundancia
+          que se está moviendo cada día.
+        </div>
 
-  <div class="form">
-    <div>
-      <div class="label">Tu enlace de invitación</div>
-      <input
-        id="referralLink"
-        class="input"
-        type="text"
-        readonly
-        value="Cargando tu enlace…"
-      />
-    </div>
+        <div class="motivation-strip">
+          <div class="motivation-item">
+            <div class="motivation-photo"></div>
+            <div class="motivation-text">
+              <div class="motivation-title">Pequeños pasos, grandes cambios</div>
+              <div class="motivation-caption">
+                Hoy una persona decidió decir “sí” a su abundancia. Tú también estás en ese camino.
+              </div>
+            </div>
+          </div>
 
-    <button type="button" class="btn btn-primary" id="copyLinkBtn">
-      Copiar enlace
-    </button>
-    <p class="small-note" id="copyMessage"></p>
+          <div class="motivation-item">
+            <div class="motivation-photo"></div>
+            <div class="motivation-text">
+              <div class="motivation-title">Compartir es multiplicar</div>
+              <div class="motivation-caption">
+                Cada invitación que haces abre una puerta nueva, para otros y para ti.
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <div style="margin-top: 12px;">
-      <div class="label">Tu QR de invitación</div>
-      <canvas
-        id="qrCanvas"
-        style="background: #ffffff; padding: 8px; border-radius: 12px;"
-      ></canvas>
-      <p class="small-note">
-        Guarda o comparte este código QR. Quien lo escanee llegará al inicio con tu invitación cargada
-        y el código se aplicará automáticamente en la página de pago.
-      </p>
-    </div>
-  </div>
+        <!-- Bloque de compartir enlace y QR -->
+        <div class="section-title" style="margin-top: 18px;">Copiar / compartir link o QR</div>
+        <div class="section-sub">
+          Usa tu enlace personal o tu código QR para invitar a otros. Tu código de invitación se agrega
+          automáticamente cuando ellos escanean o hacen clic.
+        </div>
 
-  <p class="small-note" style="margin-top: 18px;">
-    Recuerda: tu invitación es única. Cada persona que entra por tu enlace o QR cuenta para tus metas
-    de referidos y recompensas.
-  </p>
+        <div class="form">
+          <div>
+            <div class="label">Tu enlace de invitación</div>
+            <input
+              id="referralLink"
+              class="input"
+              type="text"
+              readonly
+              value="Cargando tu enlace…"
+            />
+          </div>
 
-  <div class="button-row">
-    <button class="btn btn-secondary" id="logoutBtn">
-      Cerrar sesión
-    </button>
-  </div>
-</div>
+          <button type="button" class="btn btn-primary" id="copyLinkBtn">
+            Copiar enlace
+          </button>
+          <p class="small-note" id="copyMessage"></p>
 
+          <div style="margin-top: 12px;">
+            <div class="label">Tu QR de invitación</div>
+            <canvas
+              id="qrCanvas"
+              style="background: #ffffff; padding: 8px; border-radius: 12px;"
+            ></canvas>
+            <p class="small-note">
+              Quien escanee este código llegará a la página inicial con tu invitación aplicada y podrá activar su membresía.
+            </p>
+          </div>
+        </div>
+
+        <p class="small-note" style="margin-top: 18px;">
+          Recuerda: tu invitación es única. Cada persona que entra por tu enlace o QR cuenta para tus metas
+          de referidos y recompensas.
+        </p>
+
+        <!-- Botones al fondo: Cerrar sesión + Configuración -->
+        <div class="button-row" style="margin-top: 20px; justify-content: flex-end;">
+          <button class="btn btn-secondary" id="logoutBtn">
+            Cerrar sesión
+          </button>
+          <a href="settings.html" class="btn btn-secondary">
+            Configuración
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </body>
