@@ -173,6 +173,44 @@ h2 {
   color: var(--text-main);
   border-color: var(--border-soft);
 }
+.motivation-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.motivation-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: #f4f4f5;
+}
+
+.motivation-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #facc15, #f97316, #ef4444);
+  flex-shrink: 0;
+}
+
+.motivation-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.motivation-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.motivation-caption {
+  font-size: 11px;
+  color: var(--text-soft);
+}
 
 .btn-primary:hover {
   opacity: 0.94;
@@ -280,6 +318,15 @@ h2 {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 10px;
+}
+.data-row-compact {
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.data-row-compact .pill-data {
+  font-size: 11px;
+  padding: 6px 10px;
 }
 
 .pill-data {
