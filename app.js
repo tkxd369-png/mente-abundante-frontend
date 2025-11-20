@@ -1,6 +1,6 @@
  
  // ⚠️ IMPORTANTE: pon aquí tu URL real de la API en Render
-const API_BASE = "https://mente-abundante-api.onrender.com";
+ const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
 // ----------------------------------------------------------
 //  MANEJO DE TOKEN
