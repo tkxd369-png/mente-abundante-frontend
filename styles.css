@@ -370,7 +370,13 @@ body.ma-dashboard {
     margin-left: auto;
   }
 }
-
+@media (max-width: 768px) {
+  .ma-brand-title {
+    font-size: 1.25rem;   /* más pequeño para caber en una línea */
+    letter-spacing: 0.10em;
+    white-space: nowrap;  /* obliga que quede en UNA sola línea */
+  }
+}
 /* Desktop: dashboard tipo “web app” con header en fila */
 @media (min-width: 1024px) {
   .dashboard-layout {
