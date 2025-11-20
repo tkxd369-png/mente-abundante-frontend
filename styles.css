@@ -495,3 +495,31 @@ body.ma-dashboard {
     padding: 1.4rem 1.4rem 1.6rem;
   }
 }
+/* ============================ */
+/*  AJUSTES PARA DESKTOP        */
+/*  Dashboard más tipo "web"    */
+/* ============================ */
+
+@media (min-width: 1024px) {
+  .dashboard-layout {
+    max-width: 1100px;   /* ancho máximo del dashboard */
+    margin: 0 auto;      /* centrado horizontal */
+    padding-inline: 1.5rem;
+  }
+
+  .dashboard-header {
+    border-radius: 20px 20px 0 0;
+    margin-top: 1rem;
+  }
+
+  .dashboard-main {
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    background: transparent;
+  }
+
+  .dashboard-feed {
+    background: #f5f3f0;
+  }
+}
