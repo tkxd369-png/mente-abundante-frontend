@@ -1120,3 +1120,82 @@ body.ma-dashboard {
     font-size: 1.1rem;
   }
 }
+/* ===================================== */
+/*     PAGINA PUENTE (post-pago)         */
+/* ===================================== */
+
+.bridge-page {
+  background: #f5f3f0;
+}
+
+.bridge-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo + título */
+.bridge-logo-block {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.bridge-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.7rem;
+}
+
+.bridge-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111; /* negro elegante */
+}
+
+/* Tarjeta central */
+.bridge-card {
+  max-width: 700px;
+  text-align: center;
+  padding: 2rem 2rem 2.2rem;
+}
+
+.bridge-heading {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.bridge-text {
+  font-size: 1rem;
+  margin: 1rem 0 1rem;
+  color: #444;
+}
+
+.bridge-btn {
+  margin-top: 1.2rem;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.85rem 1.4rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .bridge-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .bridge-title {
+    font-size: 1.5rem;
+  }
+
+  .bridge-card {
+    padding: 1.6rem 1.4rem;
+    border-radius: 18px;
+  }
+}
