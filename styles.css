@@ -356,3 +356,136 @@ body.ma-body {
     justify-content: space-between;
   }
 }
+/* ===================================================== */
+/*  BLOQUE PARA PAGINA PRINCIPAL, LOGIN Y CONFIGURACIÓN  */
+/*  (Restaurar estilo limpio y cálido en las demas)      */
+/* ===================================================== */
+
+/* Contenedor general de páginas sencillas (landing, login, settings) */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #f5f3f0; /* igual que el dashboard */
+}
+
+/* Tarjeta central */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  padding: 1.6rem 1.8rem 1.8rem;
+}
+
+/* Títulos de página */
+.page-title {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 1.2rem;
+}
+
+/* Formularios genéricos (login, settings, etc.) */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.label {
+  font-size: 0.82rem;
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+
+.input {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #c9a15a;
+  box-shadow: 0 0 0 1px rgba(201, 161, 90, 0.2);
+}
+
+.small-note {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Layout para Settings (configuración) si usas una tarjeta más ancha */
+.settings-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #f5f3f0;
+}
+
+.settings-card {
+  background: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 880px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.07);
+  padding: 1.8rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2rem;
+}
+
+/* Sección de título en settings */
+.settings-header {
+  grid-column: 1 / -1;
+  margin-bottom: 0.5rem;
+}
+
+/* Bloques internos de settings */
+.settings-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.settings-section-subtitle {
+  font-size: 0.8rem;
+  margin: 0 0 1rem;
+  color: #666;
+}
+
+/* Responsive para settings */
+@media (max-width: 768px) {
+  .page {
+    padding: 1.1rem;
+  }
+
+  .card {
+    border-radius: 18px;
+    padding: 1.3rem 1.4rem 1.5rem;
+  }
+
+  .settings-page {
+    padding: 1.1rem;
+  }
+
+  .settings-card {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 20px;
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+}
