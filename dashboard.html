@@ -1,151 +1,154 @@
-<!doctype html>
-<html lang="es-MX">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Mi Espacio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Librería para generar QR en el navegador -->
-  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js" defer></script>
-  <script defer src="app.js"></script>
-</head>
-<body>
-  <div class="main-shell">
-    <div class="card">
-      <!-- COLUMNA IZQUIERDA -->
-      <div class="card-left">
-        <!-- Bloque superior fijo (logo + nombre + REF) -->
-        <div class="dashboard-top">
-          <div class="logo-row">
-            <div class="logo-drop"></div>
-            <div>
-              <div class="logo-text-main">Mente Abundante</div>
-              <div class="logo-text-sub">Tu espacio personal</div>
+  <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mente Abundante — Mi espacio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="ma-body">
+    <div class="dashboard-layout">
+      <!-- HEADER FIJO -->
+      <header class="dashboard-header">
+        <div class="dash-top-row">
+          <div class="dash-brand">
+            <div class="ma-logo-drop"></div>
+            <div class="ma-brand-text">
+              <div class="ma-brand-title">Mente Abundante</div>
+              <div class="ma-brand-subtitle">Tu conexión con la abundancia</div>
             </div>
           </div>
 
-          <!-- Nombre + REF en la misma línea -->
-          <div class="dashboard-header">
-            <div class="dashboard-name" id="dashName">Hola, …</div>
-            <div class="badge-ref" id="dashRefBadge">
-              REF: …
-            </div>
-          </div>
-        </div>
-
-        <!-- FEED TIPO TIKTOK DEBAJO DEL HEADER -->
-        <div class="section-title" style="margin-top: 4px;">Inspiración en movimiento</div>
-        <div class="section-sub">
-          Una pequeña ventana a lo que sucede en la comunidad. Imágenes y momentos que se
-          actualizarán junto con la página principal de la comunidad.
-        </div>
-
-        <div class="feed-container">
-          <!-- CARD 1: GOTA AZUL -->
-          <div class="feed-card">
-            <div class="feed-media feed-media-agua"></div>
-            <div class="feed-meta">
-              <div class="feed-title">Cada gota cuenta</div>
-              <div class="feed-caption">
-                Cada decisión es una gota que expande tu abundancia. Hoy elegiste avanzar.
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 2: GOTA DORADA -->
-          <div class="feed-card">
-            <div class="feed-media feed-media-dorado"></div>
-            <div class="feed-meta">
-              <div class="feed-title">Cosecha de abundancia</div>
-              <div class="feed-caption">
-                Lo que siembras en tu mente se refleja en tu realidad. Alinea tu enfoque con lo que deseas.
-              </div>
-            </div>
+          <div class="dash-user-ref">
+            <span id="dashName" class="dash-user-name">Miembro Mente Abundante</span>
+            <button
+              id="dashRefBadge"
+              type="button"
+              class="ref-badge"
+              title="Toca para copiar tu enlace de invitación"
+            >
+              REF: —
+            </button>
           </div>
         </div>
 
-        <!-- Tu conexión con la abundancia (compacto) -->
-        <div style="margin-top: 12px;">
-          <div class="section-title">Tu conexión con la abundancia</div>
-          <div class="section-sub">
-            Un resumen rápido de tu cuenta y de cómo fluye la abundancia a través de ti hacia otros.
-          </div>
-
-          <div class="data-row data-row-compact">
-            <div class="pill-data">
-              <span class="pill-label">Usuario:</span>
-              <span id="dashUsername">…</span>
-            </div>
-            <div class="pill-data">
-              <span class="pill-label">Correo:</span>
-              <span id="dashEmail">…</span>
-            </div>
-            <div class="pill-data">
-              <span class="pill-label">Teléfono:</span>
-              <span id="dashPhone">…</span>
-            </div>
-            <div class="pill-data">
-              <span class="pill-label">Referidos activos:</span>
-              <span id="dashReferrals">0</span>
-            </div>
-          </div>
-
-          <p class="small-note" id="dashMessage"></p>
-        </div>
-      </div>
-
-      <!-- COLUMNA DERECHA -->
-      <div class="card-right">
-        <div class="section-title">Comparte tu invitación</div>
-        <div class="section-sub">
-          Usa tu enlace personal o tu código QR para invitar a otros. Tu código se agrega
-          automáticamente cuando ellos escanean o hacen clic.
+        <div class="dash-info-strip">
+          <span class="info-item">
+            Usuario:
+            <span id="dashUsername" class="info-value">—</span>
+          </span>
+          <span class="info-item hide-on-mobile">
+            Email:
+            <span id="dashEmail" class="info-value">—</span>
+          </span>
+          <span class="info-item hide-on-mobile">
+            Tel:
+            <span id="dashPhone" class="info-value">—</span>
+          </span>
+          <span class="info-item">
+            Referidos activos:
+            <span id="dashReferrals" class="info-value">0</span>
+          </span>
         </div>
 
-        <div class="form">
-          <div>
-            <div class="label">Tu enlace de invitación</div>
-            <input
-              id="referralLink"
-              class="input"
-              type="text"
-              readonly
-              value="Cargando tu enlace…"
-            />
+        <div class="dash-link-row">
+          <div class="ref-link-group">
+            <label for="referralLink" class="ref-label">
+              Tu enlace personal de invitación
+            </label>
+            <div class="ref-input-row">
+              <input
+                id="referralLink"
+                class="ref-input"
+                type="text"
+                readonly
+                value=""
+              />
+              <button id="copyLinkBtn" type="button" class="btn btn-secondary">
+                Copiar
+              </button>
+            </div>
+            <p id="copyMessage" class="small-note"></p>
           </div>
 
-          <button type="button" class="btn btn-primary" id="copyLinkBtn">
-            Copiar enlace
-          </button>
-          <p class="small-note" id="copyMessage"></p>
-
-          <div style="margin-top: 12px;">
-            <div class="label">Tu QR de invitación</div>
-            <canvas
-              id="qrCanvas"
-              style="background: #ffffff; padding: 8px; border-radius: 12px;"
-            ></canvas>
-            <p class="small-note">
-              Quien escanee este código llegará al inicio con tu invitación aplicada y podrá activar su membresía.
-            </p>
+          <!-- QR a la derecha en pantallas grandes -->
+          <div class="qr-box hide-on-mobile">
+            <canvas id="qrCanvas" class="qr-canvas"></canvas>
+            <span class="qr-label">QR listo para compartir</span>
           </div>
         </div>
 
-        <p class="small-note" style="margin-top: 18px;">
-          Recuerda: tu invitación es única. Cada persona que entra por tu enlace o QR cuenta para tus metas
-          de referidos y recompensas.
+        <p id="dashMessage" class="dash-message">
+          Tu nueva vida ya empezó. Recuerda: Tú decides ser abundante.
         </p>
+      </header>
 
-        <div class="button-row" style="margin-top: 20px; justify-content: flex-end;">
-          <button class="btn btn-secondary" id="logoutBtn">
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="dashboard-main">
+        <!-- FEED SCROLLEABLE -->
+        <section class="dashboard-feed">
+          <!-- Tarjeta 1 -->
+          <article class="feed-card feed-card-1">
+            <div class="feed-media fake-media-agua"></div>
+            <div class="feed-content">
+              <h2 class="feed-title">Cada gota cuenta</h2>
+              <p class="feed-text">
+                Cada acción alineada con tu abundancia es una gota que llena tu
+                vida. Comparte, inspira y recuerda: lo que das regresa.
+              </p>
+              <p class="feed-tag">
+                #MenteAbundante #TuDecidesSerAbundante
+              </p>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2 -->
+          <article class="feed-card feed-card-2">
+            <div class="feed-media fake-media-dorado"></div>
+            <div class="feed-content">
+              <h2 class="feed-title">Cosecha de abundancia</h2>
+              <p class="feed-text">
+                Tu luz inspira a otros. Cada invitación es una semilla que
+                siembras en la vida de alguien más.
+              </p>
+              <p class="feed-tag">
+                Comparte tu enlace y deja que la abundancia fluya.
+              </p>
+            </div>
+          </article>
+
+          <!-- Tarjeta 3 -->
+          <article class="feed-card feed-card-3">
+            <div class="feed-media fake-media-soft"></div>
+            <div class="feed-content">
+              <h2 class="feed-title">Tu energía abre caminos</h2>
+              <p class="feed-text">
+                No se trata solo del dinero, sino de la transformación que
+                activas dentro de ti y en quienes te rodean.
+              </p>
+              <p class="feed-tag">
+                Hoy también es un buen día para invitar a alguien más.
+              </p>
+            </div>
+          </article>
+
+          <!-- Puedes agregar más tarjetas aquí si quieres -->
+        </section>
+
+        <!-- FOOTER FIJO ABAJO -->
+        <footer class="dashboard-footer">
+          <button id="logoutBtn" type="button" class="btn btn-ghost">
             Cerrar sesión
           </button>
           <a href="settings.html" class="btn btn-secondary">
             Configuración
           </a>
-        </div>
-      </div>
+        </footer>
+      </main>
     </div>
-  </div>
-</body>
+
+    <!-- Librería QR (si la estás usando) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
