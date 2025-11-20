@@ -7,125 +7,110 @@
   <link rel="stylesheet" href="styles.css" />
   <script defer src="app.js"></script>
 </head>
-<body>
-  <div class="main-shell">
-    <div class="card single">
-      <div class="card-left">
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">Mente Abundante</div>
-            <div class="logo-text-sub">Configuración de cuenta</div>
-          </div>
-        </div>
+ <body class="ma-body">
+  <div class="settings-page">
+    <div class="settings-card">
+      <div class="settings-header">
+        <h1 class="page-title">Configuración</h1>
+        <p class="page-subtitle">
+          Actualiza tus datos y tu contraseña cuando lo necesites.
+        </p>
+      </div>
 
-        <h2>Tu Información</h2>
-        <p class="lead">
-          Aquí puedes actualizar tus datos de contacto y cambiar tu contraseña cuando lo necesites.
+      <div>
+        <h2 class="settings-section-title">Datos de contacto</h2>
+        <p class="settings-section-subtitle">
+          Email y teléfono para tu cuenta Mente Abundante.
         </p>
 
-        <!-- DATOS DE CONTACTO -->
-        <div style="margin-top: 10px; margin-bottom: 10px;">
-          <div class="section-title">Datos de contacto</div>
-          <div class="section-sub">
-            Mantén tu correo y teléfono actualizados. Usaremos estos datos para avisos importantes y contacto sobre pagos.
+        <form id="profileForm" class="form">
+          <div>
+            <div class="label">Correo electrónico</div>
+            <input
+              id="settingsEmail"
+              class="input"
+              type="email"
+              required
+            />
           </div>
 
-          <form class="form" id="profileForm">
-            <div>
-              <div class="label">Correo electrónico</div>
-              <input
-                class="input"
-                type="email"
-                name="email"
-                id="settingsEmail"
-                required
-                placeholder="tucorreo@ejemplo.com"
-              />
-            </div>
+          <div>
+            <div class="label">Teléfono</div>
+            <input
+              id="settingsPhone"
+              class="input"
+              type="tel"
+              required
+            />
+          </div>
 
-            <div>
-              <div class="label">Teléfono (WhatsApp)</div>
-              <input
-                class="input"
-                type="tel"
-                name="phone"
-                id="settingsPhone"
-                required
-                placeholder="+1 (555) 123-4567"
-              />
-            </div>
+          <button type="submit" class="btn btn-secondary">
+            Guardar cambios
+          </button>
 
-            <button type="submit" class="btn btn-primary">
-              Guardar cambios
-            </button>
+          <p id="profileMessage" class="small-note"></p>
+        </form>
+      </div>
 
-            <p class="small-note" id="profileMessage"></p>
-          </form>
-        </div>
+      <div>
+        <h2 class="settings-section-title">Seguridad</h2>
+        <p class="settings-section-subtitle">
+          Cambia tu contraseña cuando lo consideres necesario.
+        </p>
 
-        <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
+        <form id="passwordForm" class="form">
+          <div>
+            <div class="label">Contraseña actual</div>
+            <input
+              class="input"
+              type="password"
+              name="currentPassword"
+              id="currentPassword"
+              required
+              placeholder="••••••••"
+            />
+          </div>
 
-        <!-- CAMBIO DE CONTRASEÑA -->
-        <form class="form" id="passwordForm">
-  <div>
-    <div class="label">Contraseña actual</div>
-    <input
-      class="input"
-      type="password"
-      name="currentPassword"
-      id="currentPassword"
-      required
-      placeholder="••••••••"
-    />
-  </div>
+          <div>
+            <div class="label">Nueva contraseña</div>
+            <input
+              class="input"
+              type="password"
+              name="newPassword"
+              id="newPassword"
+              required
+              placeholder="••••••••"
+            />
+          </div>
 
-  <div>
-    <div class="label">Nueva contraseña</div>
-    <input
-      class="input"
-      type="password"
-      name="newPassword"
-      id="newPassword"
-      required
-      placeholder="••••••••"
-    />
-  </div>
+          <div>
+            <div class="label">Confirmar nueva contraseña</div>
+            <input
+              class="input"
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              required
+              placeholder="••••••••"
+            />
+          </div>
 
-  <div>
-    <div class="label">Confirmar nueva contraseña</div>
-    <input
-      class="input"
-      type="password"
-      name="confirmPassword"
-      id="confirmPassword"
-      required
-      placeholder="••••••••"
-    />
-  </div>
+          <div class="small-note">
+            <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="showNewPassword" style="margin: 0;" />
+              <span>Mostrar contraseñas mientras escribo</span>
+            </label>
+          </div>
 
-  <!-- Toggle mostrar/ocultar TODAS las contraseñas -->
-  <div class="small-note">
-    <label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
-      <input type="checkbox" id="showNewPassword" style="margin: 0;" />
-      <span>Mostrar contraseñas mientras escribo</span>
-    </label>
-  </div>
+          <button type="submit" class="btn btn-secondary">
+            Actualizar contraseña
+          </button>
 
-  <button type="submit" class="btn btn-secondary">
-    Actualizar contraseña
-  </button>
-
-  <p class="small-note" id="passwordMessage"></p>
-</form>
-          
-        </div>
-
-        <div class="button-row" style="margin-top: 20px;">
-          <a href="dashboard.html" class="btn btn-secondary">Volver a mi espacio</a>
-        </div>
+          <p class="small-note" id="passwordMessage"></p>
+        </form>
       </div>
     </div>
   </div>
+
+  <script src="app.js"></script>
 </body>
-</html>
