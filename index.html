@@ -1,100 +1,56 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Mente Abundante — Comienza tu camino</title>
+    <title>Mente Abundante — Bienvenido</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="ma-body">
-    <div class="landing-wrapper">
-      <!-- ENCABEZADO SIMPLE -->
-      <header class="landing-header">
-        <div class="landing-logo-group">
-          <div class="ma-logo-drop"></div>
-          <div class="landing-brand">
-            <div class="landing-title">Mente Abundante</div>
-            <div class="landing-subtitle">Tu conexión con la abundancia</div>
-          </div>
-        </div>
+  <body class="ma-body landing-body">
 
-        <a href="login.html" class="btn btn-ghost landing-login-btn">
-          Entrar a tu cuenta
-        </a>
-      </header>
+    <div class="landing-container">
 
-      <!-- CONTENIDO PRINCIPAL -->
-      <main class="landing-main">
-        <section class="landing-hero-card">
-          <h1 class="landing-hero-title">Empieza tu camino hacia la abundancia</h1>
-          <p class="landing-hero-text">
-            Toma unos minutos para conectar con la visión de Mente Abundante.
-            Este video de introducción te ayudará a comprender el corazón del programa.
-          </p>
+      <!-- LOGO + NOMBRE CENTRADO -->
+      <div class="landing-logo-block">
+        <div class="landing-logo-drop"></div>
+        <h1 class="landing-logo-title">Mente Abundante</h1>
+      </div>
 
-          <!-- VIDEO VISIBLE Y RESPONSIVO -->
-          <div class="landing-video-frame">
-            <!-- Si usas YouTube, reemplaza el src por tu URL embebida -->
-            <!-- EJEMPLO: <iframe src="https://www.youtube.com/embed/XXXXXXXX" ... ></iframe> -->
+      <!-- VIDEO -->
+      <div class="landing-video-frame">
+        <video
+          class="landing-video"
+          controls
+          playsinline
+        >
+          <source src="TU_VIDEO_INTRO.mp4" type="video/mp4" />
+        </video>
+      </div>
 
-            <video
-              class="landing-video"
-              controls
-              playsinline
-              poster="poster-intro.jpg"
-            >
-              <!-- Cambia este src por la ruta real de tu video -->
-              <source src="TU_VIDEO_INTRO.mp4" type="video/mp4" />
-              Tu navegador no soporta video HTML5.
-            </video>
-          </div>
+      <!-- BOTON PRINCIPAL -->
+      <button id="btnVerIntroduccion" class="btn btn-secondary landing-main-btn">
+        Ver introducción
+      </button>
 
-          <!-- BOTONES PRINCIPALES -->
-          <div class="landing-actions">
-            <button id="btnVerIntroduccion" class="btn btn-secondary">
-              Ver introducción
-            </button>
+      <!-- BOTON PARA CUENTA -->
+      <a href="login.html" class="btn btn-ghost landing-login">
+        Entrar a tu cuenta
+      </a>
 
-            <a href="login.html" class="btn btn-ghost">
-              Entrar a tu cuenta
-            </a>
-          </div>
-
-          <p class="landing-note">
-            Cuando estés listo y hayas comprendido el concepto, podrás avanzar al
-            pago de tu membresía y desbloquear el siguiente video.
-          </p>
-        </section>
-
-        <!-- SECCIÓN DE TEXTO INFORMATIVO ABAJO -->
-        <section class="landing-info">
-          <h2 class="landing-info-title">¿Qué es Mente Abundante?</h2>
-          <p class="landing-info-text">
-            Mente Abundante es un espacio diseñado para ayudarte a alinear tus
-            pensamientos, emociones y acciones con la abundancia. A través de
-            contenido guiado, comunidad y herramientas prácticas, aprenderás a
-            dejar que la abundancia fluya desde dentro de ti.
-          </p>
-          <p class="landing-info-text">
-            Este primer paso es solo el comienzo de un proceso profundo. Tómate
-            el tiempo de ver el video completo, sin distracciones, y permite que
-            el mensaje conecte con tu interior.
-          </p>
-        </section>
-      </main>
     </div>
 
     <script>
-      // Si quieres que el botón "Ver introducción" haga scroll directo al video:
+      // Scroll suave hacia el video
       document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById("btnVerIntroduccion");
-        const videoFrame = document.querySelector(".landing-video-frame");
-        if (btn && videoFrame) {
+        const frame = document.querySelector(".landing-video-frame");
+        if (btn && frame) {
           btn.addEventListener("click", () => {
-            videoFrame.scrollIntoView({ behavior: "smooth", block: "center" });
+            frame.scrollIntoView({ behavior: "smooth", block: "center" });
           });
         }
       });
     </script>
+
   </body>
 </html>
