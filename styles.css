@@ -105,23 +105,15 @@ body.ma-dashboard {
 }
 
 /* Título MENTE ABUNDANTE grande y dorado */
-.ma-brand-title {
+ .ma-brand-title {
   font-size: 1.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.1;
-  background: linear-gradient(
-    120deg,
-    #b68b3a 0%,
-    #f3d48a 25%,
-    #fff3c4 45%,
-    #c79d55 70%,
-    #f0d395 100%
-  );
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1a1a1a;  /* negro elegante */
+  background: none !important;
+  -webkit-text-fill-color: #111111 !important;
 }
 
 .ma-brand-subtitle {
@@ -356,6 +348,26 @@ body.ma-dashboard {
 
   .hide-on-mobile {
     display: none;
+  }
+}
+/* Solo móvil: nombre a la izquierda, REF a la derecha */
+@media (max-width: 768px) {
+  .dash-user-ref {
+    width: 100%;
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    margin-top: 0.6rem;
+    text-align: left;
+  }
+
+  .dash-user-name {
+    margin-right: auto;
+    text-align: left;
+  }
+
+  #dashRefBadge {
+    margin-left: auto;
   }
 }
 
