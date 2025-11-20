@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -49,33 +49,6 @@
             Referidos activos:
             <span id="dashReferrals" class="info-value">0</span>
           </span>
-        </div>
-
-        <div class="dash-link-row">
-          <div class="ref-link-group">
-            <label for="referralLink" class="ref-label">
-              Tu enlace personal de invitación
-            </label>
-            <div class="ref-input-row">
-              <input
-                id="referralLink"
-                class="ref-input"
-                type="text"
-                readonly
-                value=""
-              />
-              <button id="copyLinkBtn" type="button" class="btn btn-secondary">
-                Copiar
-              </button>
-            </div>
-            <p id="copyMessage" class="small-note"></p>
-          </div>
-
-          <!-- QR a la derecha en pantallas grandes -->
-         <div class="qr-box">
-  <canvas id="qrCanvas" class="qr-canvas"></canvas>
-  <span class="qr-label">QR listo para compartir</span>
-  </div> 
         </div>
 
         <p id="dashMessage" class="dash-message">
@@ -135,6 +108,36 @@
           <!-- Puedes agregar más tarjetas aquí si quieres -->
         </section>
 
+        <!-- SECCIÓN DE COMPARTIR: LINK + QR DEBAJO DEL SCROLL -->
+        <section class="dashboard-share">
+          <div class="dash-link-row">
+            <div class="ref-link-group">
+              <label for="referralLink" class="ref-label">
+                Tu enlace personal de invitación
+              </label>
+              <div class="ref-input-row">
+                <input
+                  id="referralLink"
+                  class="ref-input"
+                  type="text"
+                  readonly
+                  value=""
+                />
+                <button id="copyLinkBtn" type="button" class="btn btn-secondary">
+                  Copiar
+                </button>
+              </div>
+              <p id="copyMessage" class="small-note"></p>
+            </div>
+
+            <!-- QR a la derecha en pantallas grandes -->
+            <div class="qr-box">
+              <canvas id="qrCanvas" class="qr-canvas"></canvas>
+              <span class="qr-label">QR listo para compartir</span>
+            </div>
+          </div>
+        </section>
+
         <!-- FOOTER FIJO ABAJO -->
         <footer class="dashboard-footer">
           <button id="logoutBtn" type="button" class="btn btn-ghost">
@@ -147,7 +150,7 @@
       </main>
     </div>
 
-    <!-- Librería QR (si la estás usando) -->
+    <!-- Librería QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script src="app.js"></script>
   </body>
