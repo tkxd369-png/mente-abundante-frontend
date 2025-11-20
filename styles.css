@@ -676,3 +676,99 @@ body.ma-dashboard {
     padding-inline: 0.9rem;
   }
 }
+/* ===================================== */
+/*         LANDING PAGE LIMPIA           */
+/* ===================================== */
+
+.landing-body {
+  background: #f5f3f0; /* tono cálido */
+  padding: 0;
+  margin: 0;
+}
+
+.landing-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* LOGO CENTRADO */
+.landing-logo-block {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.landing-logo-drop {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  border-radius: 999px 999px 999px 0;
+  background: radial-gradient(circle at 30% 20%, #ffffff, #c6e6ff 40%, #4f9ad8 80%);
+  box-shadow: 0 8px 20px rgba(79, 154, 216, 0.35);
+}
+
+.landing-logo-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* VIDEO */
+.landing-video-frame {
+  width: 100%;
+  max-width: 840px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+}
+
+.landing-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BOTONES */
+.landing-main-btn {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  padding: 0.9rem 2rem;
+}
+
+.landing-login {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .landing-logo-drop {
+    width: 70px;
+    height: 70px;
+  }
+
+  .landing-logo-title {
+    font-size: 1.6rem;
+  }
+
+  .landing-video-frame {
+    border-radius: 16px;
+  }
+
+  .landing-main-btn {
+    width: 90%;
+  }
+
+  .landing-login {
+    width: 90%;
+    text-align: center;
+  }
+}
