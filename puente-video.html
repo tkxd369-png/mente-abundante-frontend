@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mente Abundante — Comencemos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="ma-body bridge-page">
+  <div class="bridge-wrapper">
+
+    <!-- LOGO + TITULO -->
+    <div class="bridge-logo-block">
+      <div class="ma-logo-drop bridge-logo"></div>
+      <h1 class="bridge-title">Mente Abundante</h1>
+    </div>
+
+    <!-- MENSAJE PRINCIPAL -->
+    <div class="bridge-card card">
+      <h2 class="bridge-heading">Tu decisión ya abrió el camino</h2>
+      <p class="bridge-text">
+        Gracias por unirte a Mente Abundante.  
+        Este es el siguiente paso para activar la transformación que ya comenzó dentro de ti.
+      </p>
+
+      <p class="bridge-text">
+        Ahora verás el <strong>video principal</strong>.  
+        Respira, abre tu corazón, y prepárate para recibir claridad, propósito y dirección.
+      </p>
+
+      <button class="btn btn-secondary bridge-btn" id="goToVideoBtn">
+        Ver el video principal
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("goToVideoBtn").addEventListener("click", () => {
+      window.location.href = "video-quiz.html"; 
+    });
+  </script>
+</body>
+</html>
