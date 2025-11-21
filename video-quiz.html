@@ -1,205 +1,187 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mente Abundante — Video & Quiz</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="ma-body video-page">
-    <div class="video-layout">
-      <!-- HEADER SENCILLO -->
-      <header class="video-header">
-        <div class="video-brand">
-          <div class="ma-logo-drop"></div>
-          <div class="video-brand-text">
-            <div class="video-brand-title">Mente Abundante</div>
-            <div class="video-brand-subtitle">
-              Video principal &amp; quiz de integración
-            </div>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Mente Abundante — Video + Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="ma-body">
+  <div class="main-shell">
+    <div class="card single">
+      <!-- LOGO + TÍTULO -->
+      <div class="logo-row" style="margin-bottom: 1rem;">
+        <div class="logo-drop"></div>
+        <div>
+          <div class="logo-text-main">MENTE ABUNDANTE</div>
+          <div class="logo-text-sub">Video principal + integración</div>
         </div>
-      </header>
+      </div>
 
-      <!-- CONTENIDO PRINCIPAL -->
-      <main class="video-main">
-        <section class="video-card card">
-          <h1 class="page-title">Video principal</h1>
-          <p class="page-subtitle">
-            Mira el video completo con atención. Después, responde el quiz de 10
-            preguntas para integrar lo aprendido.
-          </p>
+      <h2>Video principal: Yo Decido Ser Abundante</h2>
 
-          <!-- VIDEO (puedes cambiar el src más adelante) -->
-          <div class="video-frame">
-            <!-- Ejemplo usando iframe (YouTube / Vimeo / etc.) -->
-            <iframe
-              id="mainVideo"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Video Mente Abundante"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+      <p class="small-note" style="margin-bottom: 1rem;">
+        Te recomendamos verlo con calma, en un lugar tranquilo.  
+        Este video está disponible solo <strong>un número limitado de veces</strong>.
+      </p>
+
+      <!-- BLOQUE MENSAJE LIMITE -->
+      <p id="limitMessage" class="small-note" style="color:#b33434; display:none; margin-bottom:1rem;"></p>
+
+      <!-- SECCIÓN VIDEO -->
+      <section id="videoSection" style="margin-bottom: 1.5rem;">
+        <div class="landing-video-frame">
+          <!-- 👇 Cuando tengas el video en Vimeo, reemplaza el src de este iframe -->
+          <iframe
+            id="maMainVideo"
+            src="https://player.vimeo.com/video/XXXXXXXX" 
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="small-note">
+          El contenido de este video es para tu uso personal como miembro de Mente Abundante.
+          No está permitido descargarlo, grabarlo ni compartirlo públicamente.
+        </p>
+      </section>
+
+      <!-- SECCIÓN QUIZ -->
+      <section id="quizSection">
+        <h3>Pequeño quiz de integración</h3>
+        <p class="small-note" style="margin-bottom:0.8rem;">
+          No es un examen, es una forma de ayudarte a integrar lo que escuchaste.
+          Responde con honestidad.
+        </p>
+
+        <form id="quizForm" class="form">
+          <!-- Pregunta 1 -->
+          <div>
+            <div class="label">
+              1. ¿Cuál es la decisión principal que tomas al ver este video?
+            </div>
+            <input
+              type="text"
+              name="q1"
+              class="input"
+              placeholder="Escríbelo con tus propias palabras"
+              required
+            />
           </div>
 
-          <button id="startQuizBtn" type="button" class="btn btn-secondary video-btn">
-            Ya vi el video, ir al quiz
+          <!-- Pregunta 2 -->
+          <div>
+            <div class="label">
+              2. ¿Qué es para ti “ser abundante” después de escuchar este mensaje?
+            </div>
+            <input
+              type="text"
+              name="q2"
+              class="input"
+              placeholder="Describe en una frase"
+              required
+            />
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div>
+            <div class="label">
+              3. Menciona una acción concreta que vas a tomar en los próximos 7 días.
+            </div>
+            <input
+              type="text"
+              name="q3"
+              class="input"
+              placeholder="Ej. Hablar con…, iniciar…, soltar…"
+              required
+            />
+          </div>
+
+          <!-- Puedes duplicar bloques y llegar hasta 10 preguntas si quieres -->
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 0.8rem;">
+            Enviar respuestas y continuar
           </button>
-        </section>
 
-        <!-- QUIZ -->
-        <section id="quizSection" class="quiz-section card">
-          <h2 class="page-title">Quiz de integración</h2>
-          <p class="page-subtitle">
-            Responde todas las preguntas. No es un examen, es una forma de
-            afirmar lo que ya sabes.
-          </p>
+          <p id="quizMessage" class="small-note" style="margin-top:0.6rem;"></p>
+        </form>
+      </section>
 
-          <form id="quizForm" class="quiz-form">
-            <!-- PREGUNTA 1 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                1. ¿Qué significa “Yo decido ser abundante”?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q1" value="a" />
-                Es solo una frase bonita sin acción.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q1" value="b" />
-                Es una decisión consciente de alinearme con la abundancia en mis
-                pensamientos y acciones.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q1" value="c" />
-                Es esperar que otros cambien primero.
-              </label>
-            </div>
+      <div class="button-row" style="margin-top: 1.4rem;">
+        <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </div>
 
-            <!-- PREGUNTA 2 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                2. La abundancia, según el video, inicia principalmente en:
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q2" value="a" />
-                Las circunstancias externas.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q2" value="b" />
-                El sistema económico.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q2" value="c" />
-                La manera en la que pienso, siento y decido.
-              </label>
-            </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const MAX_VIEWS = 3; // 👈 Cambia a 2 si quieres solo 2 vistas
+      const VIEWS_KEY = "ma_video2_views";
 
-            <!-- PREGUNTA 3 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                3. ¿Qué papel juega el compartir la oportunidad con otros?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q3" value="a" />
-                Solo sirve para ganar dinero.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q3" value="b" />
-                Es sembrar en la vida de otros una posibilidad de transformación.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q3" value="c" />
-                No es importante, es opcional.
-              </label>
-            </div>
+      const videoSection = document.getElementById("videoSection");
+      const quizSection = document.getElementById("quizSection");
+      const limitMessage = document.getElementById("limitMessage");
+      const quizForm = document.getElementById("quizForm");
+      const quizMessage = document.getElementById("quizMessage");
 
-            <!-- PREGUNTA 4 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                4. ¿Qué es lo que más limita la abundancia, según el contenido?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q4" value="a" />
-                Falta de contactos.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q4" value="b" />
-                Creencias limitantes que no cuestiono.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q4" value="c" />
-                No tener suficiente tiempo libre.
-              </label>
-            </div>
+      // Leer vistas previas desde localStorage
+      let currentViews = parseInt(localStorage.getItem(VIEWS_KEY) || "0", 10);
 
-            <!-- PREGUNTA 5 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                5. ¿Qué actitud se invita a tomar frente a los retos?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q5" value="a" />
-                Resignación: así es la vida.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q5" value="b" />
-                Victimismo: culpar a los demás.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q5" value="c" />
-                Responsabilidad: ver qué puedo aprender y decidir diferente.
-              </label>
-            </div>
+      if (currentViews >= MAX_VIEWS) {
+        // Ya se pasó del límite
+        videoSection.style.display = "none";
+        quizSection.style.display = "none";
+        limitMessage.style.display = "block";
+        limitMessage.textContent =
+          "Has alcanzado el número máximo de visualizaciones permitidas para este video.";
+      } else {
+        // Incrementar contador de vistas al cargar la página
+        currentViews += 1;
+        localStorage.setItem(VIEWS_KEY, String(currentViews));
 
-            <!-- PREGUNTA 6 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                6. ¿Cómo se describe el acto de invitar a otras personas?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q6" value="a" />
-                Como presión para que compren.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q6" value="b" />
-                Como una oportunidad de servir y compartir algo que me ha bendecido.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q6" value="c" />
-                Como un favor que me hacen.
-              </label>
-            </div>
+        if (MAX_VIEWS - currentViews >= 0) {
+          limitMessage.style.display = "block";
+          limitMessage.style.color = "#444";
+          limitMessage.textContent =
+            "Esta es una de tus " +
+            MAX_VIEWS +
+            " visualizaciones permitidas de este video. Te quedan " +
+            (MAX_VIEWS - currentViews) +
+            " intento(s).";
+        }
+      }
 
-            <!-- PREGUNTA 7 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                7. ¿Qué elemento es clave para que haya resultados?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q7" value="a" />
-                Solo visualizar mucho.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q7" value="b" />
-                Acción constante alineada con la decisión interna.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q7" value="c" />
-                Esperar que otros lo hagan por mí.
-              </label>
-            </div>
+      // Manejo del quiz
+      quizForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        quizMessage.textContent = "";
 
-            <!-- PREGUNTA 8 -->
-            <div class="quiz-question">
-              <h3 class="quiz-q-title">
-                8. ¿Qué se dice sobre el miedo en relación a la abundancia?
-              </h3>
-              <label class="quiz-option">
-                <input type="radio" name="q8" value="a" />
-                Que es una señal de que debo detenerme siempre.
-              </label>
-              <label class="quiz-option">
-                <input type="radio" name="q8" value="b" />
-                Que puedo reconocerlo, abrazarlo y a
+        const formData = new FormData(quizForm);
+        const q1 = (formData.get("q1") || "").toString().trim();
+        const q2 = (formData.get("q2") || "").toString().trim();
+        const q3 = (formData.get("q3") || "").toString().trim();
+
+        if (!q1 || !q2 || !q3) {
+          quizMessage.textContent = "Por favor responde todas las preguntas.";
+          quizMessage.style.color = "#b33434";
+          return;
+        }
+
+        // Más adelante aquí podemos enviar las respuestas al backend
+        // fetch("/api/quiz/submit", { ... })
+
+        quizMessage.textContent =
+          "Gracias por tus respuestas. Ahora estás listo para crear tu cuenta.";
+        quizMessage.style.color = "#2f7b3b";
+
+        // Pequeño delay y luego redirigir a la página de crear cuenta
+        setTimeout(() => {
+          // 👇 Cambia 'signup.html' por el nombre real de tu página de registro
+          window.location.href = "signup.html";
+        }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
