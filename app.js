@@ -1,136 +1,139 @@
- <!doctype html>
-<html lang="es-MX">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Iniciar sesión</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="ma-body">
-  <div class="main-shell">
-    <div class="card single">
-      <div class="card-left">
-        <!-- LOGO + TITULO -->
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">MENTE ABUNDANTE</div>
-            <div class="logo-text-sub">Accede a tu espacio</div>
-          </div>
-        </div>
+// app.js - Frontend Mente Abundante
 
-        <h2>Inicia sesión</h2>
-        <p class="small-note">
-          Usa el correo y la contraseña que registraste después de ver el video y completar el quiz.
-        </p>
+const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-        <form class="form" id="loginForm">
-          <div>
-            <div class="label">Correo electrónico</div>
-            <input
-              class="input"
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="tucorreo@ejemplo.com"
-            />
-          </div>
+function getToken() {
+  return localStorage.getItem("ma_token");
+}
 
-          <div>
-            <div class="label">Contraseña</div>
-            <input
-              class="input"
-              type="password"
-              name="password"
-              id="password"
-              required
-              placeholder="Tu contraseña"
-            />
-          </div>
+function saveUser(user) {
+  if (user) {
+    localStorage.setItem("ma_user", JSON.stringify(user));
+  }
+}
 
-          <button type="submit" class="btn btn-primary" id="loginButton">
-            Entrar
-          </button>
+function loadUser() {
+  try {
+    const raw = localStorage.getItem("ma_user");
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
 
-          <p class="small-note" id="loginMessage" style="margin-top: 0.7rem;"></p>
-        </form>
+function logout() {
+  localStorage.removeItem("ma_token");
+  localStorage.removeItem("ma_user");
+  window.location.href = "index.html";
+}
 
-        <p class="small-note">
-          Si aún no has creado tu cuenta, termina primero el proceso de video y quiz.
-        </p>
+async function fetchMe(token) {
+  const res = await fetch(`${API_BASE}/me`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
 
-        <div class="button-row">
-          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  const data = await res.json();
+  if (!data.ok || !data.user) {
+    throw new Error(data.error || "No se pudo obtener el usuario.");
+  }
+  return data.user;
+}
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("loginForm");
-      const msg = document.getElementById("loginMessage");
-      const btn = document.getElementById("loginButton");
+async function initDashboard() {
+  const token = getToken();
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        msg.textContent = "";
-        msg.style.color = "#444";
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
+  let user;
+  try {
+    user = await fetchMe(token);
+    saveUser(user);
+  } catch (err) {
+    console.error("Error al cargar /me:", err);
+    logout();
+    return;
+  }
 
-        if (!email || !password) {
-          msg.textContent = "Por favor escribe tu email y contraseña.";
-          msg.style.color = "#b33434";
-          return;
-        }
+  const dashName = document.getElementById("dashName");
+  const dashUsername = document.getElementById("dashUsername");
+  const dashEmail = document.getElementById("dashEmail");
+  const dashPhone = document.getElementById("dashPhone");
+  const dashReferrals = document.getElementById("dashReferrals");
+  const dashRefBadge = document.getElementById("dashRefBadge");
+  const refLinkInput = document.getElementById("referralLink");
+  const copyBtn = document.getElementById("copyLinkBtn");
+  const copyMessage = document.getElementById("copyMessage");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const qrCanvas = document.getElementById("qrCanvas");
 
-        msg.textContent = "Verificando…";
-        btn.disabled = true;
+  // Link personal de invitación
+  const baseUrl = window.location.origin + "/membresia.html";
+  const personalLink = user.refid
+    ? `${baseUrl}?ref=${encodeURIComponent(user.refid)}`
+    : baseUrl;
 
-        try {
-          const res = await fetch(
-            "https://mente-abundante-api-1.onrender.com/auth/login",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password }),
-            }
-          );
+  if (dashName) dashName.textContent = user.full_name || "Miembro Mente Abundante";
+  if (dashUsername) dashUsername.textContent = user.username || "—";
+  if (dashEmail) dashEmail.textContent = user.email || "—";
+  if (dashPhone) dashPhone.textContent = user.phone || "—";
+  if (dashReferrals) dashReferrals.textContent = user.referrals ?? 0;
+  if (dashRefBadge) {
+    dashRefBadge.textContent = "REF: " + (user.refid || "—");
+    dashRefBadge.title = "Toca para copiar tu enlace de invitación";
+  }
+  if (refLinkInput) {
+    refLinkInput.value = personalLink;
+  }
 
-          const data = await res.json();
+  function copyLink() {
+    if (!refLinkInput) return;
+    refLinkInput.select();
+    refLinkInput.setSelectionRange(0, 99999);
 
-          if (!data.ok) {
-            msg.textContent = data.error || "No se pudo iniciar sesión.";
-            msg.style.color = "#b33434";
-            btn.disabled = false;
-            return;
-          }
-
-          if (data.token) {
-            localStorage.setItem("ma_token", data.token);
-          }
-          if (data.user) {
-            localStorage.setItem("ma_user", JSON.stringify(data.user));
-          }
-
-          msg.textContent = "Bienvenido. Entrando a tu dashboard…";
-          msg.style.color = "#2f7b3b";
-
+    navigator.clipboard
+      .writeText(refLinkInput.value)
+      .then(() => {
+        if (copyMessage) {
+          copyMessage.textContent = "Enlace copiado.";
           setTimeout(() => {
-            window.location.href = "dashboard.html";
-          }, 700);
-        } catch (err) {
-          console.error(err);
-          msg.textContent =
-            "Error al conectar con el servidor. Intenta de nuevo.";
-          msg.style.color = "#b33434";
-          btn.disabled = false;
+            copyMessage.textContent = "";
+          }, 1800);
+        }
+      })
+      .catch(() => {
+        if (copyMessage) {
+          copyMessage.textContent = "No se pudo copiar el enlace.";
         }
       });
+  }
+
+  if (copyBtn) copyBtn.addEventListener("click", copyLink);
+  if (dashRefBadge) dashRefBadge.addEventListener("click", copyLink);
+
+  if (qrCanvas && window.QRious) {
+    new QRious({
+      element: qrCanvas,
+      value: personalLink,
+      size: 120,
     });
-  </script>
-</body>
-</html>
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+  const isDashboard = body.classList.contains("ma-dashboard");
+
+  if (isDashboard) {
+    initDashboard();
+  }
+});
+ 
