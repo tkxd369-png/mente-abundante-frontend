@@ -6,91 +6,11 @@
   <title>Mente Abundante – Membresía</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("membershipForm");
-  const msg = document.getElementById("membershipMessage");
-  const countryMsg = document.getElementById("countryMessage");
-  const refInput = document.getElementById("refCode");
-
-  // 1. Autollenar ?ref= de la URL o de localStorage
-  const params = new URLSearchParams(window.location.search);
-  const refFromUrl = params.get("ref");
-  const refFromStorage = localStorage.getItem("ma_ref_code");
-  const finalRef = refFromUrl || refFromStorage || "";
-
-  if (finalRef) refInput.value = finalRef.toUpperCase();
-
-  const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    msg.textContent = "";
-    countryMsg.textContent = "";
-
-    const fullName = form.fullName.value.trim();
-    const email = form.email.value.trim();
-    const phone = form.phone.value.trim();
-    const refCode = form.refCode.value.trim().toUpperCase();
-    const country = form.country.value;
-
-    if (!refCode) {
-      msg.textContent = "Necesitas un código de invitación válido.";
-      msg.style.color = "#b33434";
-      return;
-    }
-
-    if (!allowedCountries.includes(country)) {
-      countryMsg.textContent =
-        "Lo sentimos, actualmente solo aceptamos ciertos países.";
-      countryMsg.style.color = "#b33434";
-      return;
-    }
-
-    msg.textContent = "Procesando... por favor espera.";
-    msg.style.color = "#444";
-
-    try {
-      const response = await fetch(
-        "https://mente-abundante-api-1.onrender.com/api/checkout/create",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fullName,
-            email,
-            phone,
-            refCode,
-            country,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!data.ok) {
-        msg.textContent = data.error || "No se pudo iniciar el proceso.";
-        msg.style.color = "#b33434";
-        return;
-      }
-
-      // Redirección (ahora a puente-video en modo prueba)
-      window.location.href = data.checkoutUrl;
-
-    } catch (err) {
-      console.error(err);
-      msg.textContent =
-        "Error al conectar con el servidor. Intenta nuevamente.";
-      msg.style.color = "#b33434";
-    }
-  });
-});
-</script>
-  
-<body>
+<body class="ma-body">
   <div class="main-shell">
     <div class="card single">
       <div class="card-left">
+        <!-- LOGO + TITULO -->
         <div class="logo-row">
           <div class="logo-drop"></div>
           <div>
@@ -106,10 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
         </p>
 
         <p class="small-note">
-          <strong>Importante:</strong> Es indispensable contar con un <strong>código de invitación</strong>.
-          Sin él no es posible procesar el pago ni continuar.
+          <strong>Importante:</strong> Es indispensable contar con un
+          <strong>código de invitación</strong>. Sin él no es posible procesar el pago ni continuar.
         </p>
 
+        <!-- FORMULARIO -->
         <form class="form" id="membershipForm">
           <div>
             <div class="label">Código de invitación</div>
@@ -129,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
               class="input"
               type="text"
               name="fullName"
+              id="fullName"
               required
               placeholder="Tu nombre y apellidos"
             />
@@ -140,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
               class="input"
               type="email"
               name="email"
+              id="email"
               required
               placeholder="tucorreo@ejemplo.com"
             />
@@ -151,9 +74,42 @@ document.addEventListener("DOMContentLoaded", () => {
               class="input"
               type="tel"
               name="phone"
+              id="phone"
               required
               placeholder="+1 (555) 123-4567"
             />
+          </div>
+
+          <div>
+            <div class="label">País de residencia</div>
+            <select id="country" name="country" class="input" required>
+              <option value="">Selecciona tu país</option>
+              <option value="US">Estados Unidos</option>
+              <option value="MX">México</option>
+              <option value="BR">Brasil</option>
+              <option value="CL">Chile</option>
+              <option value="CO">Colombia</option>
+              <option value="PE">Perú</option>
+              <option value="CA">Canadá</option>
+            </select>
+            <p id="countryMessage" class="small-note"></p>
+          </div>
+
+          <div style="margin-top: 0.5rem;">
+            <label class="label" style="display: flex; align-items: flex-start; gap: 0.4rem;">
+              <input
+                type="checkbox"
+                id="termsCheck"
+                style="margin-top: 0.15rem;"
+                required
+              />
+              <span class="small-note">
+                Confirmo que comprendo que la membresía inicial es de
+                <strong>$198 USD</strong> y que después del pago tendré acceso
+                al video principal, al quiz de integración y a mi
+                dashboard personal.
+              </span>
+            </label>
           </div>
 
           <button type="submit" class="btn btn-primary" id="payButton">
@@ -175,77 +131,99 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 
+  <!-- SCRIPT: CONEXIÓN AL BACKEND -->
   <script>
-    (function () {
-      const refInput = document.getElementById('refCode');
-      const payButton = document.getElementById('payButton');
-      const msg = document.getElementById('membershipMessage');
-      const form = document.getElementById('membershipForm');
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("membershipForm");
+      const msg = document.getElementById("membershipMessage");
+      const countryMsg = document.getElementById("countryMessage");
+      const refInput = document.getElementById("refCode");
+      const payButton = document.getElementById("payButton");
 
-      // 1. Intentamos leer ?ref= directamente de la URL
+      // Autollenar ?ref= de la URL o de localStorage
       const params = new URLSearchParams(window.location.search);
-      const refFromUrl = params.get('ref');
-
-      // 2. Si no viene en la URL, intentamos leerlo de localStorage
-      const refFromStorage = localStorage.getItem('ma_ref_code');
-
-      const finalRef = refFromUrl || refFromStorage || '';
+      const refFromUrl = params.get("ref");
+      const refFromStorage = localStorage.getItem("ma_ref_code");
+      const finalRef = refFromUrl || refFromStorage || "";
 
       if (finalRef) {
-        refInput.value = finalRef;
+        refInput.value = finalRef.toUpperCase();
       }
 
-      // Función para validar si hay código
-      function validateRef() {
-        const value = refInput.value.trim();
-        if (!value) {
-          payButton.disabled = true;
-          msg.textContent = 'Necesitas un código de invitación válido para continuar.';
-        } else {
-          payButton.disabled = false;
-          msg.textContent = '';
-        }
-      }
+      const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
 
-      // Validar al inicio
-      validateRef();
-
-      // Validar cuando se edite manualmente
-      refInput.addEventListener('input', validateRef);
-
-      // Manejar el envío (aquí luego conectaremos Stripe u otro)
-      form.addEventListener('submit', function (e) {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        validateRef();
-        if (payButton.disabled) return;
+        msg.textContent = "";
+        countryMsg.textContent = "";
 
-        // Por ahora solo simulamos el pago
-        msg.textContent = 'Procesando pago… (aquí conectaremos el procesador de pagos)';
-        // TODO: llamar a tu backend / Stripe
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const refCode = refInput.value.trim().toUpperCase();
+        const country = document.getElementById("country").value;
+        const termsCheck = document.getElementById("termsCheck").checked;
+
+        if (!refCode) {
+          msg.textContent = "Necesitas un código de invitación válido.";
+          msg.style.color = "#b33434";
+          return;
+        }
+
+        if (!termsCheck) {
+          msg.textContent = "Debes aceptar los términos para continuar.";
+          msg.style.color = "#b33434";
+          return;
+        }
+
+        if (!allowedCountries.includes(country)) {
+          countryMsg.textContent =
+            "Lo sentimos, actualmente solo aceptamos ciertos países.";
+          countryMsg.style.color = "#b33434";
+          return;
+        }
+
+        msg.textContent = "Procesando... por favor espera.";
+        msg.style.color = "#444";
+        payButton.disabled = true;
+
+        try {
+          const response = await fetch(
+            "https://mente-abundante-api-1.onrender.com/api/checkout/create",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                fullName,
+                email,
+                phone,
+                refCode,
+                country,
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (!data.ok) {
+            msg.textContent = data.error || "No se pudo iniciar el proceso.";
+            msg.style.color = "#b33434";
+            payButton.disabled = false;
+            return;
+          }
+
+          // Redirección (por ahora a puente-video, luego será Stripe)
+          window.location.href = data.checkoutUrl;
+        } catch (err) {
+          console.error(err);
+          msg.textContent =
+            "Error al conectar con el servidor. Intenta nuevamente.";
+          msg.style.color = "#b33434";
+          payButton.disabled = false;
+        }
       });
-    })();
+    });
   </script>
 </body>
 </html>
-<label for="country" class="ref-label">País de residencia</label>
-<select id="country" class="ref-input" required>
-  <option value="">Selecciona tu país</option>
-  <option value="US">Estados Unidos</option>
-  <option value="MX">México</option>
-  <option value="BR">Brasil</option>
-  <option value="CL">Chile</option>
-  <option value="CO">Colombia</option>
-  <option value="PE">Perú</option>
-  <option value="CA">Canadá</option>
-</select>
-
-<p id="countryMessage" class="small-note"></p>
-const res = await fetch("https://TU-API.onrender.com/api/checkout/create", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ fullName, email, phone, refCode, country }),
-});
-const data = await res.json();
-if (data.ok) {
-  window.location.href = data.checkoutUrl;
-}
+ 
