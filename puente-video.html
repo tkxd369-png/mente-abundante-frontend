@@ -7,38 +7,53 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="ma-body bridge-page">
-  <div class="bridge-wrapper">
+<body class="ma-body">
 
-    <!-- LOGO + TITULO -->
-    <div class="bridge-logo-block">
-      <div class="ma-logo-drop bridge-logo"></div>
-      <h1 class="bridge-title">Mente Abundante</h1>
-    </div>
+  <div class="main-shell">
+    <div class="card single">
 
-    <!-- MENSAJE PRINCIPAL -->
-    <div class="bridge-card card">
-      <h2 class="bridge-heading">Tu decisión ya abrió el camino</h2>
-      <p class="bridge-text">
-        Gracias por unirte a Mente Abundante.  
-        Este es el siguiente paso para activar la transformación que ya comenzó dentro de ti.
+      <!-- LOGO + TITULO -->
+      <div class="logo-row" style="margin-bottom: 1.2rem;">
+        <div class="logo-drop"></div>
+        <div>
+          <div class="logo-text-main">MENTE ABUNDANTE</div>
+          <div class="logo-text-sub">Tu decisión abrió el camino</div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <h2>Gracias por unirte</h2>
+
+      <p class="lead" style="margin-bottom: 1rem;">
+        Este es el siguiente paso en tu camino hacia la claridad, propósito y abundancia.
       </p>
 
-      <p class="bridge-text">
-        Ahora verás el <strong>video principal</strong>.  
-        Respira, abre tu corazón, y prepárate para recibir claridad, propósito y dirección.
+      <p class="small-note" style="margin-bottom: 1.2rem;">
+        Ahora verás el <strong>video principal</strong> de 30 minutos.  
+        Míralo con calma, en un lugar tranquilo, y permite que las palabras activen lo que ya
+        comenzaste al decir <strong>“sí, decido ser abundante”</strong>.
       </p>
 
-      <button class="btn btn-secondary bridge-btn" id="goToVideoBtn">
+      <!-- BOTÓN PRINCIPAL -->
+      <button class="btn btn-secondary" id="goToVideoBtn" style="width: 100%; margin-top: 0.5rem;">
         Ver el video principal
       </button>
-    </div>
 
+      <p class="small-note" style="margin-top: 1rem;">
+        Después de ver el video y completar el quiz, podrás crear tu cuenta y entrar a tu dashboard.
+      </p>
+
+      <!-- BOTÓN SECUNDARIO -->
+      <div class="button-row" style="margin-top: 1.4rem;">
+        <a href="index.html" class="btn btn-ghost">Volver al inicio</a>
+      </div>
+
+    </div>
   </div>
 
   <script>
     document.getElementById("goToVideoBtn").addEventListener("click", () => {
-      window.location.href = "video-quiz.html"; 
+      window.location.href = "video-quiz.html";
     });
   </script>
 </body>
