@@ -72,10 +72,8 @@ async function initDashboard() {
   const qrCanvas = document.getElementById("qrCanvas");
 
   // Link personal de invitación
-  const baseUrl = window.location.origin + "/membresia.html";
-  const personalLink = user.refid
-    ? `${baseUrl}?ref=${encodeURIComponent(user.refid)}`
-    : baseUrl;
+ const baseUrl = window.location.origin + "/index.html";
+const personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
 
   if (dashName) dashName.textContent = user.full_name || "Miembro Mente Abundante";
   if (dashUsername) dashUsername.textContent = user.username || "—";
