@@ -1,49 +1,63 @@
 <!doctype html>
 <html lang="es-MX">
- <head>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Acceso</title>
+  <title>Mente Abundante – Iniciar sesión</title>
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="app.js"></script>
 </head>
-
-<body>
+<body class="ma-body">
   <div class="main-shell">
     <div class="card single">
       <div class="card-left">
+        <!-- LOGO + TITULO -->
         <div class="logo-row">
           <div class="logo-drop"></div>
           <div>
-            <div class="logo-text-main">Mente Abundante</div>
-            <div class="logo-text-sub">Acceso seguro</div>
+            <div class="logo-text-main">MENTE ABUNDANTE</div>
+            <div class="logo-text-sub">Accede a tu espacio</div>
           </div>
         </div>
 
         <h2>Inicia sesión</h2>
-        <p class="lead">
-          Usa el correo y la contraseña que registraste después de ver el video y completar el cuestionario.
+        <p class="small-note">
+          Usa el correo y la contraseña que registraste después de ver el video y completar el quiz.
         </p>
 
         <form class="form" id="loginForm">
           <div>
             <div class="label">Correo electrónico</div>
-            <input class="input" type="email" name="email" required placeholder="tucorreo@ejemplo.com" />
-          </div>
-          <div>
-            <div class="label">Contraseña</div>
-            <input class="input" type="password" name="password" required placeholder="••••••••" />
+            <input
+              class="input"
+              type="email"
+              name="email"
+              id="email"
+              required
+              placeholder="tucorreo@ejemplo.com"
+            />
           </div>
 
-          <button type="submit" class="btn btn-primary">
+          <div>
+            <div class="label">Contraseña</div>
+            <input
+              class="input"
+              type="password"
+              name="password"
+              id="password"
+              required
+              placeholder="Tu contraseña"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="loginButton">
             Entrar
           </button>
 
-          <p class="small-note" id="loginMessage"></p>
+          <p class="small-note" id="loginMessage" style="margin-top: 0.7rem;"></p>
         </form>
 
         <p class="small-note">
-          ¿Aún no tienes cuenta? Recuerda que el registro se completa después de ver el video y responder el cuestionario.
+          Si aún no has creado tu cuenta después del video, termina primero ese paso.
         </p>
 
         <div class="button-row">
@@ -52,5 +66,71 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const msg = document.getElementById("loginMessage");
+      const btn = document.getElementById("loginButton");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        msg.textContent = "";
+        msg.style.color = "#444";
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+          msg.textContent = "Por favor escribe tu email y contraseña.";
+          msg.style.color = "#b33434";
+          return;
+        }
+
+        msg.textContent = "Verificando…";
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(
+            "https://mente-abundante-api-1.onrender.com/auth/login",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            }
+          );
+
+          const data = await res.json();
+
+          if (!data.ok) {
+            msg.textContent = data.error || "No se pudo iniciar sesión.";
+            msg.style.color = "#b33434";
+            btn.disabled = false;
+            return;
+          }
+
+          if (data.token) {
+            localStorage.setItem("ma_token", data.token);
+          }
+          if (data.user) {
+            localStorage.setItem("ma_user", JSON.stringify(data.user));
+          }
+
+          msg.textContent = "Bienvenido. Entrando a tu dashboard…";
+          msg.style.color = "#2f7b3b";
+
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 700);
+        } catch (err) {
+          console.error(err);
+          msg.textContent =
+            "Error al conectar con el servidor. Intenta de nuevo.";
+          msg.style.color = "#b33434";
+          btn.disabled = false;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
