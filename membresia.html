@@ -6,6 +6,87 @@
   <title>Mente Abundante – Membresía</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("membershipForm");
+  const msg = document.getElementById("membershipMessage");
+  const countryMsg = document.getElementById("countryMessage");
+  const refInput = document.getElementById("refCode");
+
+  // 1. Autollenar ?ref= de la URL o de localStorage
+  const params = new URLSearchParams(window.location.search);
+  const refFromUrl = params.get("ref");
+  const refFromStorage = localStorage.getItem("ma_ref_code");
+  const finalRef = refFromUrl || refFromStorage || "";
+
+  if (finalRef) refInput.value = finalRef.toUpperCase();
+
+  const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.textContent = "";
+    countryMsg.textContent = "";
+
+    const fullName = form.fullName.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const refCode = form.refCode.value.trim().toUpperCase();
+    const country = form.country.value;
+
+    if (!refCode) {
+      msg.textContent = "Necesitas un código de invitación válido.";
+      msg.style.color = "#b33434";
+      return;
+    }
+
+    if (!allowedCountries.includes(country)) {
+      countryMsg.textContent =
+        "Lo sentimos, actualmente solo aceptamos ciertos países.";
+      countryMsg.style.color = "#b33434";
+      return;
+    }
+
+    msg.textContent = "Procesando... por favor espera.";
+    msg.style.color = "#444";
+
+    try {
+      const response = await fetch(
+        "https://mente-abundante-api-1.onrender.com/api/checkout/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName,
+            email,
+            phone,
+            refCode,
+            country,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!data.ok) {
+        msg.textContent = data.error || "No se pudo iniciar el proceso.";
+        msg.style.color = "#b33434";
+        return;
+      }
+
+      // Redirección real
+      window.location.href = data.checkoutUrl;
+
+    } catch (err) {
+      console.error(err);
+      msg.textContent =
+        "Error al conectar con el servidor. Intenta nuevamente.";
+      msg.style.color = "#b33434";
+    }
+  });
+});
+</script>
+
 <body>
   <div class="main-shell">
     <div class="card single">
