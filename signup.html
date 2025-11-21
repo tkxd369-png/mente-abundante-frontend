@@ -211,6 +211,42 @@
               }),
             }
           );
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("signupForm");
+  const msg = document.getElementById("signupMessage");
+  const signupButton = document.getElementById("signupButton");
+  const refInput = document.getElementById("refCode");
+
+  // REF desde URL o localStorage
+  const params = new URLSearchParams(window.location.search);
+  const refFromUrl = params.get("ref");
+  const refFromStorage = localStorage.getItem("ma_ref_code");
+  const finalRef = refFromUrl || refFromStorage || "";
+  if (finalRef) {
+    refInput.value = finalRef.toUpperCase();
+  }
+
+  // ✅ Prefill desde membresía
+  const fullNameInput = document.getElementById("fullName");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+
+  const preFullName = localStorage.getItem("ma_pre_fullName");
+  const preEmail = localStorage.getItem("ma_pre_email");
+  const prePhone = localStorage.getItem("ma_pre_phone");
+
+  if (preFullName && !fullNameInput.value) {
+    fullNameInput.value = preFullName;
+  }
+  if (preEmail && !emailInput.value) {
+    emailInput.value = preEmail;
+  }
+  if (prePhone && !phoneInput.value) {
+    phoneInput.value = prePhone;
+  }
+
+  // ... el resto de tu código (validaciones, fetch a /auth/create-account, etc.) ...
+});
 
           const data = await response.json();
 
