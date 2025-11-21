@@ -1,58 +1,95 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Mente Abundante — Bienvenido</title>
+    <title>Mente Abundante — Tu decisión abre puertas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body class="ma-body landing-body">
-
     <div class="landing-container">
-
-      <!-- LOGO + NOMBRE CENTRADO -->
+      <!-- LOGO CENTRADO -->
       <div class="landing-logo-block">
-  <h1 class="landing-logo-title">Mente Abundante</h1>
-  <p class="landing-slogan">
-    Tu Decisión de Hoy Abre Puertas Que Aún no Imaginas.
-  </p>
-</div>
- 
-      <!-- VIDEO -->
-      <div class="landing-video-frame">
-        <video
-          class="landing-video"
-          controls
-          playsinline
-        >
-          <source src="TU_VIDEO_INTRO.mp4" type="video/mp4" />
-        </video>
+        <div class="landing-logo-drop"></div>
+        <h1 class="landing-logo-title">Mente Abundante</h1>
+        <p class="landing-subtitle">
+          Tu decisión de hoy abre puertas que aún no imaginas.
+        </p>
       </div>
 
-      <!-- BOTON PRINCIPAL -->
-      <button id="btnVerIntroduccion" class="btn btn-secondary landing-main-btn">
-        Ver introducción
-      </button>
+      <!-- TARJETA PRINCIPAL CON VIDEO -->
+      <section class="landing-hero-card">
+        <h2 class="landing-hero-title">Tu nueva vida empieza con una decisión</h2>
+        <p class="landing-hero-text">
+          Este video introductorio te mostrará la visión detrás de Mente Abundante
+          y cómo esta membresía puede ser una llave para transformar tu mentalidad,
+          tus decisiones y tus resultados.
+        </p>
 
-      <!-- BOTON PARA CUENTA -->
-      <a href="login.html" class="btn btn-ghost landing-login">
-        Entrar a tu cuenta
-      </a>
+        <!-- VIDEO INTRODUCTORIO -->
+        <div class="landing-video-frame" id="introVideoSection">
+          <!-- Cambia el src por tu video real (YouTube, Vimeo, etc.) -->
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Introducción Mente Abundante"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
 
+        <!-- BOTONES PRINCIPALES -->
+        <div class="landing-actions">
+          <!-- Este solo hace scroll al video -->
+          <button
+            type="button"
+            class="btn btn-secondary landing-main-btn"
+            onclick="document.getElementById('introVideoSection').scrollIntoView({ behavior: 'smooth' })"
+          >
+            Ver introducción
+          </button>
+
+          <!-- Este lleva a la página de membresía / pago -->
+          <button
+            type="button"
+            class="btn btn-ghost landing-login"
+            onclick="window.location.href='membresia.html'"
+          >
+            Unirme ahora — Membresía $198
+          </button>
+        </div>
+
+        <p class="landing-note">
+          Después de tu pago, tendrás acceso al video principal, al quiz de integración
+          y a tu espacio personal en el dashboard.
+        </p>
+      </section>
+
+      <!-- SECCIÓN DE INFORMACIÓN EXTRA -->
+      <section class="landing-info">
+        <h3 class="landing-info-title">¿Qué es Mente Abundante?</h3>
+        <p class="landing-info-text">
+          Mente Abundante es una membresía diseñada para ayudarte a activar una nueva
+          manera de pensar, decidir y crear resultados. No solo se trata de un programa
+          económico, sino de una transformación interna que se refleja en cada área de tu vida.
+        </p>
+        <p class="landing-info-text">
+          Al unirte, recibirás acceso al video principal, un quiz de integración,
+          tu propio enlace de referidos, código QR y un dashboard donde podrás
+          acompañar tu crecimiento y el impacto que generas en otros.
+        </p>
+
+        <p class="landing-info-text">
+          Todo comienza con una decisión: <strong>“Yo decido ser abundante”.</strong>
+        </p>
+
+        <!-- Link a login para quienes ya son miembros -->
+        <p class="landing-info-text" style="margin-top: 1.2rem;">
+          ¿Ya eres miembro?&nbsp;
+          <a href="login.html">Entrar a tu cuenta</a>
+        </p>
+      </section>
     </div>
-
-    <script>
-      // Scroll suave hacia el video
-      document.addEventListener("DOMContentLoaded", () => {
-        const btn = document.getElementById("btnVerIntroduccion");
-        const frame = document.querySelector(".landing-video-frame");
-        if (btn && frame) {
-          btn.addEventListener("click", () => {
-            frame.scrollIntoView({ behavior: "smooth", block: "center" });
-          });
-        }
-      });
-    </script>
-
   </body>
 </html>
