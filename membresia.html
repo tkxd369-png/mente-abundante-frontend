@@ -159,3 +159,12 @@
 </select>
 
 <p id="countryMessage" class="small-note"></p>
+const res = await fetch("https://TU-API.onrender.com/api/checkout/create", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ fullName, email, phone, refCode, country }),
+});
+const data = await res.json();
+if (data.ok) {
+  window.location.href = data.checkoutUrl;
+}
