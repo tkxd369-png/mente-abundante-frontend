@@ -133,6 +133,15 @@ async function loadDashboard() {
 // ----------------------------------------------------------
 //  SETTINGS – CARGAR DATOS
 // ----------------------------------------------------------
+const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
+
+const country = document.getElementById("country").value;
+
+if (!allowedCountries.includes(country)) {
+  document.getElementById("countryMessage").textContent =
+    "Lo sentimos, aún no estamos disponibles en tu país.";
+  return; // Detiene la compra
+}
 
 async function loadSettings() {
   const token = getToken();
