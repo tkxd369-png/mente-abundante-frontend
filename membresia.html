@@ -152,48 +152,36 @@
     const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      msg.textContent = "";
-      countryMsg.textContent = "";
+  e.preventDefault();
+  msg.textContent = "";
+  countryMsg.textContent = "";
 
-      const fullName = form.fullName.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const refCode = form.refCode.value.trim().toUpperCase();
-      const country = form.country.value;
-      const termsCheck = document.getElementById("termsCheck").checked;
+  const fullName = form.fullName.value.trim();
+  const email = form.email.value.trim();
+  const phone = form.phone.value.trim();
+  const refCode = form.refCode.value.trim().toUpperCase();
+  const country = form.country.value;
+  const termsCheck = document.getElementById("termsCheck").checked;
 
-      if (!refCode) {
-        msg.textContent = "Necesitas un código de invitación válido.";
-        msg.style.color = "#b33434";
-        return;
-      }
+  // ...tus validaciones de siempre...
 
-      if (!termsCheck) {
-        msg.textContent = "Debes aceptar los términos para continuar.";
-        msg.style.color = "#b33434";
-        return;
-      }
+  // ✅ Guardar datos para usarlos después en signup
+  localStorage.setItem("ma_pre_fullName", fullName);
+  localStorage.setItem("ma_pre_email", email);
+  localStorage.setItem("ma_pre_phone", phone);
+  localStorage.setItem("ma_pre_country", country);
+  localStorage.setItem("ma_ref_code", refCode); // ref global
 
-      if (!allowedCountries.includes(country)) {
-        countryMsg.textContent =
-          "Lo sentimos, actualmente solo aceptamos ciertos países.";
-        countryMsg.style.color = "#b33434";
-        return;
-      }
-
-      if (!fullName || !email || !phone) {
-        msg.textContent = "Por favor completa todos los campos.";
-        msg.style.color = "#b33434";
-        return;
-      }
-
-      // ✅ Por ahora: simulamos el pago y redirigimos directo al puente
+        // ✅ Por ahora: simulamos el pago y redirigimos directo al puente
       msg.textContent = "Procesando…";
       msg.style.color = "#444";
 
       // Puedes pasar datos por query si quieres, por ahora solo redirigimos
       window.location.href = "puente-video.html";
-    });
-  });
-</script>
+      
+  msg.textContent = "Procesando…";
+  msg.style.color = "#444";
+
+  window.location.href = "puente-video.html";
+});
+
