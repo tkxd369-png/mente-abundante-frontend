@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es-MX">
 <head>
   <meta charset="utf-8" />
@@ -149,26 +149,43 @@
       const signupButton = document.getElementById("signupButton");
       const refInput = document.getElementById("refCode");
 
-      // 1. Intentar tomar ?ref= de la URL
+      // 1) REF desde URL o localStorage (igual que membresía)
       const params = new URLSearchParams(window.location.search);
       const refFromUrl = params.get("ref");
-
-      // 2. Intentar leer ref desde localStorage (por si lo guardaste antes)
       const refFromStorage = localStorage.getItem("ma_ref_code");
-
       const finalRef = refFromUrl || refFromStorage || "";
       if (finalRef) {
         refInput.value = finalRef.toUpperCase();
       }
 
+      // 2) PREFILL de nombre / email / teléfono que guardamos en membresía
+      const fullNameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+
+      const preFullName = localStorage.getItem("ma_pre_fullName");
+      const preEmail = localStorage.getItem("ma_pre_email");
+      const prePhone = localStorage.getItem("ma_pre_phone");
+
+      if (preFullName && !fullNameInput.value) {
+        fullNameInput.value = preFullName;
+      }
+      if (preEmail && !emailInput.value) {
+        emailInput.value = preEmail;
+      }
+      if (prePhone && !phoneInput.value) {
+        phoneInput.value = prePhone;
+      }
+
+      // 3) Envío del formulario a tu backend
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         msg.textContent = "";
         msg.style.color = "#444";
 
-        const fullName = document.getElementById("fullName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
+        const fullName = fullNameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value;
         const password2 = document.getElementById("password2").value;
@@ -211,42 +228,6 @@
               }),
             }
           );
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("signupForm");
-  const msg = document.getElementById("signupMessage");
-  const signupButton = document.getElementById("signupButton");
-  const refInput = document.getElementById("refCode");
-
-  // REF desde URL o localStorage
-  const params = new URLSearchParams(window.location.search);
-  const refFromUrl = params.get("ref");
-  const refFromStorage = localStorage.getItem("ma_ref_code");
-  const finalRef = refFromUrl || refFromStorage || "";
-  if (finalRef) {
-    refInput.value = finalRef.toUpperCase();
-  }
-
-  // ✅ Prefill desde membresía
-  const fullNameInput = document.getElementById("fullName");
-  const emailInput = document.getElementById("email");
-  const phoneInput = document.getElementById("phone");
-
-  const preFullName = localStorage.getItem("ma_pre_fullName");
-  const preEmail = localStorage.getItem("ma_pre_email");
-  const prePhone = localStorage.getItem("ma_pre_phone");
-
-  if (preFullName && !fullNameInput.value) {
-    fullNameInput.value = preFullName;
-  }
-  if (preEmail && !emailInput.value) {
-    emailInput.value = preEmail;
-  }
-  if (prePhone && !phoneInput.value) {
-    phoneInput.value = prePhone;
-  }
-
-  // ... el resto de tu código (validaciones, fetch a /auth/create-account, etc.) ...
-});
 
           const data = await response.json();
 
@@ -267,6 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
           msg.textContent = "Cuenta creada con éxito. Redirigiendo a tu dashboard...";
           msg.style.color = "#2f7b3b";
+
+          // Opcional: limpiar los datos temporales de membresía
+          localStorage.removeItem("ma_pre_fullName");
+          localStorage.removeItem("ma_pre_email");
+          localStorage.removeItem("ma_pre_phone");
+          // ma_ref_code sí lo podemos conservar porque sirve para otras cosas
 
           setTimeout(() => {
             window.location.href = "dashboard.html";
