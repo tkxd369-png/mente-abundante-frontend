@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mente Abundante – Panel Administrador</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ====== ESTILOS ESPECÍFICOS DEL PANEL ADMIN ====== */
+
+    .admin-shell {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+      background: #f5f3f0;
+    }
+
+    .admin-card {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 1100px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      padding: 1.8rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .admin-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .admin-title-block h2 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .admin-title-block p {
+      margin: 0.2rem 0 0;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .admin-badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      color: #555;
+      background: #faf6ee;
+    }
+
+    /* PIN bloque */
+    .admin-pin-block {
+      border-radius: 18px;
+      border: 1px dashed rgba(0, 0, 0, 0.12);
+      padding: 1rem 1.2rem;
+      background: #fffaf2;
+    }
+
+    /* Métricas */
+    .admin-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .metric-card {
+      border-radius: 18px;
+      padding: 0.9rem 1rem;
+      background: #f8f5ef;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.15rem;
+    }
+
+    .metric-value {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .metric-sub {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 0.2rem;
+    }
+
+    /* Tabla usuarios */
+    .admin-table-section {
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      padding: 1rem 1.1rem;
+      background: #fafafa;
+    }
+
+    .admin-table-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .admin-table-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .admin-search-input {
+      min-width: 220px;
+      max-width: 280px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 0.35rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .admin-table-wrapper {
+      overflow-x: auto;
+    }
+
+    table.admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .admin-table thead {
+      background: #f1ece2;
+    }
+
+    .admin-table th,
+    .admin-table td {
+      padding: 0.55rem 0.7rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      white-space: nowrap;
+    }
+
+    .admin-table th {
+      font-weight: 600;
+      font-size: 0.78rem;
+      color: #555;
+    }
+
+    .admin-table tbody tr:nth-child(even) {
+      background: #faf7f2;
+    }
+
+    .admin-chip-ref {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: #fff7ea;
+      border: 1px solid rgba(199, 145, 62, 0.4);
+      font-size: 0.75rem;
+      color: #8a5b1e;
+    }
+
+    .admin-chip-referrals {
+      font-size: 0.75rem;
+      padding: 0.05rem 0.5rem;
+      border-radius: 999px;
+      background: #edf9f1;
+      color: #2f7b3b;
+    }
+
+    .admin-chip-referrals.zero {
+      background: #f3f3f3;
+      color: #777;
+    }
+
+    .admin-date {
+      font-size: 0.75rem;
+      color: #777;
+    }
+
+    .admin-footer-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .admin-card {
+        padding: 1.4rem 1.3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="ma-body">
+  <div class="admin-shell">
+    <div class="admin-card">
+      <!-- HEADER -->
+      <div class="admin-header-row">
+        <div class="logo-row">
+          <div class="logo-drop"></div>
+          <div>
+            <div class="logo-text-main">MENTE ABUNDANTE</div>
+            <div class="logo-text-sub">Panel de administración</div>
+          </div>
+        </div>
+
+        <div class="admin-title-block">
+          <h2>Vista general de la comunidad</h2>
+          <p>Revisa el crecimiento, tus mejores referidores y el detalle de los miembros.</p>
+        </div>
+
+        <div class="admin-badge">
+          Solo dueño / administrador
+        </div>
+      </div>
+
+      <!-- BLOQUE PIN DE ADMINISTRADOR -->
+      <div id="adminPinBlock" class="admin-pin-block">
+        <div class="label">PIN de administrador</div>
+        <input
+          class="input"
+          type="password"
+          id="adminPinInput"
+          placeholder="Escribe tu PIN de acceso"
+        />
+        <button type="button" class="btn btn-secondary" id="adminPinButton" style="margin-top: 0.6rem;">
+          Entrar al panel
+        </button>
+        <p id="adminPinMessage" class="small-note" style="margin-top: 0.4rem;"></p>
+      </div>
+
+      <!-- CONTENIDO PRINCIPAL DEL ADMIN (OCULTO HASTA PIN CORRECTO) -->
+      <div id="adminMainContent" style="display:none;">
+        <!-- METRICAS -->
+        <div class="admin-metrics-grid" id="adminMetrics">
+          <!-- Se rellenan por JS -->
+        </div>
+
+        <!-- TABLA DE USUARIOS -->
+        <section class="admin-table-section">
+          <div class="admin-table-header">
+            <h3>Miembros registrados</h3>
+            <input
+              type="text"
+              id="adminSearchInput"
+              class="admin-search-input"
+              placeholder="Buscar por nombre, email o REF..."
+            />
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table" id="adminUsersTable">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>REF personal</th>
+                  <th>Patrocinador</th>
+                  <th>Referidos</th>
+                  <th>Fecha de alta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Filas generadas por JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="admin-footer-row">
+          <a href="index.html" class="btn btn-ghost">Volver a la vista pública</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ⚠️ CAMBIA ESTE PIN POR UNO TUYO Y NO LO COMPARTAS
+    const ADMIN_PIN = "MA-MONITOR-2025";
+
+    // 🔹 DATOS DE EJEMPLO (MOCK) PARA EL PANEL
+    // Más adelante, esto se reemplaza por llamadas reales al backend.
+    const MOCK_USERS = [
+      {
+        full_name: "Ana López",
+        email: "ana@example.com",
+        phone: "+1 555 101 2020",
+        username: "analopez",
+        refid: "ANA555",
+        referredby: null,
+        referrals: 12,
+        created_at: "2025-11-01T10:15:00Z",
+      },
+      {
+        full_name: "Juan Pérez",
+        email: "juan@example.com",
+        phone: "+1 555 333 4444",
+        username: "juanperez",
+        refid: "JPE444",
+        referredby: "ANA555",
+        referrals: 3,
+        created_at: "2025-11-05T15:22:00Z",
+      },
+      {
+        full_name: "María García",
+        email: "maria@example.com",
+        phone: "+52 1 55 1234 5678",
+        username: "mariag",
+        refid: "MGA678",
+        referredby: "ANA555",
+        referrals: 0,
+        created_at: "2025-11-10T09:05:00Z",
+      },
+      {
+        full_name: "Luis Herrera",
+        email: "luis@example.com",
+        phone: "+57 300 445 5566",
+        username: "luish",
+        refid: "LHE566",
+        referredby: "JPE444",
+        referrals: 1,
+        created_at: "2025-11-12T18:40:00Z",
+      }
+    ];
+
+    function formatDate(isoString) {
+      if (!isoString) return "—";
+      const d = new Date(isoString);
+      if (isNaN(d.getTime())) return "—";
+      return d.toLocaleDateString("es-MX", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+      });
+    }
+
+    function computeStats(users) {
+      const totalUsers = users.length;
+      const totalReferrals = users.reduce(
+        (sum, u) => sum + (u.referrals || 0),
+        0
+      );
+
+      // Nuevos últimos 7 días
+      const now = new Date();
+      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const newLast7 = users.filter((u) => {
+        const d = new Date(u.created_at);
+        return d >= sevenDaysAgo;
+      }).length;
+
+      // Top referidores
+      const sortedByReferrals = [...users].sort(
+        (a, b) => (b.referrals || 0) - (a.referrals || 0)
+      );
+      const topReferrer = sortedByReferrals[0] || null;
+
+      return {
+        totalUsers,
+        totalReferrals,
+        newLast7,
+        topReferrer,
+      };
+    }
+
+    function renderMetrics(users) {
+      const container = document.getElementById("adminMetrics");
+      if (!container) return;
+
+      const stats = computeStats(users);
+      container.innerHTML = "";
+
+      const card1 = document.createElement("div");
+      card1.className = "metric-card";
+      card1.innerHTML = `
+        <div class="metric-label">Total de miembros</div>
+        <div class="metric-value">${stats.totalUsers}</div>
+        <div class="metric-sub">Usuarios registrados en la plataforma</div>
+      `;
+
+      const card2 = document.createElement("div");
+      card2.className = "metric-card";
+      card2.innerHTML = `
+        <div class="metric-label">Referidos acumulados</div>
+        <div class="metric-value">${stats.totalReferrals}</div>
+        <div class="metric-sub">Suma de todos los referidos activos</div>
+      `;
+
+      const card3 = document.createElement("div");
+      card3.className = "metric-card";
+      card3.innerHTML = `
+        <div class="metric-label">Nuevos últimos 7 días</div>
+        <div class="metric-value">${stats.newLast7}</div>
+        <div class="metric-sub">Miembros que se unieron recientemente</div>
+      `;
+
+      const card4 = document.createElement("div");
+      card4.className = "metric-card";
+      if (stats.topReferrer) {
+        card4.innerHTML = `
+          <div class="metric-label">Top referidor</div>
+          <div class="metric-value" style="font-size:1rem;">
+            ${stats.topReferrer.full_name || stats.topReferrer.username || "—"}
+          </div>
+          <div class="metric-sub">
+            REF: ${stats.topReferrer.refid || "—"} · ${
+          stats.topReferrer.referrals || 0
+        } referidos
+          </div>
+        `;
+      } else {
+        card4.innerHTML = `
+          <div class="metric-label">Top referidor</div>
+          <div class="metric-value">—</div>
+          <div class="metric-sub">Aún no hay datos suficientes</div>
+        `;
+      }
+
+      container.appendChild(card1);
+      container.appendChild(card2);
+      container.appendChild(card3);
+      container.appendChild(card4);
+    }
+
+    function renderUsersTable(users) {
+      const table = document.getElementById("adminUsersTable");
+      if (!table) return;
+      const tbody = table.querySelector("tbody");
+      tbody.innerHTML = "";
+
+      users.forEach((u) => {
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.textContent = u.full_name || "—";
+
+        const tdEmail = document.createElement("td");
+        tdEmail.textContent = u.email || "—";
+
+        const tdPhone = document.createElement("td");
+        tdPhone.textContent = u.phone || "—";
+
+        const tdRef = document.createElement("td");
+        tdRef.innerHTML = u.refid
+          ? `<span class="admin-chip-ref">${u.refid}</span>`
+          : "—";
+
+        const tdRefBy = document.createElement("td");
+        tdRefBy.textContent = u.referredby || "—";
+
+        const tdRefs = document.createElement("td");
+        const refs = u.referrals || 0;
+        tdRefs.innerHTML = `<span class="admin-chip-referrals ${
+          refs === 0 ? "zero" : ""
+        }">${refs}</span>`;
+
+        const tdDate = document.createElement("td");
+        tdDate.innerHTML = `<span class="admin-date">${formatDate(
+          u.created_at
+        )}</span>`;
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdEmail);
+        tr.appendChild(tdPhone);
+        tr.appendChild(tdRef);
+        tr.appendChild(tdRefBy);
+        tr.appendChild(tdRefs);
+        tr.appendChild(tdDate);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function applySearchFilter(users, query) {
+      if (!query) return users;
+      const q = query.toLowerCase();
+      return users.filter((u) => {
+        return (
+          (u.full_name && u.full_name.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q)) ||
+          (u.refid && u.refid.toLowerCase().includes(q))
+        );
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const adminPinBlock = document.getElementById("adminPinBlock");
+      const adminPinInput = document.getElementById("adminPinInput");
+      const adminPinButton = document.getElementById("adminPinButton");
+      const adminPinMessage = document.getElementById("adminPinMessage");
+      const adminMainContent = document.getElementById("adminMainContent");
+      const adminSearchInput = document.getElementById("adminSearchInput");
+
+      let currentUsers = MOCK_USERS.slice();
+
+      // Manejar PIN
+      adminPinButton.addEventListener("click", () => {
+        const pin = adminPinInput.value.trim();
+        if (!pin) {
+          adminPinMessage.textContent = "Escribe el PIN de administrador.";
+          adminPinMessage.style.color = "#b33434";
+          return;
+        }
+
+        if (pin !== ADMIN_PIN) {
+          adminPinMessage.textContent = "PIN incorrecto.";
+          adminPinMessage.style.color = "#b33434";
+          return;
+        }
+
+        adminPinMessage.textContent = "Acceso concedido.";
+        adminPinMessage.style.color = "#2f7b3b";
+
+        // Mostrar contenido admin
+        adminPinBlock.style.display = "none";
+        adminMainContent.style.display = "block";
+
+        // Render inicial con mock
+        renderMetrics(currentUsers);
+        renderUsersTable(currentUsers);
+      });
+
+      // Búsqueda
+      if (adminSearchInput) {
+        adminSearchInput.addEventListener("input", () => {
+          const q = adminSearchInput.value.trim();
+          const filtered = applySearchFilter(currentUsers, q);
+          renderUsersTable(filtered);
+        });
+      }
+
+      // 🔜 Más adelante:
+      // Aquí podríamos llamar a tu backend:
+      // fetch("https://mente-abundante-api-1.onrender.com/admin/users", { headers: { Authorization: "Bearer <admin-token>" }})
+      // y reemplazar MOCK_USERS por los datos reales.
+    });
+  </script>
+</body>
+</html>
