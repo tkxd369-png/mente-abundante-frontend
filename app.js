@@ -433,27 +433,15 @@
   // ---------------------------
   // DASHBOARD
   // ---------------------------
+ 
   async function initDashboard() {
     const token = getToken();
     if (!token) {
-      // Si no hay sesión, mandar a login
       window.location.href = "login.html";
       return;
     }
-// 🔹 Hacer que el nombre del usuario copie el LINK personal
-const dashNameEl = document.getElementById("dashName");
-if (dashNameEl) {
-  dashNameEl.style.cursor = "pointer";
-  dashNameEl.addEventListener("click", function () {
-    navigator.clipboard
-      .writeText(personalLink)
-      .then(() => {
-        showToast("Enlace personal copiado");
-      })
-      .catch(() => alert("No se pudo copiar el enlace."));
-  });
-}
 
+    // Logout
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
       logoutBtn.addEventListener("click", () => {
@@ -462,16 +450,17 @@ if (dashNameEl) {
       });
     }
 
+    // Frase AI
     const phraseEl = document.getElementById("aiPhraseText");
     if (phraseEl) {
       phraseEl.textContent = pickDailyPhrase();
     }
 
-    // Intentar usar usuario guardado primero
+    // Usuario desde localStorage
     let user = getStoredUser();
 
+    // Refrescar desde /me
     try {
-      // Refrescar desde /me para tener datos actualizados
       const data = await apiGet("/me");
       if (data && data.ok && data.user) {
         user = data.user;
@@ -479,7 +468,6 @@ if (dashNameEl) {
       }
     } catch (err) {
       console.error("Error al cargar /me:", err);
-      // Si /me falla, intentar seguir solo con user local
       if (!user) {
         clearSession();
         window.location.href = "login.html";
@@ -493,29 +481,21 @@ if (dashNameEl) {
       return;
     }
 
-    // Rellenar datos del dashboard
+    // ----- ELEMENTOS DEL DASHBOARD -----
     const nameEl = document.getElementById("dashName");
     const referralsEl = document.getElementById("dashReferrals");
+    const refBadge = document.getElementById("dashRefBadge");
+    const refInput = document.getElementById("referralLink");
+    const copyLinkBtn = document.getElementById("copyLinkBtn");
     const footerRefIdEl = document.getElementById("footerRefId");
     const qrCanvas = document.getElementById("qrCanvas");
+    const ebookTile = document.getElementById("ebookTile");
 
-    // Nombre (solo primer nombre) y que sea clicable
+    // Nombre (primer nombre)
     if (nameEl) {
       const fullName = user.full_name || "";
       const firstName = fullName.split(" ")[0] || fullName || "Bienvenido";
       nameEl.textContent = firstName;
-
-      if (user.refid) {
-        nameEl.style.cursor = "pointer";
-        nameEl.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(user.refid);
-            alert("Tu código de referencia ha sido copiado: " + user.refid);
-          } catch (e) {
-            alert("Tu código de referencia: " + user.refid);
-          }
-        });
-      }
     }
 
     // Número de referidos
@@ -523,16 +503,20 @@ if (dashNameEl) {
       referralsEl.textContent = user.referrals || 0;
     }
 
-    // Código en el footer
-    if (footerRefIdEl && user.refid) {
-      footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
+    // Construir LINK personal desde refid
+    let personalLink = "";
+    if (user.refid) {
+      const baseUrl = window.location.origin + "/index.html";
+      personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
     }
 
-    // QR con enlace personal
-    if (qrCanvas && window.QRious && user.refid) {
-      const baseUrl = window.location.origin + "/index.html";
-      const personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
+    // Input con link
+    if (refInput && personalLink) {
+      refInput.value = personalLink;
+    }
 
+    // QR pequeño
+    if (qrCanvas && window.QRious && personalLink) {
       new QRious({
         element: qrCanvas,
         value: personalLink,
@@ -540,15 +524,66 @@ if (dashNameEl) {
       });
     }
 
-    // Botón E-book tile (por ahora placeholder: puedes cambiar la URL)
-    const ebookTile = document.getElementById("ebookTile");
-    if (ebookTile) {
-      ebookTile.addEventListener("click", () => {
-        // Cambia esta ruta cuando tengas el e-book real
-        alert("Aquí abriremos tu E-Book Yo Decido Ser Abundante (pendiente URL).");
+    // Código en el footer (si tienes ese span)
+    if (footerRefIdEl && user.refid) {
+      footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
+    }
+
+    // ----- COMPORTAMIENTOS DE COPIADO -----
+
+    // 1) Botón "Copiar" -> copia LINK completo
+    if (copyLinkBtn && personalLink) {
+      copyLinkBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(personalLink);
+          showToast("Enlace personal copiado");
+        } catch (e) {
+          alert("No se pudo copiar el enlace.");
+        }
       });
     }
+
+    // 2) Nombre -> copia LINK completo
+    if (nameEl && personalLink) {
+      nameEl.style.cursor = "pointer";
+      nameEl.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(personalLink);
+          showToast("Enlace personal copiado");
+        } catch (e) {
+          alert("No se pudo copiar el enlace.");
+        }
+      });
+    }
+
+    // 3) Píldora "X REFERIDOS" -> copia SOLO el código refid
+    if (refBadge && user.refid) {
+      refBadge.style.cursor = "pointer";
+      refBadge.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(user.refid);
+          showToast("Código copiado");
+        } catch (e) {
+          alert("Tu código de referencia: " + user.refid);
+        }
+      });
+    }
+
+    // Tile del E-Book (placeholder)
+    if (ebookTile) {
+      ebookTile.addEventListener("click", () => {
+        alert(
+          "Aquí abriremos tu E-Book 'Yo Decido Ser Abundante' (falta definir URL)."
+        );
+      });
+    }
+
+    // Popup de QR grande
+    if (personalLink) {
+      setupQrModal(user, personalLink);
+    }
   }
+
 function setupQrModal(user, personalLink) {
   const qrCanvasSmall = document.getElementById("qrCanvas");
   const qrModal = document.getElementById("qrModal");
