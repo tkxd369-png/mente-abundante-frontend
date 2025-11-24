@@ -440,6 +440,19 @@
       window.location.href = "login.html";
       return;
     }
+// 🔹 Hacer que el nombre del usuario copie el LINK personal
+const dashNameEl = document.getElementById("dashName");
+if (dashNameEl) {
+  dashNameEl.style.cursor = "pointer";
+  dashNameEl.addEventListener("click", function () {
+    navigator.clipboard
+      .writeText(personalLink)
+      .then(() => {
+        showToast("Enlace personal copiado");
+      })
+      .catch(() => alert("No se pudo copiar el enlace."));
+  });
+}
 
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
@@ -717,3 +730,14 @@ function setupQrModal(user, personalLink) {
     el.style.display = "block";
   }
 })();
+function showToast(msg) {
+  const toast = document.getElementById("maToast");
+  if (!toast) return;
+
+  toast.textContent = msg;
+  toast.classList.add("visible");
+
+  setTimeout(() => {
+    toast.classList.remove("visible");
+  }, 1800);
+}
