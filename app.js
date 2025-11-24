@@ -536,6 +536,46 @@
       });
     }
   }
+function setupQrModal(user, personalLink) {
+  const qrCanvasSmall = document.getElementById("qrCanvas");
+  const qrModal = document.getElementById("qrModal");
+  const qrBackdrop = document.getElementById("qrModalBackdrop");
+  const qrClose = document.getElementById("qrModalClose");
+  const qrModalCanvas = document.getElementById("qrModalCanvas");
+  const qrModalRefText = document.getElementById("qrModalRefText");
+
+  if (!qrCanvasSmall || !qrModal || !qrModalCanvas) return;
+
+  let modalQr = null;
+
+  function openQrModal() {
+    qrModal.classList.add("is-visible");
+    if (qrModalRefText && user.refid) {
+      qrModalRefText.textContent = `CÓDIGO: ${user.refid}`;
+    }
+    if (!modalQr) {
+      modalQr = new QRious({
+        element: qrModalCanvas,
+        value: personalLink,
+        size: 220,
+      });
+    } else {
+      modalQr.set({ value: personalLink });
+    }
+  }
+
+  function closeQrModal() {
+    qrModal.classList.remove("is-visible");
+  }
+
+  // Al tocar el QR pequeño -> abre popup
+  qrCanvasSmall.style.cursor = "pointer";
+  qrCanvasSmall.addEventListener("click", openQrModal);
+
+  // Cerrar tocando fondo o botón
+  if (qrBackdrop) qrBackdrop.addEventListener("click", closeQrModal);
+  if (qrClose) qrClose.addEventListener("click", closeQrModal);
+}
 
   // ---------------------------
   // SETTINGS
