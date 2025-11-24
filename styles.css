@@ -1199,3 +1199,313 @@ body.ma-dashboard {
     border-radius: 18px;
   }
 }
+/* ===================================== */
+/*        PANEL ADMIN - ESTILOS          */
+/* ===================================== */
+
+/* Fondo general para pantallas admin */
+body.ma-admin-login,
+body.ma-admin-monitor {
+  background: #f5f3f0;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #2a2a2a;
+}
+
+/* Contenedor principal */
+.ma-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header superior */
+.ma-header {
+  padding: 0.9rem 1.5rem;
+  background: rgba(245, 243, 240, 0.96);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.ma-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ma-logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ma-tagline {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.15rem;
+}
+
+.ma-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ma-header-user {
+  font-size: 0.85rem;
+  color: #444;
+}
+
+/* Main admin */
+.ma-main {
+  flex: 1;
+  padding: 1.2rem 1.5rem 1.5rem;
+}
+
+.ma-main > .ma-section:first-of-type {
+  margin-top: 0;
+}
+
+/* Limitar ancho general del contenido */
+body.ma-admin-login .ma-main,
+body.ma-admin-monitor .ma-main {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Botones admin (basados en tus .btn) */
+.ma-btn {
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+  white-space: nowrap;
+  background: #f4f4f4;
+  color: #222;
+}
+
+.ma-btn:active {
+  transform: scale(0.97);
+}
+
+.ma-btn-gold {
+  background: linear-gradient(135deg, #c9a15a, #f4d58c);
+  color: #1d1d1d;
+  box-shadow: 0 6px 16px rgba(171, 129, 54, 0.28);
+}
+
+.ma-btn-gold:hover {
+  background: linear-gradient(135deg, #d4ae66, #ffe099);
+}
+
+.ma-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #444;
+}
+
+.ma-btn-outline:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.ma-btn-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #555;
+}
+
+.ma-btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Tarjetas genéricas */
+.ma-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.2rem 1.3rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.ma-card-narrow {
+  max-width: 420px;
+  margin: 2.5rem auto 0;
+}
+
+/* Títulos y subtítulos dentro de tarjetas */
+.ma-card-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ma-card-subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Secciones admin */
+.ma-section {
+  margin-bottom: 1.4rem;
+}
+
+.ma-section-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ma-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.ma-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Inputs admin */
+.ma-input {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  background: #ffffff;
+}
+
+.ma-input:focus {
+  outline: none;
+  border-color: #c9a15a;
+  box-shadow: 0 0 0 1px rgba(201, 161, 90, 0.2);
+}
+
+/* Texto de error */
+.ma-error-text {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #b33434;
+}
+
+/* Métricas (tarjetas pequeñas) */
+.ma-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ma-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.ma-card-metric {
+  padding: 0.9rem 1rem;
+}
+
+.ma-card-metric h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.ma-metric-value {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Tablas admin */
+.ma-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.ma-table th,
+.ma-table td {
+  padding: 0.55rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ma-table th {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #666;
+  background: #faf7f1;
+}
+
+.ma-table tr:nth-child(even) td {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+/* Footer de tabla (paginación) */
+.ma-table-footer {
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.ma-page-info {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ADMIN LOGIN: centrar tarjeta */
+body.ma-admin-login .ma-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* Responsive admin */
+@media (max-width: 768px) {
+  .ma-header {
+    padding-inline: 1rem;
+  }
+
+  .ma-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ma-main {
+    padding: 1rem;
+  }
+
+  .ma-card-narrow {
+    margin-top: 1.5rem;
+  }
+
+  .ma-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ma-section-actions {
+    width: 100%;
+  }
+
+  .ma-section-actions .ma-input {
+    flex: 1;
+  }
+
+  .ma-table {
+    font-size: 0.8rem;
+  }
+}
