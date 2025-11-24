@@ -676,3 +676,27 @@ select:focus {
   font-size: 1.4rem;
   color: #b39b86;
 }
+/* ===== TOAST ELEGANTE ===== */
+
+.ma-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(60, 40, 20, 0.85);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.ma-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
