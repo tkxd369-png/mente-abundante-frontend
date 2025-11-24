@@ -713,10 +713,4 @@ select:focus {
   transform: translateY(-100%);
   opacity: 0;
 }
-/* Fondo del área scroll estilo Noé */
-.dashboard-scroll-area {
-  background: #f7f3ee;  /* Beige-gris cálido */
-  padding: 16px;
-  border-radius: 18px;
-  min-height: 100vh;
-}
+ 
