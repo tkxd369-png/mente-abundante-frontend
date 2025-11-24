@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -8,17 +8,19 @@
   </head>
   <body class="ma-body ma-dashboard">
     <div class="dashboard-layout">
-      <!-- HEADER FIJO -->
+      <!-- HEADER / HERO SUPERIOR -->
       <header class="dashboard-header">
         <div class="dash-top-row">
+          <!-- Marca -->
           <div class="dash-brand">
             <div class="ma-logo-drop"></div>
             <div class="ma-brand-text">
               <div class="ma-brand-title">Mente Abundante</div>
-              <div class="ma-brand-subtitle">Tu conexión con la abundancia</div>
+              <div class="ma-brand-subtitle">Tu espacio de verdad y abundancia</div>
             </div>
           </div>
 
+          <!-- Usuario + REF -->
           <div class="dash-user-ref">
             <span id="dashName" class="dash-user-name">Miembro Mente Abundante</span>
             <button
@@ -32,6 +34,7 @@
           </div>
         </div>
 
+        <!-- Franja info rápida -->
         <div class="dash-info-strip">
           <span class="info-item">
             Usuario:
@@ -51,105 +54,114 @@
           </span>
         </div>
 
+        <!-- Mensaje principal -->
         <p id="dashMessage" class="dash-message">
-          Tu nueva vida ya empezó. Recuerda: Tú decides ser abundante.
+          Tu nueva vida ya empezó. Recuerda: tú decides ser abundante.
+        </p>
+        <p class="dash-subnote">
+          Desliza hacia abajo para ver tu enlace personal y tu código QR listo para compartir.
         </p>
       </header>
 
       <!-- CONTENIDO PRINCIPAL -->
       <main class="dashboard-main">
-        <!-- FEED SCROLLEABLE -->
-        <section class="dashboard-feed">
-          <!-- Tarjeta 1 -->
-          <article class="feed-card feed-card-1">
-            <div class="feed-media fake-media-agua"></div>
-            <div class="feed-content">
-              <h2 class="feed-title">Cada gota cuenta</h2>
-              <p class="feed-text">
-                Cada acción alineada con tu abundancia es una gota que llena tu
-                vida. Comparte, inspira y recuerda: lo que das regresa.
-              </p>
-              <p class="feed-tag">
-                #MenteAbundante #TuDecidesSerAbundante
-              </p>
-            </div>
-          </article>
-
-          <!-- Tarjeta 2 -->
-          <article class="feed-card feed-card-2">
-            <div class="feed-media fake-media-dorado"></div>
-            <div class="feed-content">
-              <h2 class="feed-title">Cosecha de abundancia</h2>
-              <p class="feed-text">
-                Tu luz inspira a otros. Cada invitación es una semilla que
-                siembras en la vida de alguien más.
-              </p>
-              <p class="feed-tag">
-                Comparte tu enlace y deja que la abundancia fluya.
-              </p>
-            </div>
-          </article>
-
-          <!-- Tarjeta 3 -->
-          <article class="feed-card feed-card-3">
-            <div class="feed-media fake-media-soft"></div>
-            <div class="feed-content">
-              <h2 class="feed-title">Tu energía abre caminos</h2>
-              <p class="feed-text">
-                No se trata solo del dinero, sino de la transformación que
-                activas dentro de ti y en quienes te rodean.
-              </p>
-              <p class="feed-tag">
-                Hoy también es un buen día para invitar a alguien más.
-              </p>
-            </div>
-          </article>
-
-          <!-- Puedes agregar más tarjetas aquí si quieres -->
-        </section>
-
-        <!-- SECCIÓN DE COMPARTIR: LINK + QR DEBAJO DEL SCROLL -->
-        <section class="dashboard-share">
-          <div class="dash-link-row">
-            <div class="ref-link-group">
-              <label for="referralLink" class="ref-label">
-                Tu enlace personal de invitación
-              </label>
-              <div class="ref-input-row">
-                <input
-                  id="referralLink"
-                  class="ref-input"
-                  type="text"
-                  readonly
-                  value=""
-                />
-                <button id="copyLinkBtn" type="button" class="btn btn-secondary">
-                  Copiar
-                </button>
+        <div class="dashboard-main-inner">
+          <!-- COLUMNA IZQUIERDA: FEED MOTIVACIONAL -->
+          <section class="dashboard-feed">
+            <article class="feed-card feed-card-1">
+              <div class="feed-media fake-media-agua"></div>
+              <div class="feed-content">
+                <h2 class="feed-title">Cada gota cuenta</h2>
+                <p class="feed-text">
+                  Cada acción alineada con tu abundancia es una gota que llena tu vida.
+                  Comparte, inspira y recuerda: lo que das, regresa multiplicado.
+                </p>
+                <p class="feed-tag">#MenteAbundante #YoDecidoSerAbundante</p>
               </div>
-              <p id="copyMessage" class="small-note"></p>
-            </div>
-<!-- ICONO DEL EBOOK -->
-<div class="ebook-box">
-  <img src="img/ebook-icon.png" class="ebook-icon" alt="Yo Decido Ser Abundante" />
-  <span class="ebook-label">Tu eBook</span>
-</div>
-            <!-- QR a la derecha en pantallas grandes -->
-            <div class="qr-box">
-              <canvas id="qrCanvas" class="qr-canvas"></canvas>
-              <span class="qr-label">QR listo para compartir</span>
-            </div>
-          </div>
-        </section>
+            </article>
 
-        <!-- FOOTER FIJO ABAJO -->
+            <article class="feed-card feed-card-2">
+              <div class="feed-media fake-media-dorado"></div>
+              <div class="feed-content">
+                <h2 class="feed-title">Cosecha de abundancia</h2>
+                <p class="feed-text">
+                  Tu luz inspira a otros. Cada invitación es una semilla que siembras en la
+                  vida de alguien más. Lo que hoy compartes puede cambiar el rumbo de una familia.
+                </p>
+                <p class="feed-tag">Comparte tu enlace y deja que la abundancia fluya.</p>
+              </div>
+            </article>
+
+            <article class="feed-card feed-card-3">
+              <div class="feed-media fake-media-soft"></div>
+              <div class="feed-content">
+                <h2 class="feed-title">Tu energía abre caminos</h2>
+                <p class="feed-text">
+                  No se trata solo del ingreso, sino de la transformación que activas dentro de ti
+                  y en quienes te rodean cuando decides ser fuente de esperanza y verdad.
+                </p>
+                <p class="feed-tag">
+                  Hoy también es un buen día para invitar a alguien más.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <!-- COLUMNA DERECHA: PANEL DE COMPARTIR (LINK + QR + EBOOK) -->
+          <aside class="dashboard-share">
+            <div class="share-card">
+              <h2 class="share-title">Comparte tu luz</h2>
+              <p class="share-text">
+                Este es tu enlace personal y tu código QR. Puedes compartirlo por mensaje,
+                redes sociales o mostrar el QR directamente desde tu pantalla.
+              </p>
+
+              <!-- Enlace personal -->
+              <div class="ref-link-group">
+                <label for="referralLink" class="ref-label">
+                  Tu enlace personal de invitación
+                </label>
+                <div class="ref-input-row">
+                  <input
+                    id="referralLink"
+                    class="ref-input"
+                    type="text"
+                    readonly
+                    value=""
+                  />
+                  <button id="copyLinkBtn" type="button" class="btn btn-secondary">
+                    Copiar
+                  </button>
+                </div>
+                <p id="copyMessage" class="small-note"></p>
+              </div>
+
+              <!-- QR + eBook -->
+              <div class="share-media-row">
+                <div class="qr-box">
+                  <canvas id="qrCanvas" class="qr-canvas"></canvas>
+                  <span class="qr-label">QR listo para compartir</span>
+                </div>
+
+                <div class="ebook-box">
+                  <img
+                    src="img/ebook-icon.png"
+                    class="ebook-icon"
+                    alt="Yo Decido Ser Abundante"
+                  />
+                  <span class="ebook-label">Tu eBook — Yo Decido Ser Abundante</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- FOOTER -->
         <footer class="dashboard-footer">
           <button id="logoutBtn" type="button" class="btn btn-ghost">
             Cerrar sesión
           </button>
-          <a href="settings.html" class="btn btn-secondary">
-            Configuración
-          </a>
+          <a href="settings.html" class="btn btn-secondary">Configuración</a>
         </footer>
       </main>
     </div>
