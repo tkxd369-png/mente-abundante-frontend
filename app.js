@@ -764,7 +764,7 @@ function setupQrModal(user, personalLink) {
     el.textContent = msg;
     el.style.display = "block";
   }
-})();
+ 
 function showToast(msg) {
   const toast = document.getElementById("maToast");
   if (!toast) return;
@@ -776,3 +776,27 @@ function showToast(msg) {
     toast.classList.remove("visible");
   }, 1800);
 }
+ // ---------------------------
+// HEADER STICKY – se esconde al bajar y aparece al subir
+// ---------------------------
+(function () {
+  const header = document.getElementById("dashboardHeader");
+  if (!header) return;
+
+  let lastScroll = 0;
+
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY;
+
+    if (current > lastScroll && current > 40) {
+      // Bajando → esconder
+      header.classList.add("ma-header-hidden");
+    } else {
+      // Subiendo → mostrar
+      header.classList.remove("ma-header-hidden");
+    }
+
+    lastScroll = current;
+  });
+})();
+ 
