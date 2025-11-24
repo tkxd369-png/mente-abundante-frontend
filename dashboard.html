@@ -151,6 +151,22 @@
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     })();
+   <!-- Popup QR grande -->
+<div class="ma-qr-modal" id="qrModal">
+  <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
+  <div class="ma-qr-modal-content">
+    <button class="ma-qr-modal-close" id="qrModalClose" type="button">
+      &times;
+    </button>
+    <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
+    <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ANA824</p>
+    <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
+    <p class="ma-qr-modal-help">
+      Pide que escaneen este QR o comparte tu enlace personal.
+    </p>
+  </div>
+</div>
+
   </script>
 </body>
 </html>
