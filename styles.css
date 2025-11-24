@@ -1509,3 +1509,64 @@ body.ma-admin-login .ma-main {
     font-size: 0.8rem;
   }
 }
+/* Texto pequeño bajo el mensaje principal del header */
+.dash-subnote {
+  margin: 0.3rem 0 0;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #777;
+}
+
+/* Contenedor interior del main para manejar columnas en desktop */
+.dashboard-main-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Tarjeta de compartir (lado derecho) */
+.share-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+  padding: 1.2rem 1.3rem 1.4rem;
+}
+
+.share-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.share-text {
+  margin: 0 0 0.8rem;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.share-media-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Responsive: en desktop 2 columnas (feed + share) */
+@media (min-width: 1024px) {
+  .dashboard-main-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding-inline: 1rem;
+  }
+
+  .dashboard-feed {
+    padding-inline: 0.5rem;
+  }
+
+  .dashboard-share {
+    padding: 0.8rem 0.5rem 0.5rem;
+  }
+}
