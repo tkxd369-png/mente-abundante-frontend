@@ -700,3 +700,16 @@ select:focus {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+/* ===== HEADER STICKY OCULTABLE ===== */
+
+#dashboardHeader {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.ma-header-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
