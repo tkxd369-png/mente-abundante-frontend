@@ -81,32 +81,27 @@
 
       <!-- Bloque 5: Enlace + QR (casi al final, antes del footer) -->
       <section class="ma-card ma-block ma-block-share" id="shareBlock">
-        <h2 class="ma-section-label">COMPARTE LA ABUNDANCIA</h2>
-        <div class="ma-share-layout">
-          <div class="ma-share-left">
-            <label for="referralLink" class="ma-input-label">TU ENLACE PERSONAL</label>
-            <div class="ma-input-with-button">
-              <input
-                type="text"
-                id="referralLink"
-                readonly
-                class="ma-input ma-input-ref"
-                value=""
-              />
-              <button id="copyLinkBtn" type="button" class="ma-btn ma-btn-outline">
-                COPIAR
-              </button>
-            </div>
-            <p class="ma-help-text">
-              Envía este enlace o tu código a las personas que quieras invitar.
-            </p>
-          </div>
-          <div class="ma-share-right">
-            <p class="ma-input-label">TU QR PERSONAL</p>
-            <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
-          </div>
-        </div>
-      </section>
+  <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
+
+  <div class="ma-share-layout ma-share-layout-square">
+    <!-- E-BOOK cuadrado -->
+    <button type="button" class="ma-square-tile" id="ebookTile">
+      <span class="ma-square-title">E-BOOK</span>
+      <span class="ma-square-sub">Leer ahora</span>
+    </button>
+
+    <!-- QR cuadrado -->
+    <div class="ma-square-tile">
+      <span class="ma-square-title">TU QR</span>
+      <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+    </div>
+  </div>
+
+  <p class="ma-help-text">
+    Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
+  </p>
+</section>
+
     </main>
 
     <!-- FOOTER (aparece al final, no fijo) -->
