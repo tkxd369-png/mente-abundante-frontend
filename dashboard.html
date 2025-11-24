@@ -1,11 +1,11 @@
  <!DOCTYPE html>
 <html lang="es">
- <head>
+<head>
   <meta charset="UTF-8" />
   <title>Mente Abundante - Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fuentes estilo Noé: serif + sans -->
+  <!-- Fuentes estilo Noé: serif + sans elegantes -->
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
     rel="stylesheet"
@@ -13,12 +13,36 @@
 
   <link rel="stylesheet" href="styles.css" />
 </head>
+<body class="ma-body ma-dashboard">
+  <div class="ma-page-wrapper ma-dashboard-wrapper">
 
-    <!-- CONTENIDO SCROLL -->
+    <!-- HEADER -->
+    <header class="ma-dashboard-header" id="dashboardHeader">
+      <!-- Línea 1: marca grande (se esconde al hacer scroll) -->
+      <div class="ma-dashboard-brand-row">
+        <h1 class="ma-logo">MENTE ABUNDANTE</h1>
+      </div>
+
+      <!-- Línea 2: nombre + referidos (queda visible) -->
+      <div class="ma-dashboard-user-row">
+        <div class="ma-dashboard-user-name">
+          <span id="dashName" class="ma-user-name">Nombre</span>
+        </div>
+        <div class="ma-dashboard-user-meta">
+          <button id="dashRefBadge" class="ma-ref-badge" type="button">
+            <span id="dashReferrals">0</span> REFERIDOS
+          </button>
+          <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO SCROLL (entre header y footer) -->
     <main class="ma-dashboard-main">
+
       <!-- Bloque 1: Frase AI -->
       <section class="ma-card ma-block ma-block-phrase">
-        <h2 class="ma-section-label">Tu frase de hoy</h2>
+        <h2 class="ma-section-label">TU FRASE DE HOY</h2>
         <p id="aiPhraseText" class="ma-phrase-text">
           “Tu decisión de hoy abre puertas que aún no imaginas.”
         </p>
@@ -26,9 +50,9 @@
 
       <!-- Bloque 2: Pinterest -->
       <section class="ma-card ma-block ma-block-pinterest">
-        <h2 class="ma-section-label">Inspiración visual</h2>
+        <h2 class="ma-section-label">INSPIRACIÓN VISUAL</h2>
         <div id="pinterestEmbed" class="ma-embed-box">
-          <!-- Aquí pegaremos más adelante el script / iframe de Pinterest -->
+          <!-- Luego pegaremos aquí el script / iframe de Pinterest -->
           <p class="ma-embed-placeholder">
             Aquí verás imágenes de inspiración desde Pinterest.
           </p>
@@ -37,7 +61,7 @@
 
       <!-- Bloque 3: TikTok -->
       <section class="ma-card ma-block ma-block-tiktok">
-        <h2 class="ma-section-label">Videos TikTok / Reels</h2>
+        <h2 class="ma-section-label">VIDEOS TIKTOK / REELS</h2>
         <div id="tiktokEmbed" class="ma-embed-box">
           <!-- Aquí irá el script / iframe de TikTok -->
           <p class="ma-embed-placeholder">
@@ -48,19 +72,19 @@
 
       <!-- Bloque 4: Newsletter / anuncios -->
       <section class="ma-card ma-block ma-block-news">
-        <h2 class="ma-section-label">Newsletter & anuncios</h2>
+        <h2 class="ma-section-label">NEWSLETTER & ANUNCIOS</h2>
         <p class="ma-news-text">
           Próximos lanzamientos, noticias de la comunidad y recordatorios
           importantes aparecerán aquí.
         </p>
       </section>
 
-      <!-- Bloque 5: Enlace + QR (queda ya casi al final) -->
+      <!-- Bloque 5: Enlace + QR (casi al final, antes del footer) -->
       <section class="ma-card ma-block ma-block-share" id="shareBlock">
-        <h2 class="ma-section-label">Comparte la abundancia</h2>
+        <h2 class="ma-section-label">COMPARTE LA ABUNDANCIA</h2>
         <div class="ma-share-layout">
           <div class="ma-share-left">
-            <label for="referralLink" class="ma-input-label">Tu enlace personal</label>
+            <label for="referralLink" class="ma-input-label">TU ENLACE PERSONAL</label>
             <div class="ma-input-with-button">
               <input
                 type="text"
@@ -70,7 +94,7 @@
                 value=""
               />
               <button id="copyLinkBtn" type="button" class="ma-btn ma-btn-outline">
-                Copiar
+                COPIAR
               </button>
             </div>
             <p class="ma-help-text">
@@ -78,39 +102,39 @@
             </p>
           </div>
           <div class="ma-share-right">
-            <p class="ma-input-label">Tu QR personal</p>
+            <p class="ma-input-label">TU QR PERSONAL</p>
             <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- FOOTER (solo aparece al final del scroll, NO fijo) -->
+    <!-- FOOTER (aparece al final, no fijo) -->
     <footer class="ma-dashboard-footer">
       <button type="button" class="ma-footer-btn" id="footerEbookBtn">
-        E-Book
+        E-BOOK
       </button>
       <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
-        Nuevos libros
+        NUEVOS LIBROS
       </button>
       <button type="button" class="ma-footer-btn" id="footerNewsBtn">
-        Novedades
+        NOVEDADES
       </button>
       <button type="button" class="ma-footer-btn" id="footerQrBtn">
         QR
       </button>
 
       <button type="button" class="ma-footer-logout" id="logoutBtn">
-        Cerrar sesión
+        CERRAR SESIÓN
       </button>
     </footer>
   </div>
 
-  <!-- QRious + lógica compartida -->
+  <!-- QRious + lógica de dashboard -->
   <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   <script src="app.js"></script>
 
-  <!-- Efecto header “Mente Abundante” que se esconde al hacer scroll -->
+  <!-- Header al estilo “Noé”: Mente Abundante se oculta al hacer scroll -->
   <script>
     (function () {
       const header = document.getElementById("dashboardHeader");
