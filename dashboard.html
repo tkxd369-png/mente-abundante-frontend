@@ -1,203 +1,148 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mente Abundante — Mi espacio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Mente Abundante - Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="ma-body ma-dashboard">
+  <div class="ma-page-wrapper ma-dashboard-wrapper">
 
-    <!-- Tipos de letra más elegantes (Noe-style) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="ma-body ma-dashboard">
-    <div class="dashboard-layout">
-      <!-- HEADER / HERO SUPERIOR -->
-      <header class="dashboard-header dashboard-header-hero">
-        <div class="dash-hero-inner">
-          <!-- Marca + logo gota -->
-          <div class="dash-hero-left">
-            <div class="dash-brand">
-              <div class="ma-logo-drop"></div>
-              <div class="ma-brand-text">
-                <div class="ma-brand-title">Mente Abundante</div>
-                <div class="ma-brand-subtitle">
-                  Comunidad de verdad, esperanza y abundancia.
-                </div>
-              </div>
-            </div>
-
-            <!-- Mensaje hero -->
-            <div class="dash-hero-copy">
-              <p class="dash-hero-kicker">Tu espacio personal</p>
-              <h1 class="dash-hero-title">
-                Hola,
-                <span id="dashName" class="dash-hero-name">Miembro Mente Abundante</span>
-              </h1>
-              <p class="dash-hero-text">
-                Tu decisión de hoy abrió un nuevo capítulo. Aquí verás tu progreso, tus
-                referidos y todo lo que necesitas para compartir este mensaje con otros.
-              </p>
-
-              <div class="dash-hero-pills">
-                <span class="dash-pill">
-                  Usuario:
-                  <span id="dashUsername" class="dash-pill-value">—</span>
-                </span>
-                <span class="dash-pill">
-                  Referidos activos:
-                  <span id="dashReferrals" class="dash-pill-value">0</span>
-                </span>
-                <button
-                  id="dashRefBadge"
-                  type="button"
-                  class="dash-pill dash-pill-ref"
-                  title="Toca para copiar tu enlace de invitación"
-                >
-                  REF: —
-                </button>
-              </div>
-
-              <p class="dash-subnote">
-                Desliza hacia abajo para ver tu enlace personal y tu código QR listo para
-                compartir.
-              </p>
-            </div>
-          </div>
-
-          <!-- Bloque lateral compacto (solo desktop) -->
-          <div class="dash-hero-side">
-            <div class="dash-side-card">
-              <p class="dash-side-label">Datos de tu cuenta</p>
-              <div class="dash-side-row">
-                <span class="dash-side-key">Email</span>
-                <span id="dashEmail" class="dash-side-value">—</span>
-              </div>
-              <div class="dash-side-row">
-                <span class="dash-side-key">Teléfono</span>
-                <span id="dashPhone" class="dash-side-value">—</span>
-              </div>
-            </div>
-          </div>
+    <!-- HEADER -->
+    <header class="ma-dashboard-header" id="dashboardHeader">
+      <div class="ma-dashboard-brand-row">
+        <h1 class="ma-logo">Mente Abundante</h1>
+      </div>
+      <div class="ma-dashboard-user-row">
+        <div class="ma-dashboard-user-name">
+          <span id="dashName" class="ma-user-name">Nombre</span>
         </div>
-      </header>
-
-      <!-- CONTENIDO PRINCIPAL -->
-      <main class="dashboard-main">
-        <div class="dashboard-main-inner">
-          <!-- GRID PRINCIPAL: IZQ (ACCIONES) + DER (INSPIRACIÓN) -->
-          <section class="dashboard-grid">
-            <!-- TARJETA: COMPARTIR (LINK + QR + EBOOK) -->
-            <section class="dashboard-share">
-              <div class="share-card">
-                <h2 class="share-title">Comparte tu luz</h2>
-                <p class="share-text">
-                  Este es tu enlace personal y tu código QR. Puedes compartirlos por mensaje,
-                  redes sociales o mostrar el QR directamente desde tu pantalla.
-                </p>
-
-                <!-- Enlace personal -->
-                <div class="ref-link-group">
-                  <label for="referralLink" class="ref-label">
-                    Tu enlace personal de invitación
-                  </label>
-                  <div class="ref-input-row">
-                    <input
-                      id="referralLink"
-                      class="ref-input"
-                      type="text"
-                      readonly
-                      value=""
-                    />
-                    <button id="copyLinkBtn" type="button" class="btn btn-secondary">
-                      Copiar
-                    </button>
-                  </div>
-                  <p id="copyMessage" class="small-note"></p>
-                </div>
-
-                <!-- QR + eBook -->
-                <div class="share-media-row">
-                  <div class="qr-box">
-                    <canvas id="qrCanvas" class="qr-canvas"></canvas>
-                    <span class="qr-label">QR listo para compartir</span>
-                  </div>
-
-                  <div class="ebook-box">
-                    <img
-                      src="img/ebook-icon.png"
-                      class="ebook-icon"
-                      alt="Yo Decido Ser Abundante"
-                    />
-                    <span class="ebook-label">Tu eBook — Yo Decido Ser Abundante</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- TARJETAS MOTIVACIONALES (INSPIRACIÓN) -->
-            <section class="dashboard-feed">
-              <h2 class="feed-section-title">Inspiración para hoy</h2>
-
-              <article class="feed-card feed-card-1">
-                <div class="feed-media fake-media-agua"></div>
-                <div class="feed-content">
-                  <h3 class="feed-title">Cada gota cuenta</h3>
-                  <p class="feed-text">
-                    Cada acción alineada con tu abundancia es una gota que llena tu vida.
-                    Comparte, inspira y recuerda: lo que das, regresa multiplicado.
-                  </p>
-                  <p class="feed-tag">#MenteAbundante #YoDecidoSerAbundante</p>
-                </div>
-              </article>
-
-              <article class="feed-card feed-card-2">
-                <div class="feed-media fake-media-dorado"></div>
-                <div class="feed-content">
-                  <h3 class="feed-title">Cosecha de abundancia</h3>
-                  <p class="feed-text">
-                    Tu luz inspira a otros. Cada invitación es una semilla que siembras en la
-                    vida de alguien más. Lo que hoy compartes puede cambiar el rumbo de una familia.
-                  </p>
-                  <p class="feed-tag">Comparte tu enlace y deja que la abundancia fluya.</p>
-                </div>
-              </article>
-
-              <article class="feed-card feed-card-3">
-                <div class="feed-media fake-media-soft"></div>
-                <div class="feed-content">
-                  <h3 class="feed-title">Tu energía abre caminos</h3>
-                  <p class="feed-text">
-                    No se trata solo del ingreso, sino de la transformación que activas dentro de ti
-                    y en quienes te rodean cuando decides ser fuente de esperanza y verdad.
-                  </p>
-                  <p class="feed-tag">
-                    Hoy también es un buen día para invitar a alguien más.
-                  </p>
-                </div>
-              </article>
-            </section>
-          </section>
-        </div>
-
-        <!-- FOOTER -->
-        <footer class="dashboard-footer">
-          <button id="logoutBtn" type="button" class="btn btn-ghost">
-            Cerrar sesión
+        <div class="ma-dashboard-user-meta">
+          <button id="dashRefBadge" class="ma-ref-badge">
+            <span id="dashReferrals">0</span> referidos
           </button>
-          <a href="settings.html" class="btn btn-secondary">Configuración</a>
-        </footer>
-      </main>
-    </div>
+          <button class="ma-icon-button" id="dashMenuBtn" type="button">
+            ⋮
+          </button>
+        </div>
+      </div>
+    </header>
 
-    <!-- Librería QR -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script src="app.js"></script>
-  </body>
+    <!-- CONTENIDO SCROLL -->
+    <main class="ma-dashboard-main">
+      <!-- Bloque 1: Frase AI -->
+      <section class="ma-card ma-block ma-block-phrase">
+        <h2 class="ma-section-label">Tu frase de hoy</h2>
+        <p id="aiPhraseText" class="ma-phrase-text">
+          “Tu decisión de hoy abre puertas que aún no imaginas.”
+        </p>
+      </section>
+
+      <!-- Bloque 2: Pinterest -->
+      <section class="ma-card ma-block ma-block-pinterest">
+        <h2 class="ma-section-label">Inspiración visual</h2>
+        <div id="pinterestEmbed" class="ma-embed-box">
+          <!-- Aquí pegaremos más adelante el script / iframe de Pinterest -->
+          <p class="ma-embed-placeholder">
+            Aquí verás imágenes de inspiración desde Pinterest.
+          </p>
+        </div>
+      </section>
+
+      <!-- Bloque 3: TikTok -->
+      <section class="ma-card ma-block ma-block-tiktok">
+        <h2 class="ma-section-label">Videos TikTok / Reels</h2>
+        <div id="tiktokEmbed" class="ma-embed-box">
+          <!-- Aquí irá el script / iframe de TikTok -->
+          <p class="ma-embed-placeholder">
+            Aquí verás tus videos destacados de TikTok o Reels.
+          </p>
+        </div>
+      </section>
+
+      <!-- Bloque 4: Newsletter / anuncios -->
+      <section class="ma-card ma-block ma-block-news">
+        <h2 class="ma-section-label">Newsletter & anuncios</h2>
+        <p class="ma-news-text">
+          Próximos lanzamientos, noticias de la comunidad y recordatorios
+          importantes aparecerán aquí.
+        </p>
+      </section>
+
+      <!-- Bloque 5: Enlace + QR (queda ya casi al final) -->
+      <section class="ma-card ma-block ma-block-share" id="shareBlock">
+        <h2 class="ma-section-label">Comparte la abundancia</h2>
+        <div class="ma-share-layout">
+          <div class="ma-share-left">
+            <label for="referralLink" class="ma-input-label">Tu enlace personal</label>
+            <div class="ma-input-with-button">
+              <input
+                type="text"
+                id="referralLink"
+                readonly
+                class="ma-input ma-input-ref"
+                value=""
+              />
+              <button id="copyLinkBtn" type="button" class="ma-btn ma-btn-outline">
+                Copiar
+              </button>
+            </div>
+            <p class="ma-help-text">
+              Envía este enlace o tu código a las personas que quieras invitar.
+            </p>
+          </div>
+          <div class="ma-share-right">
+            <p class="ma-input-label">Tu QR personal</p>
+            <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (solo aparece al final del scroll, NO fijo) -->
+    <footer class="ma-dashboard-footer">
+      <button type="button" class="ma-footer-btn" id="footerEbookBtn">
+        E-Book
+      </button>
+      <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
+        Nuevos libros
+      </button>
+      <button type="button" class="ma-footer-btn" id="footerNewsBtn">
+        Novedades
+      </button>
+      <button type="button" class="ma-footer-btn" id="footerQrBtn">
+        QR
+      </button>
+
+      <button type="button" class="ma-footer-logout" id="logoutBtn">
+        Cerrar sesión
+      </button>
+    </footer>
+  </div>
+
+  <!-- QRious + lógica compartida -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Efecto header “Mente Abundante” que se esconde al hacer scroll -->
+  <script>
+    (function () {
+      const header = document.getElementById("dashboardHeader");
+      if (!header) return;
+
+      function onScroll() {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        if (y > 24) {
+          header.classList.add("ma-header-compact");
+        } else {
+          header.classList.remove("ma-header-compact");
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
 </html>
- 
