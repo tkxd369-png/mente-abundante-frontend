@@ -1570,3 +1570,268 @@ body.ma-admin-login .ma-main {
     padding: 0.8rem 0.5rem 0.5rem;
   }
 }
+/* ========================= */
+/*   HERO TIPO NOE           */
+/* ========================= */
+
+body.ma-dashboard {
+  background: #f3f0eb;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.dashboard-header-hero {
+  background: radial-gradient(circle at 0% 0%, #fff8e8 0%, #f5f3f0 55%, #efe8dd 100%);
+  border-bottom: none;
+  border-radius: 0 0 32px 32px;
+  padding: 1.4rem 1rem 1.6rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.dash-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.9fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.dash-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.dash-hero-copy {
+  margin-top: 0.3rem;
+}
+
+.dash-hero-kicker {
+  margin: 0 0 0.3rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a5b1e;
+}
+
+.dash-hero-title {
+  margin: 0 0 0.4rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  line-height: 1.25;
+  color: #24211c;
+}
+
+.dash-hero-name {
+  font-weight: 700;
+}
+
+.dash-hero-text {
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  color: #4a4337;
+  max-width: 32rem;
+}
+
+.dash-hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.dash-pill {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(199, 145, 62, 0.18);
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #5b4a2f;
+}
+
+.dash-pill-value {
+  font-weight: 600;
+}
+
+.dash-pill-ref {
+  cursor: pointer;
+  background: #fff7ea;
+  border-color: rgba(199, 145, 62, 0.6);
+}
+
+.dash-pill-ref:hover {
+  background: #ffeac4;
+}
+
+.dash-subnote {
+  margin: 0.3rem 0 0;
+  font-size: 0.78rem;
+  color: #7a7368;
+}
+
+/* Bloque lateral del hero (datos rápidos) */
+.dash-hero-side {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dash-side-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+  min-width: 230px;
+}
+
+.dash-side-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a5b1e;
+}
+
+.dash-side-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.dash-side-key {
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.dash-side-value {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Ocultamos la franja info antigua en este diseño */
+.dash-info-strip,
+.dash-message {
+  display: none;
+}
+
+/* ========================= */
+/*   MAIN GRID DASHBOARD     */
+/* ========================= */
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem 1rem 0.9rem;
+}
+
+.dashboard-main-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+/* Tarjeta compartir */
+.share-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+  padding: 1.2rem 1.4rem 1.5rem;
+}
+
+.share-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+
+.share-text {
+  margin: 0 0 0.9rem;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.share-media-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Ajustes feed */
+.dashboard-feed {
+  flex: initial;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.feed-section-title {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+
+/* Footer */
+.dashboard-footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem 0 1.1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* ========================= */
+/*  RESPONSIVE DASHBOARD     */
+/* ========================= */
+
+@media (max-width: 900px) {
+  .dash-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .dash-hero-side {
+    justify-content: flex-start;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header-hero {
+    border-radius: 0 0 22px 22px;
+    padding: 1.1rem 0.9rem 1.2rem;
+  }
+
+  .dash-hero-title {
+    font-size: 1.4rem;
+  }
+
+  .dashboard-main {
+    padding-inline: 0.9rem;
+    padding-top: 1rem;
+  }
+
+  .share-card {
+    border-radius: 18px;
+  }
+}
