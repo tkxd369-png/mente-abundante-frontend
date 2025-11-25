@@ -776,27 +776,45 @@ function showToast(msg) {
     toast.classList.remove("visible");
   }, 1800);
 }
- // ---------------------------
-// HEADER STICKY – se esconde al bajar y aparece al subir
-// ---------------------------
-(function () {
-  const header = document.getElementById("dashboardHeader");
-  if (!header) return;
+ .ma-dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #f6f0e9; /* fondo sólido crema, ya no transparente */
+  border-bottom: 1px solid rgba(199, 171, 123, 0.25);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
 
-  let lastScroll = 0;
+.ma-dashboard-header.ma-header-compact {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
 
-  window.addEventListener("scroll", () => {
-    const current = window.scrollY;
+.ma-dashboard-brand-row {
+  padding: 0.7rem 1.4rem 0.15rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: #9f8670;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(199, 171, 123, 0.25);
+  max-height: 40px;
+  transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
+}
 
-    if (current > lastScroll && current > 40) {
-      // Bajando → esconder
-      header.classList.add("ma-header-hidden");
-    } else {
-      // Subiendo → mostrar
-      header.classList.remove("ma-header-hidden");
-    }
+.ma-logo {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  font-size: 0.9rem;
+}
 
-    lastScroll = current;
-  });
-})();
- 
+/* Cuando el header está "compacto" ocultamos la fila de Mente Abundante */
+.ma-header-compact .ma-dashboard-brand-row {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+  border-bottom-color: transparent;
+}
+
