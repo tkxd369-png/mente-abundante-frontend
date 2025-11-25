@@ -742,5 +742,158 @@
       toast.classList.remove("visible");
     }, 1800);
   }
+  // === Acciones extra del dashboard: copiar link, copiar REF, popup de QR ===
+document.addEventListener("DOMContentLoaded", function () {
+  const nameEl = document.getElementById("dashName");
+  const refBadgeEl = document.getElementById("dashRefBadge");
+  const linkInput = document.getElementById("referralLink");
+  const qrCanvas = document.getElementById("qrCanvas");
+  const footerQrBtn = document.getElementById("footerQrBtn");
+
+  // Leer usuario desde localStorage para obtener el refid
+  let currentUser = null;
+  try {
+    const raw = localStorage.getItem("ma_user");
+    if (raw) {
+      currentUser = JSON.parse(raw);
+    }
+  } catch (e) {
+    console.error("Error leyendo ma_user:", e);
+  }
+
+  function copyText(text) {
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        () => alert("Copiado: " + text),
+        () => alert("No se pudo copiar. Copia manualmente.")
+      );
+    } else {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand("copy");
+        alert("Copiado: " + text);
+      } catch (e) {
+        alert("No se pudo copiar. Copia manualmente.");
+      }
+      document.body.removeChild(temp);
+    }
+  }
+
+  // ✅ Al tocar el NOMBRE: copia el LINK PERSONAL completo
+  function handleNameClick() {
+    if (!linkInput || !linkInput.value) return;
+    copyText(linkInput.value);
+  }
+
+  // ✅ Al tocar el badge de referidos: copia SOLO el código REF
+  function handleRefBadgeClick(e) {
+    e.stopPropagation();
+    if (currentUser && currentUser.refid) {
+      copyText(currentUser.refid);
+    } else if (linkInput && linkInput.value) {
+      try {
+        const url = new URL(linkInput.value);
+        const ref = url.searchParams.get("ref");
+        copyText(ref || linkInput.value);
+      } catch (err) {
+        copyText(linkInput.value);
+      }
+    }
+  }
+
+  if (nameEl) {
+    nameEl.onclick = handleNameClick; // reemplaza cualquier handler anterior
+  }
+  if (refBadgeEl) {
+    refBadgeEl.onclick = handleRefBadgeClick;
+  }
+
+  // === Modal QR ===
+  const existingModal = document.getElementById("qrModal");
+  if (!existingModal) {
+    const modal = document.createElement("div");
+    modal.id = "qrModal";
+    modal.className = "ma-modal";
+    modal.innerHTML = `
+      <div class="ma-modal-overlay"></div>
+      <div class="ma-modal-content">
+        <h2>Tu código &amp; QR</h2>
+        <canvas id="qrModalCanvas"></canvas>
+        <p id="modalRefText" class="ma-modal-ref"></p>
+        <input id="modalLink" type="text" readonly />
+        <button type="button" id="closeModalBtn" class="ma-btn ma-btn-outline">
+          Cerrar
+        </button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const modal = document.getElementById("qrModal");
+  const modalCanvas = document.getElementById("qrModalCanvas");
+  const modalRefText = document.getElementById("modalLink")
+    ? document.getElementById("modalRefText")
+    : null;
+  const modalLink = document.getElementById("modalLink");
+  const overlay = modal.querySelector(".ma-modal-overlay");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  function openQrModal() {
+    if (!linkInput || !linkInput.value || !modal || !modalCanvas) return;
+    modal.classList.add("open");
+
+    const refCode =
+      (currentUser && currentUser.refid) ||
+      (function () {
+        try {
+          const url = new URL(linkInput.value);
+          return url.searchParams.get("ref") || "";
+        } catch {
+          return "";
+        }
+      })();
+
+    if (modalRefText) {
+      modalRefText.textContent = refCode ? `Tu código: ${refCode}` : "";
+    }
+    if (modalLink) {
+      modalLink.value = linkInput.value;
+    }
+
+    new QRious({
+      element: modalCanvas,
+      value: linkInput.value,
+      size: 260,
+      background: "white",
+      foreground: "#3b3026",
+    });
+  }
+
+  function closeQrModal() {
+    if (!modal) return;
+    modal.classList.remove("open");
+  }
+
+  if (qrCanvas) {
+    qrCanvas.style.cursor = "pointer";
+    qrCanvas.onclick = openQrModal;
+  }
+
+  if (footerQrBtn) {
+    footerQrBtn.onclick = openQrModal;
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", closeQrModal);
+  }
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", closeQrModal);
+  }
+});
+
 })();
  
