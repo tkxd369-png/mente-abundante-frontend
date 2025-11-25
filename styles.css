@@ -1,6 +1,17 @@
- /* =========================================================
-   0. BASE / RESET SUAVE
-   ========================================================= */
+ /* ============================
+   BASE
+============================ */
+
+:root {
+  --ma-bg: #f6f0e9;
+  --ma-bg-soft: #f3ece4;
+  --ma-card-bg: #ffffff;
+  --ma-border-soft: rgba(214, 189, 149, 0.9);
+  --ma-gold: #c79f5b;
+  --ma-text-main: #3a3027;
+  --ma-text-soft: #8b7460;
+  --ma-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.05);
+}
 
 *,
 *::before,
@@ -14,253 +25,90 @@ body {
   padding: 0;
 }
 
-body {
+body.ma-body {
   font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  background: #f6f0e9;
-  color: #3a3027;
-  -webkit-font-smoothing: antialiased;
+  background: var(--ma-bg);
+  color: var(--ma-text-main);
 }
 
-/* Contenedor general de página */
+/* Página genérica */
 
 .ma-page-wrapper {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-/* =========================================================
-   1. ELEMENTOS GENERALES
-   ========================================================= */
+/* ============================
+   FORMULARIOS GENERALES (index, membresía, signup, login)
+============================ */
 
 .ma-main {
-  flex: 1;
-  padding: 1.2rem 1rem 1.5rem;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-}
-
-/* Títulos generales */
-
-.ma-logo {
-  font-family: "Playfair Display", "Times New Roman", serif;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  font-size: 1.2rem;
-}
-
-/* Texto pequeño de apoyo */
-
-.ma-help-text {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  color: #8b7460;
-}
-
-/* Botones */
-
-.ma-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: transform 0.1s ease, box-shadow 0.1s ease,
-    background-color 0.15s ease, color 0.15s ease;
-}
-
-.ma-btn:active {
-  transform: translateY(1px);
-}
-
-.ma-btn-gold {
-  background: #d9b675;
-  color: #2f2417;
-  box-shadow: 0 10px 25px rgba(134, 96, 35, 0.3);
-}
-
-.ma-btn-gold:hover {
-  background: #e0c080;
-}
-
-.ma-btn-outline {
-  background: transparent;
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  color: #6b4b20;
-  background-color: #fdf6ea;
-}
-
-/* Inputs */
-
-.ma-input,
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-select {
-  width: 100%;
-  padding: 0.55rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(214, 189, 149, 0.8);
-  background: #ffffff;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.ma-input:focus,
-input:focus,
-select:focus {
-  border-color: #d9b675;
-  box-shadow: 0 0 0 1px rgba(217, 182, 117, 0.25);
-}
-
-/* Tarjetas generales */
-
-.ma-card {
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: 20px;
-  padding: 1.2rem 1rem 1.3rem;
-  box-shadow: 0 15px 38px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(227, 204, 165, 0.4);
-}
-
-/* Formularios base */
-
-.ma-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.ma-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.ma-form-group label {
-  font-size: 0.85rem;
-  color: #6d5a48;
-}
-
-/* Errores / mensajes */
-
-.ma-error-text {
-  font-size: 0.8rem;
-  color: #a93b3b;
-  margin-top: 0.3rem;
-}
-
-.ma-ok-text {
-  font-size: 0.8rem;
-  color: #407a3b;
-  margin-top: 0.3rem;
-}
-
-/* =========================================================
-   2. LANDING / PÁGINA GENERAL SIMPLE
-   ========================================================= */
-
-.ma-body.ma-landing {
-  background: radial-gradient(circle at top, #fdf6ea 0, #f6f0e9 45%, #f2e8da 100%);
-}
-
-.ma-landing-header {
-  padding: 1rem 1.2rem 0.6rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ma-landing-hero {
-  padding: 0 1.2rem 1.5rem;
-}
-
-.ma-hero-title {
-  font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
-  line-height: 1.2;
-  margin-bottom: 0.8rem;
-}
-
-.ma-hero-subtitle {
-  font-size: 0.95rem;
-  color: #6b5b4d;
-  margin-bottom: 1.2rem;
-}
-
-/* =========================================================
-   3. MEMBRESÍA / LOGIN / SIGNUP / FORM PAGES
-   ========================================================= */
-
-.ma-auth-wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #f6f0e9 0%, #f9f5f0 60%, #f6f0e9 100%);
+  padding: 1.5rem 1.2rem 2rem;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-.ma-auth-main {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem 1.2rem;
+.ma-card-simple {
+  background: var(--ma-card-bg);
+  border-radius: 18px;
+  padding: 1.4rem 1.2rem 1.5rem;
+  box-shadow: var(--ma-shadow-soft);
+  border: 1px solid rgba(227, 204, 165, 0.4);
 }
 
-.ma-auth-card {
+.ma-title {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.06em;
+}
+
+.ma-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ma-text-soft);
+  margin-bottom: 0.35rem;
+}
+
+.ma-input,
+.ma-select {
   width: 100%;
-  max-width: 420px;
-}
-
-.ma-card-title {
-  font-family: "Playfair Display", serif;
-  font-size: 1.3rem;
-  margin-bottom: 0.3rem;
-}
-
-.ma-card-subtitle {
+  border-radius: 999px;
+  border: 1px solid rgba(214, 189, 149, 0.8);
+  padding: 0.55rem 0.9rem;
   font-size: 0.9rem;
-  color: #6d5a48;
-  margin-bottom: 0.9rem;
+  background: #fffdf8;
+  margin-bottom: 0.8rem;
 }
 
-.ma-form-footer {
-  margin-top: 0.8rem;
+.ma-button-primary {
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #e2ba6b, #c79f5b);
+  color: #fff;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-top: 0.4rem;
 }
 
-/* Checkbox simple */
-
-.ma-checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
-  color: #6b5b4d;
+.ma-error {
+  display: none;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #b11e1e;
 }
 
-.ma-checkbox-row input[type="checkbox"] {
-  width: auto;
-}
-
-/* =========================================================
-   4. DASHBOARD ESTILO NOÉ (MÓVIL FIRST)
-   ========================================================= */
-
-.ma-body.ma-dashboard {
-  background: #f6f0e9;
-}
+/* ============================
+   DASHBOARD – CONTENEDOR
+============================ */
 
 .ma-dashboard-wrapper {
   min-height: 100vh;
@@ -275,8 +123,7 @@ select:focus {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(246, 240, 233, 0.96);
-  backdrop-filter: blur(6px);
+  background: #f6f0e9;
   border-bottom: 1px solid rgba(199, 171, 123, 0.25);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -299,6 +146,14 @@ select:focus {
   transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
 }
 
+.ma-logo {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  font-size: 0.9rem;
+}
+
+/* Ocultar solo la fila del logo al hacer scroll */
 .ma-header-compact .ma-dashboard-brand-row {
   opacity: 0;
   max-height: 0;
@@ -313,21 +168,11 @@ select:focus {
   padding: 0.7rem 1.4rem 0.85rem;
 }
 
-.ma-dashboard-user-name {
-  display: flex;
-  align-items: center;
-}
-
 .ma-user-name {
   font-family: "Dancing Script", "Playfair Display", serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-}
-
-.ma-user-name:hover {
-  opacity: 0.85;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: #3b2c22;
 }
 
 .ma-dashboard-user-meta {
@@ -355,14 +200,25 @@ select:focus {
   color: #8b7460;
 }
 
-/* CONTENIDO SCROLL */
+/* ============================
+   DASHBOARD – CONTENIDO
+============================ */
 
 .ma-dashboard-main {
   flex: 1;
-  padding: 1.1rem 1.1rem 1.6rem;
+  padding: 1.1rem 1.2rem 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background: var(--ma-bg-soft);
+}
+
+.ma-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 20px;
+  padding: 1.2rem 1.1rem 1.3rem;
+  box-shadow: var(--ma-shadow-soft);
+  border: 1px solid rgba(227, 204, 165, 0.4);
 }
 
 .ma-section-label {
@@ -373,8 +229,6 @@ select:focus {
   margin-bottom: 0.6rem;
 }
 
-/* Frase */
-
 .ma-phrase-text {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: 1.1rem;
@@ -382,8 +236,6 @@ select:focus {
   font-style: italic;
   color: #3b3026;
 }
-
-/* Embeds Pinterest / TikTok */
 
 .ma-embed-box {
   border-radius: 16px;
@@ -402,14 +254,12 @@ select:focus {
   color: #a18d78;
 }
 
-/* Newsletter */
-
 .ma-news-text {
   font-size: 0.9rem;
   color: #5a4b3f;
 }
 
-/* Bloque accesos (E-book + QR cuadrados) */
+/* Enlace + QR + tiles */
 
 .ma-share-layout {
   display: flex;
@@ -418,12 +268,12 @@ select:focus {
 }
 
 .ma-share-layout-square {
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .ma-square-tile {
-  flex: 0 0 150px;
-  aspect-ratio: 1 / 1;
+  flex: 1 1 45%;
+  min-height: 120px;
   border-radius: 18px;
   border: 1px solid rgba(214, 189, 149, 0.9);
   background: #fdf6ea;
@@ -431,33 +281,52 @@ select:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
   text-align: center;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.06);
+  padding: 0.7rem;
 }
 
 .ma-square-title {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #6b4b20;
+  margin-bottom: 0.3rem;
 }
 
 .ma-square-sub {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
+  color: #8b7460;
+}
+
+.ma-help-text {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
   color: #8b7460;
 }
 
 .ma-qr-canvas {
-  width: 80px;
-  height: 80px;
+  width: 110px;
+  height: 110px;
   max-width: 100%;
-  border-radius: 12px;
-  background: #fffaf4;
-  border: 1px solid rgba(214, 189, 149, 0.7);
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(214, 189, 149, 0.8);
 }
 
-/* FOOTER DASHBOARD */
+/* Si usas input de link en alguna versión */
+
+.ma-input-ref {
+  flex: 1;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 189, 149, 0.8);
+  padding-inline: 0.9rem;
+  background: #fffaf4;
+}
+
+/* ============================
+   FOOTER DASHBOARD
+============================ */
 
 .ma-dashboard-footer {
   margin-top: 1.3rem;
@@ -471,15 +340,15 @@ select:focus {
 
 .ma-footer-refid {
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6b4b20;
+  color: var(--ma-text-soft);
 }
 
 .ma-footer-btn-row {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
 }
 
@@ -506,102 +375,36 @@ select:focus {
   letter-spacing: 0.18em;
 }
 
-/* =========================================================
-   5. SETTINGS (PERFIL / CONTRASEÑA)
-   ========================================================= */
+/* ============================
+   TOAST
+============================ */
 
-.ma-settings-main {
-  flex: 1;
-  padding: 1.2rem 1.1rem 1.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.ma-settings-section {
-  max-width: 480px;
-  margin-inline: auto;
-}
-
-/* =========================================================
-   6. ADMIN (LOGIN / MONITOR) – OPCIONAL
-   ========================================================= */
-
-.ma-admin-login .ma-main,
-.ma-admin-monitor .ma-main {
-  padding: 1.3rem 1rem 1.5rem;
-}
-
-.ma-admin-monitor .ma-section {
-  margin-bottom: 1.1rem;
-}
-
-.ma-grid {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.ma-grid-3 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-@media (min-width: 640px) {
-  .ma-grid-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.ma-card-metric h3 {
+.ma-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(60, 40, 20, 0.85);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
   font-size: 0.85rem;
-  color: #6d5a48;
-  margin-bottom: 0.3rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: 0.05em;
 }
 
-.ma-metric-value {
-  font-family: "Playfair Display", serif;
-  font-size: 1.3rem;
+.ma-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-/* Tabla admin */
-
-.ma-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.82rem;
-}
-
-.ma-table th,
-.ma-table td {
-  padding: 0.45rem 0.3rem;
-  border-bottom: 1px solid #eee1cd;
-}
-
-.ma-table th {
-  text-align: left;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #9f8670;
-}
-
-/* =========================================================
-   7. RESPONSIVE AJUSTES
-   ========================================================= */
-
-@media (max-width: 420px) {
-  .ma-dashboard-main {
-    padding-inline: 0.8rem;
-  }
-
-  .ma-card {
-    border-radius: 18px;
-  }
-
-  .ma-landing-hero {
-    padding-inline: 1rem;
-  }
-}
-/* ===== POPUP QR ===== */
+/* ============================
+   POPUP QR
+============================ */
 
 .ma-qr-modal {
   position: fixed;
@@ -676,41 +479,17 @@ select:focus {
   font-size: 1.4rem;
   color: #b39b86;
 }
-/* ===== TOAST ELEGANTE ===== */
 
-.ma-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 40px;
-  transform: translateX(-50%) translateY(20px);
-  background: rgba(60, 40, 20, 0.85);
-  color: #fff;
-  padding: 0.6rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 99;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  font-family: "DM Sans", sans-serif;
-  letter-spacing: 0.05em;
-}
+/* ============================
+   RESPONSIVE
+============================ */
 
-.ma-toast.visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-/* ===== HEADER STICKY OCULTABLE ===== */
+@media (max-width: 420px) {
+  .ma-dashboard-main {
+    padding-inline: 0.8rem;
+  }
 
-#dashboardHeader {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  .ma-card {
+    border-radius: 18px;
+  }
 }
-
-.ma-header-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-}
- 
