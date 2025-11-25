@@ -1,6 +1,6 @@
  <!DOCTYPE html>
 <html lang="es">
- <head>
+<head>
   <meta charset="UTF-8" />
   <title>Mente Abundante - Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,23 +18,23 @@
   <div class="ma-page-wrapper ma-dashboard-wrapper">
 
     <!-- HEADER -->
-  <header id="dashboardHeader" class="ma-dash-header">
-  <div class="ma-dashboard-brand-row">
-    <h1 class="ma-logo">MENTE ABUNDANTE</h1>
-  </div>
-  <div class="ma-dashboard-user-row">
-    <div class="ma-dashboard-user-name">
-      <span id="dashName" class="ma-user-name">Nombre</span>
-    </div>
-    <div class="ma-dashboard-user-meta">
-      <button id="dashRefBadge" class="ma-ref-badge" type="button">
-        <span id="dashReferrals">0</span> REFERIDOS
-      </button>
-      <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
-    </div>
-  </div>
-</header>
- 
+    <header id="dashboardHeader" class="ma-dashboard-header">
+      <div class="ma-dashboard-brand-row">
+        <h1 class="ma-logo">MENTE ABUNDANTE</h1>
+      </div>
+      <div class="ma-dashboard-user-row">
+        <div class="ma-dashboard-user-name">
+          <span id="dashName" class="ma-user-name">Nombre</span>
+        </div>
+        <div class="ma-dashboard-user-meta">
+          <button id="dashRefBadge" class="ma-ref-badge" type="button">
+            <span id="dashReferrals">0</span> REFERIDOS
+          </button>
+          <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
+        </div>
+      </div>
+    </header>
+
     <!-- CONTENIDO SCROLL (entre header y footer) -->
     <main class="ma-dashboard-main">
 
@@ -50,7 +50,6 @@
       <section class="ma-card ma-block ma-block-pinterest">
         <h2 class="ma-section-label">INSPIRACIÓN VISUAL</h2>
         <div id="pinterestEmbed" class="ma-embed-box">
-          <!-- Luego pegaremos aquí el script / iframe de Pinterest -->
           <p class="ma-embed-placeholder">
             Aquí verás imágenes de inspiración desde Pinterest.
           </p>
@@ -61,7 +60,6 @@
       <section class="ma-card ma-block ma-block-tiktok">
         <h2 class="ma-section-label">VIDEOS TIKTOK / REELS</h2>
         <div id="tiktokEmbed" class="ma-embed-box">
-          <!-- Aquí irá el script / iframe de TikTok -->
           <p class="ma-embed-placeholder">
             Aquí verás tus videos destacados de TikTok o Reels.
           </p>
@@ -77,56 +75,75 @@
         </p>
       </section>
 
-      <!-- Bloque 5: Enlace + QR (casi al final, antes del footer) -->
+      <!-- Bloque 5: Enlace + QR (accesos rápidos) -->
       <section class="ma-card ma-block ma-block-share" id="shareBlock">
-  <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
+        <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
 
-  <div class="ma-share-layout ma-share-layout-square">
-    <!-- E-BOOK cuadrado -->
-    <button type="button" class="ma-square-tile" id="ebookTile">
-      <span class="ma-square-title">E-BOOK</span>
-      <span class="ma-square-sub">Leer ahora</span>
-    </button>
+        <div class="ma-share-layout ma-share-layout-square">
+          <!-- E-BOOK cuadrado -->
+          <button type="button" class="ma-square-tile" id="ebookTile">
+            <span class="ma-square-title">E-BOOK</span>
+            <span class="ma-square-sub">Leer ahora</span>
+          </button>
 
-    <!-- QR cuadrado -->
-    <div class="ma-square-tile">
-      <span class="ma-square-title">TU QR</span>
-      <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
-    </div>
-  </div>
+          <!-- QR cuadrado -->
+          <div class="ma-square-tile">
+            <span class="ma-square-title">TU QR</span>
+            <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+          </div>
+        </div>
 
-  <p class="ma-help-text">
-    Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
-  </p>
-</section>
+        <p class="ma-help-text">
+          Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
+        </p>
+      </section>
 
     </main>
 
     <!-- FOOTER (aparece al final, no fijo) -->
     <footer class="ma-dashboard-footer">
-  <!-- Código de referencia centrado -->
-  <div class="ma-footer-refid" id="footerRefId">
-    CÓDIGO: ———
-  </div>
+      <!-- Código de referencia centrado -->
+      <div class="ma-footer-refid" id="footerRefId">
+        CÓDIGO: ———
+      </div>
 
-  <!-- Iconos inferiores (sin QR repetido) -->
-  <div class="ma-footer-btn-row">
-    <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
-      NUEVOS LIBROS
-    </button>
-    <button type="button" class="ma-footer-btn" id="footerNewsBtn">
-      NOVEDADES
-    </button>
-    <button type="button" class="ma-footer-btn" id="footerExtraBtn">
-      ANUNCIOS
-    </button>
-  </div>
+      <!-- Iconos inferiores -->
+      <div class="ma-footer-btn-row">
+        <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
+          NUEVOS LIBROS
+        </button>
+        <button type="button" class="ma-footer-btn" id="footerNewsBtn">
+          NOVEDADES
+        </button>
+        <button type="button" class="ma-footer-btn" id="footerExtraBtn">
+          ANUNCIOS
+        </button>
+      </div>
 
-  <button type="button" class="ma-footer-logout" id="logoutBtn">
-    CERRAR SESIÓN
-  </button>
-</footer>
+      <button type="button" class="ma-footer-logout" id="logoutBtn">
+        CERRAR SESIÓN
+      </button>
+    </footer>
 
+  </div> <!-- /ma-page-wrapper -->
+
+  <!-- Toast elegante -->
+  <div id="maToast" class="ma-toast">Copiado</div>
+
+  <!-- Popup QR grande -->
+  <div class="ma-qr-modal" id="qrModal">
+    <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
+    <div class="ma-qr-modal-content">
+      <button class="ma-qr-modal-close" id="qrModalClose" type="button">
+        &times;
+      </button>
+      <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
+      <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
+      <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
+      <p class="ma-qr-modal-help">
+        Pide que escaneen este QR o comparte tu enlace personal.
+      </p>
+    </div>
   </div>
 
   <!-- QRious + lógica de dashboard -->
@@ -151,22 +168,6 @@
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     })();
-   <!-- Popup QR grande -->
-<div class="ma-qr-modal" id="qrModal">
-  <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
-  <div class="ma-qr-modal-content">
-    <button class="ma-qr-modal-close" id="qrModalClose" type="button">
-      &times;
-    </button>
-    <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
-    <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ANA824</p>
-    <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
-    <p class="ma-qr-modal-help">
-      Pide que escaneen este QR o comparte tu enlace personal.
-    </p>
-  </div>
-</div>
-
   </script>
 </body>
 </html>
