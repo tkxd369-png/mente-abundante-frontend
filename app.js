@@ -1,5 +1,5 @@
- // app.js – Mente Abundante
-// Versión 2.0 con dashboard estilo Noé + flujo completo
+// app.js – Mente Abundante 2.0
+// Flujo completo + dashboard estilo Noé
 
 (function () {
   const API_BASE = "https://mente-abundante-api-1.onrender.com";
@@ -31,6 +31,14 @@
     }
   }
 
+  async function safeJson(res) {
+    try {
+      return await res.json();
+    } catch {
+      return {};
+    }
+  }
+
   async function apiGet(path) {
     const token = getToken();
     const res = await fetch(API_BASE + path, {
@@ -40,13 +48,15 @@
       },
     });
 
-    if (!res.ok) {
-      const data = await safeJson(res);
-      const error = data && data.error ? data.error : "Error de servidor";
-      throw new Error(error || "ERROR");
+    const data = await safeJson(res);
+
+    if (!res.ok || !data.ok) {
+      const error =
+        (data && data.error) || `Error (${res.status}) al conectar con el servidor`;
+      throw new Error(error);
     }
 
-    return res.json();
+    return data;
   }
 
   async function apiPost(path, body) {
@@ -72,14 +82,6 @@
     return data;
   }
 
-  async function safeJson(res) {
-    try {
-      return await res.json();
-    } catch {
-      return {};
-    }
-  }
-
   // ---------------------------
   // Frases motivacionales "AI"
   // ---------------------------
@@ -89,15 +91,15 @@
     "No estás empezando de cero, estás empezando desde tu experiencia.",
     "La abundancia no llega por accidente, se construye con decisiones diarias.",
     "Lo que compartes desde el corazón, regresa multiplicado.",
-    "Cuando ayudas a otros a avanzar, tu camino también se abre."
+    "Cuando ayudas a otros a avanzar, tu camino también se abre.",
   ];
 
   function pickDailyPhrase() {
-    const todayKey = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    const stored = localStorage.getItem("ma_phrase_date");
+    const todayKey = new Date().toISOString().slice(0, 10);
+    const storedDate = localStorage.getItem("ma_phrase_date");
     const storedText = localStorage.getItem("ma_phrase_text");
 
-    if (stored === todayKey && storedText) {
+    if (storedDate === todayKey && storedText) {
       return storedText;
     }
 
@@ -109,40 +111,33 @@
   }
 
   // ---------------------------
-  // Inicializar por página
+  // Routing por página
   // ---------------------------
   document.addEventListener("DOMContentLoaded", () => {
-    // INDEX (landing)
     if (document.body.classList.contains("ma-landing")) {
       initLanding();
     }
 
-    // Membresía / pago simulado
     if (document.getElementById("membershipForm")) {
       initMembership();
     }
 
-    // Puente video
     if (document.getElementById("goToMainVideoBtn")) {
       initPuenteVideo();
     }
 
-    // Video + Quiz
     if (document.getElementById("videoQuizForm")) {
       initVideoQuiz();
     }
 
-    // SIGNUP
     if (document.getElementById("signupForm")) {
       initSignup();
     }
 
-    // LOGIN
     if (document.getElementById("loginForm")) {
       initLogin();
     }
 
-    // DASHBOARD
     if (
       document.body.classList.contains("ma-dashboard") ||
       document.getElementById("dashboardHeader")
@@ -150,7 +145,6 @@
       initDashboard();
     }
 
-    // SETTINGS
     if (
       document.getElementById("profileForm") ||
       document.getElementById("passwordForm")
@@ -167,7 +161,6 @@
       document.getElementById("indexCtaBtn") ||
       document.querySelector("[data-role='index-cta']");
 
-    // Capturar ?ref= y guardar en localStorage
     const params = new URLSearchParams(window.location.search);
     const refFromUrl = params.get("ref");
     if (refFromUrl) {
@@ -196,7 +189,6 @@
     const termsInput = document.getElementById("memTerms");
     const errorEl = document.getElementById("membershipError");
 
-    // Prefill refCode
     const params = new URLSearchParams(window.location.search);
     const refFromUrl = params.get("ref");
     const storedRef = localStorage.getItem("ma_ref_code");
@@ -231,7 +223,6 @@
         return;
       }
 
-      // Guardar en localStorage para el signup
       localStorage.setItem("ma_pre_fullName", fullName);
       localStorage.setItem("ma_pre_email", email);
       localStorage.setItem("ma_pre_phone", phone);
@@ -240,7 +231,6 @@
         localStorage.setItem("ma_ref_code", refCode.toUpperCase());
       }
 
-      // Simulación de pago: redirigir al puente-video
       window.location.href = "puente-video.html";
     });
   }
@@ -273,8 +263,7 @@
         errorEl.style.display = "none";
       }
 
-      // Por ahora no validamos respuestas reales, solo simulamos aprobación
-      const passed = true;
+      const passed = true; // simulado
 
       if (!passed) {
         showError(
@@ -304,7 +293,6 @@
     const refInput = document.getElementById("signupRefCode");
     const errorEl = document.getElementById("signupError");
 
-    // Prefill desde localStorage
     if (fullNameInput) {
       const v = localStorage.getItem("ma_pre_fullName");
       if (v) fullNameInput.value = v;
@@ -361,13 +349,8 @@
           refCode: refCode || undefined,
         });
 
-        if (!data.ok) {
-          throw new Error(data.error || "No se pudo crear la cuenta.");
-        }
-
         setSession(data.token, data.user);
 
-        // Limpiar pre-datos
         localStorage.removeItem("ma_pre_fullName");
         localStorage.removeItem("ma_pre_email");
         localStorage.removeItem("ma_pre_phone");
@@ -433,7 +416,6 @@
   // ---------------------------
   // DASHBOARD
   // ---------------------------
- 
   async function initDashboard() {
     const token = getToken();
     if (!token) {
@@ -441,7 +423,6 @@
       return;
     }
 
-    // Logout
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
       logoutBtn.addEventListener("click", () => {
@@ -450,16 +431,13 @@
       });
     }
 
-    // Frase AI
     const phraseEl = document.getElementById("aiPhraseText");
     if (phraseEl) {
       phraseEl.textContent = pickDailyPhrase();
     }
 
-    // Usuario desde localStorage
     let user = getStoredUser();
 
-    // Refrescar desde /me
     try {
       const data = await apiGet("/me");
       if (data && data.ok && data.user) {
@@ -481,7 +459,6 @@
       return;
     }
 
-    // ----- ELEMENTOS DEL DASHBOARD -----
     const nameEl = document.getElementById("dashName");
     const referralsEl = document.getElementById("dashReferrals");
     const refBadge = document.getElementById("dashRefBadge");
@@ -491,31 +468,26 @@
     const qrCanvas = document.getElementById("qrCanvas");
     const ebookTile = document.getElementById("ebookTile");
 
-    // Nombre (primer nombre)
     if (nameEl) {
       const fullName = user.full_name || "";
       const firstName = fullName.split(" ")[0] || fullName || "Bienvenido";
       nameEl.textContent = firstName;
     }
 
-    // Número de referidos
     if (referralsEl) {
       referralsEl.textContent = user.referrals || 0;
     }
 
-    // Construir LINK personal desde refid
     let personalLink = "";
     if (user.refid) {
       const baseUrl = window.location.origin + "/index.html";
       personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
     }
 
-    // Input con link
     if (refInput && personalLink) {
       refInput.value = personalLink;
     }
 
-    // QR pequeño
     if (qrCanvas && window.QRious && personalLink) {
       new QRious({
         element: qrCanvas,
@@ -524,52 +496,48 @@
       });
     }
 
-    // Código en el footer (si tienes ese span)
     if (footerRefIdEl && user.refid) {
       footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
     }
 
-    // ----- COMPORTAMIENTOS DE COPIADO -----
-
-    // 1) Botón "Copiar" -> copia LINK completo
+    // Copiar LINK completo desde botón "Copiar" (si existe)
     if (copyLinkBtn && personalLink) {
       copyLinkBtn.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(personalLink);
           showToast("Enlace personal copiado");
-        } catch (e) {
+        } catch {
           alert("No se pudo copiar el enlace.");
         }
       });
     }
 
-    // 2) Nombre -> copia LINK completo
+    // Copiar LINK completo al tocar el nombre
     if (nameEl && personalLink) {
       nameEl.style.cursor = "pointer";
       nameEl.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(personalLink);
           showToast("Enlace personal copiado");
-        } catch (e) {
+        } catch {
           alert("No se pudo copiar el enlace.");
         }
       });
     }
 
-    // 3) Píldora "X REFERIDOS" -> copia SOLO el código refid
+    // Copiar SOLO código en la píldora de referidos
     if (refBadge && user.refid) {
       refBadge.style.cursor = "pointer";
       refBadge.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(user.refid);
           showToast("Código copiado");
-        } catch (e) {
-          alert("Tu código de referencia: " + user.refid);
+        } catch {
+          alert("Tu código: " + user.refid);
         }
       });
     }
 
-    // Tile del E-Book (placeholder)
     if (ebookTile) {
       ebookTile.addEventListener("click", () => {
         alert(
@@ -578,52 +546,52 @@
       });
     }
 
-    // Popup de QR grande
     if (personalLink) {
       setupQrModal(user, personalLink);
     }
   }
 
-function setupQrModal(user, personalLink) {
-  const qrCanvasSmall = document.getElementById("qrCanvas");
-  const qrModal = document.getElementById("qrModal");
-  const qrBackdrop = document.getElementById("qrModalBackdrop");
-  const qrClose = document.getElementById("qrModalClose");
-  const qrModalCanvas = document.getElementById("qrModalCanvas");
-  const qrModalRefText = document.getElementById("qrModalRefText");
+  // ---------------------------
+  // Popup QR
+  // ---------------------------
+  function setupQrModal(user, personalLink) {
+    const qrCanvasSmall = document.getElementById("qrCanvas");
+    const qrModal = document.getElementById("qrModal");
+    const qrBackdrop = document.getElementById("qrModalBackdrop");
+    const qrClose = document.getElementById("qrModalClose");
+    const qrModalCanvas = document.getElementById("qrModalCanvas");
+    const qrModalRefText = document.getElementById("qrModalRefText");
 
-  if (!qrCanvasSmall || !qrModal || !qrModalCanvas) return;
+    if (!qrCanvasSmall || !qrModal || !qrModalCanvas) return;
 
-  let modalQr = null;
+    let modalQr = null;
 
-  function openQrModal() {
-    qrModal.classList.add("is-visible");
-    if (qrModalRefText && user.refid) {
-      qrModalRefText.textContent = `CÓDIGO: ${user.refid}`;
+    function openQrModal() {
+      qrModal.classList.add("is-visible");
+      if (qrModalRefText && user.refid) {
+        qrModalRefText.textContent = `CÓDIGO: ${user.refid}`;
+      }
+      if (!modalQr) {
+        modalQr = new QRious({
+          element: qrModalCanvas,
+          value: personalLink,
+          size: 220,
+        });
+      } else {
+        modalQr.set({ value: personalLink });
+      }
     }
-    if (!modalQr) {
-      modalQr = new QRious({
-        element: qrModalCanvas,
-        value: personalLink,
-        size: 220,
-      });
-    } else {
-      modalQr.set({ value: personalLink });
+
+    function closeQrModal() {
+      qrModal.classList.remove("is-visible");
     }
+
+    qrCanvasSmall.style.cursor = "pointer";
+    qrCanvasSmall.addEventListener("click", openQrModal);
+
+    if (qrBackdrop) qrBackdrop.addEventListener("click", closeQrModal);
+    if (qrClose) qrClose.addEventListener("click", closeQrModal);
   }
-
-  function closeQrModal() {
-    qrModal.classList.remove("is-visible");
-  }
-
-  // Al tocar el QR pequeño -> abre popup
-  qrCanvasSmall.style.cursor = "pointer";
-  qrCanvasSmall.addEventListener("click", openQrModal);
-
-  // Cerrar tocando fondo o botón
-  if (qrBackdrop) qrBackdrop.addEventListener("click", closeQrModal);
-  if (qrClose) qrClose.addEventListener("click", closeQrModal);
-}
 
   // ---------------------------
   // SETTINGS
@@ -638,7 +606,6 @@ function setupQrModal(user, personalLink) {
     const profileForm = document.getElementById("profileForm");
     const passwordForm = document.getElementById("passwordForm");
 
-    // Actualizar perfil (email / phone)
     if (profileForm) {
       const emailInput = document.getElementById("profileEmail");
       const phoneInput = document.getElementById("profilePhone");
@@ -694,7 +661,6 @@ function setupQrModal(user, personalLink) {
       });
     }
 
-    // Cambiar contraseña
     if (passwordForm) {
       const currentInput = document.getElementById("currentPassword");
       const newInput = document.getElementById("newPassword");
@@ -754,7 +720,7 @@ function setupQrModal(user, personalLink) {
   }
 
   // ---------------------------
-  // Helper para mostrar errores
+  // Helpers visuales
   // ---------------------------
   function showError(el, msg) {
     if (!el) {
@@ -764,57 +730,17 @@ function setupQrModal(user, personalLink) {
     el.textContent = msg;
     el.style.display = "block";
   }
+
+  function showToast(msg) {
+    const toast = document.getElementById("maToast");
+    if (!toast) return;
+
+    toast.textContent = msg;
+    toast.classList.add("visible");
+
+    setTimeout(() => {
+      toast.classList.remove("visible");
+    }, 1800);
+  }
+})();
  
-function showToast(msg) {
-  const toast = document.getElementById("maToast");
-  if (!toast) return;
-
-  toast.textContent = msg;
-  toast.classList.add("visible");
-
-  setTimeout(() => {
-    toast.classList.remove("visible");
-  }, 1800);
-}
- .ma-dashboard-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: #f6f0e9; /* fondo sólido crema, ya no transparente */
-  border-bottom: 1px solid rgba(199, 171, 123, 0.25);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.ma-dashboard-header.ma-header-compact {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px);
-}
-
-.ma-dashboard-brand-row {
-  padding: 0.7rem 1.4rem 0.15rem;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
-  color: #9f8670;
-  font-weight: 500;
-  border-bottom: 1px solid rgba(199, 171, 123, 0.25);
-  max-height: 40px;
-  transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
-}
-
-.ma-logo {
-  font-family: "Playfair Display", "Times New Roman", serif;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  font-size: 0.9rem;
-}
-
-/* Cuando el header está "compacto" ocultamos la fila de Mente Abundante */
-.ma-header-compact .ma-dashboard-brand-row {
-  opacity: 0;
-  max-height: 0;
-  transform: translateY(-10px);
-  border-bottom-color: transparent;
-}
-
