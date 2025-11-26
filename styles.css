@@ -220,16 +220,16 @@ body.ma-body {
   box-shadow: var(--ma-shadow-soft);
   border: 1px solid rgba(227, 204, 165, 0.4);
 }
-.ma-section-label {
+/* TITULOS DE CADA TARJETA (FRASE, INSPIRACION, ACCESOS, ETC.) */
+.ma-card > .ma-section-label {
   font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #7f654a;            /* un poco más oscuro */
-  margin-bottom: 0.9rem;     /* más espacio hacia la tarjeta */
-  margin-top: 0.9rem;        /* pequeño respiro desde el borde superior */
-}
- 
+  color: #7b5a3b;           /* un poco más oscuro para contraste */
+  margin-top: 0.4rem;
+  margin-bottom: 1.1rem;    /* espacio entre texto y borde de la tarjeta */
+} 
 .ma-phrase-text {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: 1.1rem;
