@@ -1,210 +1,190 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Mente Abundante - Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mente Abundante - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fuentes estilo Noé + cursiva moderna para el nombre -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap"
-    rel="stylesheet"
-  />
+    <!-- Fuentes -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <link rel="stylesheet" href="styles.css" />
-</head>
-  <!-- QRious + lógica compartida -->
-  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-  <script src="app.js"></script>
-
-  <!-- Script oficial de Pinterest (solo una vez por página) -->
-  <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
-
-  <!-- Efecto header “Mente Abundante” que se esconde al hacer scroll -->
-  <script>
-    (function () {
-      const header = document.getElementById("dashboardHeader");
-      if (!header) return;
-
-      function onScroll() {
-        const y = window.scrollY || document.documentElement.scrollTop;
-        if (y > 24) {
-          header.classList.add("ma-header-compact");
-        } else {
-          header.classList.remove("ma-header-compact");
-        }
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-    })();
-  </script>
-</body>
-</html>
-
-<body class="ma-body ma-dashboard">
-  <div class="ma-page-wrapper ma-dashboard-wrapper">
-
-    <!-- HEADER -->
-    <header id="dashboardHeader" class="ma-dashboard-header">
-      <div class="ma-dashboard-brand-row">
-        <h1 class="ma-logo">MENTE ABUNDANTE</h1>
-      </div>
-      <div class="ma-dashboard-user-row">
-        <div class="ma-dashboard-user-name">
-          <span id="dashName" class="ma-user-name">Nombre</span>
+  <body class="ma-body ma-dashboard">
+    <div class="ma-page-wrapper ma-dashboard-wrapper">
+      <!-- HEADER -->
+      <header id="dashboardHeader" class="ma-dashboard-header">
+        <div class="ma-dashboard-brand-row">
+          <h1 class="ma-logo">MENTE ABUNDANTE</h1>
         </div>
-        <div class="ma-dashboard-user-meta">
-          <button id="dashRefBadge" class="ma-ref-badge" type="button">
-            <span id="dashReferrals">0</span> REFERIDOS
-           <div id="dashReferralEarnings" class="ma-stat-subvalue">$0 USD estimado</div>
-          </button>
-          <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
-        </div>
-      </div>
-    </header>
+        <div class="ma-dashboard-user-row">
+          <div class="ma-dashboard-user-name">
+            <span id="dashName" class="ma-user-name">Nombre</span>
+          </div>
 
-    <!-- CONTENIDO SCROLL (entre header y footer) -->
-    <main class="ma-dashboard-main">
-
-      <!-- Bloque 1: Frase AI -->
-      <section class="ma-card ma-block ma-block-phrase">
-        <h2 class="ma-section-label">TU FRASE DE HOY</h2>
-        <p id="aiPhraseText" class="ma-phrase-text">
-          “Tu decisión de hoy abre puertas que aún no imaginas.”
-        </p>
-      </section>
-
-      <!-- Bloque 2: Pinterest -->
- <div id="pinterestEmbed" class="ma-embed-box">
-  <a
-    data-pin-do="embedBoard"
-    data-pin-board-width="420"
-    data-pin-scale-height="320"
-    data-pin-scale-width="120"
-    href="https://www.pinterest.com/agconst/mente-abundante/">
-  </a>
-</div>
-
-      <!-- Bloque 3: TikTok -->
- <section class="ma-card">
-  <div class="ma-section-label">VIDEOS TIKTOK / REELS</div>
-
-  <div class="ma-embed-box ma-embed-elfsight">
-    <div class="elfsight-app-c7aa3b7a-2625-4e48-932a-c5a323679564" data-elfsight-app-lazy></div>
-  </div>
-
-      <!-- Bloque 5: Enlace + QR (accesos rápidos) -->
-      <section class="ma-card ma-block ma-block-share" id="shareBlock">
-        <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
-
-        <div class="ma-share-layout ma-share-layout-square">
-          <!-- E-BOOK cuadrado -->
-          <button type="button" class="ma-square-tile" id="ebookTile">
-            <span class="ma-square-title">E-BOOK</span>
-            <span class="ma-square-sub">Leer ahora</span>
-          </button>
-<button
-  type="button"
-  class="ma-footer-icon"
-  onclick="window.location.href='herramientas.html'"
-  aria-label="Herramientas para compartir"
->
-</button>
-
-          <!-- QR cuadrado -->
-          <div class="ma-square-tile">
-            <span class="ma-square-title">TU QR</span>
-            <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+          <div class="ma-dashboard-user-meta">
+            <!-- Badge referidos + estimado (JS escribe el texto) -->
+            <button id="dashRefBadge" class="ma-ref-badge" type="button">
+              <span id="dashReferralsText">0 REFERIDOS</span>
+              <span id="dashEstimateText">$0 USD ESTIMADO</span>
+            </button>
+            <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
           </div>
         </div>
+      </header>
 
-        <p class="ma-help-text">
-          Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
-        </p>
-      </section>
-</section>
-      <!-- Bloque 4: Newsletter / anuncios -->
-      <section class="ma-card ma-block ma-block-news">
-        <h2 class="ma-section-label">NEWSLETTER & ANUNCIOS</h2>
-        <p class="ma-news-text">
-          Próximos lanzamientos, noticias de la comunidad y recordatorios
-          importantes aparecerán aquí.
-        </p>
-      </section>
-    </main>
+      <!-- CONTENIDO SCROLL -->
+      <main class="ma-dashboard-main">
+        <!-- Bloque 1: Frase AI -->
+        <section class="ma-card ma-block ma-block-phrase">
+          <h2 class="ma-section-label">TU FRASE DE HOY</h2>
+          <p id="aiPhraseText" class="ma-phrase-text">
+            “Tu decisión de hoy abre puertas que aún no imaginas.”
+          </p>
+        </section>
 
-    <!-- FOOTER (aparece al final, no fijo) -->
-    <footer class="ma-dashboard-footer">
-      <!-- Código de referencia centrado -->
-      <div class="ma-footer-refid" id="footerRefId">
-        CÓDIGO: ———
-      </div>
- 
-      <!-- Iconos inferiores -->
-      <div class="ma-footer-btn-row">
-        <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
-          NUEVOS LIBROS
+        <!-- Bloque 2: Pinterest -->
+        <section class="ma-card">
+          <h2 class="ma-section-label">INSPIRACIÓN VISUAL</h2>
+          <div id="pinterestEmbed" class="ma-embed-box">
+            <a
+              data-pin-do="embedBoard"
+              data-pin-board-width="420"
+              data-pin-scale-height="320"
+              data-pin-scale-width="120"
+              href="https://www.pinterest.com/agconst/mente-abundante/"
+            >
+            </a>
+          </div>
+        </section>
+
+        <!-- Bloque 3: TikTok -->
+        <section class="ma-card">
+          <h2 class="ma-section-label">VIDEOS TIKTOK / REELS</h2>
+          <div class="ma-embed-box ma-embed-elfsight">
+            <div
+              class="elfsight-app-c7aa3b7a-2625-4e48-932a-c5a323679564"
+              data-elfsight-app-lazy
+            ></div>
+          </div>
+        </section>
+
+        <!-- Bloque 4: Accesos rápidos -->
+        <section class="ma-card ma-block ma-block-share" id="shareBlock">
+          <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
+
+          <div class="ma-share-layout ma-share-layout-square">
+            <!-- E-BOOK -->
+            <button type="button" class="ma-square-tile" id="ebookTile">
+              <span class="ma-square-title">E-BOOK</span>
+              <span class="ma-square-sub">Leer ahora</span>
+            </button>
+
+            <!-- HERRAMIENTAS ($) -->
+            <button
+              type="button"
+              class="ma-square-tile ma-square-money"
+              onclick="window.location.href='herramientas.html'"
+              aria-label="Herramientas para compartir"
+            >
+              <div class="ma-square-money-icon">💲</div>
+              <div class="ma-square-money-text">
+                <span class="ma-square-title">Herramientas</span>
+                <span class="ma-square-sub">Guías para compartir</span>
+              </div>
+            </button>
+
+            <!-- QR -->
+            <div class="ma-square-tile">
+              <span class="ma-square-title">TU QR</span>
+              <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+            </div>
+          </div>
+
+          <p class="ma-help-text">
+            Comparte tu QR para que tus invitados lleguen directo a tu página de
+            inicio.
+          </p>
+        </section>
+
+        <!-- Bloque 5: Newsletter / anuncios -->
+        <section class="ma-card ma-block ma-block-news">
+          <h2 class="ma-section-label">NEWSLETTER & ANUNCIOS</h2>
+          <p class="ma-news-text">
+            Próximos lanzamientos, noticias de la comunidad y recordatorios
+            importantes aparecerán aquí.
+          </p>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="ma-dashboard-footer">
+        <div class="ma-footer-refid" id="footerRefId">
+          CÓDIGO: ———
+        </div>
+
+        <div class="ma-footer-btn-row">
+          <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
+            NUEVOS LIBROS
+          </button>
+          <button type="button" class="ma-footer-btn" id="footerNewsBtn">
+            NOVEDADES
+          </button>
+          <button type="button" class="ma-footer-btn" id="footerExtraBtn">
+            ANUNCIOS
+          </button>
+        </div>
+
+        <button type="button" class="ma-footer-logout" id="logoutBtn">
+          CERRAR SESIÓN
         </button>
-        <button type="button" class="ma-footer-btn" id="footerNewsBtn">
-          NOVEDADES
-        </button>
-        <button type="button" class="ma-footer-btn" id="footerExtraBtn">
-          ANUNCIOS
-        </button>
-      </div>
-
-      <button type="button" class="ma-footer-logout" id="logoutBtn">
-        CERRAR SESIÓN
-      </button>
-    </footer>
-
-  </div> <!-- /ma-page-wrapper -->
-
-  <!-- Toast elegante -->
-  <div id="maToast" class="ma-toast">Copiado</div>
-
-  <!-- Popup QR grande -->
-  <div class="ma-qr-modal" id="qrModal">
-    <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
-    <div class="ma-qr-modal-content">
-      <button class="ma-qr-modal-close" id="qrModalClose" type="button">
-        &times;
-      </button>
-      <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
-      <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
-      <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
-      <p class="ma-qr-modal-help">
-        Pide que escaneen este QR o comparte tu enlace personal.
-      </p>
+      </footer>
     </div>
-  </div>
 
-  <!-- QRious + lógica de dashboard -->
-  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-  <script src="app.js"></script>
+    <!-- Toast -->
+    <div id="maToast" class="ma-toast">Copiado</div>
 
-  <!-- Header al estilo “Noé”: Mente Abundante se oculta al hacer scroll -->
-  <script>
-    (function () {
-      const header = document.getElementById("dashboardHeader");
-      if (!header) return;
+    <!-- Popup QR grande -->
+    <div class="ma-qr-modal" id="qrModal">
+      <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
+      <div class="ma-qr-modal-content">
+        <button class="ma-qr-modal-close" id="qrModalClose" type="button">
+          &times;
+        </button>
+        <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
+        <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
+        <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
+        <p class="ma-qr-modal-help">
+          Pide que escaneen este QR o comparte tu enlace personal.
+        </p>
+      </div>
+    </div>
 
-      function onScroll() {
-        const y = window.scrollY || document.documentElement.scrollTop;
-        if (y > 24) {
-          header.classList.add("ma-header-compact");
-        } else {
-          header.classList.remove("ma-header-compact");
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <script src="app.js"></script>
+    <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+
+    <!-- Header compact al hacer scroll -->
+    <script>
+      (function () {
+        const header = document.getElementById("dashboardHeader");
+        if (!header) return;
+        function onScroll() {
+          const y = window.scrollY || document.documentElement.scrollTop;
+          if (y > 24) {
+            header.classList.add("ma-header-compact");
+          } else {
+            header.classList.remove("ma-header-compact");
+          }
         }
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-    })();
-  <script async defer src="https://assets.pinterest.com/js/pinit.js"></script> 
- 
-   <script src="https://elfsightcdn.com/platform.js" async></script>
-
-</body>
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+  </body>
 </html>
