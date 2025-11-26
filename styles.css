@@ -220,15 +220,16 @@ body.ma-body {
   box-shadow: var(--ma-shadow-soft);
   border: 1px solid rgba(227, 204, 165, 0.4);
 }
-
 .ma-section-label {
-  font-size: 0.78rem;
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: #b39b86;
-  margin-bottom: 0.6rem;
+  color: #7f654a;            /* un poco más oscuro */
+  margin-bottom: 0.9rem;     /* más espacio hacia la tarjeta */
+  margin-top: 0.9rem;        /* pequeño respiro desde el borde superior */
 }
-
+ 
 .ma-phrase-text {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: 1.1rem;
