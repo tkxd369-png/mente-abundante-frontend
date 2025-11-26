@@ -608,3 +608,74 @@ body.ma-body {
   color: #6b4b20;
   background: #fff7ec;
 }
+/* 1. Títulos de sección: más espacio y contraste */
+.ma-section-label {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #7f654a;        /* un poco más oscuro */
+  margin-top: 0.2rem;
+  margin-bottom: 1rem;   /* separa del borde de la tarjeta */
+}
+
+/* 2. Tarjeta de accesos rápidos (ya la tienes parecida, por si falta) */
+.ma-square-tile {
+  background: #fdf4e5;
+  border-radius: 22px;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+}
+
+.ma-square-title {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.86rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #7f654a;
+  margin-bottom: 0.3rem;
+}
+
+.ma-square-sub {
+  font-size: 0.9rem;
+  color: #6a5845;
+}
+
+/* 3. Tarjeta de dinero con icono elegante */
+.ma-square-money {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.ma-square-money-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 189, 149, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #6b4b20;
+  background: #fff7ec;
+}
+
+.ma-square-money-text {
+  display: flex;
+  flex-direction: column;
+}
+ 
+/* 4. Subtítulo debajo de los referidos en el chip del header */
+.ma-ref-badge span {
+  display: block;
+}
+
+.ma-ref-badge #dashEstimateText {
+  font-size: 0.7rem;
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
