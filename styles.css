@@ -679,3 +679,82 @@ body.ma-body {
   text-transform: uppercase;
   letter-spacing: 0.14em;
 }
+/* ===== TITULOS DE SECCION (override) ===== */
+.ma-card {
+  padding: 1.3rem 1.4rem 1.4rem;
+  border-radius: 22px;
+  background: #fff7ec;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+  margin-bottom: 1.4rem;
+}
+
+.ma-section-label {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;          /* un poco más grande */
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6b4b20;             /* más oscuro para contraste */
+  margin-top: 0.1rem;
+  margin-bottom: 1.1rem;      /* más espacio entre título y contenido */
+}
+/* ===== ACCESOS RÁPIDOS EN UNA SOLA LÍNEA ===== */
+
+.ma-share-layout-square {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.ma-share-layout-square .ma-square-tile {
+  flex: 1;
+  text-align: center;
+  padding: 1rem 0.6rem;
+}
+
+/* Aseguramos misma altura visual */
+.ma-share-layout-square .ma-square-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+}
+
+/* Títulos y subtítulos dentro de cada tile */
+.ma-square-title {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #7f654a;
+  margin-bottom: 0.25rem;
+}
+
+.ma-square-sub {
+  font-size: 0.9rem;
+  color: #6a5845;
+}
+
+/* Tile de dinero mantiene mismo tamaño que las otras */
+.ma-square-money {
+  flex: 1;
+}
+
+.ma-square-money-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 189, 149, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #6b4b20;
+  background: #fff7ec;
+  margin-bottom: 0.3rem;
+}
+
+.ma-square-money-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
