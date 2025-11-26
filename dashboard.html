@@ -13,6 +13,34 @@
 
   <link rel="stylesheet" href="styles.css" />
 </head>
+  <!-- QRious + lógica compartida -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Script oficial de Pinterest (solo una vez por página) -->
+  <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+
+  <!-- Efecto header “Mente Abundante” que se esconde al hacer scroll -->
+  <script>
+    (function () {
+      const header = document.getElementById("dashboardHeader");
+      if (!header) return;
+
+      function onScroll() {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        if (y > 24) {
+          header.classList.add("ma-header-compact");
+        } else {
+          header.classList.remove("ma-header-compact");
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
 
 <body class="ma-body ma-dashboard">
   <div class="ma-page-wrapper ma-dashboard-wrapper">
