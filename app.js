@@ -413,194 +413,166 @@
     });
   }
 
-  // ---------------------------
-  // DASHBOARD
-  // ---------------------------
-  async function initDashboard() {
-    const token = getToken();
-    if (!token) {
-      window.location.href = "login.html";
-      return;
+ // ---------------------------
+// DASHBOARD
+// ---------------------------
+async function initDashboard() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Botón logout
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      clearSession();
+      window.location.href = "index.html";
+    });
+  }
+
+  // Frase del día
+  const phraseEl = document.getElementById("aiPhraseText");
+  if (phraseEl) {
+    phraseEl.textContent = pickDailyPhrase();
+  }
+
+  // Usuario desde localStorage, luego refrescamos con /me
+  let user = getStoredUser();
+
+  try {
+    const data = await apiGet("/me");
+    if (data && data.ok && data.user) {
+      user = data.user;
+      setSession(token, user);
     }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => {
-        clearSession();
-        window.location.href = "index.html";
-      });
-    }
-
-    const phraseEl = document.getElementById("aiPhraseText");
-    if (phraseEl) {
-      phraseEl.textContent = pickDailyPhrase();
-    }
-
-    let user = getStoredUser();
-
-    try {
-      const data = await apiGet("/me");
-      if (data && data.ok && data.user) {
-        user = data.user;
-        setSession(token, user);
-      }
-    } catch (err) {
-      console.error("Error al cargar /me:", err);
-      if (!user) {
-        clearSession();
-        window.location.href = "login.html";
-        return;
-      }
-    }
-
+  } catch (err) {
+    console.error("Error al cargar /me:", err);
     if (!user) {
       clearSession();
       window.location.href = "login.html";
       return;
     }
+  }
 
-    const nameEl = document.getElementById("dashName");
-    const referralsEl = document.getElementById("dashReferrals");
-    const refBadge = document.getElementById("dashRefBadge");
-    const refInput = document.getElementById("referralLink");
-    const copyLinkBtn = document.getElementById("copyLinkBtn");
-    const footerRefIdEl = document.getElementById("footerRefId");
-    const qrCanvas = document.getElementById("qrCanvas");
-    const ebookTile = document.getElementById("ebookTile");
+  if (!user) {
+    clearSession();
+    window.location.href = "login.html";
+    return;
+  }
 
-    if (nameEl) {
-      const fullName = user.full_name || "";
-      const firstName = fullName.split(" ")[0] || fullName || "Bienvenido";
-      nameEl.textContent = firstName;
-    }
+  // Elementos del DOM
+  const nameEl = document.getElementById("dashName");
+  const refBadge = document.getElementById("dashRefBadge");
+  const refTextEl = document.getElementById("dashReferralsText");
+  const estTextEl = document.getElementById("dashEstimateText");
+  const refInput = document.getElementById("referralLink");
+  const copyLinkBtn = document.getElementById("copyLinkBtn");
+  const footerRefIdEl = document.getElementById("footerRefId");
+  const qrCanvas = document.getElementById("qrCanvas");
+  const ebookTile = document.getElementById("ebookTile");
 
-    if (referralsEl) {
-      referralsEl.textContent = user.referrals || 0;
-      const rewardPerReferral = 197; // o 197.00
+  // Nombre (solo el primer nombre)
+  if (nameEl) {
+    const fullName = user.full_name || "";
+    const firstName = fullName.split(" ")[0] || fullName || "Bienvenido";
+    nameEl.textContent = firstName;
+  }
 
-const estimated = referrals * rewardPerReferral;
+  // REFERIDOS + ESTIMADO
+  const referrals = Number(user.referrals) || 0;
+  const rewardPerReferral = 197;
+  const estimated = referrals * rewardPerReferral;
 
-const estBadge = document.getElementById("dashRefEstimate");
-if (estBadge) {
-  estBadge.textContent = `$${estimated.toLocaleString()} USD ESTIMADO`;
+  if (refTextEl) {
+    refTextEl.textContent =
+      referrals === 1 ? "1 REFERIDO" : `${referrals} REFERIDOS`;
+  }
+
+  if (estTextEl) {
+    estTextEl.textContent =
+      `$${estimated.toLocaleString()} USD ESTIMADO`;
+  }
+
+  // Enlace personal
+  let personalLink = "";
+  if (user.refid) {
+    const baseUrl = window.location.origin + "/index.html";
+    personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
+  }
+
+  if (refInput && personalLink) {
+    refInput.value = personalLink;
+  }
+
+  // QR pequeño
+  if (qrCanvas && window.QRious && personalLink) {
+    new QRious({
+      element: qrCanvas,
+      value: personalLink,
+      size: 100,
+    });
+  }
+
+  // Código en el footer
+  if (footerRefIdEl && user.refid) {
+    footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
+  }
+
+  // Botón copiar link
+  if (copyLinkBtn && personalLink) {
+    copyLinkBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(personalLink);
+        showToast("Enlace personal copiado");
+      } catch {
+        alert("No se pudo copiar el enlace.");
+      }
+    });
+  }
+
+  // Tocar el nombre = copiar link
+  if (nameEl && personalLink) {
+    nameEl.style.cursor = "pointer";
+    nameEl.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(personalLink);
+        showToast("Enlace personal copiado");
+      } catch {
+        alert("No se pudo copiar el enlace.");
+      }
+    });
+  }
+
+  // Tocar badge = copiar código
+  if (refBadge && user.refid) {
+    refBadge.style.cursor = "pointer";
+    refBadge.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(user.refid);
+        showToast("Código copiado");
+      } catch {
+        alert("Tu código: " + user.refid);
+      }
+    });
+  }
+
+  // Click E-Book
+  if (ebookTile) {
+    ebookTile.addEventListener("click", () => {
+      alert(
+        "Aquí abriremos tu E-Book 'Yo Decido Ser Abundante' (falta definir URL)."
+      );
+    });
+  }
+
+  // Popup QR grande
+  if (personalLink) {
+    setupQrModal(user, personalLink);
+  }
 }
-
-    }
-
-    let personalLink = "";
-    if (user.refid) {
-      const baseUrl = window.location.origin + "/index.html";
-      personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
-    }
-
-    if (refInput && personalLink) {
-      refInput.value = personalLink;
-    }
-
-    if (qrCanvas && window.QRious && personalLink) {
-      new QRious({
-        element: qrCanvas,
-        value: personalLink,
-        size: 100,
-      });
-    }
-
-    if (footerRefIdEl && user.refid) {
-      footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
-    }
-
-    // Copiar LINK completo desde botón "Copiar" (si existe)
-    if (copyLinkBtn && personalLink) {
-      copyLinkBtn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(personalLink);
-          showToast("Enlace personal copiado");
-        } catch {
-          alert("No se pudo copiar el enlace.");
-        }
-      });
-    }
-
-    // Copiar LINK completo al tocar el nombre
-    if (nameEl && personalLink) {
-      nameEl.style.cursor = "pointer";
-      nameEl.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(personalLink);
-          showToast("Enlace personal copiado");
-        } catch {
-          alert("No se pudo copiar el enlace.");
-        }
-      });
-    }
-
-    // Copiar SOLO código en la píldora de referidos
-    if (refBadge && user.refid) {
-      refBadge.style.cursor = "pointer";
-      refBadge.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(user.refid);
-          showToast("Código copiado");
-        } catch {
-          alert("Tu código: " + user.refid);
-        }
-      });
-    }
-
-    if (ebookTile) {
-      ebookTile.addEventListener("click", () => {
-        alert(
-          "Aquí abriremos tu E-Book 'Yo Decido Ser Abundante' (falta definir URL)."
-        );
-      });
-    }
-
-    if (personalLink) {
-      setupQrModal(user, personalLink);
-    }
-  }
-
-  // ---------------------------
-  // Popup QR
-  // ---------------------------
-  function setupQrModal(user, personalLink) {
-    const qrCanvasSmall = document.getElementById("qrCanvas");
-    const qrModal = document.getElementById("qrModal");
-    const qrBackdrop = document.getElementById("qrModalBackdrop");
-    const qrClose = document.getElementById("qrModalClose");
-    const qrModalCanvas = document.getElementById("qrModalCanvas");
-    const qrModalRefText = document.getElementById("qrModalRefText");
-
-    if (!qrCanvasSmall || !qrModal || !qrModalCanvas) return;
-
-    let modalQr = null;
-
-    function openQrModal() {
-      qrModal.classList.add("is-visible");
-      if (qrModalRefText && user.refid) {
-        qrModalRefText.textContent = `CÓDIGO: ${user.refid}`;
-      }
-      if (!modalQr) {
-        modalQr = new QRious({
-          element: qrModalCanvas,
-          value: personalLink,
-          size: 220,
-        });
-      } else {
-        modalQr.set({ value: personalLink });
-      }
-    }
-
-    function closeQrModal() {
-      qrModal.classList.remove("is-visible");
-    }
-
-    qrCanvasSmall.style.cursor = "pointer";
-    qrCanvasSmall.addEventListener("click", openQrModal);
-
-    if (qrBackdrop) qrBackdrop.addEventListener("click", closeQrModal);
-    if (qrClose) qrClose.addEventListener("click", closeQrModal);
-  }
+ 
 
   // ---------------------------
   // SETTINGS
