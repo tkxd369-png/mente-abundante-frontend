@@ -476,6 +476,15 @@
 
     if (referralsEl) {
       referralsEl.textContent = user.referrals || 0;
+      const rewardPerReferral = 197; // o 197.00
+
+const estimated = referrals * rewardPerReferral;
+
+const estBadge = document.getElementById("dashRefEstimate");
+if (estBadge) {
+  estBadge.textContent = `$${estimated.toLocaleString()} USD ESTIMADO`;
+}
+
     }
 
     let personalLink = "";
