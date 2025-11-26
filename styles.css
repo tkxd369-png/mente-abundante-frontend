@@ -493,3 +493,71 @@ body.ma-body {
     border-radius: 18px;
   }
 }
+/* === MODAL QR AMPLIADO === */
+.ma-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.ma-modal.open {
+  display: flex;
+}
+
+.ma-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.ma-modal-content {
+  position: relative;
+  background: #fffaf4;
+  border-radius: 20px;
+  padding: 1.6rem 1.4rem 1.4rem;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(214, 189, 149, 0.8);
+  text-align: center;
+}
+
+.ma-modal-content h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: #3b3026;
+}
+
+#qrModalCanvas {
+  width: 260px;
+  height: 260px;
+  max-width: 100%;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(214, 189, 149, 0.8);
+}
+
+.ma-modal-ref {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  color: #6b4b20;
+}
+
+#modalLink {
+  margin-top: 0.6rem;
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(214, 189, 149, 0.8);
+  background: #fdf6ea;
+  font-size: 0.8rem;
+  color: #3b3026;
+}
