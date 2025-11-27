@@ -12,6 +12,15 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
+<div id="qrModal" class="ma-modal" aria-hidden="true">
+  <div class="ma-modal-backdrop"></div>
+  <div class="ma-modal-content">
+    <button type="button" class="ma-modal-close" id="qrModalClose">×</button>
+    <h2 class="ma-modal-title">Tu código de invitación</h2>
+    <canvas id="qrCanvasLarge"></canvas>
+    <p class="ma-modal-text" id="qrRefText"></p>
+  </div>
+</div>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
