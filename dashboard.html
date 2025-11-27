@@ -12,6 +12,110 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <script src="app.js"></script>
+    <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+
+    <!-- Header compact al hacer scroll -->
+    <script>
+      (function () {
+        const header = document.getElementById("dashboardHeader");
+        if (!header) return;
+        function onScroll() {
+          const y = window.scrollY || document.documentElement.scrollTop;
+          if (y > 24) {
+            header.classList.add("ma-header-compact");
+          } else {
+            header.classList.remove("ma-header-compact");
+          }
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+
+    <!-- QR pequeño + modal QR grande -->
+    <script>
+      (function () {
+        // Elementos del dashboard
+        const qrTile = document.getElementById("qrTile");
+        const qrCanvasSmall = document.getElementById("qrCanvas");
+
+        const modal = document.getElementById("qrModal");
+        const modalBackdrop = document.getElementById("qrModalBackdrop");
+        const modalClose = document.getElementById("qrModalClose");
+        const modalCanvas = document.getElementById("qrModalCanvas");
+        const modalRefText = document.getElementById("qrModalRefText");
+
+        if (!qrTile || !qrCanvasSmall || !modal || !modalCanvas) {
+          return;
+        }
+
+        // Obtener usuario y refid desde localStorage
+        let user = null;
+        try {
+          user = JSON.parse(localStorage.getItem("ma_user") || "{}");
+        } catch (e) {
+          user = {};
+        }
+
+        const refid = user.refid || user.refId || "———";
+
+        // Construir link personal: https://TU-DOMINIO/index.html?ref=REFID
+        const baseUrl = window.location.origin + "/index.html";
+        const personalLink = refid && refid !== "———"
+          ? baseUrl + "?ref=" + encodeURIComponent(refid)
+          : baseUrl;
+
+        // Pequeño QR en la tarjeta
+        try {
+          new QRious({
+            element: qrCanvasSmall,
+            value: personalLink,
+            size: 68
+          });
+        } catch (e) {
+          console.warn("No se pudo generar el QR pequeño:", e);
+        }
+
+        // QR grande en el modal
+        try {
+          new QRious({
+            element: modalCanvas,
+            value: personalLink,
+            size: 220
+          });
+        } catch (e) {
+          console.warn("No se pudo generar el QR grande:", e);
+        }
+
+        // Texto del código en el modal
+        if (modalRefText) {
+          modalRefText.textContent = "CÓDIGO: " + (refid || "———");
+        }
+
+        // Funciones para abrir/cerrar modal
+        function openModal() {
+          modal.classList.add("is-visible");
+        }
+
+        function closeModal() {
+          modal.classList.remove("is-visible");
+        }
+
+        // Conectar eventos
+        qrTile.addEventListener("click", openModal);
+        if (modalBackdrop) {
+          modalBackdrop.addEventListener("click", closeModal);
+        }
+        if (modalClose) {
+          modalClose.addEventListener("click", closeModal);
+        }
+      })();
+    </script>
+  </body>
+</html>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
