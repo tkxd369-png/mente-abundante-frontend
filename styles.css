@@ -762,4 +762,42 @@ body.ma-body {
   cursor: pointer;
   color: #7b6652;
 }
+/* ===== Ajuste especial SOLO para celular (tarjetas menos altas) ===== */
+@media (max-width: 480px) {
+  /* Layout: siguen siendo 1 por fila, pero más compactas */
+  .ma-block-share .ma-share-layout.ma-share-layout-square {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  /* Tarjeta más bajita y con menos relleno */
+  .ma-block-share .ma-square-tile {
+    min-height: 95px;
+    padding: 0.55rem 0.4rem;
+  }
+
+  /* Texto un poco más compacto */
+  .ma-block-share .ma-square-title {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .ma-block-share .ma-square-sub {
+    font-size: 0.85rem;
+  }
+
+  /* Iconos un poquito más pequeños para que no “estiren” la tarjeta */
+  .ma-block-share .ma-square-money-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .ma-block-share .ma-qr-canvas {
+    width: 54px !important;
+    height: 54px !important;
+    margin-top: 0.2rem;
+  }
+}
 
