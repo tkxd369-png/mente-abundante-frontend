@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -12,15 +12,6 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-<div id="qrModal" class="ma-modal" aria-hidden="true">
-  <div class="ma-modal-backdrop"></div>
-  <div class="ma-modal-content">
-    <button type="button" class="ma-modal-close" id="qrModalClose">×</button>
-    <h2 class="ma-modal-title">Tu código de invitación</h2>
-    <canvas id="qrCanvasLarge"></canvas>
-    <p class="ma-modal-text" id="qrRefText"></p>
-  </div>
-</div>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
@@ -29,6 +20,7 @@
         <div class="ma-dashboard-brand-row">
           <h1 class="ma-logo">MENTE ABUNDANTE</h1>
         </div>
+
         <div class="ma-dashboard-user-row">
           <div class="ma-dashboard-user-name">
             <span id="dashName" class="ma-user-name">Nombre</span>
@@ -40,7 +32,9 @@
               <span id="dashReferralsText">0 REFERIDOS</span>
               <span id="dashEstimateText">$0 USD ESTIMADO</span>
             </button>
-            <button class="ma-icon-button" id="dashMenuBtn" type="button">⋮</button>
+            <button class="ma-icon-button" id="dashMenuBtn" type="button">
+              ⋮
+            </button>
           </div>
         </div>
       </header>
@@ -106,11 +100,11 @@
               </div>
             </button>
 
-            <!-- QR -->
-            <div class="ma-square-tile">
+            <!-- TU QR (icono pequeño) -->
+            <button type="button" class="ma-square-tile ma-square-qr" id="qrTile">
               <span class="ma-square-title">TU QR</span>
               <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
-            </div>
+            </button>
           </div>
 
           <p class="ma-help-text">
@@ -156,7 +150,7 @@
     <!-- Toast -->
     <div id="maToast" class="ma-toast">Copiado</div>
 
-    <!-- Popup QR grande -->
+    <!-- Popup QR grande (SOLO UNO) -->
     <div class="ma-qr-modal" id="qrModal">
       <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
       <div class="ma-qr-modal-content">
@@ -164,36 +158,4 @@
           &times;
         </button>
         <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
-        <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
-        <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
-        <p class="ma-qr-modal-help">
-          Pide que escaneen este QR o comparte tu enlace personal.
-        </p>
-      </div>
-    </div>
-
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-    <script src="app.js"></script>
-    <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-
-    <!-- Header compact al hacer scroll -->
-    <script>
-      (function () {
-        const header = document.getElementById("dashboardHeader");
-        if (!header) return;
-        function onScroll() {
-          const y = window.scrollY || document.documentElement.scrollTop;
-          if (y > 24) {
-            header.classList.add("ma-header-compact");
-          } else {
-            header.classList.remove("ma-header-compact");
-          }
-        }
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
-      })();
-    </script>
-  </body>
-</html>
+        <p cl
