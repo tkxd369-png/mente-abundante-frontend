@@ -790,3 +790,72 @@ body.ma-body {
   cursor: pointer;
   color: #7b6652;
 }
+/* ============================================================
+   ACCESOS RÁPIDOS — Alineación perfecta de las 3 tarjetas
+   ============================================================ */
+
+/* Contenedor en fila (3 columnas iguales) */
+.ma-share-layout.ma-share-layout-square {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  align-items: stretch;
+}
+
+/* Tarjeta individual */
+.ma-square-tile {
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 1.1rem 0.5rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 150px; /* <-- hace que todas midan lo mismo */
+}
+
+/* Título dentro de cada tarjeta */
+.ma-square-title {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: #7a6858;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+/* Subtítulo */
+.ma-square-sub {
+  font-size: 0.97rem;
+  color: #3a3025;
+}
+
+/* Icono del símbolo de dinero */
+.ma-square-money-icon {
+  font-size: 2.2rem;     /* mismo tamaño visual que QR */
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+/* ===== QR pequeño con tamaño fijo ===== */
+.ma-qr-canvas {
+  width: 68px !important;
+  height: 68px !important;
+
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* En móvil: se apilan pero mantienen proporción */
+@media (max-width: 768px) {
+  .ma-share-layout.ma-share-layout-square {
+    grid-template-columns: 1fr;
+  }
+  .ma-square-tile {
+    min-height: 130px;
+  }
+}
