@@ -666,7 +666,7 @@ body.ma-body {
 /* —— Versión móvil: una debajo de otra y más compactas —— */
 @media (max-width: 480px) {
   .ma-block-share .ma-share-layout.ma-share-layout-square {
-    grid-template-row: 1fr;
+    grid-template-columns: 1fr;
     gap: 0.6rem;
   }
 
