@@ -291,7 +291,7 @@ body.ma-body {
 
 /* Contenedor de las 3 tarjetas (E-BOOK, HERRAMIENTAS, TU QR) */
 .ma-share-layout.ma-share-layout-square {
-  display: row;
+  display: columns;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.9rem;
   align-items: stretch;
@@ -610,7 +610,7 @@ body.ma-body {
   padding: 1rem 0.6rem;
 
   display: flex;
-  flex-direction: columns;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
