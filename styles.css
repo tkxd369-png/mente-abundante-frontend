@@ -285,115 +285,86 @@ body.ma-body {
   font-size: 0.9rem;
   color: #5a4b3f;
 }
-
 /* ============================
    ACCESOS RÁPIDOS / LINK / QR
 ============================ */
 
-.ma-share-layout {
-  display: flex;
-  gap: 1.1rem;
-  flex-wrap: wrap;
+/* Contenedor de las 3 tarjetas (E-BOOK, HERRAMIENTAS, TU QR) */
+.ma-share-layout.ma-share-layout-square {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  align-items: stretch;
 }
 
-.ma-share-layout-square {
-  display: flex;
-  gap: 0.8rem;
+/* Versión mobile: una debajo de otra */
+@media (max-width: 768px) {
+  .ma-share-layout.ma-share-layout-square {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Tarjetas rápidas (E-BOOK / HERRAMIENTAS / TU QR) */
-
-.ma-quick-row {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.ma-quick-card,
+/* Tarjetas rápidas (todas con misma altura) */
 .ma-square-tile {
-  flex: 1 1 0;
   background: var(--ma-card-bg);
   border-radius: 18px;
-  padding: 0.9rem 0.75rem;
+  padding: 1.1rem 0.6rem;
   border: 1px solid rgba(233, 210, 179, 0.9);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
   text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  min-height: 150px;
 }
 
-.ma-quick-title,
+/* Títulos y subtítulos dentro de las tarjetas */
 .ma-square-title {
   font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   letter-spacing: 0.20em;
   text-transform: uppercase;
   color: #7f654a;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
 
-.ma-quick-sub,
 .ma-square-sub {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: #6a5845;
 }
 
-/* Tarjeta de dinero / herramientas */
-
-.ma-quick-card-money,
+/* Tarjeta de dinero / herramientas — icono arriba, texto abajo */
 .ma-square-money {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
   cursor: pointer;
 }
 
-.ma-quick-icon,
+/* Icono de dinero */
 .ma-square-money-icon {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 1px solid rgba(214, 189, 149, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.35rem;
+  font-size: 1.8rem;
   color: #6b4b20;
   background: #fff7ec;
+  margin-bottom: 0.4rem;
 }
 
-/* Tarjeta QR */
-
-.ma-quick-card-qr {
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
-}
-
-.ma-quick-qr-wrapper {
-  margin-top: 0.2rem;
-  width: 80px;
-  height: 80px;
-  margin-inline: auto;
-}
-
-.ma-quick-qr-wrapper canvas,
-.ma-quick-qr-wrapper img {
-  width: 100%;
-  height: 100%;
+/* QR pequeño como icono */
+.ma-qr-canvas {
+  width: 68px !important;
+  height: 68px !important;
   display: block;
+  margin-top: 0.25rem;
 }
 
-/* Campo de input de link (si lo usas) */
-
-.ma-input-ref {
-  flex: 1;
-  font-size: 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(214, 189, 149, 0.8);
-  padding-inline: 0.9rem;
-  background: #fffaf4;
-}
-
+/* Texto de ayuda debajo */
 .ma-help-text,
 .ma-quick-note {
   margin-top: 0.8rem;
@@ -401,6 +372,7 @@ body.ma-body {
   color: #8b7460;
 }
 
+ 
 /* ============================
    FOOTER DASHBOARD
 ============================ */
