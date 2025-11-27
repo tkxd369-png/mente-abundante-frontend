@@ -140,7 +140,7 @@ body.ma-body {
   padding: 1.1rem 1.4rem 1.1rem;
   text-align: center;
   text-transform: uppercase;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   letter-spacing: 0.24em;
   color: #2f2219; 
   font-weight: 500;
@@ -291,7 +291,7 @@ body.ma-body {
 
 /* Contenedor de las 3 tarjetas (E-BOOK, HERRAMIENTAS, TU QR) */
 .ma-share-layout.ma-share-layout-square {
-  display: grid;
+  display: row;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.9rem;
   align-items: stretch;
