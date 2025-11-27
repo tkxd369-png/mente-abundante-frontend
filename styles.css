@@ -556,8 +556,8 @@ body.ma-body {
 }
 
 .ma-dashboard-brand-row {
-  padding-top: 1.0rem;
-  padding-bottom: 1.0rem; /* más aire arriba y abajo de MENTE ABUNDANTE */
+  padding-top: 0.08rem;
+  padding-bottom: 0.08rem; /* más aire arriba y abajo de MENTE ABUNDANTE */
   text-align: center;
 }
 
@@ -610,7 +610,7 @@ body.ma-body {
   padding: 1rem 0.6rem;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: columns;
   justify-content: center;
   align-items: center;
 
@@ -666,7 +666,7 @@ body.ma-body {
 /* —— Versión móvil: una debajo de otra y más compactas —— */
 @media (max-width: 480px) {
   .ma-block-share .ma-share-layout.ma-share-layout-square {
-    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     gap: 0.6rem;
   }
 
