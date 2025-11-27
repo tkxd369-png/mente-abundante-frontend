@@ -76,42 +76,37 @@
           </div>
         </section>
 
-        <!-- Bloque 4: Accesos rápidos -->
-         <section class="ma-card ma-block ma-block-share" id="shareBlock">
-  <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
+  <!-- === TUS ACCESOS RÁPIDOS === -->
+<section class="ma-card ma-quick-section">
+  <div class="ma-section-label">TUS ACCESOS RÁPIDOS</div>
 
-  <div class="ma-share-layout ma-share-layout-square">
+  <div class="ma-quick-row">
+    <!-- E-BOOK -->
+    <div class="ma-quick-card ma-quick-card-ebook">
+      <span class="ma-quick-icon">📘</span>
+      <span class="ma-quick-label">E-BOOK</span>
+      <span class="ma-quick-cta">Leer ahora</span>
+    </div>
 
-    <!-- ———— TARJETA 1: E-BOOK ———— -->
-    <button type="button" class="ma-square-tile" id="ebookTile">
-      <div class="ma-square-icon">
-        📘
-      </div>
-      <span class="ma-square-title">E-BOOK</span>
-      <span class="ma-square-sub">Leer ahora</span>
-    </button>
+    <!-- HERRAMIENTAS -->
+    <div class="ma-quick-card ma-quick-card-tools">
+      <span class="ma-quick-icon ma-quick-icon-money">$</span>
+      <span class="ma-quick-label">HERRAMIENTAS</span>
+      <span class="ma-quick-cta">Guías para compartir</span>
+    </div>
 
-    <!-- ———— TARJETA 2: HERRAMIENTAS ———— -->
-    <button
-      type="button"
-      class="ma-square-tile ma-square-money"
-      onclick="window.location.href='herramientas.html'"
-    >
-      <div class="ma-square-icon ma-square-money-icon">
-        💲
-      </div>
-      <span class="ma-square-title">!Ganar</span>
-      <span class="ma-square-sub">DINERO!</span>
-    </button>
+    <!-- TU QR -->
+    <div class="ma-quick-card ma-quick-card-qr">
+      <canvas id="dashQrSmall"></canvas>
+      <span class="ma-quick-label">TU QR</span>
+      <span class="ma-quick-cta">Compartir</span>
+    </div>
+  </div>
 
-    <!-- ———— TARJETA 3: QR ———— -->
-    <button type="button" class="ma-square-tile ma-square-qr" id="qrTile">
-      <div class="ma-square-icon">
-        <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
-      </div>
-      <span class="ma-square-title">Tu QR</span>
-      <span class="ma-square-sub">Compartir</span>
-    </button>
+  <p class="ma-quick-note">
+    Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
+  </p>
+</section>
 
   </div>
 
