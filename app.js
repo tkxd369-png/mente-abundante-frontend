@@ -730,14 +730,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const linkInput = document.getElementById("referralLink");
   const qrCanvas = document.getElementById("qrCanvas");
   const footerQrBtn = document.getElementById("footerQrBtn");
+  const qrCard = document.querySelector(".ma-quick-card-qr");
 
-  // Leer usuario desde localStorage para obtener el refid
+  // Leer usuario desde localStorage
   let currentUser = null;
   try {
     const raw = localStorage.getItem("ma_user");
-    if (raw) {
-      currentUser = JSON.parse(raw);
-    }
+    if (raw) currentUser = JSON.parse(raw);
   } catch (e) {
     console.error("Error leyendo ma_user:", e);
   }
@@ -764,38 +763,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // ✅ Al tocar el NOMBRE: copia el LINK PERSONAL completo
-  function handleNameClick() {
-    if (!linkInput || !linkInput.value) return;
-    copyText(linkInput.value);
+  // Construir el link personal aunque el input esté vacío
+  function getPersonalLink() {
+    if (linkInput && linkInput.value) return linkInput.value;
+
+    if (!currentUser || !currentUser.refid) return "";
+    const baseUrl = window.location.origin + "/index.html";
+    return `${baseUrl}?ref=${encodeURIComponent(currentUser.refid)}`;
   }
 
-  // ✅ Al tocar el badge de referidos: copia SOLO el código REF
+  // Al tocar el NOMBRE: copia el link completo
+  function handleNameClick() {
+    const url = getPersonalLink();
+    if (!url) return;
+    copyText(url);
+  }
+
+  // Al tocar el badge: copia solo el REF
   function handleRefBadgeClick(e) {
     e.stopPropagation();
     if (currentUser && currentUser.refid) {
       copyText(currentUser.refid);
-    } else if (linkInput && linkInput.value) {
-      try {
-        const url = new URL(linkInput.value);
-        const ref = url.searchParams.get("ref");
-        copyText(ref || linkInput.value);
-      } catch (err) {
-        copyText(linkInput.value);
-      }
+      return;
+    }
+    const urlStr = getPersonalLink();
+    if (!urlStr) return;
+    try {
+      const url = new URL(urlStr);
+      copyText(url.searchParams.get("ref") || urlStr);
+    } catch {
+      copyText(urlStr);
     }
   }
 
-  if (nameEl) {
-    nameEl.onclick = handleNameClick;
-  }
-  if (refBadgeEl) {
-    refBadgeEl.onclick = handleRefBadgeClick;
-  }
+  if (nameEl) nameEl.onclick = handleNameClick;
+  if (refBadgeEl) refBadgeEl.onclick = handleRefBadgeClick;
 
   // === Modal QR ===
 
-  // Crear modal solo si no existe aún
+  // Crear modal si no existe aún
   let modal = document.getElementById("qrModal");
   if (!modal) {
     modal = document.createElement("div");
@@ -823,34 +829,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModalBtn = document.getElementById("closeModalBtn");
 
   function openQrModal() {
-    if (!linkInput || !linkInput.value || !modalCanvas) return;
+    const url = getPersonalLink();
+    if (!url || !modalCanvas) return;
 
     modal.classList.add("open");
 
-    // Determinar el código de referencia
-    let refCode = "";
-    if (currentUser && currentUser.refid) {
-      refCode = currentUser.refid;
-    } else {
-      try {
-        const url = new URL(linkInput.value);
-        refCode = url.searchParams.get("ref") || "";
-      } catch {
-        refCode = "";
-      }
-    }
+    const refCode = currentUser && currentUser.refid ? currentUser.refid : "";
 
     if (modalRefText) {
       modalRefText.textContent = refCode ? `Tu código: ${refCode}` : "";
     }
-
-    if (modalLink) {
-      modalLink.value = linkInput.value;
-    }
+    if (modalLink) modalLink.value = url;
 
     new QRious({
       element: modalCanvas,
-      value: linkInput.value,
+      value: url,
       size: 260,
       background: "white",
       foreground: "#3b3026",
@@ -861,24 +854,19 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.classList.remove("open");
   }
 
-  // Click en QR pequeño
-  if (qrCanvas) {
+  // Disparadores: click en la tarjeta QR, en el canvas o en el botón del footer
+  if (qrCard) {
+    qrCard.style.cursor = "pointer";
+    qrCard.addEventListener("click", openQrModal);
+  } else if (qrCanvas) {
     qrCanvas.style.cursor = "pointer";
     qrCanvas.onclick = openQrModal;
   }
 
-  // Click en botón de QR del footer (si existe)
-  if (footerQrBtn) {
-    footerQrBtn.onclick = openQrModal;
-  }
+  if (footerQrBtn) footerQrBtn.onclick = openQrModal;
 
-  // Cerrar al tocar overlay o botón cerrar
-  if (overlay) {
-    overlay.addEventListener("click", closeQrModal);
-  }
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener("click", closeQrModal);
-  }
+  if (overlay) overlay.addEventListener("click", closeQrModal);
+  if (closeModalBtn) closeModalBtn.addEventListener("click", closeQrModal);
 });
-  
+
 })();
