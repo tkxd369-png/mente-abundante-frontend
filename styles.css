@@ -629,3 +629,164 @@ body.ma-body {
   display: block;
   margin: 0 auto 0.4rem auto;
 }
+/* ===== Header: título y nombre más visibles ===== */
+.ma-dashboard-header {
+  padding: 1.25rem 1.25rem 0.75rem;
+}
+
+.ma-dashboard-brand-row {
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem; /* más aire arriba y abajo de MENTE ABUNDANTE */
+  text-align: center;
+}
+
+.ma-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #7b6652;
+}
+
+/* Un poco más grande en pantallas grandes */
+@media (min-width: 768px) {
+  .ma-logo {
+    font-size: 1.4rem;
+  }
+}
+
+/* Nombre "Ana" más visible */
+.ma-user-name {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.35rem;
+  color: #3a2f25;
+}
+
+/* En móvil un pelín más grande */
+@media (max-width: 768px) {
+  .ma-user-name {
+    font-size: 1.45rem;
+  }
+}
+
+/* ===== Accesos rápidos: 3 tarjetas alineadas ===== */
+.ma-share-layout.ma-share-layout-square {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.ma-square-tile {
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  padding: 0.9rem 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile: se apilan pero siguen proporcionales */
+@media (max-width: 768px) {
+  .ma-share-layout.ma-share-layout-square {
+    grid-template-columns: 1fr;
+  }
+
+  .ma-square-tile {
+    padding: 0.85rem 1rem;
+  }
+}
+
+/* Tipografía de títulos dentro de las tarjetas */
+.ma-square-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8b755e;
+  margin-bottom: 0.25rem;
+}
+
+.ma-square-sub {
+  font-size: 0.95rem;
+  color: #3a2f25;
+}
+
+/* Icono de dinero */
+.ma-square-money-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.35rem;
+}
+
+/* QR pequeño como icono consistente */
+.ma-qr-canvas {
+  width: 72px !important;
+  height: 72px !important;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* ===== Modal QR grande (por si necesitas refinar más adelante) ===== */
+.ma-qr-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.ma-qr-modal.is-visible {
+  display: flex;
+}
+
+.ma-qr-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ma-qr-modal-content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem 1.75rem;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.ma-qr-modal-title {
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8b755e;
+  margin-bottom: 0.5rem;
+}
+
+.ma-qr-modal-ref {
+  font-size: 0.9rem;
+  color: #3a2f25;
+  margin-bottom: 0.75rem;
+}
+
+.ma-qr-modal-canvas {
+  width: 220px !important;
+  height: 220px !important;
+  margin: 0 auto 0.75rem auto;
+}
+
+.ma-qr-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #7b6652;
+}
