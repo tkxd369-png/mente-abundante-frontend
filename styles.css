@@ -552,7 +552,7 @@ body.ma-body {
 
 /* Más aire y mejor lectura en el header */
 .ma-dashboard-header {
-  padding: 1.25rem 1.25rem 0.75rem;
+  padding: 1.0rem 1.0rem 0.75rem;
 }
 
 .ma-dashboard-brand-row {
@@ -572,14 +572,14 @@ body.ma-body {
 /* Un poco más grande en pantallas grandes */
 @media (min-width: 768px) {
   .ma-logo {
-    font-size: 1.4rem;
+    font-size: 2.0rem;
   }
 }
 
-/* Nombre "Ana" más visible y elegante */
+/* Nombre "  Ana" más visible y elegante */
 .ma-user-name {
   font-family: "Dancing Script", cursive;
-  font-size: 1.7rem;
+  font-size: 2.2rem;
   color: #3a2f25;
 }
 
@@ -604,7 +604,7 @@ body.ma-body {
 /* Tarjeta individual (las 3 iguales) */
 .ma-block-share .ma-square-tile {
   background-color: #ffffff;
-  border-radius: 18px;
+  border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   padding: 1rem 0.6rem;
@@ -635,8 +635,8 @@ body.ma-body {
 
 /* Icono del símbolo de dinero */
 .ma-block-share .ma-square-money-icon {
-  width: 52px;
-  height: 52px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 1px solid rgba(214, 189, 149, 0.95);
   display: flex;
@@ -650,8 +650,8 @@ body.ma-body {
 
 /* QR pequeño como icono consistente */
 .ma-block-share .ma-qr-canvas {
-  width: 62px !important;
-  height: 62px !important;
+  width: 42px !important;
+  height: 42px !important;
   display: block;
   margin-top: 0.25rem;
 }
@@ -692,8 +692,8 @@ body.ma-body {
   }
 
   .ma-block-share .ma-qr-canvas {
-    width: 54px !important;
-    height: 54px !important;
+    width: 42px !important;
+    height: 42px !important;
   }
 }
 
@@ -795,8 +795,8 @@ body.ma-body {
   }
 
   .ma-block-share .ma-qr-canvas {
-    width: 54px !important;
-    height: 54px !important;
+    width: 42px !important;
+    height: 42px !important;
     margin-top: 0.2rem;
   }
 }
