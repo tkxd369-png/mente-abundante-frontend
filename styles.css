@@ -6,7 +6,7 @@
   --ma-bg: #f6f0e9;
   --ma-bg-soft: #f3ece4;
   --ma-card-bg: #ffffff;
-  --ma-border-soft: rgba(214, 189, 149, 0.9);
+  --ma-border-soft: rgba(214, 189, 149, 0.65);
   --ma-gold: #c79f5b;
   --ma-text-main: #3a3027;
   --ma-text-soft: #8b7460;
@@ -32,14 +32,15 @@ body.ma-body {
   color: var(--ma-text-main);
 }
 
-/* Página genérica */
+/* Página genérica wrapper */
 
 .ma-page-wrapper {
   min-height: 100vh;
 }
 
 /* ============================
-   FORMULARIOS GENERALES (index, membresía, signup, login)
+   FORMULARIOS GENERALES
+   (index, membresía, signup, login)
 ============================ */
 
 .ma-main {
@@ -112,7 +113,7 @@ body.ma-body {
 
 .ma-dashboard-wrapper {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f6f0e9 0%, #f9f5f0 60%, #f6f0e9 100%);
+  background: var(--ma-bg-soft);
   display: flex;
   flex-direction: column;
 }
@@ -123,7 +124,7 @@ body.ma-body {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: #f6f0e9;
+  background: var(--ma-bg);
   border-bottom: 1px solid rgba(199, 171, 123, 0.25);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -133,27 +134,29 @@ body.ma-body {
   transform: translateY(-2px);
 }
 
+/* Fila del título "MENTE ABUNDANTE" */
+
 .ma-dashboard-brand-row {
-  padding: 0.7rem 1.4rem 0.15rem;
+  padding: 1.1rem 1.4rem 1.1rem;
   text-align: center;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
-  color: #9f8670;
+  font-size: 0.95rem;
+  letter-spacing: 0.24em;
+  color: #8f735b;
   font-weight: 500;
   border-bottom: 1px solid rgba(199, 171, 123, 0.25);
-  max-height: 40px;
+  max-height: 999px;
   transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
 }
 
 .ma-logo {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-weight: 500;
-  letter-spacing: 0.2em;
-  font-size: 0.9rem;
+  letter-spacing: 0.24em;
 }
 
 /* Ocultar solo la fila del logo al hacer scroll */
+
 .ma-header-compact .ma-dashboard-brand-row {
   opacity: 0;
   max-height: 0;
@@ -161,18 +164,20 @@ body.ma-body {
   border-bottom-color: transparent;
 }
 
+/* Fila usuario + chips */
+
 .ma-dashboard-user-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 1.4rem 0.85rem;
+  padding: 0.9rem 1.4rem 1rem;
 }
 
 .ma-user-name {
   font-family: "Dancing Script", "Playfair Display", serif;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   letter-spacing: 0.04em;
-  color: #3b2c22;
+  color: #2f2219;
 }
 
 .ma-dashboard-user-meta {
@@ -190,6 +195,17 @@ body.ma-body {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+}
+
+.ma-ref-badge span {
+  display: block;
+}
+
+.ma-ref-badge #dashEstimateText {
+  font-size: 0.7rem;
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
 
 .ma-icon-button {
@@ -210,26 +226,34 @@ body.ma-body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: var(--ma-bg-soft);
 }
 
-.ma-card {
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: 20px;
-  padding: 1.2rem 1.1rem 1.3rem;
+/* Tarjetas grandes: frase, inspiración, TikTok, newsletter */
+
+.ma-card,
+.ma-widget-card {
+  background: var(--ma-card-bg);
+  border-radius: 18px;
+  padding: 1.3rem 1.4rem 1.4rem;
   box-shadow: var(--ma-shadow-soft);
-  border: 1px solid rgba(227, 204, 165, 0.4);
+  border: 1px solid rgba(227, 204, 165, 0.35);
 }
-/* TITULOS DE CADA TARJETA (FRASE, INSPIRACION, ACCESOS, ETC.) */
+
+/* Títulos de cada tarjeta */
+
+.ma-section-label,
 .ma-card > .ma-section-label {
   font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #7b5a3b;           /* un poco más oscuro para contraste */
-  margin-top: 0.4rem;
-  margin-bottom: 1.1rem;    /* espacio entre texto y borde de la tarjeta */
-} 
+  color: #6b4b20;
+  margin-top: 0.15rem;
+  margin-bottom: 1.1rem;
+}
+
+/* Frase principal */
+
 .ma-phrase-text {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: 1.1rem;
@@ -237,6 +261,8 @@ body.ma-body {
   font-style: italic;
   color: #3b3026;
 }
+
+/* Caja de embed (Pinterest, TikTok si no carga, etc.) */
 
 .ma-embed-box {
   border-radius: 16px;
@@ -260,7 +286,9 @@ body.ma-body {
   color: #5a4b3f;
 }
 
-/* Enlace + QR + tiles */
+/* ============================
+   ACCESOS RÁPIDOS / LINK / QR
+============================ */
 
 .ma-share-layout {
   display: flex;
@@ -269,52 +297,93 @@ body.ma-body {
 }
 
 .ma-share-layout-square {
-  justify-content: space-between;
+  display: flex;
+  gap: 0.8rem;
 }
 
+/* Tarjetas rápidas (E-BOOK / HERRAMIENTAS / TU QR) */
+
+.ma-quick-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ma-quick-card,
 .ma-square-tile {
-  flex: 1 1 45%;
-  min-height: 120px;
+  flex: 1 1 0;
+  background: var(--ma-card-bg);
   border-radius: 18px;
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  background: #fdf6ea;
+  padding: 0.9rem 0.75rem;
+  border: 1px solid rgba(233, 210, 179, 0.9);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+  text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.ma-quick-title,
+.ma-square-title {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #7f654a;
+  margin-bottom: 0.25rem;
+}
+
+.ma-quick-sub,
+.ma-square-sub {
+  font-size: 0.88rem;
+  color: #6a5845;
+}
+
+/* Tarjeta de dinero / herramientas */
+
+.ma-quick-card-money,
+.ma-square-money {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.ma-quick-icon,
+.ma-square-money-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 189, 149, 0.95);
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 0.7rem;
-}
-
-.ma-square-title {
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 1.35rem;
   color: #6b4b20;
-  margin-bottom: 0.3rem;
+  background: #fff7ec;
 }
 
-.ma-square-sub {
-  font-size: 0.8rem;
-  color: #8b7460;
+/* Tarjeta QR */
+
+.ma-quick-card-qr {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
-.ma-help-text {
-  margin-top: 0.8rem;
-  font-size: 0.8rem;
-  color: #8b7460;
+.ma-quick-qr-wrapper {
+  margin-top: 0.2rem;
+  width: 80px;
+  height: 80px;
+  margin-inline: auto;
 }
 
-.ma-qr-canvas {
-  width: 110px;
-  height: 110px;
-  max-width: 100%;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(214, 189, 149, 0.8);
+.ma-quick-qr-wrapper canvas,
+.ma-quick-qr-wrapper img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* Si usas input de link en alguna versión */
+/* Campo de input de link (si lo usas) */
 
 .ma-input-ref {
   flex: 1;
@@ -323,6 +392,13 @@ body.ma-body {
   border: 1px solid rgba(214, 189, 149, 0.8);
   padding-inline: 0.9rem;
   background: #fffaf4;
+}
+
+.ma-help-text,
+.ma-quick-note {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: #8b7460;
 }
 
 /* ============================
@@ -357,7 +433,7 @@ body.ma-body {
   flex: 1 1 30%;
   border-radius: 999px;
   border: 1px solid rgba(214, 189, 149, 0.9);
-  background: #fdf6ea;
+  background: var(--ma-card-bg);
   padding: 0.55rem 0.7rem;
   font-size: 0.78rem;
   text-transform: uppercase;
@@ -404,361 +480,9 @@ body.ma-body {
 }
 
 /* ============================
-   POPUP QR
+   MODAL QR (ÚNICO)
 ============================ */
 
-.ma-qr-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: 50;
-}
-
-.ma-qr-modal.is-visible {
-  display: block;
-}
-
-.ma-qr-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.ma-qr-modal-content {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: #fdf6ea;
-  border-radius: 24px;
-  padding: 1.6rem 1.3rem 1.7rem;
-  max-width: 320px;
-  width: 88%;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  text-align: center;
-}
-
-.ma-qr-modal-title {
-  font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #6b4b20;
-  margin-bottom: 0.4rem;
-}
-
-.ma-qr-modal-ref {
-  font-size: 0.9rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #8b7460;
-  margin-bottom: 0.8rem;
-}
-
-.ma-qr-modal-canvas {
-  width: 220px;
-  height: 220px;
-  max-width: 100%;
-  border-radius: 20px;
-  background: #ffffff;
-  border: 1px solid rgba(214, 189, 149, 0.8);
-  margin-bottom: 0.7rem;
-}
-
-.ma-qr-modal-help {
-  font-size: 0.8rem;
-  color: #8b7460;
-}
-
-.ma-qr-modal-close {
-  position: absolute;
-  right: 0.7rem;
-  top: 0.4rem;
-  border: none;
-  background: transparent;
-  font-size: 1.4rem;
-  color: #b39b86;
-}
-
-/* ============================
-   RESPONSIVE
-============================ */
-
-@media (max-width: 420px) {
-  .ma-dashboard-main {
-    padding-inline: 0.8rem;
-  }
-
-  .ma-card {
-    border-radius: 18px;
-  }
-}
-/* === MODAL QR AMPLIADO === */
-.ma-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-}
-
-.ma-modal.open {
-  display: flex;
-}
-
-.ma-modal-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(4px);
-}
-
-.ma-modal-content {
-  position: relative;
-  background: #fffaf4;
-  border-radius: 20px;
-  padding: 1.6rem 1.4rem 1.4rem;
-  max-width: 380px;
-  width: 90%;
-  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.18);
-  border: 1px solid rgba(214, 189, 149, 0.8);
-  text-align: center;
-}
-
-.ma-modal-content h2 {
-  font-family: "Playfair Display", serif;
-  font-weight: 500;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  color: #3b3026;
-}
-
-#qrModalCanvas {
-  width: 260px;
-  height: 260px;
-  max-width: 100%;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(214, 189, 149, 0.8);
-}
-
-.ma-modal-ref {
-  margin-top: 0.8rem;
-  font-size: 0.9rem;
-  color: #6b4b20;
-}
-
-#modalLink {
-  margin-top: 0.6rem;
-  width: 100%;
-  padding: 0.5rem 0.8rem;
-  border-radius: 10px;
-  border: 1px solid rgba(214, 189, 149, 0.8);
-  background: #fdf6ea;
-  font-size: 0.8rem;
-  color: #3b3026;
-}
-.ma-quick-card {
-  background: #fdf4e5;
-  border-radius: 22px;
-  padding: 1.1rem 1.2rem;
-  margin-bottom: 0.9rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-}
-
-.ma-quick-title {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.86rem;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: #7f654a;
-  margin-bottom: 0.35rem;
-}
-
-.ma-quick-sub {
-  font-size: 0.9rem;
-  color: #6a5845;
-}
-
-/* tarjeta de dinero */
-.ma-quick-card-money {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  cursor: pointer;
-}
-
-.ma-quick-card-money .ma-quick-title {
-  margin-bottom: 0.1rem;
-}
-
-.ma-quick-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  color: #6b4b20;
-  background: #fff7ec;
-}
-/* 1. Títulos de sección: más espacio y contraste */
-.ma-section-label {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: #7f654a;        /* un poco más oscuro */
-  margin-top: 0.2rem;
-  margin-bottom: 1rem;   /* separa del borde de la tarjeta */
-}
-
-/* 2. Tarjeta de accesos rápidos (ya la tienes parecida, por si falta) */
-.ma-square-tile {
-  background: #fdf4e5;
-  border-radius: 22px;
-  padding: 1.1rem 1.2rem;
-  margin-bottom: 0.9rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-}
-
-.ma-square-title {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.86rem;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: #7f654a;
-  margin-bottom: 0.3rem;
-}
-
-.ma-square-sub {
-  font-size: 0.9rem;
-  color: #6a5845;
-}
-
-/* 3. Tarjeta de dinero con icono elegante */
-.ma-square-money {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  cursor: pointer;
-}
-
-.ma-square-money-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  color: #6b4b20;
-  background: #fff7ec;
-}
-
-.ma-square-money-text {
-  display: flex;
-  flex-direction: column;
-}
- 
-/* 4. Subtítulo debajo de los referidos en el chip del header */
-.ma-ref-badge span {
-  display: block;
-}
-
-.ma-ref-badge #dashEstimateText {
-  font-size: 0.7rem;
-  margin-top: 0.15rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-/* ===== TITULOS DE SECCION (override) ===== */
-.ma-card {
-  padding: 1.3rem 1.4rem 1.4rem;
-  border-radius: 22px;
-  background: #fff7ec;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-  margin-bottom: 1.4rem;
-}
-
-.ma-section-label {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.9rem;          /* un poco más grande */
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #6b4b20;             /* más oscuro para contraste */
-  margin-top: 0.1rem;
-  margin-bottom: 1.1rem;      /* más espacio entre título y contenido */
-}
-/* ===== ACCESOS RÁPIDOS EN UNA SOLA LÍNEA ===== */
-
-.ma-share-layout-square {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.ma-share-layout-square .ma-square-tile {
-  flex: 1;
-  text-align: center;
-  padding: 1rem 0.6rem;
-}
-
-/* Aseguramos misma altura visual */
-.ma-share-layout-square .ma-square-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 110px;
-}
-
-/* Títulos y subtítulos dentro de cada tile */
-.ma-square-title {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: #7f654a;
-  margin-bottom: 0.25rem;
-}
-
-.ma-square-sub {
-  font-size: 0.9rem;
-  color: #6a5845;
-}
-
-/* Tile de dinero mantiene mismo tamaño que las otras */
-.ma-square-money {
-  flex: 1;
-}
-
-.ma-square-money-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(214, 189, 149, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  color: #6b4b20;
-  background: #fff7ec;
-  margin-bottom: 0.3rem;
-}
-
-.ma-square-money-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/* MODAL QR */
 .ma-modal {
   position: fixed;
   inset: 0;
@@ -776,6 +500,7 @@ body.ma-body {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
 }
 
 .ma-modal-content {
@@ -787,6 +512,7 @@ body.ma-body {
   width: 88%;
   text-align: center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(214, 189, 149, 0.8);
 }
 
 .ma-modal-title {
@@ -797,15 +523,24 @@ body.ma-body {
 }
 
 #qrCanvasLarge {
-  width: 160px;
-  height: 160px;
-  display: block;
-  margin: 0 auto 0.7rem;
+  width: 180px;
+  height: 180px;
+  max-width: 100%;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(214, 189, 149, 0.8);
+  margin-bottom: 0.7rem;
 }
 
 .ma-modal-text {
   font-size: 0.9rem;
   color: #5f4c3a;
+}
+
+.ma-modal-ref {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #6b4b20;
 }
 
 .ma-modal-close {
@@ -818,88 +553,26 @@ body.ma-body {
   cursor: pointer;
   color: #8a6f55;
 }
-/* CONTENEDOR DE LOS ACCESOS RÁPIDOS */
-.ma-quick-row {
-  display: flex;
-  gap: 0.75rem;
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media (max-width: 480px) {
+  .ma-dashboard-main {
+    padding-inline: 0.9rem;
+  }
+
+  .ma-card,
+  .ma-widget-card {
+    border-radius: 18px;
+  }
+
+  .ma-user-name {
+    font-size: 1.85rem;
+  }
 }
 
-/* TARJETA BASE (LAS TRES) */
-.ma-quick-card {
-  flex: 1 1 0;
-  background: #fdf4e5;
-  border-radius: 22px;
-  padding: 0.9rem 0.75rem;
-  border: 1px solid rgba(233, 210, 179, 0.9);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.02);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* TÍTULO Y SUBTÍTULO DENTRO DE LAS TARJETAS */
-.ma-quick-title {
-  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #7b5a3b;
-  margin-bottom: 0.25rem;
-}
-
-.ma-quick-sub {
-  font-size: 0.88rem;
-  color: #6a5845;
-}
-
-/* TARJETA HERRAMIENTAS: ICONO + TEXTO */
-.ma-quick-card-money {
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.ma-quick-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(214,189,149,0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  color: #6b4b20;
-  background: #fff7ec;
-}
-
-/* TARJETA QR: QUE NO SE VAYA DE PROPORCIÓN */
-.ma-quick-card-qr {
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
-}
-
-.ma-quick-qr-wrapper {
-  margin-top: 0.2rem;
-  width: 72px;
-  height: 72px;
-  margin-inline: auto;
-}
-
-.ma-quick-qr-wrapper canvas,
-.ma-quick-qr-wrapper img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* TEXTO BAJO LAS TARJETAS */
-.ma-quick-note {
-  margin-top: 0.9rem;
-  font-size: 0.9rem;
-  color: #6a5845;
-}
-
-/* SI LA PANTALLA ES MUY ESTRECHA, PERMITIR 2 FILAS */
 @media (max-width: 380px) {
   .ma-quick-row {
     flex-wrap: wrap;
