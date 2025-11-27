@@ -723,7 +723,7 @@ async function initDashboard() {
       toast.classList.remove("visible");
     }, 1800);
   }
-  // === Acciones extra del dashboard: copiar link, copiar REF, popup de QR ===
+ // === Acciones extra del dashboard: copiar link, copiar REF, popup de QR ===
 document.addEventListener("DOMContentLoaded", function () {
   const nameEl = document.getElementById("dashName");
   const refBadgeEl = document.getElementById("dashRefBadge");
@@ -787,14 +787,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (nameEl) {
-    nameEl.onclick = handleNameClick; // reemplaza cualquier handler anterior
+    nameEl.onclick = handleNameClick;
   }
   if (refBadgeEl) {
     refBadgeEl.onclick = handleRefBadgeClick;
   }
+
   // === Modal QR ===
 
-  // Si no existe el modal en el HTML, lo creamos dinámicamente
+  // Crear modal solo si no existe aún
   let modal = document.getElementById("qrModal");
   if (!modal) {
     modal = document.createElement("div");
@@ -815,7 +816,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(modal);
   }
 
-  // Referencias dentro del modal
   const modalCanvas = document.getElementById("qrModalCanvas");
   const modalRefText = document.getElementById("modalRefText");
   const modalLink = document.getElementById("modalLink");
@@ -823,12 +823,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeModalBtn = document.getElementById("closeModalBtn");
 
   function openQrModal() {
-    // linkInput = input donde ya ponemos el link personal (definido antes en app.js)
     if (!linkInput || !linkInput.value || !modalCanvas) return;
 
     modal.classList.add("open");
 
-    // Sacar el código de referido
+    // Determinar el código de referencia
     let refCode = "";
     if (currentUser && currentUser.refid) {
       refCode = currentUser.refid;
@@ -849,7 +848,6 @@ document.addEventListener("DOMContentLoaded", function () {
       modalLink.value = linkInput.value;
     }
 
-    // QR grande en el modal
     new QRious({
       element: modalCanvas,
       value: linkInput.value,
@@ -863,25 +861,24 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.classList.remove("open");
   }
 
-  // Eventos: click en el QR pequeño y en el botón del footer
+  // Click en QR pequeño
   if (qrCanvas) {
     qrCanvas.style.cursor = "pointer";
     qrCanvas.onclick = openQrModal;
   }
 
+  // Click en botón de QR del footer (si existe)
   if (footerQrBtn) {
     footerQrBtn.onclick = openQrModal;
   }
 
-  // Cerrar modal al tocar fuera o el botón "Cerrar"
+  // Cerrar al tocar overlay o botón cerrar
   if (overlay) {
     overlay.addEventListener("click", closeQrModal);
   }
-
   if (closeModalBtn) {
     closeModalBtn.addEventListener("click", closeQrModal);
   }
-
- });
+});
+  
 })();
- 
