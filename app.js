@@ -482,7 +482,7 @@ async function initDashboard() {
 
   // REFERIDOS + ESTIMADO
   const referrals = Number(user.referrals) || 0;
-  const rewardPerReferral = 197;
+  const rewardPerReferral = 177;
   const estimated = referrals * rewardPerReferral;
 
   if (refTextEl) {
@@ -792,11 +792,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (refBadgeEl) {
     refBadgeEl.onclick = handleRefBadgeClick;
   }
-
   // === Modal QR ===
-  const existingModal = document.getElementById("qrModal");
-  if (!existingModal) {
-    const modal = document.createElement("div");
+
+  // Si no existe el modal en el HTML, lo creamos dinámicamente
+  let modal = document.getElementById("qrModal");
+  if (!modal) {
+    modal = document.createElement("div");
     modal.id = "qrModal";
     modal.className = "ma-modal";
     modal.innerHTML = `
@@ -814,37 +815,41 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(modal);
   }
 
-  const modal = document.getElementById("qrModal");
+  // Referencias dentro del modal
   const modalCanvas = document.getElementById("qrModalCanvas");
-  const modalRefText = document.getElementById("modalLink")
-    ? document.getElementById("modalRefText")
-    : null;
+  const modalRefText = document.getElementById("modalRefText");
   const modalLink = document.getElementById("modalLink");
   const overlay = modal.querySelector(".ma-modal-overlay");
   const closeModalBtn = document.getElementById("closeModalBtn");
 
   function openQrModal() {
-    if (!linkInput || !linkInput.value || !modal || !modalCanvas) return;
+    // linkInput = input donde ya ponemos el link personal (definido antes en app.js)
+    if (!linkInput || !linkInput.value || !modalCanvas) return;
+
     modal.classList.add("open");
 
-    const refCode =
-      (currentUser && currentUser.refid) ||
-      (function () {
-        try {
-          const url = new URL(linkInput.value);
-          return url.searchParams.get("ref") || "";
-        } catch {
-          return "";
-        }
-      })();
+    // Sacar el código de referido
+    let refCode = "";
+    if (currentUser && currentUser.refid) {
+      refCode = currentUser.refid;
+    } else {
+      try {
+        const url = new URL(linkInput.value);
+        refCode = url.searchParams.get("ref") || "";
+      } catch {
+        refCode = "";
+      }
+    }
 
     if (modalRefText) {
       modalRefText.textContent = refCode ? `Tu código: ${refCode}` : "";
     }
+
     if (modalLink) {
       modalLink.value = linkInput.value;
     }
 
+    // QR grande en el modal
     new QRious({
       element: modalCanvas,
       value: linkInput.value,
@@ -855,10 +860,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function closeQrModal() {
-    if (!modal) return;
     modal.classList.remove("open");
   }
 
+  // Eventos: click en el QR pequeño y en el botón del footer
   if (qrCanvas) {
     qrCanvas.style.cursor = "pointer";
     qrCanvas.onclick = openQrModal;
@@ -868,13 +873,15 @@ document.addEventListener("DOMContentLoaded", function () {
     footerQrBtn.onclick = openQrModal;
   }
 
+  // Cerrar modal al tocar fuera o el botón "Cerrar"
   if (overlay) {
     overlay.addEventListener("click", closeQrModal);
   }
+
   if (closeModalBtn) {
     closeModalBtn.addEventListener("click", closeQrModal);
   }
-});
 
+ });
 })();
  
