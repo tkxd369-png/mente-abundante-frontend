@@ -586,3 +586,46 @@ body.ma-body {
     flex: 1 1 100%;
   }
 }
+/* ===== Fila de accesos rápidos ===== */
+.ma-quick-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+/* Cada tarjeta: misma altura, centradas */
+.ma-quick-card {
+  background-color: var(--ma-card-bg, #ffffff);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  padding: 1rem 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* En móvil: una debajo de otra pero con la misma proporción */
+@media (max-width: 768px) {
+  .ma-quick-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ma-quick-card {
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* Iconos dentro de las tarjetas: tamaño consistente */
+.ma-quick-card img,
+.ma-quick-card canvas,
+.ma-quick-card svg {
+  max-width: 72px;
+  max-height: 72px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.4rem auto;
+}
