@@ -818,3 +818,98 @@ body.ma-body {
   cursor: pointer;
   color: #8a6f55;
 }
+/* CONTENEDOR DE LOS ACCESOS RÁPIDOS */
+.ma-quick-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* TARJETA BASE (LAS TRES) */
+.ma-quick-card {
+  flex: 1 1 0;
+  background: #fdf4e5;
+  border-radius: 22px;
+  padding: 0.9rem 0.75rem;
+  border: 1px solid rgba(233, 210, 179, 0.9);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* TÍTULO Y SUBTÍTULO DENTRO DE LAS TARJETAS */
+.ma-quick-title {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7b5a3b;
+  margin-bottom: 0.25rem;
+}
+
+.ma-quick-sub {
+  font-size: 0.88rem;
+  color: #6a5845;
+}
+
+/* TARJETA HERRAMIENTAS: ICONO + TEXTO */
+.ma-quick-card-money {
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ma-quick-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(214,189,149,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  color: #6b4b20;
+  background: #fff7ec;
+}
+
+/* TARJETA QR: QUE NO SE VAYA DE PROPORCIÓN */
+.ma-quick-card-qr {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.ma-quick-qr-wrapper {
+  margin-top: 0.2rem;
+  width: 72px;
+  height: 72px;
+  margin-inline: auto;
+}
+
+.ma-quick-qr-wrapper canvas,
+.ma-quick-qr-wrapper img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* TEXTO BAJO LAS TARJETAS */
+.ma-quick-note {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: #6a5845;
+}
+
+/* SI LA PANTALLA ES MUY ESTRECHA, PERMITIR 2 FILAS */
+@media (max-width: 380px) {
+  .ma-quick-row {
+    flex-wrap: wrap;
+  }
+
+  .ma-quick-card {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  .ma-quick-card-qr {
+    flex: 1 1 100%;
+  }
+}
