@@ -766,7 +766,7 @@ body.ma-body {
 @media (max-width: 480px) {
   /* Layout: siguen siendo 1 por fila, pero más compactas */
   .ma-block-share .ma-share-layout.ma-share-layout-square {
-    grid-template-row: 1fr;
+    grid-template-colums: 1fr;
     gap: 0.6rem;
   }
 
