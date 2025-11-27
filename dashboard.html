@@ -77,36 +77,48 @@
         </section>
 
         <!-- Bloque 4: Accesos rápidos -->
-        <section class="ma-card ma-block ma-block-share" id="shareBlock">
-          <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
+         <section class="ma-card ma-block ma-block-share" id="shareBlock">
+  <h2 class="ma-section-label">TUS ACCESOS RÁPIDOS</h2>
 
-          <div class="ma-share-layout ma-share-layout-square">
-            <!-- E-BOOK -->
-            <button type="button" class="ma-square-tile" id="ebookTile">
-              <span class="ma-square-title">E-BOOK</span>
-              <span class="ma-square-sub">Leer ahora</span>
-            </button>
+  <div class="ma-share-layout ma-share-layout-square">
 
-            <!-- HERRAMIENTAS ($) -->
-            <button
-              type="button"
-              class="ma-square-tile ma-square-money"
-              onclick="window.location.href='herramientas.html'"
-              aria-label="Herramientas para compartir"
-            >
-              <div class="ma-square-money-icon">💲</div>
-              <div class="ma-square-money-text">
-                <span class="ma-square-title">Herramientas</span>
-                <span class="ma-square-sub">Guías para compartir</span>
-              </div>
-            </button>
+    <!-- ———— TARJETA 1: E-BOOK ———— -->
+    <button type="button" class="ma-square-tile" id="ebookTile">
+      <div class="ma-square-icon">
+        📘
+      </div>
+      <span class="ma-square-title">E-BOOK</span>
+      <span class="ma-square-sub">Leer ahora</span>
+    </button>
 
-            <!-- TU QR (icono pequeño) -->
-            <button type="button" class="ma-square-tile ma-square-qr" id="qrTile">
-              <span class="ma-square-title">TU QR</span>
-              <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
-            </button>
-          </div>
+    <!-- ———— TARJETA 2: HERRAMIENTAS ———— -->
+    <button
+      type="button"
+      class="ma-square-tile ma-square-money"
+      onclick="window.location.href='herramientas.html'"
+    >
+      <div class="ma-square-icon ma-square-money-icon">
+        💲
+      </div>
+      <span class="ma-square-title">Herramientas</span>
+      <span class="ma-square-sub">Guías para compartir</span>
+    </button>
+
+    <!-- ———— TARJETA 3: QR ———— -->
+    <button type="button" class="ma-square-tile ma-square-qr" id="qrTile">
+      <div class="ma-square-icon">
+        <canvas id="qrCanvas" class="ma-qr-canvas"></canvas>
+      </div>
+      <span class="ma-square-title">Tu QR</span>
+      <span class="ma-square-sub">Compartir</span>
+    </button>
+
+  </div>
+
+  <p class="ma-help-text">
+    Comparte tu QR para que tus invitados lleguen directo a tu página.
+  </p>
+</section>
 
           <p class="ma-help-text">
             Comparte tu QR para que tus invitados lleguen directo a tu página de
