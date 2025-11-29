@@ -13,6 +13,21 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
+<!-- === MODAL QR GRANDE === -->
+<div id="qrModal" class="ma-modal">
+  <div class="ma-modal-backdrop"></div>
+  <div class="ma-modal-content">
+    <button type="button" class="ma-modal-close" id="qrModalClose">×</button>
+
+    <h2 class="ma-modal-title">Tu QR personal</h2>
+    <p class="ma-modal-subtitle">
+      Muestra este código a tus invitados o envíales tu link para que lleguen directo a tu página de inicio.
+    </p>
+
+    <canvas id="dashQrBig"></canvas>
+    <p class="ma-modal-code" id="qrModalCode"></p>
+  </div>
+</div>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
