@@ -825,7 +825,7 @@ body.ma-body {
 /* En móvil: una debajo de otra pero con la misma proporción */
 @media (max-width: 768px) {
   .ma-quick-row {
-    grid-template-columns: 1fr;
+    grid-template-row: 1fr;
   }
 
   .ma-quick-card {
