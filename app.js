@@ -515,6 +515,46 @@ if (qrSmallCanvas && typeof QRious !== "undefined") {
     size: 80
   });
 }
+// === MODAL QR GRANDE ===
+const qrQuickButton = document.querySelector(".ma-quick-card-qr");
+const qrModal = document.getElementById("qrModal");
+const qrModalClose = document.getElementById("qrModalClose");
+const qrBigCanvas = document.getElementById("dashQrBig");
+const qrModalCode = document.getElementById("qrModalCode");
+
+if (
+  qrQuickButton &&
+  qrModal &&
+  qrBigCanvas &&
+  typeof QRious !== "undefined"
+) {
+  // Generar QR grande una sola vez
+  new QRious({
+    element: qrBigCanvas,
+    value: personalLink,
+    size: 220
+  });
+
+  if (qrModalCode) {
+    qrModalCode.textContent = user.refid || "";
+  }
+
+  const openQrModal = () => {
+    qrModal.classList.add("is-open");
+  };
+
+  const closeQrModal = () => {
+    qrModal.classList.remove("is-open");
+  };
+
+  qrQuickButton.addEventListener("click", openQrModal);
+  qrModalClose.addEventListener("click", closeQrModal);
+  qrModal.addEventListener("click", (e) => {
+    if (e.target === qrModal || e.target.classList.contains("ma-modal-backdrop")) {
+      closeQrModal();
+    }
+  });
+}
 
 
   // Código en el footer
