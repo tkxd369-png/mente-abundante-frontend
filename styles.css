@@ -948,4 +948,76 @@ body.ma-body {
   word-spacing: normal;
   white-space: normal;
 }
+/* ===== MODAL QR GRANDE ===== */
+
+.ma-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.ma-modal.is-open {
+  display: flex;
+}
+
+.ma-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.ma-modal-content {
+  position: relative;
+  z-index: 1;
+  max-width: 360px;
+  width: 90%;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.ma-modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #7b6a59;
+}
+
+.ma-modal-title {
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7b6a59;
+  margin-bottom: 0.35rem;
+}
+
+.ma-modal-subtitle {
+  font-size: 0.85rem;
+  color: #8f7d69;
+  margin-bottom: 0.9rem;
+}
+
+#dashQrBig {
+  width: 180px !important;
+  height: 180px !important;
+  margin: 0 auto 0.7rem auto;
+  display: block;
+}
+
+.ma-modal-code {
+  font-size: 0.85rem;
+  color: #3a2f25;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
 
