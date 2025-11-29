@@ -506,14 +506,16 @@ async function initDashboard() {
     refInput.value = personalLink;
   }
 
-  // QR pequeño
-  if (qrCanvas && window.QRious && personalLink) {
-    new QRious({
-      element: qrCanvas,
-      value: personalLink,
-      size: 100,
-    });
-  }
+  // === QR pequeño en tarjeta "TU QR" ===
+const qrSmallCanvas = document.getElementById("dashQrSmall");
+if (qrSmallCanvas && typeof QRious !== "undefined") {
+  new QRious({
+    element: qrSmallCanvas,
+    value: personalLink,
+    size: 80
+  });
+}
+
 
   // Código en el footer
   if (footerRefIdEl && user.refid) {
