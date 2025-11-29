@@ -855,7 +855,7 @@ body.ma-body {
 /* en pantallas chicas: apiladas pero bonitas */
 @media (max-width: 768px) {
   .ma-quick-row {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .ma-quick-card {
