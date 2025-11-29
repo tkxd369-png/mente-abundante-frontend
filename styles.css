@@ -1020,4 +1020,13 @@ body.ma-body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+/* Links de accesos rápidos con look de tarjeta */
+.ma-quick-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
