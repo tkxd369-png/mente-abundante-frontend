@@ -862,4 +862,90 @@ body.ma-body {
     padding: 1rem 1rem;
   }
 }
+/* ===== Sección TUS ACCESOS RÁPIDOS ===== */
+
+.ma-quick-section {
+  margin-top: 1.75rem;
+}
+
+/* fila de tres tarjetas en una sola línea */
+.ma-quick-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+/* cada tarjeta */
+.ma-quick-card {
+  flex: 1 1 0;
+  background-color: var(--ma-card-bg, #ffffff);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  padding: 0.85rem 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* iconito arriba */
+.ma-quick-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+/* icono de dinero redondito */
+.ma-quick-icon-money {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+/* texto de arriba (E-BOOK / HERRAMIENTAS / TU QR) */
+.ma-quick-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  color: var(--ma-text-muted, #9b8570);
+}
+
+/* texto de acción */
+.ma-quick-cta {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ma-text-main, #3a2f25);
+}
+
+/* QR pequeño dentro de la tarjeta */
+.ma-quick-card-qr canvas {
+  width: 56px !important;
+  height: 56px !important;
+  margin-bottom: 0.25rem;
+}
+
+/* nota debajo de las tarjetas */
+.ma-quick-note {
+  margin-top: 0.95rem;
+  font-size: 0.85rem;
+  color: var(--ma-text-muted, #9b8570);
+}
+
+/* por si alguna regla anterior rompía las letras */
+.ma-quick-card span {
+  letter-spacing: normal;
+  word-spacing: normal;
+  white-space: normal;
+}
 
