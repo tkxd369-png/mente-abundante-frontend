@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Master Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ===== THE MASTER KEY – START PAGE ===== */
+
+    body.tm-start {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      color: #f6f0e8;
+      background-color: #050304;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .tm-start-wrapper {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tm-start-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to bottom, rgba(5,3,4,0.7), rgba(5,3,4,0.9)),
+        url("img/the-master-key-door.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.1) contrast(1.1);
+      z-index: 0;
+    }
+
+    .tm-start-panel {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      width: 100%;
+      margin: 2rem;
+      padding: 2.2rem 2rem 1.8rem;
+      border-radius: 24px;
+      background: rgba(8, 6, 6, 0.75);
+      border: 1px solid rgba(255, 215, 160, 0.16);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(18px);
+      text-align: center;
+    }
+
+    .tm-start-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f8e9d0;
+      margin-bottom: 0.5rem;
+    }
+
+    .tm-start-sub {
+      font-size: 0.9rem;
+      color: #d5c4aa;
+      margin-bottom: 1.8rem;
+    }
+
+    .tm-start-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #d5c4aa;
+      margin-bottom: 0.35rem;
+      text-align: left;
+    }
+
+    .tm-start-input {
+      width: 100%;
+      padding: 0.85rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(243, 224, 193, 0.55);
+      background: rgba(10, 7, 7, 0.8);
+      color: #f8e9d0;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .tm-start-input::placeholder {
+      color: #b39b7f;
+    }
+    .tm-start-input:focus {
+      border-color: #f3cf8a;
+      box-shadow: 0 0 0 1px rgba(243, 207, 138, 0.4);
+    }
+
+    .tm-start-error {
+      min-height: 1.2rem;
+      font-size: 0.78rem;
+      color: #ffb3a3;
+      text-align: left;
+      margin-top: 0.35rem;
+    }
+
+    .tm-start-lang-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+    }
+
+    .tm-start-btn {
+      flex: 1 1 0;
+      padding: 0.75rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(243, 224, 193, 0.6);
+      background: rgba(18, 13, 12, 0.9);
+      color: #f8e9d0;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+    }
+    .tm-start-btn:hover {
+      background: rgba(243, 207, 138, 0.16);
+      border-color: #f3cf8a;
+    }
+
+    .tm-start-footer {
+      margin-top: 1.6rem;
+      font-size: 0.75rem;
+      color: #a9957e;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 480px) {
+      .tm-start-panel {
+        margin: 1.6rem;
+        padding: 1.9rem 1.5rem 1.6rem;
+      }
+      .tm-start-title {
+        font-size: 1.35rem;
+        letter-spacing: 0.22em;
+      }
+    }
+  </style>
+</head>
+
+<body class="tm-start">
+  <div class="tm-start-wrapper">
+    <div class="tm-start-bg"></div>
+
+    <main class="tm-start-panel">
+      <h1 class="tm-start-title">The Master Key</h1>
+      <p class="tm-start-sub">
+        Enter your access key to unlock the next step.
+      </p>
+
+      <div class="tm-start-label">
+        Access Key · Llave de acceso
+      </div>
+      <input
+        id="tmAccessInput"
+        class="tm-start-input"
+        type="text"
+        placeholder="Type your key / Escribe tu llave"
+        autocomplete="off"
+      />
+      <div id="tmAccessError" class="tm-start-error"></div>
+
+      <div class="tm-start-lang-row">
+        <button type="button" class="tm-start-btn" data-lang="en">
+          English
+        </button>
+        <button type="button" class="tm-start-btn" data-lang="es">
+          Español
+        </button>
+      </div>
+
+      <div class="tm-start-footer">
+        Visitors with a personal link or QR will go directly to the main page.
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // === Simple logic for the starting page ===
+    (function () {
+      const input = document.getElementById("tmAccessInput");
+      const errorEl = document.getElementById("tmAccessError");
+      const buttons = document.querySelectorAll(".tm-start-btn");
+
+      function goNext(lang) {
+        const code = (input.value || "").trim();
+
+        if (!code) {
+          errorEl.textContent = "Por favor ingresa tu llave de acceso.";
+          input.focus();
+          return;
+        }
+
+        // Guardamos el código por si lo quieres usar después
+        try {
+          localStorage.setItem("tm_access_code", code);
+        } catch (e) {
+          // ignore
+        }
+
+        // Aquí decides a dónde mandar:
+        // - index.html (español)
+        // - index-en.html (inglés) – si luego creas uno
+        if (lang === "en") {
+          window.location.href = "index.html?lang=en";
+        } else {
+          window.location.href = "index.html?lang=es";
+        }
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.getAttribute("data-lang") || "es";
+          errorEl.textContent = "";
+          goNext(lang);
+        });
+      });
+
+      input.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter") {
+          ev.preventDefault();
+          // por defecto Español si presionan Enter
+          goNext("es");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
