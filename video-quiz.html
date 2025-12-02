@@ -2,186 +2,402 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Mente Abundante — Video + Quiz</title>
+  <title>Video principal y quiz — The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      padding: 2.2rem 1.4rem 3rem;
+    }
+
+    .ma-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .ma-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-header-step {
+      font-size: 0.8rem;
+      color: #7a6650;
+      text-align: right;
+    }
+
+    .ma-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .ma-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LADO VIDEO */
+    .ma-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.8rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-sub {
+      font-size: 0.95rem;
+      color: #7a6650;
+      margin-bottom: 1.4rem;
+      max-width: 34rem;
+    }
+
+    .ma-video-shell {
+      width: 100%;
+      border-radius: 22px;
+      background-color: #111111;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      margin-bottom: 0.9rem;
+      overflow: hidden;
+    }
+
+    .ma-video-inner {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background-color: #000;
+    }
+
+    .ma-video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5e4cf;
+      font-size: 0.9rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .ma-video-note {
+      font-size: 0.82rem;
+      color: #97826b;
+    }
+
+    /* LADO QUIZ */
+    .ma-quiz-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,0.03);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      padding: 1.6rem 1.4rem 1.5rem;
+    }
+
+    .ma-quiz-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-quiz-sub {
+      font-size: 0.9rem;
+      color: #7a6650;
+      margin-bottom: 1rem;
+    }
+
+    .ma-question {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .ma-question p {
+      margin: 0 0 0.3rem;
+      font-weight: 500;
+      color: #5a4937;
+    }
+
+    .ma-question label {
+      display: block;
+      font-size: 0.86rem;
+      color: #7a6650;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
+    }
+
+    .ma-quiz-footer {
+      margin-top: 1.1rem;
+      font-size: 0.82rem;
+      color: #97826b;
+    }
+
+    .ma-quiz-error {
+      min-height: 1rem;
+      font-size: 0.82rem;
+      color: #c04730;
+      margin-top: 0.6rem;
+    }
+
+    .ma-quiz-button {
+      width: 100%;
+      margin-top: 1.1rem;
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-quiz-button:hover {
+      filter: brightness(1.03);
+    }
+  </style>
 </head>
-
-<body class="ma-body">
-  <div class="main-shell">
-    <div class="card single">
-      <!-- LOGO + TÍTULO -->
-      <div class="logo-row" style="margin-bottom: 1rem;">
-        <div class="logo-drop"></div>
-        <div>
-          <div class="logo-text-main">MENTE ABUNDANTE</div>
-          <div class="logo-text-sub">Video principal + integración</div>
-        </div>
+<body>
+  <div class="ma-shell">
+    <header class="ma-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Programa privado</span>
+        <span class="ma-logo-title">Mente Abundante</span>
       </div>
+      <div class="ma-header-step">
+        Paso 4 de 5<br />
+        <strong>Video principal & Quiz</strong>
+      </div>
+    </header>
 
-      <h2>Video principal: Yo Decido Ser Abundante</h2>
+    <main class="ma-main">
+      <!-- LADO VIDEO -->
+      <section>
+        <div class="ma-eyebrow">The Master Key</div>
+        <h1 class="ma-title">Video principal de acceso.</h1>
 
-      <p class="small-note" style="margin-bottom: 1rem;">
-        Te recomendamos verlo con calma, en un lugar tranquilo.  
-        Este video está disponible solo <strong>un número limitado de veces</strong>.
-      </p>
-
-      <!-- BLOQUE MENSAJE LIMITE -->
-      <p id="limitMessage" class="small-note" style="color:#b33434; display:none; margin-bottom:1rem;"></p>
-
-      <!-- SECCIÓN VIDEO -->
-      <section id="videoSection" style="margin-bottom: 1.5rem;">
-        <div class="landing-video-frame">
-          <!-- 👇 Cuando tengas el video en Vimeo, reemplaza el src de este iframe -->
-          <iframe
-            id="maMainVideo"
-            src="https://player.vimeo.com/video/XXXXXXXX" 
-            frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <p class="small-note">
-          El contenido de este video es para tu uso personal como miembro de Mente Abundante.
-          No está permitido descargarlo, grabarlo ni compartirlo públicamente.
+        <p class="ma-sub">
+          Mira este video completo con atención. Al finalizar, responde las preguntas para
+          confirmar que entendiste la esencia del programa antes de crear tu cuenta personal.
         </p>
+
+        <div class="ma-video-shell">
+          <div class="ma-video-inner" id="maMainVideo">
+            <!-- Reemplaza este bloque por tu iframe/video real -->
+            <div class="ma-video-placeholder">
+              Aquí va tu video principal (30 minutos).<br />
+              Reemplaza este área por tu iframe de YouTube, Vimeo o reproductor.
+            </div>
+          </div>
+        </div>
+
+        <div class="ma-video-note">
+          Te recomendamos verlo sin distracciones. Puedes pausar y retomar si lo necesitas.
+        </div>
       </section>
 
-      <!-- SECCIÓN QUIZ -->
-      <section id="quizSection">
-        <h3>Pequeño quiz de integración</h3>
-        <p class="small-note" style="margin-bottom:0.8rem;">
-          No es un examen, es una forma de ayudarte a integrar lo que escuchaste.
-          Responde con honestidad.
-        </p>
+      <!-- LADO QUIZ -->
+      <aside class="ma-quiz-card">
+        <div class="ma-quiz-title">Quiz de comprensión</div>
+        <div class="ma-quiz-sub">
+          No se trata de “examen”, sino de asegurarnos de que tomas esta decisión de forma
+          consciente. Responde con sinceridad lo que escuchaste en el video.
+        </div>
 
-        <form id="quizForm" class="form">
+        <form id="maQuizForm">
           <!-- Pregunta 1 -->
-          <div>
-            <div class="label">
-              1. ¿Cuál es la decisión principal que tomas al ver este video?
-            </div>
-            <input
-              type="text"
-              name="q1"
-              class="input"
-              placeholder="Escríbelo con tus propias palabras"
-              required
-            />
+          <div class="ma-question">
+            <p>1. ¿Cuál es la intención principal de The Master Key?</p>
+            <label>
+              <input type="radio" name="q1" value="a" />
+              Obtener dinero rápido sin compromiso personal.
+            </label>
+            <label>
+              <input type="radio" name="q1" value="b" />
+              Transformar tu mentalidad y decisiones hacia una vida más abundante.
+            </label>
+            <label>
+              <input type="radio" name="q1" value="c" />
+              Ser solo un grupo social sin propósito.
+            </label>
           </div>
 
           <!-- Pregunta 2 -->
-          <div>
-            <div class="label">
-              2. ¿Qué es para ti “ser abundante” después de escuchar este mensaje?
-            </div>
-            <input
-              type="text"
-              name="q2"
-              class="input"
-              placeholder="Describe en una frase"
-              required
-            />
+          <div class="ma-question">
+            <p>2. ¿Qué se espera de ti como miembro?</p>
+            <label>
+              <input type="radio" name="q2" value="a" />
+              Que no hagas nada, solo esperar resultados.
+            </label>
+            <label>
+              <input type="radio" name="q2" value="b" />
+              Participar activamente, aplicar lo aprendido y compartir desde la verdad.
+            </label>
+            <label>
+              <input type="radio" name="q2" value="c" />
+              Que compartas información falsa para atraer a más personas.
+            </label>
           </div>
 
           <!-- Pregunta 3 -->
-          <div>
-            <div class="label">
-              3. Menciona una acción concreta que vas a tomar en los próximos 7 días.
-            </div>
-            <input
-              type="text"
-              name="q3"
-              class="input"
-              placeholder="Ej. Hablar con…, iniciar…, soltar…"
-              required
-            />
+          <div class="ma-question">
+            <p>3. ¿Cómo se presenta el sistema de referidos en el video?</p>
+            <label>
+              <input type="radio" name="q3" value="a" />
+              Como una promesa de hacerse rico sin esfuerzo.
+            </label>
+            <label>
+              <input type="radio" name="q3" value="b" />
+              Como una herramienta adicional que recompensa compartir algo que realmente crees.
+            </label>
+            <label>
+              <input type="radio" name="q3" value="c" />
+              Como un esquema obligado para poder pertenecer.
+            </label>
           </div>
 
-          <!-- Puedes duplicar bloques y llegar hasta 10 preguntas si quieres -->
+          <!-- Pregunta 4 -->
+          <div class="ma-question">
+            <p>4. ¿Qué lugar ocupa tu “decisión” en todo esto?</p>
+            <label>
+              <input type="radio" name="q4" value="a" />
+              Es algo secundario, lo importante es el dinero.
+            </label>
+            <label>
+              <input type="radio" name="q4" value="b" />
+              Es el punto de partida: tú decides cambiar tu mentalidad y abrirte a algo nuevo.
+            </label>
+            <label>
+              <input type="radio" name="q4" value="c" />
+              No tiene importancia mientras pagues.
+            </label>
+          </div>
 
-          <button type="submit" class="btn btn-primary" style="margin-top: 0.8rem;">
-            Enviar respuestas y continuar
+          <!-- Pregunta 5 -->
+          <div class="ma-question">
+            <p>5. Después del video y el quiz, ¿qué viene?</p>
+            <label>
+              <input type="radio" name="q5" value="a" />
+              Crear tu cuenta, recibir tu código y acceder al dashboard de Mente Abundante.
+            </label>
+            <label>
+              <input type="radio" name="q5" value="b" />
+              Nada, el proceso termina aquí.
+            </label>
+            <label>
+              <input type="radio" name="q5" value="c" />
+              Volver al inicio sin acceso.
+            </label>
+          </div>
+
+          <div class="ma-quiz-footer">
+            Necesitas responder correctamente la mayoría de las preguntas para continuar.
+          </div>
+
+          <div id="maQuizError" class="ma-quiz-error"></div>
+
+          <button type="button" id="maQuizSubmit" class="ma-quiz-button">
+            Continuar
           </button>
-
-          <p id="quizMessage" class="small-note" style="margin-top:0.6rem;"></p>
         </form>
-      </section>
-
-      <div class="button-row" style="margin-top: 1.4rem;">
-        <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-      </div>
-    </div>
+      </aside>
+    </main>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const MAX_VIEWS = 3; // 👈 Cambia a 2 si quieres solo 2 vistas
-      const VIEWS_KEY = "ma_video2_views";
+    (function () {
+      const form = document.getElementById("maQuizForm");
+      const btn = document.getElementById("maQuizSubmit");
+      const errorEl = document.getElementById("maQuizError");
 
-      const videoSection = document.getElementById("videoSection");
-      const quizSection = document.getElementById("quizSection");
-      const limitMessage = document.getElementById("limitMessage");
-      const quizForm = document.getElementById("quizForm");
-      const quizMessage = document.getElementById("quizMessage");
-
-      // Leer vistas previas desde localStorage
-      let currentViews = parseInt(localStorage.getItem(VIEWS_KEY) || "0", 10);
-
-      if (currentViews >= MAX_VIEWS) {
-        // Ya se pasó del límite
-        videoSection.style.display = "none";
-        quizSection.style.display = "none";
-        limitMessage.style.display = "block";
-        limitMessage.textContent =
-          "Has alcanzado el número máximo de visualizaciones permitidas para este video.";
-      } else {
-        // Incrementar contador de vistas al cargar la página
-        currentViews += 1;
-        localStorage.setItem(VIEWS_KEY, String(currentViews));
-
-        if (MAX_VIEWS - currentViews >= 0) {
-          limitMessage.style.display = "block";
-          limitMessage.style.color = "#444";
-          limitMessage.textContent =
-            "Esta es una de tus " +
-            MAX_VIEWS +
-            " visualizaciones permitidas de este video. Te quedan " +
-            (MAX_VIEWS - currentViews) +
-            " intento(s).";
+      function getAnswer(name) {
+        const nodeList = form.querySelectorAll('input[name="' + name + '"]');
+        for (const n of nodeList) {
+          if (n.checked) return n.value;
         }
+        return "";
       }
 
-      // Manejo del quiz
-      quizForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        quizMessage.textContent = "";
+      function showError(msg) {
+        if (errorEl) errorEl.textContent = msg || "";
+      }
 
-        const formData = new FormData(quizForm);
-        const q1 = (formData.get("q1") || "").toString().trim();
-        const q2 = (formData.get("q2") || "").toString().trim();
-        const q3 = (formData.get("q3") || "").toString().trim();
+      if (btn && form) {
+        btn.addEventListener("click", function () {
+          const q1 = getAnswer("q1");
+          const q2 = getAnswer("q2");
+          const q3 = getAnswer("q3");
+          const q4 = getAnswer("q4");
+          const q5 = getAnswer("q5");
 
-        if (!q1 || !q2 || !q3) {
-          quizMessage.textContent = "Por favor responde todas las preguntas.";
-          quizMessage.style.color = "#b33434";
-          return;
-        }
+          if (!q1 || !q2 || !q3 || !q4 || !q5) {
+            showError("Por favor responde todas las preguntas antes de continuar.");
+            return;
+          }
 
-        // Más adelante aquí podemos enviar las respuestas al backend
-        // fetch("/api/quiz/submit", { ... })
+          let correct = 0;
+          if (q1 === "b") correct++;
+          if (q2 === "b") correct++;
+          if (q3 === "b") correct++;
+          if (q4 === "b") correct++;
+          if (q5 === "a") correct++;
 
-        quizMessage.textContent =
-          "Gracias por tus respuestas. Ahora estás listo para crear tu cuenta.";
-        quizMessage.style.color = "#2f7b3b";
+          if (correct < 4) {
+            showError("Revisa nuevamente el video y tus respuestas. Recuerda que esto es para tu propio beneficio.");
+            return;
+          }
 
-        // Pequeño delay y luego redirigir a la página de crear cuenta
-        setTimeout(() => {
-          // 👇 Cambia 'signup.html' por el nombre real de tu página de registro
+          showError("");
+
+          // Aquí continúa el flujo normal: crear cuenta
           window.location.href = "signup.html";
-        }, 1200);
-      });
-    });
+        });
+      }
+    })();
   </script>
 </body>
 </html>
