@@ -421,6 +421,23 @@
 
   <script>
     (function () {
+     const MA_PAYOUT_COUNTRIES = [
+  { code: "AR", name: "Argentina" },
+  { code: "BO", name: "Bolivia" },
+  { code: "BR", name: "Brasil" },
+  { code: "CL", name: "Chile" },
+  { code: "CO", name: "Colombia" },
+  { code: "CR", name: "Costa Rica" },
+  { code: "DO", name: "República Dominicana" },
+  { code: "EC", name: "Ecuador" },
+  { code: "MX", name: "México" },
+  { code: "PA", name: "Panamá" },
+  { code: "PE", name: "Perú" },
+  { code: "PY", name: "Paraguay" },
+  { code: "SV", name: "El Salvador" },
+  { code: "UY", name: "Uruguay" }
+];
+
       const params = new URLSearchParams(window.location.search);
       const refFromUrl = params.get("ref") || "";
       let refCode = refFromUrl;
@@ -459,6 +476,27 @@
             "Si alguien te invitó, asegúrate de usar su link personal para que su código se registre correctamente.";
         }
       }
+function populateCountrySelect(selectEl, preSelected) {
+  if (!selectEl) return;
+
+  selectEl.innerHTML = "";
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Selecciona tu país";
+  selectEl.appendChild(placeholder);
+
+  MA_PAYOUT_COUNTRIES.forEach((c) => {
+    const opt = document.createElement("option");
+    opt.value = c.code;
+    opt.textContent = c.name;
+    selectEl.appendChild(opt);
+  });
+
+  if (preSelected) {
+    selectEl.value = preSelected;
+  }
+}
 
       // Prefill desde lo que ya se haya guardado
       const fullNameInput = document.getElementById("fullName");
