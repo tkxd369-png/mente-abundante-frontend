@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -13,6 +13,7 @@
       var params = new URLSearchParams(window.location.search);
       var hasRef = params.has("ref");
 
+      // Si entran solamente al dominio ("/") y no traen ref -> ir a la puerta
       if (path === "/" && !hasRef) {
         window.location.replace("start.html");
       }
@@ -41,7 +42,7 @@
       min-height: 100vh;
     }
 
-    /* HEADER SIMPLE */
+    /* HEADER MUY SIMPLE */
     .ma-landing-header {
       display: flex;
       align-items: center;
@@ -57,7 +58,7 @@
     }
 
     .ma-logo-tag {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #9b8570;
@@ -65,7 +66,7 @@
 
     .ma-logo-title {
       font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #3a2f25;
@@ -98,7 +99,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #9b8570;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.6rem;
     }
 
     .ma-main-title {
@@ -126,7 +127,7 @@
       background-color: #111111;
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-      margin-bottom: 1.8rem;
+      margin: 1.6rem auto 1.8rem auto; /* un poco más de aire arriba */
       overflow: hidden;
     }
 
@@ -157,9 +158,9 @@
     .ma-cta-button {
       border: none;
       border-radius: 999px;
-      padding: 0.95rem 2.4rem;
-      font-size: 0.95rem;
-      letter-spacing: 0.16em;
+      padding: 1rem 2.8rem;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       background: linear-gradient(135deg, #f2c47b, #e3a95a);
       color: #2c241b;
@@ -172,11 +173,21 @@
 
     /* MENSAJE FINAL */
     .ma-bottom-message {
-      margin-top: auto;
+      margin-top: 2.8rem;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #97826b;
       padding-top: 1.8rem;
+      opacity: 0.9;
+    }
+
+    .ma-bottom-message::before {
+      content: "";
+      display: block;
+      width: 60%;
+      height: 1px;
+      margin: 2.2rem auto 1.6rem auto;
+      background: rgba(0, 0, 0, 0.08);
     }
 
     @media (max-width: 600px) {
@@ -200,31 +211,33 @@
     <header class="ma-landing-header">
       <div class="ma-logo-block">
         <span class="ma-logo-tag">Programa privado</span>
+        <span class="ma-logo-title">Mente Abundante</span>
       </div>
       <a href="login.html" class="ma-login-link">Entrar</a>
     </header>
+
     <!-- CONTENIDO CENTRAL -->
     <main class="ma-hero-center">
+      <div class="ma-main-title-eyebrow">Puertas · Decisión · Abundancia</div>
+
       <h1 class="ma-main-title">The Master Key</h1>
 
       <p class="ma-main-subtitle">
         El programa que abre la puerta para la vida que tanto has esperado.
-        No es casualidad que estés aquí.
+        No es casualidad que estés aquí. Mira este video hasta el final.
       </p>
-      <span class="ma-logo-title">Mira este video hasta el final. </span> 
-  
-  <!-- VIDEO PRINCIPAL -->
+
+      <!-- VIDEO PRINCIPAL -->
       <section class="ma-video-shell">
         <div class="ma-video-inner" id="maIntroVideo">
           <!-- TODO: Reemplaza este bloque por tu iframe/video real -->
           <div class="ma-video-placeholder">
             Aquí va tu video principal de introducción.
             <br />
-            (Reemplaza este bloque por tu iframe de YouTube o video).
+            (Reemplaza este bloque por tu iframe de YouTube o reproductor real).
           </div>
         </div>
       </section>
-      <div class="ma-main-title-eyebrow">Puertas · Decisión · Abundancia</div>
 
       <!-- BOTÓN DORADO -->
       <div class="ma-cta-wrapper">
@@ -272,4 +285,3 @@
   </script>
 </body>
 </html>
-  
