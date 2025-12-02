@@ -1,218 +1,528 @@
- <!doctype html>
-<html lang="es-MX">
+ <!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>Activa tu acceso — The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Membresía</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body.ma-membership {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ma-membership-shell {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER (igual estilo que index) */
+    .ma-landing-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-login-link {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-login-link:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* MAIN LAYOUT */
+    .ma-membership-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2.2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .ma-membership-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LADO IZQUIERDO: TEXTO / DETALLE */
+    .ma-membership-copy-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-membership-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.8rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-membership-subtitle {
+      font-size: 0.98rem;
+      color: #7a6650;
+      margin-bottom: 1.4rem;
+      max-width: 30rem;
+    }
+
+    .ma-membership-highlights {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .ma-membership-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: #efe0cc;
+      color: #5f4b36;
+    }
+
+    .ma-membership-detail-list {
+      font-size: 0.88rem;
+      color: #7a6650;
+      padding-left: 1.1rem;
+    }
+    .ma-membership-detail-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .ma-membership-ref-hint {
+      font-size: 0.8rem;
+      color: #97826b;
+      margin-top: 0.8rem;
+    }
+
+    /* LADO DERECHO: FORMULARIO */
+    .ma-membership-form-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      padding: 1.6rem 1.5rem 1.4rem;
+    }
+
+    .ma-form-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.4rem;
+    }
+
+    .ma-form-amount {
+      font-size: 1.05rem;
+      color: #3a2f25;
+      margin-bottom: 1.1rem;
+    }
+
+    .ma-form-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .ma-form-label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.25rem;
+    }
+
+    .ma-form-input {
+      width: 100%;
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background-color: #fbf5ec;
+      font-size: 0.9rem;
+      color: #3a2f25;
+      outline: none;
+    }
+
+    .ma-form-input::placeholder {
+      color: #b39b7f;
+    }
+
+    .ma-form-input:focus {
+      border-color: #e3a95a;
+      box-shadow: 0 0 0 1px rgba(227, 169, 90, 0.24);
+      background-color: #fffdf8;
+    }
+
+    .ma-form-input[readonly] {
+      background-color: #f3ebdf;
+      cursor: default;
+    }
+
+    .ma-form-inline {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .ma-form-inline {
+        flex-direction: column;
+      }
+    }
+
+    .ma-form-terms {
+      margin-top: 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+      color: #7a6650;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+    }
+
+    .ma-form-terms input[type="checkbox"] {
+      margin-top: 0.12rem;
+    }
+
+    .ma-form-error {
+      min-height: 1.1rem;
+      font-size: 0.8rem;
+      color: #c04730;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-form-note {
+      font-size: 0.78rem;
+      color: #97826b;
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .ma-form-cta {
+      margin-top: 1rem;
+    }
+
+    .ma-form-button {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-form-button:hover {
+      filter: brightness(1.03);
+    }
+
+    /* FOOTER MINI */
+    .ma-membership-footer {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
+      color: #97826b;
+      text-align: center;
+    }
+
+    .ma-membership-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
 </head>
-<body class="ma-body">
-  <div class="main-shell">
-    <div class="card single">
-      <div class="card-left">
-        <!-- LOGO + TITULO -->
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">MENTE ABUNDANTE</div>
-            <div class="logo-text-sub">Membresía privada</div>
-          </div>
-        </div>
 
-        <h2>Activa tu acceso</h2>
-        <p class="lead">
-          La aportación única de <strong>$198 USD</strong> te da acceso al video principal
-          de 30 minutos, al programa “Yo Decido Ser Abundante” y al sistema de referidos.
-        </p>
-
-        <p class="small-note">
-          <strong>Importante:</strong> Es indispensable contar con un
-          <strong>código de invitación</strong>. Sin él no es posible procesar el pago ni continuar.
-        </p>
-
-        <!-- FORMULARIO -->
-        <form class="form" id="membershipForm">
-          <div>
-            <div class="label">Código de invitación</div>
-            <input
-              class="input"
-              type="text"
-              name="refCode"
-              id="refCode"
-              required
-              placeholder="Ej. ANA824"
-            />
-          </div>
-
-          <div>
-            <div class="label">Nombre completo</div>
-            <input
-              class="input"
-              type="text"
-              name="fullName"
-              id="fullName"
-              required
-              placeholder="Tu nombre y apellidos"
-            />
-          </div>
-
-          <div>
-            <div class="label">Correo electrónico</div>
-            <input
-              class="input"
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="tucorreo@ejemplo.com"
-            />
-          </div>
-
-          <div>
-            <div class="label">Teléfono (WhatsApp)</div>
-            <input
-              class="input"
-              type="tel"
-              name="phone"
-              id="phone"
-              required
-              placeholder="+1 (555) 123-4567"
-            />
-          </div>
-
-          <div>
-            <div class="label">País de residencia</div>
-            <select id="country" name="country" class="input" required>
-              <option value="">Selecciona tu país</option>
-              <option value="US">Estados Unidos</option>
-              <option value="MX">México</option>
-              <option value="BR">Brasil</option>
-              <option value="CL">Chile</option>
-              <option value="CO">Colombia</option>
-              <option value="PE">Perú</option>
-              <option value="CA">Canadá</option>
-            </select>
-            <p id="countryMessage" class="small-note"></p>
-          </div>
-
-          <div style="margin-top: 0.5rem;">
-            <label class="label" style="display: flex; align-items: flex-start; gap: 0.4rem;">
-              <input
-                type="checkbox"
-                id="termsCheck"
-                style="margin-top: 0.15rem;"
-                required
-              />
-              <span class="small-note">
-                Confirmo que comprendo que la membresía inicial es de
-                <strong>$198 USD</strong> y que después del pago tendré acceso
-                al video principal, al quiz de integración y a mi
-                dashboard personal.
-              </span>
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn-primary" id="payButton">
-            Pagar $198 USD
-          </button>
-
-          <p class="small-note" id="membershipMessage"></p>
-        </form>
-
-        <p class="small-note">
-          Si llegaste aquí por un <strong>código QR</strong>, tu código de invitación debería aparecer
-          automáticamente. Si no lo ves, regresa con la persona que te invitó para obtener tu código.
-        </p>
-
-        <div class="button-row">
-          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-        </div>
+<body class="ma-membership">
+  <div class="ma-membership-shell">
+    <!-- HEADER -->
+    <header class="ma-landing-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Programa privado</span>
+        <span class="ma-logo-title">Mente Abundante</span>
       </div>
-    </div>
+      <a href="login.html" class="ma-login-link">Entrar</a>
+    </header>
+
+    <!-- MAIN -->
+    <main class="ma-membership-main">
+      <!-- LADO IZQUIERDO: CONTEXTO -->
+      <section>
+        <div class="ma-membership-copy-eyebrow">Paso 2 · Activar acceso</div>
+        <h1 class="ma-membership-title">Tu decisión se convierte en acceso.</h1>
+
+        <p class="ma-membership-subtitle">
+          Aquí confirmas tus datos y activas tu acceso a <strong>The Master Key</strong> y a la comunidad de Mente Abundante. Esta contribución es única, tu puerta de entrada como miembro fundador.
+        </p>
+
+        <div class="ma-membership-highlights">
+          <div class="ma-membership-chip">
+            ✨ Acceso al contenido central y al video principal
+          </div>
+          <div class="ma-membership-chip">
+            🤝 Comunidad privada de Mente Abundante
+          </div>
+          <div class="ma-membership-chip">
+            🔑 Programa de referidos exclusivo para miembros
+          </div>
+        </div>
+
+        <ul class="ma-membership-detail-list">
+          <li>Pago único para activar tu acceso al programa.</li>
+          <li>Tu código de invitación asegura que tu patrocinador reciba crédito.</li>
+          <li>Después de confirmar, verás el video completo y los siguientes pasos.</li>
+        </ul>
+
+        <div id="refInfo" class="ma-membership-ref-hint"></div>
+      </section>
+
+      <!-- LADO DERECHO: FORMULARIO -->
+      <aside class="ma-membership-form-card">
+        <div class="ma-form-title">Confirmar activación</div>
+        <div class="ma-form-amount">Contribución única: <strong>USD $777</strong></div>
+
+        <div class="ma-form-row ma-form-inline">
+          <div style="flex:1;">
+            <label class="ma-form-label" for="fullName">Nombre completo</label>
+            <input
+              id="fullName"
+              class="ma-form-input"
+              type="text"
+              placeholder="Como aparece en tus documentos"
+              autocomplete="name"
+            />
+          </div>
+        </div>
+
+        <div class="ma-form-row ma-form-inline">
+          <div style="flex:1;">
+            <label class="ma-form-label" for="email">Email</label>
+            <input
+              id="email"
+              class="ma-form-input"
+              type="email"
+              placeholder="tucorreo@ejemplo.com"
+              autocomplete="email"
+            />
+          </div>
+          <div style="flex:1;">
+            <label class="ma-form-label" for="phone">Teléfono</label>
+            <input
+              id="phone"
+              class="ma-form-input"
+              type="tel"
+              placeholder="+1 ..."
+              autocomplete="tel"
+            />
+          </div>
+        </div>
+
+        <div class="ma-form-row">
+          <label class="ma-form-label" for="country">País / Ciudad</label>
+          <input
+            id="country"
+            class="ma-form-input"
+            type="text"
+            placeholder="Ej. México · CDMX"
+          />
+        </div>
+
+        <div class="ma-form-row">
+          <label class="ma-form-label" for="refCode">Código de invitación</label>
+          <input
+            id="refCode"
+            class="ma-form-input"
+            type="text"
+            placeholder="Se llena automáticamente si vienes con link"
+            readonly
+          />
+        </div>
+
+        <div class="ma-form-terms">
+          <input type="checkbox" id="termsCheck" />
+          <label for="termsCheck">
+            Confirmo que esta contribución es final y que he leído y acepto los
+            términos del programa Mente Abundante y su política de no reembolsos.
+          </label>
+        </div>
+
+        <div id="formError" class="ma-form-error"></div>
+
+        <div class="ma-form-cta">
+          <button id="btnContinuarPago" type="button" class="ma-form-button">
+            Continuar al pago
+          </button>
+        </div>
+
+        <div class="ma-form-note">
+          En la siguiente pantalla verás el detalle de tu contribución y el acceso al video principal. Tu código de invitación quedará ligado a tu cuenta.
+        </div>
+      </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="ma-membership-footer">
+      ¿Tienes dudas? Puedes volver al inicio o entrar a tu cuenta si ya eres miembro.
+      <br />
+      <a href="index.html">Volver a The Master Key</a> ·
+      <a href="login.html">Entrar a tu cuenta</a>
+    </footer>
   </div>
 
-  <!-- SCRIPT: SOLO FLUJO, SIN BACKEND POR AHORA -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("membershipForm");
-      const msg = document.getElementById("membershipMessage");
-      const countryMsg = document.getElementById("countryMessage");
-      const refInput = document.getElementById("refCode");
-
-      // 1. REF desde URL o localStorage (por QR o botones)
+    (function () {
       const params = new URLSearchParams(window.location.search);
-      const refFromUrl = params.get("ref");
-      const refFromStorage = localStorage.getItem("ma_ref_code");
-      const finalRef = refFromUrl || refFromStorage || "";
+      const refFromUrl = params.get("ref") || "";
+      let refCode = refFromUrl;
 
-      if (finalRef) {
-        refInput.value = finalRef.toUpperCase();
+      // Recuperar ref desde localStorage si no vino en URL
+      try {
+        const storedRef = localStorage.getItem("ma_ref_code");
+        if (!refCode && storedRef) {
+          refCode = storedRef;
+        }
+      } catch (e) {
+        // ignore
       }
 
-      const allowedCountries = ["US", "MX", "BR", "CL", "CO", "PE", "CA"];
+      // Guardar ref en localStorage para el resto del flujo
+      try {
+        if (refCode) {
+          localStorage.setItem("ma_ref_code", refCode);
+        }
+      } catch (e) {
+        // ignore
+      }
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (msg) msg.textContent = "";
-        if (countryMsg) countryMsg.textContent = "";
+      // Prefill del código en el campo
+      const refInput = document.getElementById("refCode");
+      const refInfo = document.getElementById("refInfo");
+      if (refInput) {
+        refInput.value = refCode || "";
+      }
+      if (refInfo) {
+        if (refCode) {
+          refInfo.textContent =
+            "Estás activando tu acceso con el código de invitación: " + refCode + ".";
+        } else {
+          refInfo.textContent =
+            "Si alguien te invitó, asegúrate de usar su link personal para que su código se registre correctamente.";
+        }
+      }
 
-        const fullName = form.fullName.value.trim();
-        const email = form.email.value.trim();
-        const phone = form.phone.value.trim();
-        const refCode = form.refCode.value.trim().toUpperCase();
-        const country = form.country.value;
-        const termsCheck = document.getElementById("termsCheck").checked;
+      // Prefill desde lo que ya se haya guardado
+      const fullNameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const countryInput = document.getElementById("country");
+      const termsCheck = document.getElementById("termsCheck");
+      const formError = document.getElementById("formError");
+      const btnContinuar = document.getElementById("btnContinuarPago");
 
-        // Validaciones básicas
-        if (!refCode) {
-          if (msg) {
-            msg.textContent = "Necesitas un código de invitación válido.";
-            msg.style.color = "#b33434";
+      try {
+        const preName = localStorage.getItem("ma_pre_fullName");
+        const preEmail = localStorage.getItem("ma_pre_email");
+        const prePhone = localStorage.getItem("ma_pre_phone");
+        const preCountry = localStorage.getItem("ma_pre_country");
+
+        if (preName && fullNameInput) fullNameInput.value = preName;
+        if (preEmail && emailInput) emailInput.value = preEmail;
+        if (prePhone && phoneInput) phoneInput.value = prePhone;
+        if (preCountry && countryInput) countryInput.value = preCountry;
+      } catch (e) {
+        // ignore
+      }
+
+      function showError(msg) {
+        if (formError) formError.textContent = msg || "";
+      }
+
+      if (btnContinuar) {
+        btnContinuar.addEventListener("click", function () {
+          const fullName = (fullNameInput?.value || "").trim();
+          const email = (emailInput?.value || "").trim();
+          const phone = (phoneInput?.value || "").trim();
+          const country = (countryInput?.value || "").trim();
+          const termsAccepted = !!(termsCheck && termsCheck.checked);
+
+          if (!fullName || !email || !phone) {
+            showError("Por favor completa al menos nombre, email y teléfono.");
+            return;
           }
-          return;
-        }
-
-        if (!fullName || !email || !phone) {
-          if (msg) {
-            msg.textContent = "Por favor completa todos los campos.";
-            msg.style.color = "#b33434";
+          if (!termsAccepted) {
+            showError("Debes confirmar los términos antes de continuar.");
+            return;
           }
-          return;
-        }
 
-        if (!termsCheck) {
-          if (msg) {
-            msg.textContent = "Debes aceptar los términos para continuar.";
-            msg.style.color = "#b33434";
+          showError("");
+
+          // Guardar datos previos en localStorage para las siguientes pantallas
+          try {
+            localStorage.setItem("ma_pre_fullName", fullName);
+            localStorage.setItem("ma_pre_email", email);
+            localStorage.setItem("ma_pre_phone", phone);
+            localStorage.setItem("ma_pre_country", country || "");
+            if (refCode) {
+              localStorage.setItem("ma_ref_code", refCode);
+            }
+          } catch (e) {
+            // ignore
           }
-          return;
-        }
 
-        if (!allowedCountries.includes(country)) {
-          if (countryMsg) {
-            countryMsg.textContent =
-              "Lo sentimos, actualmente solo aceptamos ciertos países.";
-            countryMsg.style.color = "#b33434";
-          }
-          return;
-        }
-
-        // ✅ Guardar datos para usarlos en signup
-        localStorage.setItem("ma_pre_fullName", fullName);
-        localStorage.setItem("ma_pre_email", email);
-        localStorage.setItem("ma_pre_phone", phone);
-        localStorage.setItem("ma_pre_country", country);
-        localStorage.setItem("ma_ref_code", refCode);
-
-        if (msg) {
-          msg.textContent = "Procesando…";
-          msg.style.color = "#444";
-        }
-
-        // ✅ Simulamos pago: redirigir a la página puente
-        window.location.href = "puente-video.html";
-      });
-    });
+          // Aquí todavía es flujo simulado: ir a puente-video.html
+          // (puedes cambiar después a checkout real de Stripe)
+          window.location.href = "puente-video.html";
+        });
+      }
+    })();
   </script>
 </body>
 </html>
