@@ -1,117 +1,438 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mente Abundante — Tu decisión abre puertas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles.css" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Mente Abundante — Tu decisión abre puertas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Redirección desde el dominio raíz hacia la puerta, pero NO cuando viene ref -->
   <script>
-  (function () {
-    // Ruta actual, por ejemplo "/" o "/index.html"
-    var path = window.location.pathname;
-    var params = new URLSearchParams(window.location.search);
-    var hasRef = params.has("ref");
+    (function () {
+      var path = window.location.pathname;
+      var params = new URLSearchParams(window.location.search);
+      var hasRef = params.has("ref");
 
-    // Si entran al dominio raíz ("/") SIN ref -> manda a la puerta
-    if (path === "/" && !hasRef) {
-      window.location.replace("start.html");
+      if (path === "/" && !hasRef) {
+        window.location.replace("start.html");
+      }
+    })();
+  </script>
+
+  <!-- Estilos específicos solo para la landing -->
+  <style>
+    body.ma-landing {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
     }
-    // Si entran a /index.html?ref=XXXX -> NO se redirige (se queda en la landing)
-  })();
-</script>
 
-  </head>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const refFromUrl = params.get("ref");
-    if (refFromUrl) {
-      // Guardamos el código para usarlo después en membresía
-      localStorage.setItem("ma_ref_code", refFromUrl.toUpperCase());
+    .ma-landing-shell {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
     }
-  });
-</script>
 
-  <body class="ma-body landing-body">
-    <div class="landing-container">
-      <!-- LOGO CENTRADO -->
-      <div class="landing-logo-block">
-        <div class="landing-logo-drop"></div>
-        <h1 class="landing-logo-title">Mente Abundante</h1>
-        <p class="landing-subtitle">
-          Tu decisión de hoy abre puertas que aún no imaginas.
-        </p>
+    /* HEADER */
+    .ma-landing-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .ma-landing-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-landing-logo-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-landing-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-landing-login {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.38rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-landing-login:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* HERO */
+    .ma-landing-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .ma-hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-hero-heading {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      color: #3a2f25;
+      margin-bottom: 0.75rem;
+    }
+
+    .ma-hero-sub {
+      font-size: 0.98rem;
+      color: #7a6650;
+      max-width: 34rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .ma-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: #efe0cc;
+      color: #5f4b36;
+      margin-bottom: 1.1rem;
+    }
+
+    .ma-hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .ma-hero-btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 0.8rem 1.6rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 14px 40px rgba(226, 167, 90, 0.45);
+    }
+    .ma-hero-btn-primary:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-hero-btn-ghost {
+      border-radius: 999px;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(123, 102, 80, 0.35);
+      background: transparent;
+      color: #5f4b36;
+      cursor: pointer;
+    }
+    .ma-hero-btn-ghost:hover {
+      background-color: rgba(246, 240, 232, 0.8);
+    }
+
+    .ma-hero-footnote {
+      font-size: 0.8rem;
+      color: #97826b;
+    }
+
+    /* HERO RIGHT – CARD VIDEO */
+    .ma-hero-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.08);
+      padding: 1.3rem 1.3rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .ma-hero-video {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #111;
+      aspect-ratio: 16 / 9;
+    }
+
+    .ma-hero-video-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5e4cf;
+      font-size: 0.9rem;
+    }
+
+    .ma-hero-video-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-hero-video-title {
+      font-size: 0.95rem;
+      color: #3a2f25;
+    }
+
+    .ma-hero-video-meta {
+      font-size: 0.8rem;
+      color: #97826b;
+    }
+
+    /* SECTION: BENEFICIOS */
+    .ma-landing-benefits {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .ma-benefit-card {
+      background-color: #fdf8f1;
+      border-radius: 18px;
+      padding: 1.1rem 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .ma-benefit-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.35rem;
+    }
+
+    .ma-benefit-title {
+      font-size: 0.97rem;
+      color: #3a2f25;
+      margin-bottom: 0.3rem;
+    }
+
+    .ma-benefit-text {
+      font-size: 0.86rem;
+      color: #7a6650;
+    }
+
+    /* FOOTER MINI */
+    .ma-landing-footer {
+      margin-top: 2.6rem;
+      font-size: 0.8rem;
+      color: #97826b;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .ma-landing-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .ma-landing-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .ma-hero-heading {
+        font-size: 1.9rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ma-landing-shell {
+        padding: 1.25rem 1.1rem 2.4rem;
+      }
+      .ma-landing-header {
+        margin-bottom: 1.8rem;
+      }
+      .ma-landing-main {
+        gap: 2rem;
+      }
+      .ma-landing-benefits {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-landing">
+  <div class="ma-landing-shell">
+    <!-- HEADER -->
+    <header class="ma-landing-header">
+      <div class="ma-landing-logo">
+        <span class="ma-landing-logo-tag">Movimiento · Comunidad · Decisión</span>
+        <span class="ma-landing-logo-title">Mente Abundante</span>
       </div>
 
-      <!-- TARJETA PRINCIPAL CON VIDEO -->
-      <section class="landing-hero-card">
-        <h2 class="landing-hero-title">Tu nueva vida empieza con una decisión</h2>
-        <p class="landing-hero-text">
-          Este video introductorio te mostrará la visión detrás de Mente Abundante
-          y cómo esta membresía puede ser una llave para transformar tu mentalidad,
-          tus decisiones y tus resultados.
+      <a href="login.html" class="ma-landing-login">Entrar a tu cuenta</a>
+    </header>
+
+    <!-- MAIN HERO -->
+    <main class="ma-landing-main">
+      <!-- LEFT TEXT -->
+      <section>
+        <div class="ma-hero-eyebrow">Tu decisión de hoy abre puertas</div>
+        <h1 class="ma-hero-heading">
+          Tu nueva vida empieza con una sola decisión.
+        </h1>
+
+        <p class="ma-hero-sub">
+          Este video introductorio te muestra la visión detrás de <strong>Mente Abundante</strong> y cómo esta membresía puede convertirse en tu llave para transformar tu mentalidad, tus decisiones y tus resultados.
         </p>
 
-        <!-- VIDEO INTRODUCTORIO -->
-        <div class="landing-video-frame" id="introVideoSection">
-          <!-- Cambia el src por tu video real (YouTube, Vimeo, etc.) -->
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Introducción Mente Abundante"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div class="ma-hero-badge">
+          <span>⭐ Programa privado de referidos</span>
         </div>
 
-        <!-- BOTONES PRINCIPALES -->
-        <div class="landing-actions">
-          <!-- Este solo hace scroll al video -->
-          <button
-            type="button"
-            class="btn btn-secondary landing-main-btn"
-            onclick="document.getElementById('introVideoSection').scrollIntoView({ behavior: 'smooth' })"
-          >
+        <div class="ma-hero-buttons">
+          <button id="btnVerIntro" class="ma-hero-btn-ghost" type="button">
             Ver introducción
           </button>
-
-          <!-- Este lleva a la página de membresía / pago -->
-          <button
-            type="button"
-            class="btn btn-ghost landing-login"
-            onclick="window.location.href='membresia.html'"
-          >
-            Si Quiero
+          <button id="btnSiQuiero" class="ma-hero-btn-primary" type="button">
+            Sí, quiero activar mi acceso
           </button>
         </div>
 
-        <p class="landing-note">
-         Cuando Te Unas al equipo te proveeremos las herramientas necesarias para "EMPEZAR A GENERAR DESDE YA"
-        </p>
+        <div class="ma-hero-footnote">
+          Todo comienza con una decisión: <strong>“Yo decido ser abundante”.</strong>
+        </div>
       </section>
 
-      <!-- SECCIÓN DE INFORMACIÓN EXTRA -->
-      <section class="landing-info">
-        <h3 class="landing-info-title">¿ESTAS LISTO PARA GENERAR DE 7,000 A 10,000 DOLARES ESTRAS AL MES?</h3>
-        <p class="landing-info-text">
-           
-         
-        </p>
-        <p class="landing-info-text">
-   .
-        </p>
+      <!-- RIGHT CARD (VIDEO PREVIEW) -->
+      <aside class="ma-hero-card">
+        <div class="ma-hero-video" id="intro-video">
+          <!-- Aquí puedes reemplazar el contenido interno por tu iframe de YouTube o video real -->
+          <div class="ma-hero-video-inner">
+            <span>Video introductorio<br />Haz clic en “Ver introducción” para reproducir.</span>
+          </div>
+        </div>
 
-        <p class="landing-info-text">
-          Todo comienza con una decisión: 
-         <strong>“Yo decido ser abundante”.</strong>
-        </p>
+        <div>
+          <div class="ma-hero-video-label">Video principal</div>
+          <div class="ma-hero-video-title">
+            La visión detrás de Mente Abundante
+          </div>
+          <div class="ma-hero-video-meta">
+            Duración aproximada: 5–7 minutos · Acceso inmediato tras tu registro
+          </div>
+        </div>
+      </aside>
+    </main>
 
-        <!-- Link a login para quienes ya son miembros -->
-        <p class="landing-info-text" style="margin-top: 1.2rem;">
-          ¿Ya eres miembro?&nbsp;
-          <a href="login.html">Entrar a tu cuenta</a>
+    <!-- BENEFICIOS -->
+    <section class="ma-landing-benefits">
+      <article class="ma-benefit-card">
+        <div class="ma-benefit-label">mentalidad</div>
+        <h2 class="ma-benefit-title">Reprogramar tu manera de pensar</h2>
+        <p class="ma-benefit-text">
+          Contenido diseñado para ayudarte a renovar tus creencias sobre dinero, decisiones y abundancia, desde una perspectiva práctica y espiritual.
         </p>
-      </section>
-    </div>
-  </body>
+      </article>
+
+      <article class="ma-benefit-card">
+        <div class="ma-benefit-label">herramientas</div>
+        <h2 class="ma-benefit-title">Empieza a generar desde ya</h2>
+        <p class="ma-benefit-text">
+          Acceso a material listo para compartir, ejemplos de mensajes y guía para que puedas recomendar el programa de forma orgánica y sencilla.
+        </p>
+      </article>
+
+      <article class="ma-benefit-card">
+        <div class="ma-benefit-label">comunidad</div>
+        <h2 class="ma-benefit-title">No caminas solo</h2>
+        <p class="ma-benefit-text">
+          Formarás parte de una comunidad que habla tu mismo idioma: decisiones conscientes, crecimiento personal y expansión financiera.
+        </p>
+      </article>
+    </section>
+
+    <!-- FOOTER MINI -->
+    <footer class="ma-landing-footer">
+      <span>¿Ya eres miembro? <a href="login.html">Entra a tu cuenta</a></span>
+      <span>Tu decisión de hoy abre puertas que aún no imaginas.</span>
+    </footer>
+  </div>
+
+  <!-- LÓGICA PARA REF Y BOTONES -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get("ref") || "";
+
+      // Guardar ref en localStorage (para membresía, signup, etc.)
+      try {
+        if (ref) {
+          localStorage.setItem("ma_ref_code", ref);
+        }
+      } catch (e) {
+        // ignore
+      }
+
+      // Botón Ver introducción -> desplazar a la tarjeta de video
+      const btnVerIntro = document.getElementById("btnVerIntro");
+      if (btnVerIntro) {
+        btnVerIntro.addEventListener("click", function () {
+          const videoSection = document.getElementById("intro-video");
+          if (videoSection && typeof videoSection.scrollIntoView === "function") {
+            videoSection.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+      }
+
+      // Botón Sí, quiero -> ir a membresía, preservando ref si existe
+      const btnSiQuiero = document.getElementById("btnSiQuiero");
+      if (btnSiQuiero) {
+        btnSiQuiero.addEventListener("click", function () {
+          let target = "membresia.html";
+          if (ref) {
+            const url = new URL(target, window.location.origin);
+            url.searchParams.set("ref", ref);
+            target = url.pathname + url.search;
+          }
+          window.location.href = target;
+        });
+      }
+    })();
+  </script>
+</body>
 </html>
+ 
