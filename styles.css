@@ -1029,4 +1029,14 @@ body.ma-body {
   align-items: center;
   justify-content: center;
 }
+.ma-form-terms a,
+.ma-membership-footer a {
+  color: #7a6650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
+.ma-form-terms a:hover,
+.ma-membership-footer a:hover {
+  color: #5a4937;
+}
