@@ -516,7 +516,9 @@ function populateCountrySelect(selectEl, preSelected) {
         if (preName && fullNameInput) fullNameInput.value = preName;
         if (preEmail && emailInput) emailInput.value = preEmail;
         if (prePhone && phoneInput) phoneInput.value = prePhone;
-        if (preCountry && countryInput) countryInput.value = preCountry;
+        // llenar el dropdown dinámicamente
+populateCountrySelect(countryInput, preCountry || "");
+
       } catch (e) {
         // ignore
       }
