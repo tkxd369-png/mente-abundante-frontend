@@ -5,6 +5,21 @@
     <title>Mente Abundante — Tu decisión abre puertas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
+  <script>
+  (function () {
+    // Ruta actual, por ejemplo "/" o "/index.html"
+    var path = window.location.pathname;
+    var params = new URLSearchParams(window.location.search);
+    var hasRef = params.has("ref");
+
+    // Si entran al dominio raíz ("/") SIN ref -> manda a la puerta
+    if (path === "/" && !hasRef) {
+      window.location.replace("start.html");
+    }
+    // Si entran a /index.html?ref=XXXX -> NO se redirige (se queda en la landing)
+  })();
+</script>
+
   </head>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
