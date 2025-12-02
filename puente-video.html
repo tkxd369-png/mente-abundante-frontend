@@ -1,60 +1,175 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mente Abundante — Comencemos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Tu acceso está casi listo — The Master Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2.2rem 1.4rem;
+    }
+
+    .ma-shell {
+      max-width: 720px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.12);
+      padding: 2.2rem 2rem 2.4rem;
+      text-align: center;
+    }
+
+    .ma-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.7rem;
+    }
+
+    .ma-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.9rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-sub {
+      font-size: 0.96rem;
+      color: #7a6650;
+      max-width: 32rem;
+      margin: 0.5rem auto 1.4rem;
+    }
+
+    .ma-user-note {
+      font-size: 0.9rem;
+      color: #5a4937;
+      margin-bottom: 1.6rem;
+    }
+
+    .ma-divider {
+      width: 64%;
+      height: 1px;
+      background: rgba(0,0,0,0.08);
+      margin: 1.6rem auto 1.4rem auto;
+    }
+
+    .ma-steps {
+      font-size: 0.88rem;
+      color: #7a6650;
+      max-width: 30rem;
+      margin: 0 auto 1.8rem;
+      line-height: 1.6;
+    }
+
+    .ma-steps strong {
+      color: #5a4937;
+    }
+
+    .ma-btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 2.6rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(226, 167, 90, 0.5);
+      margin-bottom: 1.4rem;
+    }
+
+    .ma-btn-primary:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-footnote {
+      font-size: 0.8rem;
+      color: #97826b;
+    }
+
+    @media (max-width: 600px) {
+      .ma-shell {
+        padding: 1.8rem 1.4rem 2rem;
+      }
+      .ma-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
+<body>
+  <div class="ma-shell">
+    <div class="ma-eyebrow">Paso 3 · Confirmación</div>
+    <h1 class="ma-title">Tu decisión ya fue registrada.</h1>
 
-<body class="ma-body">
+    <p class="ma-sub">
+      Acabas de abrir la puerta a <strong>The Master Key</strong>. Ahora verás el video principal
+      donde se revela cómo funciona el programa y los siguientes pasos.
+    </p>
 
-  <div class="main-shell">
-    <div class="card single">
+    <p id="maUserNote" class="ma-user-note"></p>
 
-      <!-- LOGO + TITULO -->
-      <div class="logo-row" style="margin-bottom: 1.2rem;">
-        <div class="logo-drop"></div>
-        <div>
-          <div class="logo-text-main">MENTE ABUNDANTE</div>
-          <div class="logo-text-sub">Tu decisión abrió el camino</div>
-        </div>
-      </div>
+    <div class="ma-divider"></div>
 
-      <!-- CONTENIDO PRINCIPAL -->
-      <h2>Gracias por unirte</h2>
+    <p class="ma-steps">
+      <strong>Lo que sigue es sencillo:</strong><br />
+      1. Mira el video completo con atención.<br />
+      2. Responde el breve quiz para confirmar que entendiste el contenido.<br />
+      3. Crea tu cuenta personal y recibe tu código exclusivo.
+    </p>
 
-      <p class="lead" style="margin-bottom: 1rem;">
-        Este es el siguiente paso en tu camino hacia la claridad, propósito y abundancia.
-      </p>
+    <button id="btnVerVideo" class="ma-btn-primary" type="button">
+      Ver el video principal
+    </button>
 
-      <p class="small-note" style="margin-bottom: 1.2rem;">
-        Ahora verás el <strong>video principal</strong> de 30 minutos.  
-        Míralo con calma, en un lugar tranquilo, y permite que las palabras activen lo que ya
-        comenzaste al decir <strong>“sí, decido ser abundante”</strong>.
-      </p>
-
-      <!-- BOTÓN PRINCIPAL -->
-      <button class="btn btn-secondary" id="goToVideoBtn" style="width: 100%; margin-top: 0.5rem;">
-        Ver el video principal
-      </button>
-
-      <p class="small-note" style="margin-top: 1rem;">
-        Después de ver el video y completar el quiz, podrás crear tu cuenta y entrar a tu dashboard.
-      </p>
-
-      <!-- BOTÓN SECUNDARIO -->
-      <div class="button-row" style="margin-top: 1.4rem;">
-        <a href="index.html" class="btn btn-ghost">Volver al inicio</a>
-      </div>
-
+    <div class="ma-footnote">
+      Respira profundo. Estás a un paso de desbloquear tu acceso completo.
     </div>
   </div>
 
   <script>
-    document.getElementById("goToVideoBtn").addEventListener("click", () => {
-      window.location.href = "video-quiz.html";
-    });
+    (function () {
+      const userNoteEl = document.getElementById("maUserNote");
+
+      try {
+        const name = localStorage.getItem("ma_pre_fullName") || "";
+        const ref = localStorage.getItem("ma_ref_code") || "";
+
+        if (name && ref) {
+          userNoteEl.textContent =
+            "Gracias, " + name + ". Tu activación se registró con el código de invitación: " + ref + ".";
+        } else if (name) {
+          userNoteEl.textContent = "Gracias, " + name + ". Tu activación ha sido registrada.";
+        } else if (ref) {
+          userNoteEl.textContent =
+            "Tu activación se registró correctamente con el código de invitación: " + ref + ".";
+        } else {
+          userNoteEl.textContent =
+            "Tu activación ha sido registrada correctamente. Ahora continúa con el video principal.";
+        }
+      } catch (e) {
+        // si algo falla, dejamos el mensaje vacío o genérico
+      }
+
+      const btn = document.getElementById("btnVerVideo");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          window.location.href = "video-quiz.html";
+        });
+      }
+    })();
   </script>
 </body>
 </html>
