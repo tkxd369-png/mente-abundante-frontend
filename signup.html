@@ -1,272 +1,534 @@
- <!doctype html>
-<html lang="es-MX">
+ <!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>Crear tu cuenta — The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Crear cuenta</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      padding: 2.2rem 1.4rem 3rem;
+    }
+
+    .ma-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .ma-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-header-step {
+      font-size: 0.8rem;
+      color: #7a6650;
+      text-align: right;
+    }
+
+    .ma-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .ma-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LADO IZQUIERDO: TEXTO */
+    .ma-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.8rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-sub {
+      font-size: 0.95rem;
+      color: #7a6650;
+      margin-bottom: 1.4rem;
+      max-width: 34rem;
+    }
+
+    .ma-highlight-box {
+      background-color: #fff7ec;
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      font-size: 0.9rem;
+      color: #5a4937;
+      margin-bottom: 1.2rem;
+    }
+
+    .ma-ref-info {
+      font-size: 0.85rem;
+      color: #7a6650;
+      margin-top: 0.5rem;
+    }
+
+    /* LADO DERECHO: FORMULARIO */
+    .ma-form-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,0.03);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      padding: 1.6rem 1.5rem 1.5rem;
+    }
+
+    .ma-form-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.4rem;
+    }
+
+    .ma-form-subtitle {
+      font-size: 0.9rem;
+      color: #7a6650;
+      margin-bottom: 1.1rem;
+    }
+
+    .ma-form-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .ma-form-inline {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .ma-form-inline {
+        flex-direction: column;
+      }
+    }
+
+    .ma-form-label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.25rem;
+    }
+
+    .ma-form-input {
+      width: 100%;
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background-color: #fbf5ec;
+      font-size: 0.9rem;
+      color: #3a2f25;
+      outline: none;
+    }
+
+    .ma-form-input::placeholder {
+      color: #b39b7f;
+    }
+
+    .ma-form-input:focus {
+      border-color: #e3a95a;
+      box-shadow: 0 0 0 1px rgba(227, 169, 90, 0.24);
+      background-color: #fffdf8;
+    }
+
+    .ma-form-input[readonly] {
+      background-color: #f3ebdf;
+      cursor: default;
+    }
+
+    .ma-form-note {
+      font-size: 0.78rem;
+      color: #97826b;
+      margin-top: 0.3rem;
+      line-height: 1.4;
+    }
+
+    .ma-form-error {
+      min-height: 1rem;
+      font-size: 0.82rem;
+      color: #c04730;
+      margin-top: 0.6rem;
+    }
+
+    .ma-form-success {
+      min-height: 1rem;
+      font-size: 0.82rem;
+      color: #2d7c46;
+      margin-top: 0.6rem;
+    }
+
+    .ma-form-button {
+      width: 100%;
+      margin-top: 1.1rem;
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-form-button:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-form-footer {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: #97826b;
+      text-align: center;
+    }
+
+    .ma-form-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
 </head>
-<body class="ma-body">
-  <div class="main-shell">
-    <div class="card single">
-      <div class="card-left">
-        <!-- LOGO + TITULO -->
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">MENTE ABUNDANTE</div>
-            <div class="logo-text-sub">Crea tu acceso personal</div>
-          </div>
+<body>
+  <div class="ma-shell">
+    <header class="ma-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Programa privado</span>
+        <span class="ma-logo-title">Mente Abundante</span>
+      </div>
+      <div class="ma-header-step">
+        Paso 5 de 5<br />
+        <strong>Crear tu cuenta personal</strong>
+      </div>
+    </header>
+
+    <main class="ma-main">
+      <!-- LADO IZQUIERDO -->
+      <section>
+        <div class="ma-eyebrow">The Master Key</div>
+        <h1 class="ma-title">Crea tu cuenta dentro de Mente Abundante.</h1>
+
+        <p class="ma-sub">
+          Este será tu acceso oficial al dashboard, a tus herramientas, a tu código personal de invitación
+          y al contenido futuro del programa. Usa datos reales para proteger tu acceso.
+        </p>
+
+        <div class="ma-highlight-box" id="maSummaryBox">
+          Estás a punto de crear tu cuenta con los datos que registraste en el paso anterior.
         </div>
 
-        <h2>Crea tu cuenta</h2>
-        <p class="lead">
-          Estás a un paso de entrar a tu <strong>dashboard personal</strong>,
-          donde verás tu enlace para invitar, tu QR y el resumen de tus referidos.
-        </p>
+        <div id="maRefInfo" class="ma-ref-info"></div>
+      </section>
 
-        <p class="small-note">
-          Usa el mismo correo y teléfono que proporcionaste al iniciar tu membresía.
-        </p>
+      <!-- LADO DERECHO: FORMULARIO -->
+      <aside class="ma-form-card">
+        <div class="ma-form-title">Crear cuenta</div>
+        <div class="ma-form-subtitle">
+          Completa o ajusta tus datos y elige una contraseña segura. Tu email será tu acceso principal.
+        </div>
 
-        <!-- FORMULARIO -->
-        <form class="form" id="signupForm">
-          <div>
-            <div class="label">Nombre completo</div>
+        <form id="maSignupForm" novalidate>
+          <div class="ma-form-row">
+            <label class="ma-form-label" for="fullName">Nombre completo</label>
             <input
-              class="input"
-              type="text"
-              name="fullName"
               id="fullName"
-              required
-              placeholder="Tu nombre y apellidos"
+              class="ma-form-input"
+              type="text"
+              placeholder="Tu nombre completo"
+              autocomplete="name"
             />
           </div>
 
-          <div>
-            <div class="label">Correo electrónico</div>
-            <input
-              class="input"
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="tucorreo@ejemplo.com"
-            />
-          </div>
-
-          <div>
-            <div class="label">Teléfono (WhatsApp)</div>
-            <input
-              class="input"
-              type="tel"
-              name="phone"
-              id="phone"
-              required
-              placeholder="+1 (555) 123-4567"
-            />
-          </div>
-
-          <div>
-            <div class="label">
-              Nombre de usuario <span class="small-note">(opcional)</span>
+          <div class="ma-form-row ma-form-inline">
+            <div style="flex:1;">
+              <label class="ma-form-label" for="email">Email</label>
+              <input
+                id="email"
+                class="ma-form-input"
+                type="email"
+                placeholder="tucorreo@ejemplo.com"
+                autocomplete="email"
+              />
             </div>
+            <div style="flex:1;">
+              <label class="ma-form-label" for="phone">Teléfono</label>
+              <input
+                id="phone"
+                class="ma-form-input"
+                type="tel"
+                placeholder="+1 ..."
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <div class="ma-form-row">
+            <label class="ma-form-label" for="username">Usuario</label>
             <input
-              class="input"
-              type="text"
-              name="username"
               id="username"
-              placeholder="Cómo te gustaría que te vean dentro"
-            />
-            <p class="small-note">
-              Si lo dejas vacío, usaremos tu correo para generar uno.
-            </p>
-          </div>
-
-          <div>
-            <div class="label">Contraseña</div>
-            <input
-              class="input"
-              type="password"
-              name="password"
-              id="password"
-              required
-              placeholder="Mínimo 6 caracteres"
-            />
-          </div>
-
-          <div>
-            <div class="label">Confirmar contraseña</div>
-            <input
-              class="input"
-              type="password"
-              name="password2"
-              id="password2"
-              required
-              placeholder="Escribe de nuevo tu contraseña"
-            />
-          </div>
-
-          <div>
-            <div class="label">Código de invitación</div>
-            <input
-              class="input"
+              class="ma-form-input"
               type="text"
-              name="refCode"
-              id="refCode"
-              required
-              placeholder="Código de quien te invitó"
+              placeholder="Ej. anagonzalez"
+              autocomplete="username"
             />
-            <p class="small-note">
-              Si llegaste por un enlace o QR, este campo debería aparecer
-              automáticamente.
-            </p>
+            <div class="ma-form-note">
+              Puedes usar tu nombre, apellido o algo fácil de recordar. Tu código personal se generará a partir de aquí.
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" id="signupButton">
+          <div class="ma-form-row ma-form-inline">
+            <div style="flex:1;">
+              <label class="ma-form-label" for="password">Contraseña</label>
+              <input
+                id="password"
+                class="ma-form-input"
+                type="password"
+                placeholder="Mínimo 8 caracteres"
+                autocomplete="new-password"
+              />
+            </div>
+            <div style="flex:1;">
+              <label class="ma-form-label" for="confirmPassword">Confirmar contraseña</label>
+              <input
+                id="confirmPassword"
+                class="ma-form-input"
+                type="password"
+                placeholder="Repítela"
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+
+          <div class="ma-form-row">
+            <label class="ma-form-label" for="refCode">Código de invitación</label>
+            <input
+              id="refCode"
+              class="ma-form-input"
+              type="text"
+              readonly
+            />
+            <div class="ma-form-note">
+              Este código asegura que tu patrocinador reciba el crédito correcto. Se llena automáticamente
+              desde el enlace con el que llegaste.
+            </div>
+          </div>
+
+          <div id="maError" class="ma-form-error"></div>
+          <div id="maSuccess" class="ma-form-success"></div>
+
+          <button type="button" id="maSignupBtn" class="ma-form-button">
             Crear mi cuenta
           </button>
 
-          <p class="small-note" id="signupMessage" style="margin-top: 0.7rem;"></p>
+          <div class="ma-form-footer">
+            Al crear tu cuenta confirmas que viste el video principal, entendiste la naturaleza del programa
+            y aceptas los <a href="terminos.html" target="_blank">Términos y Condiciones</a>.
+            <br /><br />
+            ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>.
+          </div>
         </form>
-
-        <p class="small-note">
-          Si ya tienes una cuenta, puedes
-          <a href="login.html">iniciar sesión aquí</a>.
-        </p>
-
-        <div class="button-row">
-          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-        </div>
-      </div>
-    </div>
+      </aside>
+    </main>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("signupForm");
-      const msg = document.getElementById("signupMessage");
-      const signupButton = document.getElementById("signupButton");
-      const refInput = document.getElementById("refCode");
+    (function () {
+      const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-      // 1) REF desde URL o localStorage (igual que membresía)
-      const params = new URLSearchParams(window.location.search);
-      const refFromUrl = params.get("ref");
-      const refFromStorage = localStorage.getItem("ma_ref_code");
-      const finalRef = refFromUrl || refFromStorage || "";
-      if (finalRef) {
-        refInput.value = finalRef.toUpperCase();
-      }
+      const form = document.getElementById("maSignupForm");
+      const btn = document.getElementById("maSignupBtn");
 
-      // 2) PREFILL de nombre / email / teléfono que guardamos en membresía
       const fullNameInput = document.getElementById("fullName");
       const emailInput = document.getElementById("email");
       const phoneInput = document.getElementById("phone");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const refCodeInput = document.getElementById("refCode");
 
-      const preFullName = localStorage.getItem("ma_pre_fullName");
-      const preEmail = localStorage.getItem("ma_pre_email");
-      const prePhone = localStorage.getItem("ma_pre_phone");
+      const errorEl = document.getElementById("maError");
+      const successEl = document.getElementById("maSuccess");
+      const summaryBox = document.getElementById("maSummaryBox");
+      const refInfo = document.getElementById("maRefInfo");
 
-      if (preFullName && !fullNameInput.value) {
-        fullNameInput.value = preFullName;
+      function showError(msg) {
+        if (errorEl) errorEl.textContent = msg || "";
+        if (successEl) successEl.textContent = "";
       }
-      if (preEmail && !emailInput.value) {
-        emailInput.value = preEmail;
+
+      function showSuccess(msg) {
+        if (successEl) successEl.textContent = msg || "";
+        if (errorEl) errorEl.textContent = "";
       }
-      if (prePhone && !phoneInput.value) {
-        phoneInput.value = prePhone;
-      }
 
-      // 3) Envío del formulario a tu backend
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        msg.textContent = "";
-        msg.style.color = "#444";
-
-        const fullName = fullNameInput.value.trim();
-        const email = emailInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value;
-        const password2 = document.getElementById("password2").value;
-        const refCode = refInput.value.trim().toUpperCase();
-
-        if (!fullName || !email || !phone || !refCode) {
-          msg.textContent = "Por favor completa todos los campos obligatorios.";
-          msg.style.color = "#b33434";
-          return;
-        }
-
-        if (password.length < 6) {
-          msg.textContent = "La contraseña debe tener al menos 6 caracteres.";
-          msg.style.color = "#b33434";
-          return;
-        }
-
-        if (password !== password2) {
-          msg.textContent = "Las contraseñas no coinciden.";
-          msg.style.color = "#b33434";
-          return;
-        }
-
-        msg.textContent = "Creando tu cuenta, por favor espera...";
-        signupButton.disabled = true;
-
+      // Prefill desde localStorage
+      (function prefillFromStorage() {
         try {
-          const response = await fetch(
-            "https://mente-abundante-api-1.onrender.com/auth/create-account",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                fullName,
-                email,
-                phone,
-                password,
-                username: username || undefined,
-                refCode,
-              }),
+          const preName = localStorage.getItem("ma_pre_fullName") || "";
+          const preEmail = localStorage.getItem("ma_pre_email") || "";
+          const prePhone = localStorage.getItem("ma_pre_phone") || "";
+          const refCode = localStorage.getItem("ma_ref_code") || "";
+
+          if (preName && fullNameInput) fullNameInput.value = preName;
+          if (preEmail && emailInput) emailInput.value = preEmail;
+          if (prePhone && phoneInput) phoneInput.value = prePhone;
+          if (refCode && refCodeInput) refCodeInput.value = refCode;
+
+          if (summaryBox) {
+            if (preName || preEmail) {
+              let text = "Estás a punto de crear tu cuenta";
+              if (preName) text += " como " + preName;
+              if (preEmail) text += " con el email " + preEmail;
+              text += ". Podrás ajustar cualquier dato antes de continuar.";
+              summaryBox.textContent = text;
             }
-          );
+          }
 
-          const data = await response.json();
+          if (refInfo) {
+            if (refCode) {
+              refInfo.textContent =
+                "Código de invitación detectado: " + refCode + ". Este código quedará ligado a tu cuenta.";
+            } else {
+              refInfo.textContent =
+                "Si alguien te invitó, asegúrate de haber usado su enlace personal para que su código se registre correctamente.";
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+      })();
 
-          if (!data.ok) {
-            msg.textContent = data.error || "No se pudo crear la cuenta.";
-            msg.style.color = "#b33434";
-            signupButton.disabled = false;
+      async function createAccount(payload) {
+        const url = API_BASE + "/auth/create-account";
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          let msg = "No se pudo crear tu cuenta. Intenta nuevamente.";
+          try {
+            const data = await res.json();
+            if (data && data.error) msg = data.error;
+          } catch (e) {}
+          throw new Error(msg);
+        }
+
+        const data = await res.json();
+        return data;
+      }
+
+      if (btn && form) {
+        btn.addEventListener("click", async function () {
+          const fullName = (fullNameInput?.value || "").trim();
+          const email = (emailInput?.value || "").trim();
+          const phone = (phoneInput?.value || "").trim();
+          let username = (usernameInput?.value || "").trim();
+          const password = passwordInput?.value || "";
+          const confirmPassword = confirmPasswordInput?.value || "";
+          const refCode = (refCodeInput?.value || "").trim();
+
+          if (!fullName || !email || !phone) {
+            showError("Por favor completa nombre, email y teléfono.");
+            return;
+          }
+          if (!password || password.length < 8) {
+            showError("La contraseña debe tener al menos 8 caracteres.");
+            return;
+          }
+          if (password !== confirmPassword) {
+            showError("Las contraseñas no coinciden.");
             return;
           }
 
-          // Guardar token y usuario en localStorage
-          if (data.token) {
-            localStorage.setItem("ma_token", data.token);
-          }
-          if (data.user) {
-            localStorage.setItem("ma_user", JSON.stringify(data.user));
+          if (!username) {
+            // generar username simple a partir del email
+            const base = email.split("@")[0] || "usuario";
+            username = base.toLowerCase().replace(/[^a-z0-9]/gi, "").slice(0, 12) || "user" + Date.now();
           }
 
-          msg.textContent = "Cuenta creada con éxito. Redirigiendo a tu dashboard...";
-          msg.style.color = "#2f7b3b";
+          showError("");
+          showSuccess("Creando tu cuenta...");
 
-          // Opcional: limpiar los datos temporales de membresía
-          localStorage.removeItem("ma_pre_fullName");
-          localStorage.removeItem("ma_pre_email");
-          localStorage.removeItem("ma_pre_phone");
-          // ma_ref_code sí lo podemos conservar porque sirve para otras cosas
+          const payload = {
+            fullName,
+            email,
+            phone,
+            password,
+            username,
+            refCode: refCode || null
+          };
 
-          setTimeout(() => {
-            window.location.href = "dashboard.html";
-          }, 1000);
-        } catch (err) {
-          console.error(err);
-          msg.textContent =
-            "Error al conectar con el servidor. Intenta nuevamente.";
-          msg.style.color = "#b33434";
-          signupButton.disabled = false;
-        }
-      });
-    });
+          try {
+            const data = await createAccount(payload);
+
+            try {
+              if (data && data.token) {
+                localStorage.setItem("ma_token", data.token);
+              }
+              if (data && data.user) {
+                localStorage.setItem("ma_user", JSON.stringify(data.user));
+              }
+            } catch (e) {
+              // ignore
+            }
+
+            showSuccess("Cuenta creada con éxito. Redirigiendo a tu dashboard...");
+            setTimeout(function () {
+              window.location.href = "dashboard.html";
+            }, 800);
+          } catch (err) {
+            showError(err.message || "Ocurrió un error al crear tu cuenta.");
+          }
+        });
+      }
+    })();
   </script>
 </body>
 </html>
