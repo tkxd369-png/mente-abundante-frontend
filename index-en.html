@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Master Key — Abundant Mind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Estilos específicos para landing minimalista (clonados del index en español) -->
+  <style>
+    body.ma-landing-simple {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ma-landing-shell {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER MUY SIMPLE */
+    .ma-landing-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-login-link {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-login-link:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* CONTENIDO CENTRAL */
+    .ma-hero-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .ma-main-title-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 1.2rem;
+    }
+
+    .ma-main-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 2.3rem;
+      line-height: 1.2;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #3a2f25;
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-main-subtitle {
+      font-size: 0.98rem;
+      color: #7a6650;
+      max-width: 32rem;
+      margin: 0 auto 1.9rem auto;
+    }
+
+    /* VIDEO */
+    .ma-video-shell {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 22px;
+      background-color: #111111;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      margin: 1.6rem auto 1.8rem auto;
+      overflow: hidden;
+    }
+
+    .ma-video-inner {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background-color: #000;
+    }
+
+    .ma-video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5e4cf;
+      font-size: 0.9rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* BOTÓN DORADO */
+    .ma-cta-wrapper {
+      margin-bottom: 2.2rem;
+    }
+
+    .ma-cta-button {
+      border: none;
+      border-radius: 999px;
+      padding: 1rem 2.8rem;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(226, 167, 90, 0.5);
+    }
+    .ma-cta-button:hover {
+      filter: brightness(1.03);
+    }
+
+    /* MENSAJE FINAL */
+    .ma-bottom-message {
+      margin-top: 2.8rem;
+      text-align: center;
+      font-size: 1rem;
+      color: #97826b;
+      padding-top: 1.8rem;
+      opacity: 0.9;
+    }
+
+    .ma-bottom-message::before {
+      content: "";
+      display: block;
+      width: 60%;
+      height: 1px;
+      margin: 2.2rem auto 1.6rem auto;
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    /* (Opcional) estilo heredado del botón secundario, aunque aquí no se usa */
+    .tm-index-btn-secondary {
+      margin-top: 0.9rem;
+      padding: 0.55rem 1.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(243, 207, 138, 0.7);
+      background: transparent;
+      color: #97826b;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    .tm-index-btn-secondary:hover {
+      opacity: 1;
+      background: rgba(243, 207, 138, 0.08);
+    }
+
+    @media (max-width: 600px) {
+      .ma-landing-shell {
+        padding: 1.6rem 1.1rem 2.2rem;
+      }
+      .ma-main-title {
+        font-size: 1.9rem;
+        letter-spacing: 0.14em;
+      }
+      .ma-main-subtitle {
+        font-size: 0.92rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-landing-simple">
+  <div class="ma-landing-shell">
+    <!-- HEADER SIMPLE -->
+    <header class="ma-landing-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Private program</span>
+      </div>
+      <a href="login.html?lang=en" class="ma-login-link">Sign in</a>
+    </header>
+
+    <!-- CONTENIDO CENTRAL -->
+    <main class="ma-hero-center">
+      <h1 class="ma-main-title">The Master Key</h1>
+
+      <p class="ma-main-subtitle">
+        The program that opens the door to the life you’ve been waiting for.
+        It’s not a coincidence you’re here.
+      </p>
+
+      <span class="ma-logo-title">Watch this video until the end.</span>
+
+      <!-- VIDEO PRINCIPAL (VERSIÓN INGLÉS) -->
+      <section class="ma-video-shell">
+        <div class="ma-video-inner" id="maIntroVideoEn">
+          <!-- TODO: Reemplaza este bloque por tu iframe/video real en inglés -->
+          <div class="ma-video-placeholder">
+            Here goes your main introduction video in English.
+            <br />
+            (Replace this block with your YouTube iframe or real player).
+          </div>
+        </div>
+      </section>
+
+      <div class="ma-main-title-eyebrow">Doors · Decision · Abundance</div>
+
+      <!-- BOTÓN DORADO (INGLÉS) -->
+      <div class="ma-cta-wrapper">
+        <button id="btnImIn" type="button" class="ma-cta-button">
+          I’m in
+        </button>
+      </div>
+    </main>
+
+    <!-- MENSAJE FINAL -->
+    <div class="ma-bottom-message">
+      Get ready. Your new life is about to begin.
+    </div>
+  </div>
+
+  <!-- LÓGICA PARA REF Y BOTÓN "I'M IN" -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get("ref") || "";
+
+      // Marcar idioma en localStorage para el resto del flujo
+      try {
+        localStorage.setItem("ma_lang", "en");
+      } catch (e) {}
+
+      // Guardar ref en localStorage (para membership-en, signup-en, etc.)
+      try {
+        if (ref) {
+          localStorage.setItem("ma_ref_code", ref);
+        }
+      } catch (e) {
+        // ignore
+      }
+
+      // Botón I'm in -> ir a membresía EN, preservando ref si existe
+      const btnImIn = document.getElementById("btnImIn");
+      if (btnImIn) {
+        btnImIn.addEventListener("click", function () {
+          let target = "membresia-en.html";
+          if (ref) {
+            const url = new URL(target, window.location.origin);
+            url.searchParams.set("ref", ref);
+            target = url.pathname + url.search;
+          }
+          window.location.href = target;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
