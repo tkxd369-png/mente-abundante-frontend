@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -57,7 +57,7 @@
     }
 
     .tm-start-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
+      font-family: "Playfair Display", serif;
       font-size: 1.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -106,6 +106,26 @@
       margin-top: 0.35rem;
     }
 
+    /* ✨ Link para login */
+    .tm-login-link {
+      text-align: center;
+      margin-top: 0.9rem;
+    }
+
+    .tm-login-link a {
+      color: #e8d8c0;
+      font-size: 0.82rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      letter-spacing: 0.03em;
+      opacity: 0.9;
+    }
+
+    .tm-login-link a:hover {
+      opacity: 1;
+    }
+
+    /* Language buttons */
     .tm-start-lang-row {
       display: flex;
       gap: 0.75rem;
@@ -156,29 +176,21 @@
 
     <main class="tm-start-panel">
       <h1 class="tm-start-title">The Master Key</h1>
-      <p class="tm-start-sub">
-        Enter your access key to unlock the next step.
-      </p>
+      <p class="tm-start-sub">Enter your access key to unlock the next step.</p>
 
-      <div class="tm-start-label">
-        Access Key · Llave de acceso
-      </div>
-      <input
-        id="tmAccessInput"
-        class="tm-start-input"
-        type="text"
-        placeholder="Type your key / Escribe tu llave"
-        autocomplete="off"
-      />
+      <div class="tm-start-label">Access Key · Llave de acceso</div>
+      <input id="tmAccessInput" class="tm-start-input" type="text"
+             placeholder="Type your key / Escribe tu llave" autocomplete="off" />
       <div id="tmAccessError" class="tm-start-error"></div>
 
+      <!-- ✨ LINK NUEVO -->
+      <div class="tm-login-link">
+        <a href="login.html">Ingresar a mi cuenta</a>
+      </div>
+
       <div class="tm-start-lang-row">
-        <button type="button" class="tm-start-btn" data-lang="en">
-          English
-        </button>
-        <button type="button" class="tm-start-btn" data-lang="es">
-          Español
-        </button>
+        <button type="button" class="tm-start-btn" data-lang="en">English</button>
+        <button type="button" class="tm-start-btn" data-lang="es">Español</button>
       </div>
 
       <div class="tm-start-footer">
@@ -203,16 +215,8 @@
           return;
         }
 
-        // Guardamos el código por si lo quieres usar después
-        try {
-          localStorage.setItem("tm_access_code", code);
-        } catch (e) {
-          // ignore
-        }
+        localStorage.setItem("tm_access_code", code);
 
-        // Aquí decides a dónde mandar:
-        // - index.html (español)
-        // - index-en.html (inglés) – si luego creas uno
         if (lang === "en") {
           window.location.href = "index.html?lang=en";
         } else {
@@ -231,7 +235,6 @@
       input.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter") {
           ev.preventDefault();
-          // por defecto Español si presionan Enter
           goNext("es");
         }
       });
@@ -239,4 +242,3 @@
   </script>
 </body>
 </html>
- 
