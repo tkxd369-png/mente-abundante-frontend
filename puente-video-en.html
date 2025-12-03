@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Access activated — The Master Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body.ma-bridge {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ma-bridge-shell {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.4rem 1.4rem 2.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .ma-bridge-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-bridge-login {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-bridge-login:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* CARD CENTRAL */
+    .ma-bridge-card {
+      margin-top: 0.6rem;
+      padding: 2rem 1.8rem 2.1rem;
+      border-radius: 24px;
+      background-color: #fdf8f1;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+      text-align: center;
+    }
+
+    .ma-bridge-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-bridge-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.7rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-bridge-text {
+      font-size: 0.96rem;
+      color: #7a6650;
+      max-width: 32rem;
+      margin: 0 auto 1.8rem auto;
+    }
+
+    .ma-bridge-note {
+      font-size: 0.82rem;
+      color: #97826b;
+      max-width: 30rem;
+      margin: 0.4rem auto 1.8rem auto;
+    }
+
+    .ma-bridge-button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 2.6rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(226, 167, 90, 0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    .ma-bridge-button:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-bridge-footer {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
+      color: #97826b;
+      text-align: center;
+    }
+
+    .ma-bridge-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .ma-bridge-shell {
+        padding: 1.9rem 1.1rem 2.2rem;
+      }
+      .ma-bridge-card {
+        padding: 1.8rem 1.4rem 1.9rem;
+      }
+      .ma-bridge-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-bridge">
+  <div class="ma-bridge-shell">
+    <!-- HEADER -->
+    <header class="ma-bridge-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Step 3 · Main video</span>
+        <span class="ma-logo-title">The Master Key</span>
+      </div>
+      <a href="login.html?lang=en" class="ma-bridge-login">Sign in</a>
+    </header>
+
+    <!-- CARD CENTRAL -->
+    <section class="ma-bridge-card">
+      <div class="ma-bridge-eyebrow">Access activated</div>
+      <h1 class="ma-bridge-title">Your door is now open.</h1>
+
+      <p class="ma-bridge-text">
+        In the next step you’ll watch the main video of The Master Key. Take a quiet moment,
+        put your phone on silent and be fully present. This message is for you.
+      </p>
+
+      <p class="ma-bridge-note">
+        After watching the full video, you will see the instructions to create your private account
+        and receive your personal referral link as a member.
+      </p>
+
+      <button id="btnWatchVideo" type="button" class="ma-bridge-button">
+        Watch the main video
+      </button>
+    </section>
+
+    <footer class="ma-bridge-footer">
+      If you close this page, you can reopen your access using the same email and code used at registration.
+      <br />
+      <a href="index-en.html">Back to The Master Key</a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      // fijar idioma en EN para el resto del flujo
+      try {
+        localStorage.setItem("ma_lang", "en");
+      } catch (e) {}
+
+      const btn = document.getElementById("btnWatchVideo");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          window.location.href = "video-quiz-en.html";
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
