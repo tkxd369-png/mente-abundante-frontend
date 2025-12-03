@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create your private account — The Master Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body.ma-signup {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ma-signup-shell {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 2.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .ma-signup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-login-link {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-login-link:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* CARD */
+    .ma-signup-card {
+      margin-top: 0.4rem;
+      background-color: #fdf8f1;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+      padding: 1.9rem 1.6rem 2.1rem;
+    }
+
+    .ma-signup-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-signup-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      color: #3a2f25;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-signup-sub {
+      font-size: 0.95rem;
+      color: #7a6650;
+      margin-bottom: 1.4rem;
+      max-width: 30rem;
+    }
+
+    .ma-signup-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.9rem 1rem;
+    }
+
+    .ma-form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ma-form-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .ma-form-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-form-input {
+      width: 100%;
+      padding: 0.7rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background-color: #fbf5ec;
+      font-size: 0.9rem;
+      color: #3a2f25;
+      outline: none;
+    }
+
+    .ma-form-input::placeholder {
+      color: #b39b7f;
+    }
+
+    .ma-form-input:focus {
+      border-color: #e3a95a;
+      box-shadow: 0 0 0 1px rgba(227, 169, 90, 0.24);
+      background-color: #fffdf8;
+    }
+
+    .ma-form-input[readonly] {
+      background-color: #f3ebdf;
+      cursor: default;
+    }
+
+    .ma-field-hint {
+      font-size: 0.78rem;
+      color: #97826b;
+    }
+
+    .ma-signup-ref {
+      font-size: 0.82rem;
+      color: #7a6650;
+      margin-top: 0.4rem;
+    }
+
+    .ma-signup-error {
+      grid-column: 1 / -1;
+      min-height: 1.2rem;
+      font-size: 0.8rem;
+      color: #c04730;
+      margin-top: 0.2rem;
+    }
+
+    .ma-signup-success {
+      grid-column: 1 / -1;
+      min-height: 1.2rem;
+      font-size: 0.82rem;
+      color: #2f7a4c;
+      margin-top: 0.2rem;
+    }
+
+    .ma-signup-cta {
+      grid-column: 1 / -1;
+      margin-top: 0.8rem;
+    }
+
+    .ma-signup-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-signup-btn:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-signup-footer {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
+      color: #97826b;
+      text-align: center;
+    }
+
+    .ma-signup-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .ma-signup-shell {
+        padding: 1.9rem 1.1rem 2.2rem;
+      }
+      .ma-signup-card {
+        padding: 1.7rem 1.4rem 1.9rem;
+      }
+      .ma-signup-form {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .ma-form-field-full {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-signup">
+  <div class="ma-signup-shell">
+    <!-- HEADER -->
+    <header class="ma-signup-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Step 5 · Private account</span>
+        <span class="ma-logo-title">The Master Key</span>
+      </div>
+      <a href="login.html?lang=en" class="ma-login-link">Sign in</a>
+    </header>
+
+    <!-- CARD -->
+    <section class="ma-signup-card">
+      <div class="ma-signup-eyebrow">Create your access</div>
+      <h1 class="ma-signup-title">Your personal space inside The Master Key.</h1>
+
+      <p class="ma-signup-sub">
+        Here you will create your private account. This login will be used to access your dashboard,
+        your referral link and your future materials inside the Program.
+      </p>
+
+      <form id="signupForm" class="ma-signup-form">
+        <div class="ma-form-field ma-form-field-full">
+          <label class="ma-form-label" for="fullName">Full name</label>
+          <input
+            id="fullName"
+            class="ma-form-input"
+            type="text"
+            placeholder="As it appears in your documents"
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="email">Email</label>
+          <input
+            id="email"
+            class="ma-form-input"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="phone">Phone / WhatsApp</label>
+          <input
+            id="phone"
+            class="ma-form-input"
+            type="tel"
+            placeholder="+1 ..."
+            autocomplete="tel"
+          />
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="username">Username (optional)</label>
+          <input
+            id="username"
+            class="ma-form-input"
+            type="text"
+            placeholder="If empty, we’ll create one for you"
+            autocomplete="username"
+          />
+          <div class="ma-field-hint">
+            This will be used to build your personal referral code.
+          </div>
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="password">Password</label>
+          <input
+            id="password"
+            class="ma-form-input"
+            type="password"
+            placeholder="Create a secure password"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div class="ma-form-field ma-form-field-full">
+          <label class="ma-form-label" for="refCode">Invitation code</label>
+          <input
+            id="refCode"
+            class="ma-form-input"
+            type="text"
+            readonly
+          />
+          <div id="refHint" class="ma-signup-ref"></div>
+        </div>
+
+        <div id="signupError" class="ma-signup-error"></div>
+        <div id="signupSuccess" class="ma-signup-success"></div>
+
+        <div class="ma-signup-cta">
+          <button id="signupBtn" type="submit" class="ma-signup-btn">
+            Create my account
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <div class="ma-signup-footer">
+      If you already have an account, you can
+      <a href="login.html?lang=en">sign in here</a>.
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // mark language as EN
+      try {
+        localStorage.setItem("ma_lang", "en");
+      } catch (e) {}
+
+      const API_BASE = "https://mente-abundante-api-1.onrender.com";
+
+      const fullNameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+      const refInput = document.getElementById("refCode");
+      const refHint = document.getElementById("refHint");
+      const signupForm = document.getElementById("signupForm");
+      const signupError = document.getElementById("signupError");
+      const signupSuccess = document.getElementById("signupSuccess");
+      const signupBtn = document.getElementById("signupBtn");
+
+      // Prefill desde localStorage
+      let refCode = "";
+      try {
+        const preName = localStorage.getItem("ma_pre_fullName");
+        const preEmail = localStorage.getItem("ma_pre_email");
+        const prePhone = localStorage.getItem("ma_pre_phone");
+        const storedRef = localStorage.getItem("ma_ref_code");
+
+        if (preName && fullNameInput) fullNameInput.value = preName;
+        if (preEmail && emailInput) emailInput.value = preEmail;
+        if (prePhone && phoneInput) phoneInput.value = prePhone;
+        if (storedRef) refCode = storedRef;
+      } catch (e) {
+        // ignore
+      }
+
+      if (refInput) {
+        refInput.value = refCode || "";
+      }
+      if (refHint) {
+        if (refCode) {
+          refHint.textContent =
+            "Your sponsor’s invitation code is linked to your account: " + refCode + ".";
+        } else {
+          refHint.textContent =
+            "If someone shared this Program with you, their code will be registered through their link.";
+        }
+      }
+
+      function setError(msg) {
+        if (signupError) signupError.textContent = msg || "";
+        if (signupSuccess) signupSuccess.textContent = "";
+      }
+
+      function setSuccess(msg) {
+        if (signupSuccess) signupSuccess.textContent = msg || "";
+        if (signupError) signupError.textContent = "";
+      }
+
+      async function createAccount(evt) {
+        evt.preventDefault();
+        setError("");
+        setSuccess("");
+
+        const fullName = (fullNameInput?.value || "").trim();
+        const email = (emailInput?.value || "").trim();
+        const phone = (phoneInput?.value || "").trim();
+        const username = (usernameInput?.value || "").trim();
+        const password = passwordInput?.value || "";
+        const refCodeLocal = (refInput?.value || refCode || "").trim();
+
+        if (!fullName || !email || !phone || !password) {
+          setError("Please complete full name, email, phone and password.");
+          return;
+        }
+
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creating account...";
+
+        try {
+          const res = await fetch(API_BASE + "/auth/create-account", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              fullName,
+              email,
+              phone,
+              password,
+              username: username || undefined,
+              refCode: refCodeLocal || undefined
+            })
+          });
+
+          if (!res.ok) {
+            let msg = "There was an issue creating your account. Please try again.";
+            try {
+              const dataErr = await res.json();
+              if (dataErr && dataErr.error) msg = dataErr.error;
+            } catch (e) {
+              // ignore
+            }
+            throw new Error(msg);
+          }
+
+          const data = await res.json();
+
+          // Guardar token y usuario
+          try {
+            if (data.token) {
+              localStorage.setItem("ma_token", data.token);
+            }
+            if (data.user) {
+              localStorage.setItem("ma_user", JSON.stringify(data.user));
+            }
+          } catch (e) {
+            // ignore
+          }
+
+          setSuccess("Account created successfully. Redirecting to your dashboard...");
+
+          setTimeout(function () {
+            window.location.href = "dashboard.html?lang=en";
+          }, 900);
+        } catch (err) {
+          setError(err.message || "Unexpected error. Please try again.");
+        } finally {
+          signupBtn.disabled = false;
+          signupBtn.textContent = "Create my account";
+        }
+      }
+
+      if (signupForm) {
+        signupForm.addEventListener("submit", createAccount);
+      }
+    })();
+  </script>
+</body>
+</html>
