@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Main video & quiz — The Master Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body.ma-video-quiz {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ma-vq-shell {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 2.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .ma-vq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .ma-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .ma-logo-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-logo-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-vq-login-link {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-vq-login-link:hover {
+      background-color: #f5e4cf;
+    }
+
+    /* MAIN GRID */
+    .ma-vq-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .ma-vq-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LEFT: VIDEO */
+    .ma-vq-left-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-vq-left-sub {
+      font-size: 0.95rem;
+      color: #7a6650;
+      margin-bottom: 1.4rem;
+      max-width: 30rem;
+    }
+
+    .ma-vq-video-shell {
+      width: 100%;
+      border-radius: 22px;
+      background-color: #111;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.14);
+      overflow: hidden;
+    }
+
+    .ma-vq-video-inner {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background-color: #000;
+    }
+
+    .ma-vq-video-inner iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .ma-vq-video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5e4cf;
+      font-size: 0.9rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .ma-vq-left-note {
+      font-size: 0.82rem;
+      color: #97826b;
+      margin-top: 0.9rem;
+    }
+
+    /* RIGHT: QUIZ */
+    .ma-vq-quiz-card {
+      background-color: #fdf8f1;
+      border-radius: 22px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem 1.4rem 1.6rem;
+    }
+
+    .ma-vq-quiz-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9b8570;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-vq-quiz-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #3a2f25;
+      margin-bottom: 0.9rem;
+    }
+
+    .ma-vq-question {
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .ma-vq-question:last-child {
+      border-bottom: none;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0;
+    }
+
+    .ma-vq-q-text {
+      font-size: 0.9rem;
+      color: #5b4735;
+      margin-bottom: 0.35rem;
+    }
+
+    .ma-vq-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.86rem;
+      color: #5b4735;
+    }
+
+    .ma-vq-options label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .ma-vq-options input[type="radio"] {
+      accent-color: #d29b57;
+    }
+
+    .ma-vq-error {
+      min-height: 1.1rem;
+      font-size: 0.8rem;
+      color: #c04730;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-vq-success {
+      min-height: 1.1rem;
+      font-size: 0.82rem;
+      color: #2f7a4c;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-vq-submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.85rem 1.4rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-vq-submit-btn:hover {
+      filter: brightness(1.03);
+    }
+
+    .ma-vq-footer {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
+      color: #97826b;
+      text-align: center;
+    }
+
+    .ma-vq-footer a {
+      color: #7a6650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .ma-vq-shell {
+        padding: 1.9rem 1.1rem 2.2rem;
+      }
+      .ma-vq-quiz-card {
+        padding: 1.4rem 1.2rem 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-video-quiz">
+  <div class="ma-vq-shell">
+    <!-- HEADER -->
+    <header class="ma-vq-header">
+      <div class="ma-logo-block">
+        <span class="ma-logo-tag">Step 4 · Main video & quiz</span>
+        <span class="ma-logo-title">The Master Key</span>
+      </div>
+      <a href="login.html?lang=en" class="ma-vq-login-link">Sign in</a>
+    </header>
+
+    <!-- MAIN GRID -->
+    <main class="ma-vq-main">
+      <!-- LEFT: VIDEO -->
+      <section>
+        <h1 class="ma-vq-left-title">Watch with intention.</h1>
+        <p class="ma-vq-left-sub">
+          Take a deep breath, allow yourself to receive this message and imagine what your life
+          can look like when you decide to live from abundance.
+        </p>
+
+        <div class="ma-vq-video-shell">
+          <div class="ma-vq-video-inner">
+            <!-- TODO: reemplaza este bloque por tu iframe real en inglés -->
+            <div class="ma-vq-video-placeholder">
+              Here goes your main English video for The Master Key.
+              <br />
+              (Replace this placeholder with your YouTube iframe or video player.)
+            </div>
+          </div>
+        </div>
+
+        <p class="ma-vq-left-note">
+          After watching the video, answer the questions on the right. This is not an exam; it’s a
+          way to confirm that you are present and aligned with the principles of the Program.
+        </p>
+      </section>
+
+      <!-- RIGHT: QUIZ -->
+      <aside class="ma-vq-quiz-card">
+        <div class="ma-vq-quiz-eyebrow">Short quiz</div>
+        <div class="ma-vq-quiz-title">
+          Answer these questions to continue to your private account.
+        </div>
+
+        <form id="quizForm">
+          <!-- Q1 -->
+          <div class="ma-vq-question">
+            <div class="ma-vq-q-text">
+              1. What is the main intention of The Master Key?
+            </div>
+            <div class="ma-vq-options">
+              <label>
+                <input type="radio" name="q1" value="a" />
+                To magically fix everything without my participation.
+              </label>
+              <label>
+                <input type="radio" name="q1" value="b" />
+                To offer tools and perspective so I can consciously create a new level of life.
+              </label>
+              <label>
+                <input type="radio" name="q1" value="c" />
+                To guarantee a specific financial result in a fixed time.
+              </label>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="ma-vq-question">
+            <div class="ma-vq-q-text">
+              2. What is my role in this process?
+            </div>
+            <div class="ma-vq-options">
+              <label>
+                <input type="radio" name="q2" value="a" />
+                Just watch passively and wait for things to change on their own.
+              </label>
+              <label>
+                <input type="radio" name="q2" value="b" />
+                Take responsibility for my decisions, actions and inner work.
+              </label>
+              <label>
+                <input type="radio" name="q2" value="c" />
+                Compare myself with others and compete with them.
+              </label>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="ma-vq-question">
+            <div class="ma-vq-q-text">
+              3. How do I understand the referral program mentioned in the video?
+            </div>
+            <div class="ma-vq-options">
+              <label>
+                <input type="radio" name="q3" value="a" />
+                As a guaranteed salary that I will receive automatically.
+              </label>
+              <label>
+                <input type="radio" name="q3" value="b" />
+                As an optional way to share the Program, where results depend on my actions.
+              </label>
+              <label>
+                <input type="radio" name="q3" value="c" />
+                As something I can use to promise specific income to other people.
+              </label>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="ma-vq-question">
+            <div class="ma-vq-q-text">
+              4. Which attitude best describes how I want to walk this process?
+            </div>
+            <div class="ma-vq-options">
+              <label>
+                <input type="radio" name="q4" value="a" />
+                From fear, doubt and resistance to change.
+              </label>
+              <label>
+                <input type="radio" name="q4" value="b" />
+                From openness, responsibility and willingness to learn.
+              </label>
+              <label>
+                <input type="radio" name="q4" value="c" />
+                From obligation, just because someone else told me to.
+              </label>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="ma-vq-question">
+            <div class="ma-vq-q-text">
+              5. What do I understand about the nature of the contribution?
+            </div>
+            <div class="ma-vq-options">
+              <label>
+                <input type="radio" name="q5" value="a" />
+                It is a one-time, non-refundable contribution for access to the Program.
+              </label>
+              <label>
+                <input type="radio" name="q5" value="b" />
+                It is a test payment that can be reversed whenever I want.
+              </label>
+              <label>
+                <input type="radio" name="q5" value="c" />
+                It is an investment with guaranteed profit.
+              </label>
+            </div>
+          </div>
+
+          <div id="quizError" class="ma-vq-error"></div>
+          <div id="quizSuccess" class="ma-vq-success"></div>
+
+          <button type="submit" class="ma-vq-submit-btn">
+            Confirm and continue
+          </button>
+        </form>
+      </aside>
+    </main>
+
+    <div class="ma-vq-footer">
+      If you have any technical issues, you can return later using the same email and access details.
+      <br />
+      <a href="index-en.html">Back to The Master Key</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // marcar idioma en EN
+      try {
+        localStorage.setItem("ma_lang", "en");
+      } catch (e) {}
+
+      const quizForm = document.getElementById("quizForm");
+      const quizError = document.getElementById("quizError");
+      const quizSuccess = document.getElementById("quizSuccess");
+
+      // respuestas correctas
+      const ANSWERS = {
+        q1: "b",
+        q2: "b",
+        q3: "b",
+        q4: "b",
+        q5: "a"
+      };
+      const PASSING_SCORE = 4; // mínimo 4 de 5
+
+      if (quizForm) {
+        quizForm.addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          quizError.textContent = "";
+          quizSuccess.textContent = "";
+
+          const formData = new FormData(quizForm);
+          let score = 0;
+          let totalAnswered = 0;
+
+          Object.keys(ANSWERS).forEach((qKey) => {
+            const value = formData.get(qKey);
+            if (value) {
+              totalAnswered++;
+              if (value === ANSWERS[qKey]) score++;
+            }
+          });
+
+          if (totalAnswered < Object.keys(ANSWERS).length) {
+            quizError.textContent = "Please answer all the questions before continuing.";
+            return;
+          }
+
+          if (score < PASSING_SCORE) {
+            quizError.textContent =
+              "To continue, please review the video and your answers. This process deserves your full presence.";
+            return;
+          }
+
+          quizSuccess.textContent =
+            "Thank you. Your answers are aligned with the intention of the Program. Redirecting to create your private account...";
+          
+          setTimeout(function () {
+            window.location.href = "signup-en.html";
+          }, 900);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
