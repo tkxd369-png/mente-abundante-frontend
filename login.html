@@ -1,136 +1,182 @@
-<!doctype html>
-<html lang="es-MX">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <title>Iniciar sesión – The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Iniciar sesión</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #050304;
+      color: #f6f0e8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .login-panel {
+      width: 100%;
+      max-width: 420px;
+      padding: 2rem 1.8rem 2.2rem;
+      border-radius: 26px;
+      background: rgba(8, 6, 6, 0.8);
+      border: 1px solid rgba(255, 215, 160, 0.22);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(18px);
+    }
+
+    .login-title {
+      font-family: "Playfair Display", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 0.8rem;
+      color: #f8e9d0;
+    }
+
+    .login-sub {
+      text-align: center;
+      color: #d5c4aa;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .login-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      color: #d5c4aa;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(243, 224, 193, 0.55);
+      background: rgba(10, 7, 7, 0.8);
+      color: #f8e9d0;
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 1.2rem;
+    }
+
+    .login-input::placeholder {
+      color: #b39b7f;
+    }
+
+    .login-input:focus {
+      border-color: #f3cf8a;
+      box-shadow: 0 0 0 1px rgba(243, 207, 138, 0.4);
+    }
+
+    .login-error {
+      min-height: 1.2rem;
+      color: #ffb3a3;
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 999px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.9rem;
+      color: #19130e;
+      background: linear-gradient(135deg, #f2c47b, #e6b067);
+      cursor: pointer;
+      box-shadow: 0 24px 60px rgba(243, 207, 138, 0.4);
+      margin-top: 0.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .login-btn:hover {
+      filter: brightness(1.06);
+    }
+
+    .login-links {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #ccbba0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .login-links a {
+      color: #e8d8c0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
 </head>
-<body class="ma-body">
-  <div class="main-shell">
-    <div class="card single">
-      <div class="card-left">
-        <!-- LOGO + TITULO -->
-        <div class="logo-row">
-          <div class="logo-drop"></div>
-          <div>
-            <div class="logo-text-main">MENTE ABUNDANTE</div>
-            <div class="logo-text-sub">Accede a tu espacio</div>
-          </div>
-        </div>
 
-        <h2>Inicia sesión</h2>
-        <p class="small-note">
-          Usa el correo y la contraseña que registraste después de ver el video y completar el quiz.
-        </p>
+<body>
+  <main class="login-panel">
+    <h1 class="login-title">The Master Key</h1>
+    <p class="login-sub">Accede a tu cuenta</p>
 
-        <form class="form" id="loginForm">
-          <div>
-            <div class="label">Correo electrónico</div>
-            <input
-              class="input"
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="tucorreo@ejemplo.com"
-            />
-          </div>
+    <div class="login-label">Email</div>
+    <input id="loginEmail" class="login-input" type="email" placeholder="you@example.com" />
 
-          <div>
-            <div class="label">Contraseña</div>
-            <input
-              class="input"
-              type="password"
-              name="password"
-              id="password"
-              required
-              placeholder="Tu contraseña"
-            />
-          </div>
+    <div class="login-label">Password</div>
+    <input id="loginPassword" class="login-input" type="password" placeholder="••••••••" />
 
-          <button type="submit" class="btn btn-primary" id="loginButton">
-            Entrar
-          </button>
+    <div id="loginError" class="login-error"></div>
 
-          <p class="small-note" id="loginMessage" style="margin-top: 0.7rem;"></p>
-        </form>
+    <button id="loginBtn" class="login-btn">Iniciar sesión</button>
 
-        <p class="small-note">
-          Si aún no has creado tu cuenta, termina primero el proceso de video y quiz.
-        </p>
-
-        <div class="button-row">
-          <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-        </div>
-      </div>
+    <div class="login-links">
+      <a href="start.html">Crear cuenta</a>
+      <a href="login.html">¿Olvidaste tu contraseña?</a>
     </div>
-  </div>
+  </main>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("loginForm");
-      const msg = document.getElementById("loginMessage");
-      const btn = document.getElementById("loginButton");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        msg.textContent = "";
-        msg.style.color = "#444";
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
+      loginError.textContent = "";
 
-        if (!email || !password) {
-          msg.textContent = "Por favor escribe tu email y contraseña.";
-          msg.style.color = "#b33434";
+      if (!email || !password) {
+        loginError.textContent = "Por favor ingresa tu email y contraseña.";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://mente-abundante-api-1.onrender.com/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (!data.ok) {
+          loginError.textContent = "Credenciales incorrectas. Intenta de nuevo.";
           return;
         }
 
-        msg.textContent = "Verificando…";
-        btn.disabled = true;
+        localStorage.setItem("ma_token", data.token);
+        localStorage.setItem("ma_user", JSON.stringify(data.user));
 
-        try {
-          const res = await fetch(
-            "https://mente-abundante-api-1.onrender.com/auth/login",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password }),
-            }
-          );
-
-          const data = await res.json();
-
-          if (!data.ok) {
-            msg.textContent = data.error || "No se pudo iniciar sesión.";
-            msg.style.color = "#b33434";
-            btn.disabled = false;
-            return;
-          }
-
-          if (data.token) {
-            localStorage.setItem("ma_token", data.token);
-          }
-          if (data.user) {
-            localStorage.setItem("ma_user", JSON.stringify(data.user));
-          }
-
-          msg.textContent = "Bienvenido. Entrando a tu dashboard…";
-          msg.style.color = "#2f7b3b";
-
-          setTimeout(() => {
-            window.location.href = "dashboard.html";
-          }, 700);
-        } catch (err) {
-          console.error(err);
-          msg.textContent =
-            "Error al conectar con el servidor. Intenta de nuevo.";
-          msg.style.color = "#b33434";
-          btn.disabled = false;
-        }
-      });
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        loginError.textContent = "Error de conexión. Intenta más tarde.";
+      }
     });
   </script>
 </body>
 </html>
+ 
