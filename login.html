@@ -139,7 +139,7 @@
       <a href="login.html">¿Olvidaste tu contraseña?</a>
     </div>
   </main>
-<script>
+ <script>
   // Detect language
   const urlParams = new URLSearchParams(window.location.search);
   let lang = urlParams.get("lang") || localStorage.getItem("ma_lang") || "es";
@@ -150,13 +150,15 @@
   // Elements
   const titleEl = document.querySelector(".login-title");
   const subEl = document.querySelector(".login-sub");
-  const emailLabel = document.querySelectorAll(".login-label")[0];
-  const passLabel = document.querySelectorAll(".login-label")[1];
+  const labels = document.querySelectorAll(".login-label");
+  const emailLabel = labels[0];
+  const passLabel = labels[1];
   const loginBtn = document.getElementById("loginBtn");
   const linkCreate = document.querySelectorAll(".login-links a")[0];
   const linkForgot = document.querySelectorAll(".login-links a")[1];
+  const loginError = document.getElementById("loginError");
 
-  // TEXTS FOR BOTH LANGUAGES
+  // TEXTS
   const texts = {
     es: {
       title: "The Master Key",
@@ -164,6 +166,8 @@
       email: "Email",
       pass: "Password",
       btn: "Iniciar sesión",
+      verifying: "Verificando acceso...",
+      success: "Acceso correcto. Redirigiendo...",
       create: "Crear cuenta",
       forgot: "¿Olvidaste tu contraseña?",
       empty: "Por favor ingresa tu email y contraseña.",
@@ -176,6 +180,8 @@
       email: "Email",
       pass: "Password",
       btn: "Sign in",
+      verifying: "Verifying access...",
+      success: "Access granted. Redirecting...",
       create: "Create account",
       forgot: "Forgot your password?",
       empty: "Please enter your email and password.",
@@ -184,7 +190,7 @@
     }
   };
 
-  const t = texts[lang];
+  const t = texts[lang] || texts.es;
 
   // Apply texts
   titleEl.textContent = t.title;
@@ -195,10 +201,7 @@
   linkCreate.textContent = t.create;
   linkForgot.textContent = t.forgot;
 
-  // LOGIN LOGIC
-  const loginError = document.getElementById("loginError");
-
-  loginBtn.addEventListener("click", async () => {
+  async function handleLogin() {
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value.trim();
 
@@ -209,6 +212,10 @@
       return;
     }
 
+    // mostrar "verificando..."
+    loginBtn.disabled = true;
+    loginBtn.textContent = t.verifying;
+
     try {
       const res = await fetch("https://mente-abundante-api-1.onrender.com/auth/login", {
         method: "POST",
@@ -217,23 +224,49 @@
       });
 
       const data = await res.json();
+
       if (!data.ok) {
         loginError.textContent = t.wrong;
+        loginBtn.disabled = false;
+        loginBtn.textContent = t.btn;
         return;
       }
 
+      // guardar sesión
       localStorage.setItem("ma_token", data.token);
       localStorage.setItem("ma_user", JSON.stringify(data.user));
 
-      // keep language in dashboard
-      window.location.href = "dashboard.html?lang=" + lang;
+      loginError.style.color = "#9be7c4";
+      loginError.textContent = t.success;
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html?lang=" + lang;
+      }, 700);
     } catch (err) {
       loginError.textContent = t.conn;
+      loginBtn.disabled = false;
+      loginBtn.textContent = t.btn;
+    }
+  }
+
+  // Click botón
+  loginBtn.addEventListener("click", handleLogin);
+
+  // Enter en campos
+  document.getElementById("loginPassword").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleLogin();
+    }
+  });
+  document.getElementById("loginEmail").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleLogin();
     }
   });
 </script>
 
-  
 </body>
 </html>
  
