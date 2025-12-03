@@ -139,44 +139,101 @@
       <a href="login.html">¿Olvidaste tu contraseña?</a>
     </div>
   </main>
+<script>
+  // Detect language
+  const urlParams = new URLSearchParams(window.location.search);
+  let lang = urlParams.get("lang") || localStorage.getItem("ma_lang") || "es";
 
-  <script>
-    const loginBtn = document.getElementById("loginBtn");
-    const loginError = document.getElementById("loginError");
+  // Save language for reuse
+  localStorage.setItem("ma_lang", lang);
 
-    loginBtn.addEventListener("click", async () => {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
+  // Elements
+  const titleEl = document.querySelector(".login-title");
+  const subEl = document.querySelector(".login-sub");
+  const emailLabel = document.querySelectorAll(".login-label")[0];
+  const passLabel = document.querySelectorAll(".login-label")[1];
+  const loginBtn = document.getElementById("loginBtn");
+  const linkCreate = document.querySelectorAll(".login-links a")[0];
+  const linkForgot = document.querySelectorAll(".login-links a")[1];
 
-      loginError.textContent = "";
+  // TEXTS FOR BOTH LANGUAGES
+  const texts = {
+    es: {
+      title: "The Master Key",
+      sub: "Accede a tu cuenta",
+      email: "Email",
+      pass: "Password",
+      btn: "Iniciar sesión",
+      create: "Crear cuenta",
+      forgot: "¿Olvidaste tu contraseña?",
+      empty: "Por favor ingresa tu email y contraseña.",
+      wrong: "Credenciales incorrectas. Intenta de nuevo.",
+      conn: "Error de conexión. Intenta más tarde."
+    },
+    en: {
+      title: "The Master Key",
+      sub: "Access your account",
+      email: "Email",
+      pass: "Password",
+      btn: "Sign in",
+      create: "Create account",
+      forgot: "Forgot your password?",
+      empty: "Please enter your email and password.",
+      wrong: "Incorrect credentials. Try again.",
+      conn: "Connection error. Please try later."
+    }
+  };
 
-      if (!email || !password) {
-        loginError.textContent = "Por favor ingresa tu email y contraseña.";
+  const t = texts[lang];
+
+  // Apply texts
+  titleEl.textContent = t.title;
+  subEl.textContent = t.sub;
+  emailLabel.textContent = t.email;
+  passLabel.textContent = t.pass;
+  loginBtn.textContent = t.btn;
+  linkCreate.textContent = t.create;
+  linkForgot.textContent = t.forgot;
+
+  // LOGIN LOGIC
+  const loginError = document.getElementById("loginError");
+
+  loginBtn.addEventListener("click", async () => {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    loginError.textContent = "";
+
+    if (!email || !password) {
+      loginError.textContent = t.empty;
+      return;
+    }
+
+    try {
+      const res = await fetch("https://mente-abundante-api-1.onrender.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (!data.ok) {
+        loginError.textContent = t.wrong;
         return;
       }
 
-      try {
-        const res = await fetch("https://mente-abundante-api-1.onrender.com/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
+      localStorage.setItem("ma_token", data.token);
+      localStorage.setItem("ma_user", JSON.stringify(data.user));
 
-        const data = await res.json();
-        if (!data.ok) {
-          loginError.textContent = "Credenciales incorrectas. Intenta de nuevo.";
-          return;
-        }
+      // keep language in dashboard
+      window.location.href = "dashboard.html?lang=" + lang;
+    } catch (err) {
+      loginError.textContent = t.conn;
+    }
+  });
+</script>
 
-        localStorage.setItem("ma_token", data.token);
-        localStorage.setItem("ma_user", JSON.stringify(data.user));
-
-        window.location.href = "dashboard.html";
-      } catch (err) {
-        loginError.textContent = "Error de conexión. Intenta más tarde.";
-      }
-    });
-  </script>
+  
 </body>
 </html>
  
