@@ -2,336 +2,239 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>The Master Key — Access</title>
+  <title>The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
 
   <style>
-    :root {
-      --gold-soft: #e6c184;
-      --gold-strong: #f2c47b;
-      --bg-dark: #050405;
-      --text-main: #f5e7d4;
-      --text-muted: #bba68a;
-    }
+    /* ===== THE MASTER KEY – START PAGE ===== */
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
+    body.tm-start {
       margin: 0;
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      color: #f6f0e8;
+      background-color: #050304;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.8rem 1rem;
-    }
-
-    .ma-start-shell {
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    /* LINKS SUPERIORES */
-    .ma-top-links {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto 1.6rem auto;
-      text-align: center;
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .ma-top-links a {
-      color: var(--text-main);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .ma-top-links .sep {
-      color: var(--text-muted);
-      margin: 0 0.25rem;
-    }
-
-    /* LAYOUT PRINCIPAL */
-    .ma-main {
-      display: flex;
-      gap: 2.2rem;
       align-items: stretch;
       justify-content: center;
     }
 
-    .ma-image {
-      flex: 1.1;
-      border-radius: 26px;
-      overflow: hidden;
+    .tm-start-wrapper {
       position: relative;
-      background-image: url("img/door-masterkey.jpg"); /* usa el nombre real del archivo */
-      background-size: cover;
-      background-position: center;
-      min-height: 260px;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .ma-image::after {
-      content: "";
+    .tm-start-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(255, 220, 150, 0.25), transparent 55%);
-      mix-blend-mode: screen;
+      background-image:
+        linear-gradient(to bottom, rgba(5,3,4,0.7), rgba(5,3,4,0.9)),
+        url("img/the-master-key-door.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.1) contrast(1.1);
+      z-index: 0;
     }
 
-    .ma-card {
-      flex: 1;
-      background: radial-gradient(circle at top, #1b1510 0, #0b0705 55%, #050405 100%);
-      border-radius: 26px;
-      padding: 2rem 1.7rem 1.9rem;
-      border: 1px solid rgba(230, 193, 132, 0.25);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.85);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .tm-start-panel {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      width: 100%;
+      margin: 2rem;
+      padding: 2.2rem 2rem 1.8rem;
+      border-radius: 24px;
+      background: rgba(8, 6, 6, 0.75);
+      border: 1px solid rgba(255, 215, 160, 0.16);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(18px);
+      text-align: center;
     }
 
-    .ma-eyebrow {
-      font-size: 0.78rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold-soft);
-      margin-bottom: 0.8rem;
-    }
-
-    .ma-title {
+    .tm-start-title {
       font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 2rem;
+      font-size: 1.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f8e9d0;
+      margin-bottom: 0.5rem;
+    }
+
+    .tm-start-sub {
+      font-size: 0.9rem;
+      color: #d5c4aa;
+      margin-bottom: 1.8rem;
+    }
+
+    .tm-start-label {
+      font-size: 0.75rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin: 0 0 0.6rem;
-      color: var(--text-main);
+      color: #d5c4aa;
+      margin-bottom: 0.35rem;
+      text-align: left;
     }
 
-    .ma-sub {
-      font-size: 0.96rem;
-      color: var(--text-muted);
-      margin-bottom: 1.6rem;
-      line-height: 1.6;
-      max-width: 24rem;
-    }
-
-    .ma-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .ma-input-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .ma-input {
-      flex: 1;
-      padding: 0.8rem 0.9rem;
+    .tm-start-input {
+      width: 100%;
+      padding: 0.85rem 0.9rem;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(0, 0, 0, 0.4);
-      color: var(--text-main);
+      border: 1px solid rgba(243, 224, 193, 0.55);
+      background: rgba(10, 7, 7, 0.8);
+      color: #f8e9d0;
       font-size: 0.95rem;
       outline: none;
     }
-
-    .ma-input::placeholder {
-      color: #7f6a52;
+    .tm-start-input::placeholder {
+      color: #b39b7f;
+    }
+    .tm-start-input:focus {
+      border-color: #f3cf8a;
+      box-shadow: 0 0 0 1px rgba(243, 207, 138, 0.4);
     }
 
-    .ma-input:focus {
-      border-color: var(--gold-strong);
-      box-shadow: 0 0 0 1px rgba(242, 196, 123, 0.45);
+    .tm-start-error {
+      min-height: 1.2rem;
+      font-size: 0.78rem;
+      color: #ffb3a3;
+      text-align: left;
+      margin-top: 0.35rem;
     }
 
-    .ma-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 0.8rem 1.4rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, var(--gold-strong), #e3a95a);
-      color: #271e15;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 16px 48px rgba(226, 167, 90, 0.65);
-    }
-
-    .ma-btn:hover {
-      filter: brightness(1.05);
-    }
-
-    .ma-lang-row {
+    .tm-start-lang-row {
       display: flex;
-      gap: 0.7rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
     }
 
-    .ma-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      max-width: 24rem;
+    .tm-start-btn {
+      flex: 1 1 0;
+      padding: 0.75rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(243, 224, 193, 0.6);
+      background: rgba(18, 13, 12, 0.9);
+      color: #f8e9d0;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+    }
+    .tm-start-btn:hover {
+      background: rgba(243, 207, 138, 0.16);
+      border-color: #f3cf8a;
     }
 
-    @media (max-width: 900px) {
-      .ma-main {
-        flex-direction: column;
-      }
-
-      .ma-image {
-        order: -1;
-        min-height: 220px;
-      }
-
-      .ma-card {
-        padding: 1.7rem 1.4rem 1.8rem;
-      }
-
-      .ma-title {
-        font-size: 1.7rem;
-      }
+    .tm-start-footer {
+      margin-top: 1.6rem;
+      font-size: 0.75rem;
+      color: #a9957e;
+      opacity: 0.85;
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 1.4rem 0.9rem;
+      .tm-start-panel {
+        margin: 1.6rem;
+        padding: 1.9rem 1.5rem 1.6rem;
       }
-
-      .ma-input-row {
-        flex-direction: column;
-      }
-
-      .ma-lang-row {
-        flex-direction: column;
-      }
-
-      .ma-btn {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
+      .tm-start-title {
+        font-size: 1.35rem;
+        letter-spacing: 0.22em;
       }
     }
   </style>
 </head>
-<body>
-  <div class="ma-start-shell">
-    <!-- LINKS SUPERIORES -->
-    <div class="ma-top-links">
-      <span>¿Ya tienes cuenta?</span>
-      <a href="login.html">Inicia sesión</a>
-      <span class="sep">·</span>
-      <a href="login.html">¿Olvidaste tu contraseña?</a>
-    </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <div class="ma-main">
-      <div class="ma-image"></div>
+<body class="tm-start">
+  <div class="tm-start-wrapper">
+    <div class="tm-start-bg"></div>
 
-      <div class="ma-card">
-        <div class="ma-eyebrow">The Master Key</div>
-        <h1 class="ma-title">Enter your access key.</h1>
+    <main class="tm-start-panel">
+      <h1 class="tm-start-title">The Master Key</h1>
+      <p class="tm-start-sub">
+        Enter your access key to unlock the next step.
+      </p>
 
-        <p class="ma-sub">
-          Si llegaste aquí por tu cuenta, escribe el código de invitación que recibiste.
-          Si llegaste desde el enlace personal de alguien, tu código ya está guardado.
-        </p>
-
-        <label for="accessCode" class="ma-label">Código de acceso</label>
-        <div class="ma-input-row">
-          <input
-            id="accessCode"
-            class="ma-input"
-            type="text"
-            placeholder="Ejemplo: ANA824"
-            autocomplete="off"
-          />
-          <button id="btnDefault" class="ma-btn" type="button">
-            Continuar
-          </button>
-        </div>
-
-        <div class="ma-label">Idioma</div>
-        <div class="ma-lang-row">
-          <button id="btnEs" class="ma-btn" type="button">Español</button>
-          <button id="btnEn" class="ma-btn" type="button">English</button>
-        </div>
-
-        <div class="ma-note">
-          Si no tienes un código, pídele el suyo a la persona que te habló de The Master Key.
-          Tu nueva vida no comienza con un formulario, comienza con una decisión consciente.
-        </div>
+      <div class="tm-start-label">
+        Access Key · Llave de acceso
       </div>
-    </div>
+      <input
+        id="tmAccessInput"
+        class="tm-start-input"
+        type="text"
+        placeholder="Type your key / Escribe tu llave"
+        autocomplete="off"
+      />
+      <div id="tmAccessError" class="tm-start-error"></div>
+
+      <div class="tm-start-lang-row">
+        <button type="button" class="tm-start-btn" data-lang="en">
+          English
+        </button>
+        <button type="button" class="tm-start-btn" data-lang="es">
+          Español
+        </button>
+      </div>
+
+      <div class="tm-start-footer">
+        Visitors with a personal link or QR will go directly to the main page.
+      </div>
+    </main>
   </div>
 
   <script>
+    // === Simple logic for the starting page ===
     (function () {
-      const input = document.getElementById("accessCode");
-      const btnDefault = document.getElementById("btnDefault");
-      const btnEs = document.getElementById("btnEs");
-      const btnEn = document.getElementById("btnEn");
+      const input = document.getElementById("tmAccessInput");
+      const errorEl = document.getElementById("tmAccessError");
+      const buttons = document.querySelectorAll(".tm-start-btn");
 
       function goNext(lang) {
-        try {
-          const value = (input.value || "").trim();
-          if (value) {
-            // guardamos el código tal como lo escriben, pero puedes forzar mayúsculas si quieres
-            localStorage.setItem("ma_ref_code", value.toUpperCase());
-          }
-        } catch (e) {
-          // ignoramos errores de localStorage
+        const code = (input.value || "").trim();
+
+        if (!code) {
+          errorEl.textContent = "Por favor ingresa tu llave de acceso.";
+          input.focus();
+          return;
         }
 
-        // Por ahora ambos idiomas van al mismo index; en futuro puedes usar ?lang=
-        window.location.href = "index.html";
-        // Ejemplo futuro:
-        // window.location.href = "index.html?lang=" + lang;
+        // Guardamos el código por si lo quieres usar después
+        try {
+          localStorage.setItem("tm_access_code", code);
+        } catch (e) {
+          // ignore
+        }
+
+        // Aquí decides a dónde mandar:
+        // - index.html (español)
+        // - index-en.html (inglés) – si luego creas uno
+        if (lang === "en") {
+          window.location.href = "index.html?lang=en";
+        } else {
+          window.location.href = "index.html?lang=es";
+        }
       }
 
-      if (btnDefault) {
-        btnDefault.addEventListener("click", function () {
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.getAttribute("data-lang") || "es";
+          errorEl.textContent = "";
+          goNext(lang);
+        });
+      });
+
+      input.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter") {
+          ev.preventDefault();
+          // por defecto Español si presionan Enter
           goNext("es");
-        });
-      }
-
-      if (btnEs) {
-        btnEs.addEventListener("click", function () {
-          goNext("es");
-        });
-      }
-
-      if (btnEn) {
-        btnEn.addEventListener("click", function () {
-          goNext("en");
-        });
-      }
-
-      if (input) {
-        input.addEventListener("keydown", function (ev) {
-          if (ev.key === "Enter") {
-            ev.preventDefault();
-            goNext("es");
-          }
-        });
-      }
+        }
+      });
     })();
   </script>
 </body>
