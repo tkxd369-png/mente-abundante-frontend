@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Master Key — Membership</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body.ma-membership {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
+      background-color: #f6f0e8;
+      color: #3a2f25;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.8rem 1.2rem;
+    }
+
+    .ma-membership-shell {
+      width: 100%;
+      max-width: 720px;
+      background-color: #fdf8f1;
+      border-radius: 24px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      padding: 2.2rem 1.8rem 2.4rem;
+    }
+
+    .ma-membership-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .ma-membership-badge {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-membership-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #3a2f25;
+    }
+
+    .ma-membership-login-link {
+      font-size: 0.85rem;
+      color: #7a6650;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #f6ecdd;
+    }
+    .ma-membership-login-link:hover {
+      background-color: #f2e2cf;
+    }
+
+    .ma-membership-subtitle {
+      font-size: 0.95rem;
+      color: #7a6650;
+      margin-bottom: 1.8rem;
+      max-width: 34rem;
+    }
+
+    form.ma-membership-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.2rem;
+    }
+
+    .ma-form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .ma-form-field-full {
+      grid-column: 1 / -1;
+    }
+
+    label.ma-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9b8570;
+    }
+
+    .ma-input,
+    .ma-select {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(147, 125, 101, 0.4);
+      background-color: #fffaf3;
+      color: #3a2f25;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .ma-input::placeholder {
+      color: #b39b7f;
+    }
+
+    .ma-input:focus,
+    .ma-select:focus {
+      border-color: #d2a868;
+      box-shadow: 0 0 0 1px rgba(210, 168, 104, 0.35);
+    }
+
+    .ma-ref-note {
+      font-size: 0.8rem;
+      color: #8a745f;
+    }
+
+    .ma-error {
+      font-size: 0.8rem;
+      color: #c24a3b;
+      margin-top: 0.25rem;
+      min-height: 1rem;
+      grid-column: 1 / -1;
+    }
+
+    .ma-terms-box {
+      grid-column: 1 / -1;
+      background-color: #f3e3cf;
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      font-size: 0.8rem;
+      color: #5a4a3a;
+      line-height: 1.5;
+    }
+
+    .ma-terms-box strong {
+      font-weight: 600;
+    }
+
+    .ma-terms-link {
+      color: #7a4f1f;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .ma-submit-row {
+      grid-column: 1 / -1;
+      margin-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .ma-submit-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 2.4rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f2c47b, #e3a95a);
+      color: #2c241b;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(226, 167, 90, 0.5);
+    }
+
+    .ma-submit-btn[disabled] {
+      opacity: 0.7;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .ma-submit-note {
+      font-size: 0.78rem;
+      color: #8a745f;
+    }
+
+    @media (max-width: 720px) {
+      .ma-membership-shell {
+        padding: 1.9rem 1.4rem 2.1rem;
+      }
+      form.ma-membership-form {
+        grid-template-columns: 1fr;
+      }
+      .ma-form-field-full {
+        grid-column: 1 / -1;
+      }
+      .ma-submit-row {
+        align-items: stretch;
+      }
+      .ma-submit-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body class="ma-membership">
+  <div class="ma-membership-shell">
+    <header class="ma-membership-header">
+      <div>
+        <div class="ma-membership-badge">Private program · One-time access</div>
+        <div class="ma-membership-title">The Master Key</div>
+      </div>
+      <a href="login.html?lang=en" class="ma-membership-login-link">Sign in</a>
+    </header>
+
+    <p class="ma-membership-subtitle">
+      Complete your details to activate your one-time access to The Master Key and your personal referral account.
+    </p>
+
+    <form id="maMembershipForm" class="ma-membership-form">
+      <div class="ma-form-field ma-form-field-full">
+        <label for="fullName" class="ma-label">Full name</label>
+        <input
+          id="fullName"
+          name="fullName"
+          type="text"
+          class="ma-input"
+          placeholder="First name and last name"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div class="ma-form-field">
+        <label for="email" class="ma-label">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          class="ma-input"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        />
+      </div>
+
+      <div class="ma-form-field">
+        <label for="phone" class="ma-label">Phone / WhatsApp</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          class="ma-input"
+          placeholder="+1 555 000 0000"
+          autocomplete="tel"
+          required
+        />
+      </div>
+
+      <div class="ma-form-field">
+        <label for="country" class="ma-label">Country (for affiliate payouts)</label>
+        <select id="country" name="country" class="ma-select" required>
+          <option value="">Select your country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="MX">Mexico</option>
+          <option value="BR">Brazil</option>
+          <option value="CL">Chile</option>
+          <option value="CO">Colombia</option>
+        </select>
+      </div>
+
+      <div class="ma-form-field">
+        <label for="refCode" class="ma-label">Invitation / Referral code</label>
+        <input
+          id="refCode"
+          name="refCode"
+          type="text"
+          class="ma-input"
+          placeholder="If someone invited you, write their code"
+        />
+        <div class="ma-ref-note" id="refNote"></div>
+      </div>
+
+      <div id="formError" class="ma-error"></div>
+
+      <div class="ma-terms-box">
+        <strong>Important:</strong> This is a <strong>one-time, non-refundable payment</strong>.
+        The Master Key does <strong>not store any card or payment information</strong>. Only your
+        personal data for your private account is stored, and it is never sold or shared with third parties.
+        <br /><br />
+        Affiliate payouts are processed through Stripe Connect and your local bank. Additional fees
+        or currency conversion costs may apply, especially in Latin America. The Master Key is not responsible
+        for possible payment blocks, delays, or losses caused by banks or Stripe.
+        <br /><br />
+        Please review the full
+        <a href="terms-en.html?from=membresia-en" class="ma-terms-link">Terms &amp; Conditions (English)</a>
+        before confirming your payment.
+      </div>
+
+      <div class="ma-submit-row">
+        <button id="submitBtn" type="submit" class="ma-submit-btn">
+          Confirm one-time access
+        </button>
+        <div class="ma-submit-note">
+          By clicking this button you confirm that you understand and accept that this purchase is
+          final and non-refundable.
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      // Mark language as EN for the rest of the flow
+      try {
+        localStorage.setItem("ma_lang", "en");
+      } catch (e) {}
+
+      const params = new URLSearchParams(window.location.search);
+      const urlRef = params.get("ref") || "";
+
+      const refInput = document.getElementById("refCode");
+      const refNote = document.getElementById("refNote");
+      const form = document.getElementById("maMembershipForm");
+      const formError = document.getElementById("formError");
+      const submitBtn = document.getElementById("submitBtn");
+
+      // Try to load ref from localStorage if not in URL
+      let storedRef = "";
+      try {
+        storedRef = localStorage.getItem("ma_ref_code") || "";
+      } catch (e) {}
+
+      const finalRef = urlRef || storedRef;
+
+      if (finalRef) {
+        if (refInput) {
+          refInput.value = finalRef;
+        }
+        if (refNote) {
+          refNote.textContent = "Detected invitation code: " + finalRef.toUpperCase();
+        }
+        try {
+          localStorage.setItem("ma_ref_code", finalRef.toUpperCase());
+        } catch (e) {}
+      }
+
+      if (form) {
+        form.addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          formError.textContent = "";
+
+          const fullName = document.getElementById("fullName").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const phone = document.getElementById("phone").value.trim();
+          const country = document.getElementById("country").value;
+          const refCode = document.getElementById("refCode").value.trim();
+
+          if (!fullName || !email || !phone || !country) {
+            formError.textContent = "Please complete all required fields.";
+            return;
+          }
+
+          // Simulate processing / disable button
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Processing...";
+
+          try {
+            localStorage.setItem("ma_pre_fullName", fullName);
+            localStorage.setItem("ma_pre_email", email);
+            localStorage.setItem("ma_pre_phone", phone);
+            localStorage.setItem("ma_pre_country", country);
+            if (refCode) {
+              localStorage.setItem("ma_ref_code", refCode.toUpperCase());
+            }
+          } catch (e) {
+            // ignore storage errors
+          }
+
+          // Here you will later call Stripe. For now, we simulate success and go to the video bridge in EN.
+          setTimeout(function () {
+            window.location.href = "puente-video-en.html";
+          }, 600);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
