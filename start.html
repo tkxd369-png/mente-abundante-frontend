@@ -198,90 +198,44 @@
       </div>
     </main>
   </div>
-<script>
-  // === START BILINGÜE ===
+ <script>
+  // === Simple logic for the starting page ===
   (function () {
     const input = document.getElementById("tmAccessInput");
     const errorEl = document.getElementById("tmAccessError");
     const buttons = document.querySelectorAll(".tm-start-btn");
-    const titleEl = document.querySelector(".tm-start-title");
-    const subEl = document.querySelector(".tm-start-sub");
-    const labelEl = document.querySelector(".tm-start-label");
-    const footerEl = document.querySelector(".tm-start-footer");
 
-    // 1) Detectar idioma: ?lang=, o lo último que se usó, o español por defecto
-    const params = new URLSearchParams(window.location.search);
-    let lang = params.get("lang") || localStorage.getItem("ma_lang") || "es";
-
-    // Guardar idioma
-    localStorage.setItem("ma_lang", lang);
-
-    // 2) Textos en ambos idiomas
-    const TEXTS = {
-      es: {
-        title: "The Master Key",
-        sub: "Ingresa tu llave de acceso para abrir el siguiente paso.",
-        label: "Llave de acceso · Access key",
-        placeholder: "Escribe tu llave de acceso",
-        footer: "Los visitantes con un enlace personal o QR irán directamente a la página principal.",
-        empty: "Por favor ingresa tu llave de acceso."
-      },
-      en: {
-        title: "The Master Key",
-        sub: "Enter your access key to unlock the next step.",
-        label: "Access key · Llave de acceso",
-        placeholder: "Type your access key",
-        footer: "Visitors with a personal link or QR will go directly to the main page.",
-        empty: "Please enter your access key."
-      }
-    };
-
-    function applyTexts() {
-      const t = TEXTS[lang] || TEXTS.es;
-      if (titleEl) titleEl.textContent = t.title;
-      if (subEl) subEl.textContent = t.sub;
-      if (labelEl) labelEl.textContent = t.label;
-      if (footerEl) footerEl.textContent = t.footer;
-      if (input) input.placeholder = t.placeholder;
-      if (errorEl) errorEl.textContent = "";
-    }
-
-    applyTexts();
-
-    // 3) Lógica para continuar
-    function goNext(targetLang) {
-      // actualizar idioma elegido
-      lang = targetLang || lang || "es";
-      localStorage.setItem("ma_lang", lang);
-
-      const t = TEXTS[lang] || TEXTS.es;
+    function goNext(lang) {
       const code = (input.value || "").trim();
 
       if (!code) {
-        if (errorEl) {
-          errorEl.textContent = t.empty;
-        }
-        input && input.focus();
+        errorEl.textContent = "Por favor ingresa tu llave de acceso.";
+        input.focus();
         return;
       }
 
-      // Guardamos el código (para usarlo más adelante en el flujo)
+      // Guardamos el código por si lo quieres usar después
       try {
         localStorage.setItem("tm_access_code", code);
-        // También lo guardamos como ref por si el resto del flujo lo usa
-        localStorage.setItem("ma_ref_code", code.toUpperCase());
       } catch (e) {
-        // ignoramos errores de localStorage
+        // ignore
       }
 
-      // Mandamos al index con el idioma seleccionado
-      window.location.href = "index.html?lang=" + lang;
+      // Aquí decides a dónde mandar:
+      if (lang === "en") {
+        // 👉 Landing en inglés
+        window.location.href = "index-en.html?lang=en";
+      } else {
+        // 👉 Landing en español
+        window.location.href = "index.html?lang=es";
+      }
     }
 
     // 4) Botones de idioma
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const btnLang = btn.getAttribute("data-lang") || "es";
+        errorEl.textContent = "";
         goNext(btnLang);
       });
     });
@@ -291,13 +245,13 @@
       input.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter") {
           ev.preventDefault();
-          goNext(lang || "es");
+          errorEl.textContent = "";
+          goNext("es"); // <- aquí ya no usamos 'lang' indefinida
         }
       });
     }
   })();
 </script>
-
   
 </body>
 </html>
