@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Master Key - Referral Program</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+        color: #222;
+      }
+
+      .ref-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ref-header {
+        padding: 1.25rem 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .ref-logo {
+        letter-spacing: 0.18em;
+        font-size: 0.85rem;
+      }
+
+      .ref-lang-switch {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .ref-lang-btn {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: #ffffff;
+        padding: 0.18rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .ref-lang-btn.active {
+        border-color: #d4af37;
+        background: #d4af37;
+        color: #ffffff;
+      }
+
+      .ref-main {
+        flex: 1;
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 1.5rem 1.75rem 3rem;
+      }
+
+      .ref-kicker {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 0.4rem;
+      }
+
+      .ref-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .ref-subtitle {
+        font-size: 0.92rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+      }
+
+      .ref-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      @media (max-width: 900px) {
+        .ref-grid {
+          display: block;
+        }
+      }
+
+      .ref-card {
+        background: #ffffff;
+        border-radius: 1.25rem;
+        padding: 1.4rem 1.25rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        margin-bottom: 1.25rem;
+      }
+
+      .ref-card-title {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .ref-card-sub {
+        font-size: 0.86rem;
+        color: #777;
+        margin-bottom: 0.75rem;
+      }
+
+      .ref-status-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      @media (max-width: 640px) {
+        .ref-status-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .ref-status-item {
+        border-radius: 0.9rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 0.7rem 0.8rem;
+        background: #fafafa;
+      }
+
+      .ref-status-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #888;
+        margin-bottom: 0.15rem;
+      }
+
+      .ref-status-value {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .ref-status-note {
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 0.4rem;
+      }
+
+      .ref-payout-list {
+        font-size: 0.88rem;
+        color: #444;
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      .ref-payout-list li {
+        margin-bottom: 0.3rem;
+      }
+
+      .ref-details {
+        border-radius: 0.9rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 0.8rem 0.9rem;
+        background: #fafafa;
+      }
+
+      .ref-details summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+      }
+
+      .ref-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .ref-details-chevron {
+        font-size: 1rem;
+        opacity: 0.6;
+      }
+
+      .ref-details-content {
+        margin-top: 0.7rem;
+        font-size: 0.88rem;
+        color: #555;
+      }
+
+      .ref-breakdown-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.25rem;
+      }
+
+      .ref-breakdown-label {
+        color: #666;
+      }
+
+      .ref-breakdown-value {
+        font-weight: 500;
+      }
+
+      .ref-link-box {
+        border-radius: 0.9rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 0.8rem 0.9rem;
+        background: #fafafa;
+      }
+
+      .ref-link-value {
+        font-size: 0.85rem;
+        word-break: break-all;
+        margin-bottom: 0.6rem;
+      }
+
+      .ref-link-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .ref-btn-main {
+        border: none;
+        background: #d4af37;
+        color: #111;
+        padding: 0.42rem 1.25rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .ref-btn-ghost {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: #ffffff;
+        color: #444;
+        padding: 0.42rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .ref-table-wrapper {
+        margin-top: 0.75rem;
+        overflow-x: auto;
+      }
+
+      table.ref-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+
+      table.ref-table thead {
+        background: #fafafa;
+      }
+
+      table.ref-table th,
+      table.ref-table td {
+        padding: 0.5rem 0.4rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      table.ref-table th {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        color: #999;
+      }
+
+      .ref-empty {
+        font-size: 0.82rem;
+        color: #888;
+        margin-top: 0.5rem;
+      }
+
+      .ref-footer-note {
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 1.5rem;
+      }
+
+      .ref-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        background: #111;
+        color: #fff;
+        padding: 0.55rem 1.2rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .ref-toast.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="ref-page">
+      <header class="ref-header">
+        <div class="ref-logo">THE MASTER KEY</div>
+
+        <div class="ref-lang-switch">
+          <button
+            type="button"
+            class="ref-lang-btn"
+            data-lang="es"
+          >
+            ES
+          </button>
+          <button
+            type="button"
+            class="ref-lang-btn"
+            data-lang="en"
+          >
+            EN
+          </button>
+        </div>
+      </header>
+
+      <main class="ref-main">
+        <div class="ref-intro">
+          <div class="ref-kicker" data-i18n="ref.kicker">
+            REFERRAL PROGRAM
+          </div>
+          <h1 class="ref-title" data-i18n="ref.title">
+            Your Referral Summary
+          </h1>
+          <p class="ref-subtitle" data-i18n="ref.subtitle">
+            Share your Master Key link and unlock rewards for helping others
+            grow, with a simple and transparent structure.
+          </p>
+        </div>
+
+        <div class="ref-grid">
+          <!-- COLUMNA IZQUIERDA -->
+          <div>
+            <!-- Box #1: Referral Status Overview -->
+            <section class="ref-card">
+              <h2 class="ref-card-title" data-i18n="ref.statusTitle">
+                Referral Status Overview
+              </h2>
+              <p class="ref-card-sub" data-i18n="ref.statusSub">
+                A snapshot of your current referrals and projected rewards.
+              </p>
+
+              <div class="ref-status-grid">
+                <div class="ref-status-item">
+                  <div
+                    class="ref-status-label"
+                    data-i18n="ref.totalLabel"
+                  >
+                    Total Referrals
+                  </div>
+                  <div
+                    class="ref-status-value"
+                    id="refTotal"
+                  >
+                    0
+                  </div>
+                </div>
+
+                <div class="ref-status-item">
+                  <div
+                    class="ref-status-label"
+                    data-i18n="ref.qualifiedLabel"
+                  >
+                    Qualified Referrals
+                  </div>
+                  <div
+                    class="ref-status-value"
+                    id="refQualified"
+                  >
+                    0
+                  </div>
+                </div>
+
+                <div class="ref-status-item">
+                  <div
+                    class="ref-status-label"
+                    data-i18n="ref.pendingLabel"
+                  >
+                    Pending / In-Process
+                  </div>
+                  <div
+                    class="ref-status-value"
+                    id="refPending"
+                  >
+                    0
+                  </div>
+                </div>
+
+                <div class="ref-status-item">
+                  <div
+                    class="ref-status-label"
+                    data-i18n="ref.projectedLabel"
+                  >
+                    Projected Earnings
+                  </div>
+                  <div
+                    class="ref-status-value"
+                    id="refProjected"
+                  >
+                    $0
+                  </div>
+                </div>
+              </div>
+
+              <p class="ref-status-note" data-i18n="ref.statusNote">
+                The projected amount includes only approved referrals and may
+                exclude payments still within the 3–7 day internal verification
+                window.
+              </p>
+
+              <p class="ref-status-note">
+                <span data-i18n="ref.procLabel">Processing deduction:</span>
+                <strong>10%</strong>
+              </p>
+            </section>
+
+            <!-- Box #2: Payout Schedule -->
+            <section class="ref-card">
+              <h2 class="ref-card-title" data-i18n="ref.payoutTitle">
+                Payout Schedule
+              </h2>
+              <p class="ref-card-sub" data-i18n="ref.payoutSub">
+                Your referral rewards are paid on a predictable schedule, so you
+                always know what to expect.
+              </p>
+
+              <ul class="ref-payout-list">
+                <li data-i18n="ref.payoutItem1">
+                  Payments are processed on the 13th and 27th of each month.
+                </li>
+                <li data-i18n="ref.payoutItem2">
+                  Only referrals that have passed the internal 3–7 business day
+                  verification window are included.
+                </li>
+                <li data-i18n="ref.payoutItem3">
+                  Payments are sent via Stripe Connect directly to your account.
+                </li>
+              </ul>
+            </section>
+
+            <!-- Box #3: Reward Breakdown -->
+            <section class="ref-card">
+              <h2 class="ref-card-title" data-i18n="ref.breakTitle">
+                Referral Reward Breakdown
+              </h2>
+              <p class="ref-card-sub" data-i18n="ref.breakSub">
+                Transparent breakdown of how your reward per referral is
+                calculated.
+              </p>
+
+              <details class="ref-details" open>
+                <summary>
+                  <span data-i18n="ref.breakSummary">
+                    See reward calculation per referral
+                  </span>
+                  <span class="ref-details-chevron">⌄</span>
+                </summary>
+                <div class="ref-details-content">
+                  <div class="ref-breakdown-row">
+                    <span
+                      class="ref-breakdown-label"
+                      data-i18n="ref.baseLabel"
+                    >
+                      Base reward per referral
+                    </span>
+                    <span class="ref-breakdown-value">$197.00</span>
+                  </div>
+                  <div class="ref-breakdown-row">
+                    <span
+                      class="ref-breakdown-label"
+                      data-i18n="ref.procFeeLabel"
+                    >
+                      Processing fee (10%)
+                    </span>
+                    <span class="ref-breakdown-value">–$19.70</span>
+                  </div>
+                  <div class="ref-breakdown-row">
+                    <span
+                      class="ref-breakdown-label"
+                      data-i18n="ref.netLabel"
+                    >
+                      Net reward per referral
+                    </span>
+                    <span class="ref-breakdown-value">$177.30</span>
+                  </div>
+
+                  <p class="ref-status-note" data-i18n="ref.breakNote">
+                    This structure keeps the program sustainable, covers
+                    operational costs and keeps rewards clear and predictable
+                    for every member.
+                  </p>
+                </div>
+              </details>
+            </section>
+          </div>
+
+          <!-- COLUMNA DERECHA -->
+          <div>
+            <!-- Box #4: Your Referral Link -->
+            <section class="ref-card">
+              <h2 class="ref-card-title" data-i18n="ref.linkTitle">
+                Your Referral Link
+              </h2>
+              <p class="ref-card-sub" data-i18n="ref.linkSub">
+                Share this link with people you invite so they can join through
+                you.
+              </p>
+
+              <div class="ref-link-box">
+                <div
+                  class="ref-link-value"
+                  id="refLinkValue"
+                >
+                  —
+                </div>
+
+                <div class="ref-link-actions">
+                  <button
+                    type="button"
+                    class="ref-btn-main"
+                    id="copyRefLinkBtn"
+                    data-i18n="ref.copyLinkBtn"
+                  >
+                    COPY LINK
+                  </button>
+
+                  <button
+                    type="button"
+                    class="ref-btn-ghost"
+                    data-channel="whatsapp"
+                    data-i18n="ref.shareWa"
+                  >
+                    WhatsApp
+                  </button>
+                  <button
+                    type="button"
+                    class="ref-btn-ghost"
+                    data-channel="instagram"
+                    data-i18n="ref.shareIg"
+                  >
+                    Instagram
+                  </button>
+                  <button
+                    type="button"
+                    class="ref-btn-ghost"
+                    data-channel="facebook"
+                    data-i18n="ref.shareFb"
+                  >
+                    Facebook
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- Box #5: Referral Activity List -->
+            <section class="ref-card">
+              <h2 class="ref-card-title" data-i18n="ref.activityTitle">
+                Referral Activity
+              </h2>
+              <p class="ref-card-sub" data-i18n="ref.activitySub">
+                A simple view of who has joined through your link and their
+                current status.
+              </p>
+
+              <div class="ref-table-wrapper">
+                <table class="ref-table">
+                  <thead>
+                    <tr>
+                      <th data-i18n="ref.colName">Name / Email</th>
+                      <th data-i18n="ref.colStatus">Status</th>
+                      <th data-i18n="ref.colJoined">Joined</th>
+                      <th data-i18n="ref.colClears">Clears On</th>
+                      <th data-i18n="ref.colReward">Reward</th>
+                    </tr>
+                  </thead>
+                  <tbody id="refTableBody">
+                    <!-- Aquí luego se llenará con datos reales desde tu backend -->
+                  </tbody>
+                </table>
+              </div>
+
+              <p
+                class="ref-empty"
+                id="refEmptyState"
+                data-i18n="ref.empty"
+              >
+                Your detailed referral list will appear here as the system
+                starts recording activity.
+              </p>
+            </section>
+          </div>
+        </div>
+
+        <p class="ref-footer-note" data-i18n="ref.footerNote">
+          This page is for transparency and clarity. It reduces questions,
+          protects the integrity of the program and helps you track your
+          progress in a simple way.
+        </p>
+      </main>
+    </div>
+
+    <div id="refToast" class="ref-toast">Copied</div>
+
+    <script>
+      (function () {
+        const LANG_KEY = "ma_lang";
+
+        const TRANSLATIONS = {
+          es: {
+            "ref.kicker": "PROGRAMA DE REFERIDOS",
+            "ref.title": "Tu resumen de referidos",
+            "ref.subtitle":
+              "Comparte tu enlace de The Master Key y recibe recompensas por ayudar a otros a crecer, con una estructura simple y transparente.",
+            "ref.statusTitle": "Resumen de tu estado de referidos",
+            "ref.statusSub":
+              "Una vista rápida de tus referidos actuales y recompensas estimadas.",
+            "ref.totalLabel": "Referidos totales",
+            "ref.qualifiedLabel": "Referidos calificados",
+            "ref.pendingLabel": "Pendientes / En proceso",
+            "ref.projectedLabel": "Recompensas estimadas",
+            "ref.statusNote":
+              "El monto estimado incluye solo referidos aprobados y puede excluir pagos que aún están dentro de la ventana interna de verificación de 3 a 7 días hábiles.",
+            "ref.procLabel": "Deducción por procesamiento:",
+            "ref.payoutTitle": "Calendario de pagos",
+            "ref.payoutSub":
+              "Tus recompensas se pagan en un calendario claro, para que siempre sepas qué esperar.",
+            "ref.payoutItem1":
+              "Los pagos se procesan el día 13 y 27 de cada mes.",
+            "ref.payoutItem2":
+              "Solo se incluyen los referidos que ya pasaron la ventana interna de verificación de 3 a 7 días hábiles.",
+            "ref.payoutItem3":
+              "Los pagos se envían por Stripe Connect directamente a tu cuenta.",
+            "ref.breakTitle": "Desglose de tu recompensa",
+            "ref.breakSub":
+              "Desglose transparente de cómo se calcula tu recompensa por cada referido.",
+            "ref.breakSummary":
+              "Ver el cálculo de recompensa por referido",
+            "ref.baseLabel": "Recompensa base por referido",
+            "ref.procFeeLabel": "Costo de procesamiento (10%)",
+            "ref.netLabel": "Recompensa neta por referido",
+            "ref.breakNote":
+              "Esta estructura mantiene el programa sostenible, cubre costos operativos y mantiene claras y predecibles las recompensas para cada miembro.",
+            "ref.linkTitle": "Tu enlace de referido",
+            "ref.linkSub":
+              "Comparte este enlace con las personas que invites para que se unan a través de ti.",
+            "ref.copyLinkBtn": "COPIAR ENLACE",
+            "ref.shareWa": "WhatsApp",
+            "ref.shareIg": "Instagram",
+            "ref.shareFb": "Facebook",
+            "ref.activityTitle": "Actividad de tus referidos",
+            "ref.activitySub":
+              "Una vista sencilla de quién ha entrado con tu enlace y cuál es su estado.",
+            "ref.colName": "Nombre / Email",
+            "ref.colStatus": "Estado",
+            "ref.colJoined": "Fecha de ingreso",
+            "ref.colClears": "Se confirma el",
+            "ref.colReward": "Recompensa",
+            "ref.empty":
+              "El detalle de tus referidos aparecerá aquí a medida que el sistema registre actividad.",
+            "ref.footerNote":
+              "Esta página existe para darte transparencia y claridad. Reduce preguntas, protege la integridad del programa y te ayuda a seguir tu progreso de forma simple.",
+            "ref.toastCopied": "Enlace copiado",
+            "ref.statusPending": "Pendiente",
+            "ref.statusQualified": "Calificado",
+          },
+          en: {
+            "ref.kicker": "REFERRAL PROGRAM",
+            "ref.title": "Your Referral Summary",
+            "ref.subtitle":
+              "Share your Master Key link and unlock rewards for helping others grow, with a simple and transparent structure.",
+            "ref.statusTitle": "Referral Status Overview",
+            "ref.statusSub":
+              "A quick snapshot of your current referrals and projected rewards.",
+            "ref.totalLabel": "Total Referrals",
+            "ref.qualifiedLabel": "Qualified Referrals",
+            "ref.pendingLabel": "Pending / In-Process",
+            "ref.projectedLabel": "Projected Earnings",
+            "ref.statusNote":
+              "The projected amount includes only approved referrals and may exclude payments still within the 3–7 business day internal verification window.",
+            "ref.procLabel": "Processing deduction:",
+            "ref.payoutTitle": "Payout Schedule",
+            "ref.payoutSub":
+              "Your rewards follow a clear payout schedule, so you always know what to expect.",
+            "ref.payoutItem1":
+              "Payments are processed on the 13th and 27th of each month.",
+            "ref.payoutItem2":
+              "Only referrals that have passed the internal 3–7 business day verification window are included.",
+            "ref.payoutItem3":
+              "Payments are sent via Stripe Connect directly to your account.",
+            "ref.breakTitle": "Referral Reward Breakdown",
+            "ref.breakSub":
+              "Transparent breakdown of how your per-referral reward is calculated.",
+            "ref.breakSummary":
+              "See reward calculation per referral",
+            "ref.baseLabel": "Base reward per referral",
+            "ref.procFeeLabel": "Processing fee (10%)",
+            "ref.netLabel": "Net reward per referral",
+            "ref.breakNote":
+              "This structure keeps the program sustainable, covers operational costs, and keeps rewards clear and predictable for every member.",
+            "ref.linkTitle": "Your Referral Link",
+            "ref.linkSub":
+              "Share this link with the people you invite so they can join through you.",
+            "ref.copyLinkBtn": "COPY LINK",
+            "ref.shareWa": "WhatsApp",
+            "ref.shareIg": "Instagram",
+            "ref.shareFb": "Facebook",
+            "ref.activityTitle": "Referral Activity",
+            "ref.activitySub":
+              "A simple view of who has joined through your link and their current status.",
+            "ref.colName": "Name / Email",
+            "ref.colStatus": "Status",
+            "ref.colJoined": "Joined",
+            "ref.colClears": "Clears On",
+            "ref.colReward": "Reward",
+            "ref.empty":
+              "Your detailed referral list will appear here as the system starts recording activity.",
+            "ref.footerNote":
+              "This page exists for transparency and clarity. It reduces questions, protects the integrity of the program and helps you track your progress in a simple way.",
+            "ref.toastCopied": "Link copied",
+            "ref.statusPending": "Pending",
+            "ref.statusQualified": "Qualified",
+          },
+        };
+
+        function getLang() {
+          const stored = localStorage.getItem(LANG_KEY);
+          if (stored === "en" || stored === "es") return stored;
+          return "es";
+        }
+
+        function setLang(lang) {
+          localStorage.setItem(LANG_KEY, lang);
+        }
+
+        function applyLang() {
+          const lang = getLang();
+          const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
+          document.documentElement.lang = lang;
+
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (dict[key]) el.textContent = dict[key];
+          });
+
+          document
+            .querySelectorAll(".ref-lang-btn")
+            .forEach((btn) => {
+              const btnLang = btn.getAttribute("data-lang");
+              btn.classList.toggle("active", btnLang === lang);
+            });
+        }
+
+        function showToast(message) {
+          const toast = document.getElementById("refToast");
+          if (!toast) return;
+          toast.textContent = message;
+          toast.classList.add("visible");
+          setTimeout(() => {
+            toast.classList.remove("visible");
+          }, 1600);
+        }
+
+        // Leer info que mandamos desde el dashboard
+        function loadSummaryFromStorage() {
+          let summary = null;
+          try {
+            summary = JSON.parse(
+              localStorage.getItem("ma_ref_summary") || "null"
+            );
+          } catch (e) {
+            summary = null;
+          }
+
+          const refTotalEl = document.getElementById("refTotal");
+          const refQualEl = document.getElementById("refQualified");
+          const refPendEl = document.getElementById("refPending");
+          const refProjEl = document.getElementById("refProjected");
+
+          // Intentamos llenar desde lo que tenemos en el botón del dashboard:
+          // Ej: "12 REFERIDOS" / "12 REFERRALS"
+          // Ej: "$354.60 USD ESTIMADO / ESTIMATED"
+          if (summary && summary.refText) {
+            const parts = summary.refText.trim().split(" ");
+            const num = parts[0] && !isNaN(parseInt(parts[0], 10))
+              ? parseInt(parts[0], 10)
+              : 0;
+
+            if (refTotalEl) refTotalEl.textContent = num;
+            if (refQualEl) refQualEl.textContent = num; // por ahora asumimos todos calificados
+            if (refPendEl) refPendEl.textContent = 0;
+          }
+
+          if (summary && summary.estText && refProjEl) {
+            const tokens = summary.estText.trim().split(" ");
+            // tokens[0] debe ser algo como "$354.60"
+            const amount = tokens[0] || "$0";
+            refProjEl.textContent = amount;
+          }
+
+          // Construir el referral link desde ma_user
+          let user = null;
+          try {
+            user = JSON.parse(localStorage.getItem("ma_user") || "{}");
+          } catch (e) {
+            user = {};
+          }
+          const refid = user.refid || user.refId || "";
+          const baseUrl = window.location.origin + "/index.html";
+          const link = refid
+            ? baseUrl + "?ref=" + encodeURIComponent(refid)
+            : baseUrl;
+
+          const linkEl = document.getElementById("refLinkValue");
+          if (linkEl) {
+            linkEl.textContent = link;
+          }
+
+          // Tabla de actividad (placeholder por ahora)
+          const tbody = document.getElementById("refTableBody");
+          const emptyState = document.getElementById("refEmptyState");
+          if (tbody) {
+            // Si después conectas backend, aquí llenas filas reales.
+            // Por ahora dejamos sin filas y mostramos solo el mensaje vacío.
+            if (emptyState) emptyState.style.display = "block";
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          applyLang();
+          loadSummaryFromStorage();
+
+          // Idioma
+          document
+            .querySelectorAll(".ref-lang-btn")
+            .forEach((btn) => {
+              btn.addEventListener("click", function () {
+                const lang = this.getAttribute("data-lang");
+                setLang(lang);
+                applyLang();
+              });
+            });
+
+          // Botón copiar enlace
+          const copyBtn = document.getElementById("copyRefLinkBtn");
+          const linkEl = document.getElementById("refLinkValue");
+          copyBtn &&
+            copyBtn.addEventListener("click", async function () {
+              if (!linkEl) return;
+              const text = linkEl.textContent.trim();
+              try {
+                await navigator.clipboard.writeText(text);
+                const lang = getLang();
+                const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
+                showToast(
+                  dict["ref.toastCopied"] || "Copiado"
+                );
+              } catch (e) {
+                console.warn("No se pudo copiar:", e);
+              }
+            });
+
+          // Botones compartir (solo pre-llenan el texto / URL)
+          document
+            .querySelectorAll(".ref-btn-ghost")
+            .forEach((btn) => {
+              btn.addEventListener("click", function () {
+                if (!linkEl) return;
+                const url = encodeURIComponent(
+                  linkEl.textContent.trim()
+                );
+                const lang = getLang();
+                const dict = TRANSLATIONS[lang] || TRANSLATIONS.es;
+                const baseMsg =
+                  lang === "en"
+                    ? "This is the program I mentioned:"
+                    : "Este es el programa que te comenté:";
+                const text = encodeURIComponent(
+                  baseMsg + " " + linkEl.textContent.trim()
+                );
+                const channel = this.getAttribute("data-channel");
+
+                let shareUrl = "";
+                if (channel === "whatsapp") {
+                  shareUrl = "https://wa.me/?text=" + text;
+                } else if (channel === "facebook") {
+                  shareUrl =
+                    "https://www.facebook.com/sharer/sharer.php?u=" +
+                    url;
+                } else if (channel === "instagram") {
+                  // Instagram no acepta URLs directas para compartir texto desde web,
+                  // así que solo copiamos el enlace y mostramos un mensaje.
+                  navigator.clipboard
+                    .writeText(
+                      baseMsg + " " + decodeURIComponent(text)
+                    )
+                    .then(() => {
+                      showToast(
+                        dict["ref.toastCopied"] ||
+                          "Copiado"
+                      );
+                    });
+                  return;
+                }
+
+                if (shareUrl) {
+                  window.open(shareUrl, "_blank");
+                }
+              });
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
