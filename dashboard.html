@@ -538,45 +538,22 @@ if (phraseEl) {
         }
       })();
     </script>
+ 
+ <!-- Ajuste de textos del botón de referidos según idioma -->
+<script>
+  (function () {
+    function updateReferralTexts() {
+      ...
+    }
 
-    <!-- Ajuste de textos del botón de referidos según idioma -->
-    <script>
-      (function () {
-        function updateReferralTexts() {
-          const lang = window.maGetLang ? window.maGetLang() : "es";
-          const refEl = document.getElementById("dashReferralsText");
-          const estEl = document.getElementById("dashEstimateText");
+    document.addEventListener("DOMContentLoaded", function () {
+      updateReferralTexts();
+      setTimeout(updateReferralTexts, 800);
+    });
 
-          if (refEl) {
-            const text = refEl.textContent.trim();
-            const parts = text.split(" ");
-            const num = parts[0] || "0";
-            if (lang === "en") {
-              refEl.textContent = num + " REFERRALS";
-            } else {
-              refEl.textContent = num + " REFERIDOS";
-            }
-          }
+    window.maUpdateReferralTexts = updateReferralTexts;
+  })();
+</script>
 
-          if (estEl) {
-            const text = estEl.textContent.trim();
-            const tokens = text.split(" ");
-            const amount = tokens[0] || "$0";
-            const currency = tokens[1] || "USD";
-            const label = lang === "en" ? "ESTIMATED" : "ESTIMADO";
-            estEl.textContent = amount + " " + currency + " " + label;
-          }
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-          updateReferralTexts();
-          // pequeño delay extra para cuando app.js actualice datos
-          setTimeout(updateReferralTexts, 800);
-        });
-
-        // Exponer para que el sistema de idioma pueda llamarlo
-        window.maUpdateReferralTexts = updateReferralTexts;
-      })();
-    </script>
   </body>
 </html>
