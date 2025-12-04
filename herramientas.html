@@ -1,159 +1,624 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Herramientas para Compartir - Mente Abundante</title>
+    <title>The Master Key - Herramientas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- mismas fuentes que el dashboard -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
+    <!-- Puedes seguir usando tu styles.css general -->
     <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+        color: #222;
+      }
+
+      .tools-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tools-header {
+        padding: 1.25rem 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .tools-logo {
+        letter-spacing: 0.18em;
+        font-size: 0.85rem;
+      }
+
+      .tools-lang-switch {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .tools-lang-btn {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: #ffffff;
+        padding: 0.18rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .tools-lang-btn.active {
+        border-color: #d4af37;
+        background: #d4af37;
+        color: #ffffff;
+      }
+
+      .tools-main {
+        flex: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 1.5rem 1.75rem 3rem;
+      }
+
+      .tools-intro-kicker {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 0.4rem;
+      }
+
+      .tools-intro-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .tools-intro-text {
+        font-size: 0.92rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+      }
+
+      .tools-section {
+        background: #ffffff;
+        border-radius: 1.25rem;
+        padding: 1.5rem 1.25rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        margin-bottom: 1.25rem;
+      }
+
+      .tools-section-title {
+        font-size: 1.05rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .tools-section-desc {
+        font-size: 0.86rem;
+        color: #777;
+        margin-bottom: 1rem;
+      }
+
+      .tools-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .tools-item {
+        border-radius: 0.9rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 0.75rem 0.8rem;
+        background: #fafafa;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .tools-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      .tools-meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .tools-tag {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #999;
+      }
+
+      .tools-copy-btn {
+        border: none;
+        background: #d4af37;
+        color: #111;
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .tools-footer-note {
+        font-size: 0.8rem;
+        color: #888;
+        margin-top: 1.25rem;
+      }
+
+      .tools-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        background: #111;
+        color: #fff;
+        padding: 0.55rem 1.2rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .tools-toast.visible {
+        opacity: 1;
+      }
+
+      @media (max-width: 640px) {
+        .tools-section {
+          padding: 1.2rem 1rem;
+        }
+      }
+    </style>
   </head>
-  <body class="ma-body">
-    <div class="ma-dashboard-wrapper">
-      <!-- Header sencillo con back -->
-      <header class="ma-dashboard-header" id="dashboardHeader">
-        <div class="ma-dashboard-user-row" style="justify-content: space-between">
+
+  <body>
+    <div class="tools-page">
+      <header class="tools-header">
+        <div class="tools-logo">THE MASTER KEY</div>
+
+        <div class="tools-lang-switch">
           <button
             type="button"
-            class="ma-icon-button"
-            onclick="window.location.href='dashboard.html'"
-            aria-label="Volver al dashboard"
+            class="tools-lang-btn"
+            data-lang="es"
           >
-            ←
+            ES
           </button>
-          <div class="ma-user-name">Herramientas para compartir</div>
-          <div style="width: 32px"></div>
+          <button
+            type="button"
+            class="tools-lang-btn"
+            data-lang="en"
+          >
+            EN
+          </button>
         </div>
       </header>
 
-      <main class="ma-dashboard-main">
-        <!-- INTRO -->
-        <section class="ma-card">
-          <div class="ma-section-label">PROPÓSITO</div>
-          <p class="ma-news-text">
-            Aquí encontrarás guías y guiones para crear contenido orgánico sobre
-            <strong>Mente Abundante</strong> sin hacer promesas irreales, sin
-            problemas legales y manteniendo el corazón del proyecto: inspirar,
-            no presionar.
+      <main class="tools-main">
+        <div class="tools-intro">
+          <div
+            class="tools-intro-kicker"
+            data-i18n="tools.kicker"
+          >
+            HERRAMIENTAS PARA COMPARTIR
+          </div>
+          <h1
+            class="tools-intro-title"
+            data-i18n="tools.title"
+          >
+            Textos listos para copiar y pegar en tus redes.
+          </h1>
+          <p
+            class="tools-intro-text"
+            data-i18n="tools.intro"
+          >
+            Usa estos ejemplos como base. Puedes adaptarlos a tu estilo, pero
+            mantén la esencia: simple, honesto y sin prometer resultados
+            garantizados.
           </p>
-        </section>
+        </div>
 
-        <!-- QUÉ SÍ / QUÉ NO -->
-        <section class="ma-card">
-          <div class="ma-section-label">QUÉ SÍ PUEDES DECIR</div>
-          <ul class="ma-news-text">
-            <li>Hablar de <strong>tu experiencia personal</strong> (testimonio).</li>
-            <li>Mencionar que es un <strong>programa de crecimiento personal</strong> y comunidad.</li>
-            <li>Decir que incluye un <strong>ebook motivacional</strong> y un sistema de referidos.</li>
-            <li>Enfatizar que <strong>no es empleo ni salario fijo</strong> sino ingresos variables.</li>
-            <li>Invitar con frases tipo: “<em>Si quieres saber cómo he creado un ingreso extra de forma simple y sin presión, mándame mensaje.</em>”</li>
-          </ul>
-        </section>
-
-        <section class="ma-card">
-          <div class="ma-section-label">QUÉ NO DEBES DECIR</div>
-          <ul class="ma-news-text">
-            <li>No prometas ganancias garantizadas (“vas a ganar 3 mil seguros”).</li>
-            <li>No digas que es <strong>empleo</strong>, “trabajo fijo”, “salario” ni “inversión financiera asegurada”.</li>
-            <li>No prometas tiempos exactos (“en 1 semana vas a ganar…”).</li>
-            <li>No uses nombres de bancos, empresas o marcas como si fueran socios oficiales (a menos que lo sean).</li>
-            <li>No muestres estados de cuenta ni capturas con montos exagerados como garantía.</li>
-          </ul>
-        </section>
-
-        <!-- GUIONES CORTOS (15–20s) -->
-        <section class="ma-card">
-          <div class="ma-section-label">GUIONES CORTOS (15–20 SEG)</div>
-          <p class="ma-news-text">
-            Estos son ejemplos de videos verticales rápidos para TikTok, Reels o Shorts.
-            Adáptalos a tu estilo, habla natural y grábate en tu entorno real.
+        <!-- CORTOS -->
+        <section class="tools-section">
+          <h2
+            class="tools-section-title"
+            data-i18n="tools.shortTitle"
+          >
+            Textos cortos para historias / shorts
+          </h2>
+          <p
+            class="tools-section-desc"
+            data-i18n="tools.shortDesc"
+          >
+            Ideales para historias de Instagram, Facebook, TikTok o YouTube
+            Shorts.
           </p>
-          <ol class="ma-news-text">
-            <li>
-              <strong>Hook simple:</strong><br />
-              “¿Te imaginas generar un ingreso extra compartiendo un libro que realmente
-              transforma tu mentalidad? Yo empecé con <strong>Mente Abundante</strong>,
-              leí el ebook, puse en práctica varias ideas y ahora comparto el proyecto
-              con amigos que también quieren crecer. Si quieres que te cuente mi experiencia,
-              escríbeme <strong>‘ABUNDANCIA’</strong>.”
-            </li>
-            <li>
-              <strong>Testimonio corto:</strong><br />
-              “Hace unos meses estaba buscando una forma de mejorar mis finanzas y mi mentalidad.
-              Encontré un programa llamado <strong>Mente Abundante</strong>, empecé por el ebook
-              y hoy tengo una comunidad de personas con la que crecemos juntos y además genero un
-              ingreso extra. No es magia ni promesa rápida, es constancia. Si te interesa saber cómo funciona,
-              mándame mensaje.”
-            </li>
-            <li>
-              <strong>Enfoque mentalidad:</strong><br />
-              “La verdadera abundancia empieza en la mente. Estoy en un proyecto donde
-              trabajamos mentalidad, propósito y también aprendemos a generar ingresos compartiendo un libro.
-              No es para todo el mundo, pero si sientes que ya es tiempo de subir de nivel, mándame un DM.”
-            </li>
-          </ol>
+
+          <div class="tools-list">
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.short1"
+              >
+                ¿Te gustaría saber cómo empecé a generar ingresos extra
+                recomendando un solo recurso digital? Te cuento más aquí. 👇
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.shortTag"
+                >
+                  HISTORIA / SHORT
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.short2"
+              >
+                Un solo programa. Un sistema claro. Sin dramas. Si quieres ver
+                cómo funciona, mándame un mensaje con la palabra “LLAVE”.
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.shortTag"
+                >
+                  HISTORIA / SHORT
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.short3"
+              >
+                No es multinivel, no es trading, no son productos físicos. Es
+                una sola llave maestra que recomiendo porque primero me ayudó a
+                mí.
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.shortTag"
+                >
+                  HISTORIA / SHORT
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- GUIONES MEDIOS (30–45s) -->
-        <section class="ma-card">
-          <div class="ma-section-label">GUIONES MEDIOS (30–45 SEG)</div>
-          <ol class="ma-news-text">
-            <li>
-              <strong>Historia antes / después:</strong><br />
-              “Antes de entrar a <strong>Mente Abundante</strong>, yo veía el dinero solo como algo que faltaba.
-              Empecé leyendo un ebook que habla de <em>decidir</em> ser abundante, hice varios ejercicios,
-              y poco a poco cambié mi forma de hablar, de pensar y de tomar decisiones. Después descubrí
-              que podía compartir este mismo material con otras personas y recibir una comisión por cada
-              persona que decide entrar. No es un trabajo mágico, pero para mí ha sido una herramienta real
-              para crecer. Si quieres que te mande la información clara, sin presión, escríbeme.”
-            </li>
-            <li>
-              <strong>Enfatizando transparencia:</strong><br />
-              “Quiero contarte algo importante: lo que estoy haciendo <strong>no es empleo, no es salario fijo</strong>
-              y no es una promesa de hacerte rico. Es un sistema de afiliados donde compartimos un ebook y una
-              comunidad de crecimiento. Te pagan una comisión por cada persona que entra con tu enlace, nada más
-              y nada menos. Si estás buscando opciones para generar un ingreso extra de forma honesta, sin engaños,
-              te puedo explicar cómo funciona y tú decides.”
-            </li>
-          </ol>
+        <!-- MEDIOS -->
+        <section class="tools-section">
+          <h2
+            class="tools-section-title"
+            data-i18n="tools.midTitle"
+          >
+            Textos medianos para publicaciones
+          </h2>
+          <p
+            class="tools-section-desc"
+            data-i18n="tools.midDesc"
+          >
+            Úsalos en posts de Instagram, Facebook o descripciones de videos.
+          </p>
+
+          <div class="tools-list">
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.mid1"
+              >
+                Hace tiempo estaba buscando una forma de generar ingresos extra
+                sin tener que meterme a esquemas raros ni vivir pegado al
+                teléfono. Encontré un programa llamado “The Master Key” que
+                combina desarrollo personal profundo con un sistema muy simple
+                de referidos. Si quieres ver de qué se trata, mándame mensaje y
+                te comparto el enlace.
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.midTag"
+                >
+                  PUBLICACIÓN
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.mid2"
+              >
+                No prometo “hacerte rico en 7 días”, ni “dinero fácil mientras
+                duermes”. Lo que sí encontré fue un recurso que ordenó mi mente,
+                me dio herramientas reales y además me permite generar ingresos
+                recomendándolo. Si quieres información sin compromiso, escríbeme
+                y te cuento qué es The Master Key.
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.midTag"
+                >
+                  PUBLICACIÓN
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- GUIONES LARGOS (60–90s) -->
-        <section class="ma-card">
-          <div class="ma-section-label">GUIONES LARGOS (60–90 SEG)</div>
-          <ol class="ma-news-text">
-            <li>
-              <strong>Explicación completa estilo storytime:</strong><br />
-              “Quiero contarte cómo llegué a <strong>Mente Abundante</strong>. Yo estaba buscando algo que me ayudara
-              a cambiar mi relación con el dinero, pero sin caer en promesas falsas. Encontré un ebook que se llama
-              ‘Yo Decido Ser Abundante’ y lo que me atrapó es que no se trataba solo de dinero, sino de mentalidad,
-              decisiones diarias y propósito. Después de leerlo, descubrí que había una comunidad detrás, con un sistema
-              donde tú puedes recomendar el libro y ganar una comisión cuando alguien entra con tu código. No es para
-              todo el mundo: necesitas disciplina, paciencia y ganas de aprender. Pero si sientes que ya es tiempo de
-              hacer algo distinto con tu vida financiera y emocional, mándame mensaje y te comparto los detalles para
-              que tú mismo evalúes si resuena contigo.”
-            </li>
-          </ol>
+        <!-- LARGOS -->
+        <section class="tools-section">
+          <h2
+            class="tools-section-title"
+            data-i18n="tools.longTitle"
+          >
+            Textos largos para descripciones / biografía
+          </h2>
+          <p
+            class="tools-section-desc"
+            data-i18n="tools.longDesc"
+          >
+            Úsalos como descripción en YouTube, publicaciones largas o sección
+            “sobre mí”.
+          </p>
+
+          <div class="tools-list">
+            <div class="tools-item">
+              <p
+                class="tools-text"
+                data-i18n="tools.long1"
+              >
+                Durante mucho tiempo quise mejorar mis finanzas, pero todo lo
+                que encontraba eran promesas vacías o sistemas que no iban con
+                mis valores. The Master Key no es una fórmula mágica, es un
+                programa que combina formación interior, mentalidad de
+                abundancia y un modelo muy sencillo: recomiendas un solo
+                recurso digital de alto valor y recibes una comisión clara por
+                cada persona que decide entrar. No tienes que perseguir a nadie,
+                no tienes que “reclutar”, no es multinivel. Si quieres que te
+                explique cómo funciona y ver si hace sentido para ti, mándame un
+                mensaje directo y te lo explico sin presión.
+              </p>
+              <div class="tools-meta-row">
+                <span
+                  class="tools-tag"
+                  data-i18n="tools.longTag"
+                >
+                  DESCRIPCIÓN LARGA
+                </span>
+                <button
+                  type="button"
+                  class="tools-copy-btn"
+                  data-i18n="tools.copyBtn"
+                >
+                  COPIAR
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- RECORDATORIO LEGAL / TONO -->
-        <section class="ma-card">
-          <div class="ma-section-label">RECORDATORIO CLAVE</div>
-          <ul class="ma-news-text">
-            <li>Siempre habla desde tu experiencia personal (“en mi caso…”, “para mí…”).</li>
-            <li>Evita palabras como “garantizado”, “asegurado”, “sin riesgo”.</li>
-            <li>Si mencionas ingresos, di que “los resultados dependen de cada persona, su esfuerzo y constancia”.</li>
-            <li>Si tienes dudas sobre si una frase es adecuada, <strong>sé conservador</strong> o pregúntanos antes de publicar.</li>
-          </ul>
-        </section>
+        <p
+          class="tools-footer-note"
+          data-i18n="tools.footerNote"
+        >
+          Puedes adaptar estos textos a tu historia personal. Evita prometer
+          ganancias garantizadas, cantidades específicas o resultados asegurados.
+        </p>
       </main>
     </div>
 
-    <!-- no hace falta app.js aquí, pero puedes usarlo si quieres coherencia -->
+    <div id="toolsToast" class="tools-toast">Copiado</div>
+
+    <script>
+      (function () {
+        const LANG_KEY = "ma_lang";
+
+        const TRANSLATIONS = {
+          es: {
+            "tools.kicker": "HERRAMIENTAS PARA COMPARTIR",
+            "tools.title":
+              "Textos listos para copiar y pegar en tus redes.",
+            "tools.intro":
+              "Usa estos ejemplos como base. Puedes adaptarlos a tu estilo, pero mantén la esencia: simple, honesto y sin prometer resultados garantizados.",
+            "tools.shortTitle": "Textos cortos para historias / shorts",
+            "tools.shortDesc":
+              "Ideales para historias de Instagram, Facebook, TikTok o YouTube Shorts.",
+            "tools.short1":
+              "¿Te gustaría saber cómo empecé a generar ingresos extra recomendando un solo recurso digital? Te cuento más aquí. 👇",
+            "tools.short2":
+              "Un solo programa. Un sistema claro. Sin dramas. Si quieres ver cómo funciona, mándame un mensaje con la palabra “LLAVE”.",
+            "tools.short3":
+              "No es multinivel, no es trading, no son productos físicos. Es una sola llave maestra que recomiendo porque primero me ayudó a mí.",
+            "tools.shortTag": "HISTORIA / SHORT",
+            "tools.midTitle": "Textos medianos para publicaciones",
+            "tools.midDesc":
+              "Úsalos en posts de Instagram, Facebook o descripciones de videos.",
+            "tools.mid1":
+              "Hace tiempo estaba buscando una forma de generar ingresos extra sin tener que meterme a esquemas raros ni vivir pegado al teléfono. Encontré un programa llamado “The Master Key” que combina desarrollo personal profundo con un sistema muy simple de referidos. Si quieres ver de qué se trata, mándame mensaje y te comparto el enlace.",
+            "tools.mid2":
+              "No prometo “hacerte rico en 7 días”, ni “dinero fácil mientras duermes”. Lo que sí encontré fue un recurso que ordenó mi mente, me dio herramientas reales y además me permite generar ingresos recomendándolo. Si quieres información sin compromiso, escríbeme y te cuento qué es The Master Key.",
+            "tools.midTag": "PUBLICACIÓN",
+            "tools.longTitle":
+              "Textos largos para descripciones / biografía",
+            "tools.longDesc":
+              "Úsalos como descripción en YouTube, publicaciones largas o sección “sobre mí”.",
+            "tools.long1":
+              "Durante mucho tiempo quise mejorar mis finanzas, pero todo lo que encontraba eran promesas vacías o sistemas que no iban con mis valores. The Master Key no es una fórmula mágica, es un programa que combina formación interior, mentalidad de abundancia y un modelo muy sencillo: recomiendas un solo recurso digital de alto valor y recibes una comisión clara por cada persona que decide entrar. No tienes que perseguir a nadie, no tienes que “reclutar”, no es multinivel. Si quieres que te explique cómo funciona y ver si hace sentido para ti, mándame un mensaje directo y te lo explico sin presión.",
+            "tools.longTag": "DESCRIPCIÓN LARGA",
+            "tools.copyBtn": "COPIAR",
+            "tools.copied": "Texto copiado",
+            "tools.footerNote":
+              "Puedes adaptar estos textos a tu historia personal. Evita prometer ganancias garantizadas, cantidades específicas o resultados asegurados.",
+          },
+          en: {
+            "tools.kicker": "TOOLS TO SHARE",
+            "tools.title":
+              "Ready-to-use texts to copy and paste on your socials.",
+            "tools.intro":
+              "Use these examples as a base. You can adapt them to your style, but keep the essence: simple, honest and without promising guaranteed results.",
+            "tools.shortTitle": "Short scripts for stories / shorts",
+            "tools.shortDesc":
+              "Perfect for Instagram Stories, Facebook Stories, TikTok or YouTube Shorts.",
+            "tools.short1":
+              "Would you like to know how I started earning extra income by recommending just one digital resource? I’ll tell you more here. 👇",
+            "tools.short2":
+              "One program. A clear system. No drama. If you want to see how it works, send me a message with the word “KEY”.",
+            "tools.short3":
+              "It’s not MLM, not trading, not physical products. It’s one master key I recommend because it helped me first.",
+            "tools.shortTag": "STORY / SHORT",
+            "tools.midTitle": "Medium-length texts for posts",
+            "tools.midDesc":
+              "Use them for Instagram / Facebook posts or video descriptions.",
+            "tools.mid1":
+              "For a long time I was looking for a way to create extra income without getting into strange schemes or living glued to my phone. I found a program called “The Master Key” that combines deep personal growth with a very simple referral system. If you want to see what it’s about, send me a message and I’ll share the link with you.",
+            "tools.mid2":
+              "I don’t promise to “make you rich in 7 days” or “easy money while you sleep”. What I did find was a resource that helped me get my mind in order, gave me real tools, and also allows me to earn by recommending it. If you want information with no pressure, send me a message and I’ll explain what The Master Key is.",
+            "tools.midTag": "POST",
+            "tools.longTitle":
+              "Long texts for descriptions / bio",
+            "tools.longDesc":
+              "Use them as a YouTube description, long post or “about me” section.",
+            "tools.long1":
+              "For a long time I wanted to improve my finances, but everything I found were empty promises or systems that didn’t match my values. The Master Key is not a magic formula; it’s a program that combines inner formation, an abundance mindset, and a very simple model: you recommend one high-value digital resource and receive a clear commission for each person who decides to join. You don’t have to chase anyone, you don’t have to “recruit”, it’s not MLM. If you’d like me to explain how it works and see if it makes sense for you, send me a direct message and I’ll walk you through it without pressure.",
+            "tools.longTag": "LONG DESCRIPTION",
+            "tools.copyBtn": "COPY",
+            "tools.copied": "Text copied",
+            "tools.footerNote":
+              "You can adapt these texts to your personal story. Avoid promising guaranteed earnings, specific amounts or assured results.",
+          },
+        };
+
+        function getLang() {
+          const stored = localStorage.getItem(LANG_KEY);
+          if (stored === "en" || stored === "es") return stored;
+          return "es";
+        }
+
+        function setLang(lang) {
+          localStorage.setItem(LANG_KEY, lang);
+        }
+
+        function applyLang() {
+          const lang = getLang();
+          const dict = TRANSLATIONS[lang];
+          document.documentElement.lang = lang;
+
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (dict[key]) el.textContent = dict[key];
+          });
+
+          document
+            .querySelectorAll(".tools-lang-btn")
+            .forEach((btn) => {
+              const btnLang = btn.getAttribute("data-lang");
+              btn.classList.toggle("active", btnLang === lang);
+            });
+        }
+
+        function showToast(message) {
+          const toast = document.getElementById("toolsToast");
+          if (!toast) return;
+          toast.textContent = message;
+          toast.classList.add("visible");
+          setTimeout(() => {
+            toast.classList.remove("visible");
+          }, 1600);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          applyLang();
+
+          // Botones de idioma
+          document
+            .querySelectorAll(".tools-lang-btn")
+            .forEach((btn) => {
+              btn.addEventListener("click", function () {
+                const lang = this.getAttribute("data-lang");
+                setLang(lang);
+                applyLang();
+              });
+            });
+
+          // Botones de copiar
+          document
+            .querySelectorAll(".tools-copy-btn")
+            .forEach((btn) => {
+              btn.addEventListener("click", async function () {
+                const item = this.closest(".tools-item");
+                if (!item) return;
+                const textEl = item.querySelector(".tools-text");
+                if (!textEl) return;
+
+                const text = textEl.textContent.trim();
+                try {
+                  await navigator.clipboard.writeText(text);
+                  const lang = getLang();
+                  const dict = TRANSLATIONS[lang];
+                  showToast(dict["tools.copied"] || "Copiado");
+                } catch (e) {
+                  console.warn("No se pudo copiar:", e);
+                }
+              });
+            });
+        });
+      })();
+    </script>
   </body>
 </html>
