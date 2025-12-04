@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -152,6 +152,30 @@
       cursor: default;
     }
 
+    .ma-password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .ma-password-wrap .ma-form-input {
+      padding-right: 2.4rem;
+    }
+
+    .ma-password-toggle {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      color: #9b8570;
+      padding: 0;
+    }
+
     .ma-field-hint {
       font-size: 0.78rem;
       color: #97826b;
@@ -303,13 +327,44 @@
 
         <div class="ma-form-field">
           <label class="ma-form-label" for="password">Password</label>
-          <input
-            id="password"
-            class="ma-form-input"
-            type="password"
-            placeholder="Create a secure password"
-            autocomplete="new-password"
-          />
+          <div class="ma-password-wrap">
+            <input
+              id="password"
+              class="ma-form-input"
+              type="password"
+              placeholder="Create a secure password"
+              autocomplete="new-password"
+            />
+            <button
+              type="button"
+              class="ma-password-toggle"
+              data-target="password"
+              aria-label="Toggle password visibility"
+            >
+              👁
+            </button>
+          </div>
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="passwordConfirm">Confirm password</label>
+          <div class="ma-password-wrap">
+            <input
+              id="passwordConfirm"
+              class="ma-form-input"
+              type="password"
+              placeholder="Repeat your password"
+              autocomplete="new-password"
+            />
+            <button
+              type="button"
+              class="ma-password-toggle"
+              data-target="passwordConfirm"
+              aria-label="Toggle password visibility"
+            >
+              👁
+            </button>
+          </div>
         </div>
 
         <div class="ma-form-field ma-form-field-full">
@@ -354,6 +409,7 @@
       const phoneInput = document.getElementById("phone");
       const usernameInput = document.getElementById("username");
       const passwordInput = document.getElementById("password");
+      const passwordConfirmInput = document.getElementById("passwordConfirm");
       const refInput = document.getElementById("refCode");
       const refHint = document.getElementById("refHint");
       const signupForm = document.getElementById("signupForm");
@@ -361,7 +417,7 @@
       const signupSuccess = document.getElementById("signupSuccess");
       const signupBtn = document.getElementById("signupBtn");
 
-      // Prefill desde localStorage
+      // Prefill from localStorage
       let refCode = "";
       try {
         const preName = localStorage.getItem("ma_pre_fullName");
@@ -400,6 +456,29 @@
         if (signupError) signupError.textContent = "";
       }
 
+      // toggle de ojito
+      function setupPasswordToggles() {
+        const toggles = document.querySelectorAll(".ma-password-toggle");
+        toggles.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
+            if (!targetId) return;
+            const input = document.getElementById(targetId);
+            if (!input) return;
+
+            if (input.type === "password") {
+              input.type = "text";
+              btn.textContent = "🙈";
+            } else {
+              input.type = "password";
+              btn.textContent = "👁";
+            }
+          });
+        });
+      }
+
+      setupPasswordToggles();
+
       async function createAccount(evt) {
         evt.preventDefault();
         setError("");
@@ -410,10 +489,21 @@
         const phone = (phoneInput?.value || "").trim();
         const username = (usernameInput?.value || "").trim();
         const password = passwordInput?.value || "";
+        const passwordConfirm = passwordConfirmInput?.value || "";
         const refCodeLocal = (refInput?.value || refCode || "").trim();
 
         if (!fullName || !email || !phone || !password) {
           setError("Please complete full name, email, phone and password.");
+          return;
+        }
+
+        if (password.length < 8) {
+          setError("Your password must be at least 8 characters long.");
+          return;
+        }
+
+        if (password !== passwordConfirm) {
+          setError("Password and confirmation do not match.");
           return;
         }
 
@@ -449,7 +539,7 @@
 
           const data = await res.json();
 
-          // Guardar token y usuario
+          // Save token & user
           try {
             if (data.token) {
               localStorage.setItem("ma_token", data.token);
