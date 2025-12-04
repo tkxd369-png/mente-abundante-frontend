@@ -572,15 +572,17 @@ if (phraseEl) {
       // pequeño delay extra para cuando app.js actualice datos
       setTimeout(updateReferralTexts, 800);
 
-      // 👉 Conectar el botón para ir a referrals.html
-      const badge = document.getElementById("dashRefBadge");
-      if (badge) {
+      // 👉 Limpiar cualquier listener viejo y dejar solo el de ir a referrals.html
+      let badge = document.getElementById("dashRefBadge");
+      if (badge && badge.parentNode) {
+        const newBadge = badge.cloneNode(true); // clona el botón y elimina listeners anteriores
+        badge.parentNode.replaceChild(newBadge, badge);
+        badge = newBadge;
+
         badge.addEventListener("click", function () {
           const lang = window.maGetLang ? window.maGetLang() : "es";
-          const refTextEl =
-            document.getElementById("dashReferralsText");
-          const estTextEl =
-            document.getElementById("dashEstimateText");
+          const refTextEl = document.getElementById("dashReferralsText");
+          const estTextEl = document.getElementById("dashEstimateText");
 
           const refText = refTextEl
             ? refTextEl.textContent.trim()
@@ -589,7 +591,6 @@ if (phraseEl) {
             ? estTextEl.textContent.trim()
             : "";
 
-          // Guardamos en localStorage para que referrals.html lo lea
           const payload = { lang, refText, estText };
           try {
             localStorage.setItem(
@@ -600,7 +601,7 @@ if (phraseEl) {
             console.warn("No se pudo guardar ma_ref_summary:", e);
           }
 
-          // Redirigir a la página del programa de referidos
+          // Solo abre la página de referidos, ya no copia nada
           window.location.href = "referrals.html";
         });
       }
