@@ -370,21 +370,19 @@
               btn.classList.toggle("active", btnLang === lang);
             });
 
-          // Frase por defecto (solo si no hay una personalizada)
-          const phraseEl = document.getElementById("aiPhraseText");
-          if (phraseEl) {
-            const current = phraseEl.textContent.trim();
-            const esDefault =
-              "“Tu decisión de hoy abre puertas que aún no imaginas.”";
-            const enDefault =
-              "“Your decision today opens doors you can't yet imagine.”";
+          // Frase por defecto según idioma (por ahora sin AI)
+const phraseEl = document.getElementById("aiPhraseText");
+if (phraseEl) {
+  if (lang === "en") {
+    phraseEl.textContent =
+      "“Your decision today opens doors you can't yet imagine.”";
+  } else {
+    phraseEl.textContent =
+      "“Tu decisión de hoy abre puertas que aún no imaginas.”";
+  }
+}
 
-            if (lang === "en" && (!current || current === esDefault)) {
-              phraseEl.textContent = enDefault;
-            } else if (lang === "es" && (!current || current === enDefault)) {
-              phraseEl.textContent = esDefault;
-            }
-          }
+         
 
           // Actualizar textos de referidos si está disponible el helper
           if (window.maUpdateReferralTexts) {
