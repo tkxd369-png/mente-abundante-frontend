@@ -2,30 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Crear tu cuenta — The Master Key</title>
+  <title>Crea tu cuenta privada — The Master Key</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
 
   <style>
-    body {
+    body.ma-signup {
       margin: 0;
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "DM Sans", sans-serif;
       background-color: #f6f0e8;
       color: #3a2f25;
-      padding: 2.2rem 1.4rem 3rem;
-    }
-
-    .ma-shell {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .ma-header {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    .ma-signup-shell {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 2.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .ma-signup-header {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .ma-logo-block {
@@ -35,7 +43,7 @@
     }
 
     .ma-logo-tag {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #9b8570;
@@ -43,115 +51,79 @@
 
     .ma-logo-title {
       font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #3a2f25;
     }
 
-    .ma-header-step {
-      font-size: 0.8rem;
+    .ma-login-link {
+      font-size: 0.85rem;
       color: #7a6650;
-      text-align: right;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 102, 80, 0.25);
+      padding: 0.35rem 0.9rem;
+      background-color: #fdf8f1;
+    }
+    .ma-login-link:hover {
+      background-color: #f5e4cf;
     }
 
-    .ma-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: flex-start;
+    /* CARD */
+    .ma-signup-card {
+      margin-top: 0.4rem;
+      background-color: #fdf8f1;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+      padding: 1.9rem 1.6rem 2.1rem;
     }
 
-    @media (max-width: 880px) {
-      .ma-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* LADO IZQUIERDO: TEXTO */
-    .ma-eyebrow {
-      font-size: 0.60rem;
+    .ma-signup-eyebrow {
+      font-size: 0.78rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #9b8570;
+      margin-bottom: 0.6rem;
+    }
+
+    .ma-signup-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: 1.6rem;
+      line-height: 1.3;
+      color: #3a2f25;
       margin-bottom: 0.5rem;
     }
 
-    .ma-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: 1.5rem;
-      line-height: 1.3;
-      color: #3a2f25;
-      margin-bottom: 0.8rem;
-    }
-
-    .ma-sub {
+    .ma-signup-sub {
       font-size: 0.95rem;
       color: #7a6650;
       margin-bottom: 1.4rem;
-      max-width: 34rem;
+      max-width: 30rem;
     }
 
-    .ma-highlight-box {
-      background-color: #fff7ec;
-      border-radius: 18px;
-      padding: 1rem 1.1rem;
-      font-size: 0.9rem;
-      color: #5a4937;
-      margin-bottom: 1.2rem;
+    .ma-signup-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.9rem 1rem;
     }
 
-    .ma-ref-info {
-      font-size: 0.85rem;
-      color: #7a6650;
-      margin-top: 0.5rem;
-    }
-
-    /* LADO DERECHO: FORMULARIO */
-    .ma-form-card {
-      background-color: #ffffff;
-      border-radius: 24px;
-      border: 1px solid rgba(0,0,0,0.03);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-      padding: 1.6rem 1.5rem 1.5rem;
-    }
-
-    .ma-form-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9b8570;
-      margin-bottom: 0.4rem;
-    }
-
-    .ma-form-subtitle {
-      font-size: 0.9rem;
-      color: #7a6650;
-      margin-bottom: 1.1rem;
-    }
-
-    .ma-form-row {
-      margin-bottom: 0.85rem;
-    }
-
-    .ma-form-inline {
+    .ma-form-field {
       display: flex;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
-    @media (max-width: 600px) {
-      .ma-form-inline {
-        flex-direction: column;
-      }
+    .ma-form-field-full {
+      grid-column: 1 / -1;
     }
 
     .ma-form-label {
-      display: block;
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #9b8570;
-      margin-bottom: 0.25rem;
     }
 
     .ma-form-input {
@@ -180,34 +152,68 @@
       cursor: default;
     }
 
-    .ma-form-note {
+    .ma-password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .ma-password-wrap .ma-form-input {
+      padding-right: 2.4rem;
+    }
+
+    .ma-password-toggle {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      color: #9b8570;
+      padding: 0;
+    }
+
+    .ma-field-hint {
       font-size: 0.78rem;
       color: #97826b;
-      margin-top: 0.3rem;
-      line-height: 1.4;
     }
 
-    .ma-form-error {
-      min-height: 1rem;
+    .ma-signup-ref {
       font-size: 0.82rem;
+      color: #7a6650;
+      margin-top: 0.4rem;
+    }
+
+    .ma-signup-error {
+      grid-column: 1 / -1;
+      min-height: 1.2rem;
+      font-size: 0.8rem;
       color: #c04730;
-      margin-top: 0.6rem;
+      margin-top: 0.2rem;
     }
 
-    .ma-form-success {
-      min-height: 1rem;
+    .ma-signup-success {
+      grid-column: 1 / -1;
+      min-height: 1.2rem;
       font-size: 0.82rem;
-      color: #2d7c46;
-      margin-top: 0.6rem;
+      color: #2f7a4c;
+      margin-top: 0.2rem;
     }
 
-    .ma-form-button {
+    .ma-signup-cta {
+      grid-column: 1 / -1;
+      margin-top: 0.8rem;
+    }
+
+    .ma-signup-btn {
       width: 100%;
-      margin-top: 1.1rem;
       border: none;
       border-radius: 999px;
       padding: 0.9rem 1.5rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       background: linear-gradient(135deg, #f2c47b, #e3a95a);
@@ -216,317 +222,350 @@
       box-shadow: 0 16px 46px rgba(226, 167, 90, 0.5);
     }
 
-    .ma-form-button:hover {
+    .ma-signup-btn:hover {
       filter: brightness(1.03);
     }
 
-    .ma-form-footer {
-      margin-top: 1rem;
-      font-size: 0.82rem;
+    .ma-signup-footer {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
       color: #97826b;
       text-align: center;
     }
 
-    .ma-form-footer a {
+    .ma-signup-footer a {
       color: #7a6650;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
+
+    @media (max-width: 720px) {
+      .ma-signup-shell {
+        padding: 1.9rem 1.1rem 2.2rem;
+      }
+      .ma-signup-card {
+        padding: 1.7rem 1.4rem 1.9rem;
+      }
+      .ma-signup-form {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .ma-form-field-full {
+        grid-column: 1 / -1;
+      }
+    }
   </style>
 </head>
-<body>
-  <div class="ma-shell">
-    <header class="ma-header">
+
+<body class="ma-signup">
+  <div class="ma-signup-shell">
+    <!-- HEADER -->
+    <header class="ma-signup-header">
       <div class="ma-logo-block">
-        <span class="ma-logo-tag">Programa privado</span>
+        <span class="ma-logo-tag">Paso 5 · Cuenta privada</span>
         <span class="ma-logo-title">The Master Key</span>
       </div>
-      <div class="ma-header-step">
-        Paso 5 de 5<br />
-        <strong>Crear tu cuenta personal</strong>
-      </div>
+      <a href="login.html" class="ma-login-link">Ingresar</a>
     </header>
 
-    <main class="ma-main">
-      <!-- LADO IZQUIERDO -->
-      <section>
-        
-        <h1 class="ma-title">Crea tu cuenta dentro de The Master Key.</h1>
+    <!-- CARD -->
+    <section class="ma-signup-card">
+      <div class="ma-signup-eyebrow">Crear tu acceso</div>
+      <h1 class="ma-signup-title">Tu espacio personal dentro de The Master Key.</h1>
 
-        <p class="ma-sub">
-          Este será tu acceso oficial al dashboard, a tus herramientas, a tu código personal de invitación
-          y al contenido futuro del programa. Usa datos reales para proteger tu acceso.
-        </p>
+      <p class="ma-signup-sub">
+        Aquí crearás tu cuenta privada. Este acceso se usará para entrar a tu dashboard,
+        ver tus materiales y recibir tu link personal de referidos dentro del Programa.
+      </p>
 
-        <div class="ma-highlight-box" id="maSummaryBox">
-          Estás a punto de crear tu cuenta con los datos que registraste en el paso anterior.
+      <form id="signupForm" class="ma-signup-form">
+        <div class="ma-form-field ma-form-field-full">
+          <label class="ma-form-label" for="fullName">Nombre completo</label>
+          <input
+            id="fullName"
+            class="ma-form-input"
+            type="text"
+            placeholder="Como aparece en tus documentos"
+            autocomplete="name"
+          />
         </div>
 
-        <div id="maRefInfo" class="ma-ref-info"></div>
-      </section>
-
-      <!-- LADO DERECHO: FORMULARIO -->
-      <aside class="ma-form-card">
-        <div class="ma-form-title">Crear cuenta</div>
-        <div class="ma-form-subtitle">
-          Completa o ajusta tus datos y elige una contraseña segura. Tu email será tu acceso principal.
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="email">Email</label>
+          <input
+            id="email"
+            class="ma-form-input"
+            type="email"
+            placeholder="tucorreo@ejemplo.com"
+            autocomplete="email"
+          />
         </div>
 
-        <form id="maSignupForm" novalidate>
-          <div class="ma-form-row">
-            <label class="ma-form-label" for="fullName">Nombre completo</label>
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="phone">Teléfono / WhatsApp</label>
+          <input
+            id="phone"
+            class="ma-form-input"
+            type="tel"
+            placeholder="+52 ..."
+            autocomplete="tel"
+          />
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="username">Usuario (opcional)</label>
+          <input
+            id="username"
+            class="ma-form-input"
+            type="text"
+            placeholder="Si lo dejas vacío, crearemos uno por ti"
+            autocomplete="username"
+          />
+          <div class="ma-field-hint">
+            Esto se usa para construir tu código personal de referidos.
+          </div>
+        </div>
+
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="password">Contraseña</label>
+          <div class="ma-password-wrap">
             <input
-              id="fullName"
+              id="password"
               class="ma-form-input"
-              type="text"
-              placeholder="Tu nombre completo"
-              autocomplete="name"
+              type="password"
+              placeholder="Crea una contraseña segura"
+              autocomplete="new-password"
             />
+            <button
+              type="button"
+              class="ma-password-toggle"
+              data-target="password"
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              👁
+            </button>
           </div>
+        </div>
 
-          <div class="ma-form-row ma-form-inline">
-            <div style="flex:1;">
-              <label class="ma-form-label" for="email">Email</label>
-              <input
-                id="email"
-                class="ma-form-input"
-                type="email"
-                placeholder="tucorreo@ejemplo.com"
-                autocomplete="email"
-              />
-            </div>
-            <div style="flex:1;">
-              <label class="ma-form-label" for="phone">Teléfono</label>
-              <input
-                id="phone"
-                class="ma-form-input"
-                type="tel"
-                placeholder="+1 ..."
-                autocomplete="tel"
-              />
-            </div>
-          </div>
-
-          <div class="ma-form-row">
-            <label class="ma-form-label" for="username">Usuario</label>
+        <div class="ma-form-field">
+          <label class="ma-form-label" for="passwordConfirm">Confirmar contraseña</label>
+          <div class="ma-password-wrap">
             <input
-              id="username"
+              id="passwordConfirm"
               class="ma-form-input"
-              type="text"
-              placeholder="Ej. anagonzalez"
-              autocomplete="username"
+              type="password"
+              placeholder="Repite tu contraseña"
+              autocomplete="new-password"
             />
-            <div class="ma-form-note">
-              Puedes usar tu nombre, apellido o algo fácil de recordar. Tu código personal se generará a partir de aquí.
-            </div>
+            <button
+              type="button"
+              class="ma-password-toggle"
+              data-target="passwordConfirm"
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              👁
+            </button>
           </div>
+        </div>
 
-          <div class="ma-form-row ma-form-inline">
-            <div style="flex:1;">
-              <label class="ma-form-label" for="password">Contraseña</label>
-              <input
-                id="password"
-                class="ma-form-input"
-                type="password"
-                placeholder="Mínimo 8 caracteres"
-                autocomplete="new-password"
-              />
-            </div>
-            <div style="flex:1;">
-              <label class="ma-form-label" for="confirmPassword">Confirmar contraseña</label>
-              <input
-                id="confirmPassword"
-                class="ma-form-input"
-                type="password"
-                placeholder="Repítela"
-                autocomplete="new-password"
-              />
-            </div>
-          </div>
+        <div class="ma-form-field ma-form-field-full">
+          <label class="ma-form-label" for="refCode">Código de invitación</label>
+          <input
+            id="refCode"
+            class="ma-form-input"
+            type="text"
+            readonly
+          />
+          <div id="refHint" class="ma-signup-ref"></div>
+        </div>
 
-          <div class="ma-form-row">
-            <label class="ma-form-label" for="refCode">Código de invitación</label>
-            <input
-              id="refCode"
-              class="ma-form-input"
-              type="text"
-              readonly
-            />
-            <div class="ma-form-note">
-              Este código asegura que tu patrocinador reciba el crédito correcto. Se llena automáticamente
-              desde el enlace con el que llegaste.
-            </div>
-          </div>
+        <div id="signupError" class="ma-signup-error"></div>
+        <div id="signupSuccess" class="ma-signup-success"></div>
 
-          <div id="maError" class="ma-form-error"></div>
-          <div id="maSuccess" class="ma-form-success"></div>
-
-          <button type="button" id="maSignupBtn" class="ma-form-button">
+        <div class="ma-signup-cta">
+          <button id="signupBtn" type="submit" class="ma-signup-btn">
             Crear mi cuenta
           </button>
+        </div>
+      </form>
+    </section>
 
-          <div class="ma-form-footer">
-            Al crear tu cuenta confirmas que viste el video principal, entendiste la naturaleza del programa
-            y aceptas los <a href="terminos.html" target="_blank">Términos y Condiciones</a>.
-            <br /><br />
-            ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>.
-          </div>
-        </form>
-      </aside>
-    </main>
+    <div class="ma-signup-footer">
+      Si ya tienes una cuenta, puedes
+      <a href="login.html">ingresar aquí</a>.
+    </div>
   </div>
 
   <script>
     (function () {
-      const API_BASE = "https://mente-abundante-api-1.onrender.com";
+      // marcar idioma ES para el flujo actual
+      try {
+        localStorage.setItem("ma_lang", "es");
+      } catch (e) {}
 
-      const form = document.getElementById("maSignupForm");
-      const btn = document.getElementById("maSignupBtn");
+      const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
       const fullNameInput = document.getElementById("fullName");
       const emailInput = document.getElementById("email");
       const phoneInput = document.getElementById("phone");
       const usernameInput = document.getElementById("username");
       const passwordInput = document.getElementById("password");
-      const confirmPasswordInput = document.getElementById("confirmPassword");
-      const refCodeInput = document.getElementById("refCode");
-
-      const errorEl = document.getElementById("maError");
-      const successEl = document.getElementById("maSuccess");
-      const summaryBox = document.getElementById("maSummaryBox");
-      const refInfo = document.getElementById("maRefInfo");
-
-      function showError(msg) {
-        if (errorEl) errorEl.textContent = msg || "";
-        if (successEl) successEl.textContent = "";
-      }
-
-      function showSuccess(msg) {
-        if (successEl) successEl.textContent = msg || "";
-        if (errorEl) errorEl.textContent = "";
-      }
+      const passwordConfirmInput = document.getElementById("passwordConfirm");
+      const refInput = document.getElementById("refCode");
+      const refHint = document.getElementById("refHint");
+      const signupForm = document.getElementById("signupForm");
+      const signupError = document.getElementById("signupError");
+      const signupSuccess = document.getElementById("signupSuccess");
+      const signupBtn = document.getElementById("signupBtn");
 
       // Prefill desde localStorage
-      (function prefillFromStorage() {
-        try {
-          const preName = localStorage.getItem("ma_pre_fullName") || "";
-          const preEmail = localStorage.getItem("ma_pre_email") || "";
-          const prePhone = localStorage.getItem("ma_pre_phone") || "";
-          const refCode = localStorage.getItem("ma_ref_code") || "";
+      let refCode = "";
+      try {
+        const preName = localStorage.getItem("ma_pre_fullName");
+        const preEmail = localStorage.getItem("ma_pre_email");
+        const prePhone = localStorage.getItem("ma_pre_phone");
+        const storedRef = localStorage.getItem("ma_ref_code");
 
-          if (preName && fullNameInput) fullNameInput.value = preName;
-          if (preEmail && emailInput) emailInput.value = preEmail;
-          if (prePhone && phoneInput) phoneInput.value = prePhone;
-          if (refCode && refCodeInput) refCodeInput.value = refCode;
-
-          if (summaryBox) {
-            if (preName || preEmail) {
-              let text = "Estás a punto de crear tu cuenta";
-              if (preName) text += " como " + preName;
-              if (preEmail) text += " con el email " + preEmail;
-              text += ". Podrás ajustar cualquier dato antes de continuar.";
-              summaryBox.textContent = text;
-            }
-          }
-
-          if (refInfo) {
-            if (refCode) {
-              refInfo.textContent =
-                "Código de invitación detectado: " + refCode + ". Este código quedará ligado a tu cuenta.";
-            } else {
-              refInfo.textContent =
-                "Si alguien te invitó, asegúrate de haber usado su enlace personal para que su código se registre correctamente.";
-            }
-          }
-        } catch (e) {
-          // ignore
-        }
-      })();
-
-      async function createAccount(payload) {
-        const url = API_BASE + "/auth/create-account";
-        const res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        if (!res.ok) {
-          let msg = "No se pudo crear tu cuenta. Intenta nuevamente.";
-          try {
-            const data = await res.json();
-            if (data && data.error) msg = data.error;
-          } catch (e) {}
-          throw new Error(msg);
-        }
-
-        const data = await res.json();
-        return data;
+        if (preName && fullNameInput) fullNameInput.value = preName;
+        if (preEmail && emailInput) emailInput.value = preEmail;
+        if (prePhone && phoneInput) phoneInput.value = prePhone;
+        if (storedRef) refCode = storedRef;
+      } catch (e) {
+        // ignore
       }
 
-      if (btn && form) {
-        btn.addEventListener("click", async function () {
-          const fullName = (fullNameInput?.value || "").trim();
-          const email = (emailInput?.value || "").trim();
-          const phone = (phoneInput?.value || "").trim();
-          let username = (usernameInput?.value || "").trim();
-          const password = passwordInput?.value || "";
-          const confirmPassword = confirmPasswordInput?.value || "";
-          const refCode = (refCodeInput?.value || "").trim();
+      if (refInput) {
+        refInput.value = refCode || "";
+      }
+      if (refHint) {
+        if (refCode) {
+          refHint.textContent =
+            "El código de invitación de tu patrocinador quedará ligado a tu cuenta: " + refCode + ".";
+        } else {
+          refHint.textContent =
+            "Si alguien te compartió este Programa, su código se registra a través de su link personal.";
+        }
+      }
 
-          if (!fullName || !email || !phone) {
-            showError("Por favor completa nombre, email y teléfono.");
-            return;
-          }
-          if (!password || password.length < 8) {
-            showError("La contraseña debe tener al menos 8 caracteres.");
-            return;
-          }
-          if (password !== confirmPassword) {
-            showError("Las contraseñas no coinciden.");
-            return;
-          }
+      function setError(msg) {
+        if (signupError) signupError.textContent = msg || "";
+        if (signupSuccess) signupSuccess.textContent = "";
+      }
 
-          if (!username) {
-            // generar username simple a partir del email
-            const base = email.split("@")[0] || "usuario";
-            username = base.toLowerCase().replace(/[^a-z0-9]/gi, "").slice(0, 12) || "user" + Date.now();
-          }
+      function setSuccess(msg) {
+        if (signupSuccess) signupSuccess.textContent = msg || "";
+        if (signupError) signupError.textContent = "";
+      }
 
-          showError("");
-          showSuccess("Creando tu cuenta...");
+      // toggle de ojito
+      function setupPasswordToggles() {
+        const toggles = document.querySelectorAll(".ma-password-toggle");
+        toggles.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
+            if (!targetId) return;
+            const input = document.getElementById(targetId);
+            if (!input) return;
 
-          const payload = {
-            fullName,
-            email,
-            phone,
-            password,
-            username,
-            refCode: refCode || null
-          };
+            if (input.type === "password") {
+              input.type = "text";
+              btn.textContent = "🙈";
+            } else {
+              input.type = "password";
+              btn.textContent = "👁";
+            }
+          });
+        });
+      }
 
-          try {
-            const data = await createAccount(payload);
+      setupPasswordToggles();
 
+      async function createAccount(evt) {
+        evt.preventDefault();
+        setError("");
+        setSuccess("");
+
+        const fullName = (fullNameInput?.value || "").trim();
+        const email = (emailInput?.value || "").trim();
+        const phone = (phoneInput?.value || "").trim();
+        const username = (usernameInput?.value || "").trim();
+        const password = passwordInput?.value || "";
+        const passwordConfirm = passwordConfirmInput?.value || "";
+        const refCodeLocal = (refInput?.value || refCode || "").trim();
+
+        if (!fullName || !email || !phone || !password) {
+          setError("Por favor completa nombre, email, teléfono y contraseña.");
+          return;
+        }
+
+        if (password.length < 8) {
+          setError("Tu contraseña debe tener al menos 8 caracteres.");
+          return;
+        }
+
+        if (password !== passwordConfirm) {
+          setError("La contraseña y la confirmación no coinciden.");
+          return;
+        }
+
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creando cuenta...";
+
+        try {
+          const res = await fetch(API_BASE + "/auth/create-account", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              fullName,
+              email,
+              phone,
+              password,
+              username: username || undefined,
+              refCode: refCodeLocal || undefined
+            })
+          });
+
+          if (!res.ok) {
+            let msg = "Hubo un problema al crear tu cuenta. Intenta de nuevo.";
             try {
-              if (data && data.token) {
-                localStorage.setItem("ma_token", data.token);
-              }
-              if (data && data.user) {
-                localStorage.setItem("ma_user", JSON.stringify(data.user));
-              }
+              const dataErr = await res.json();
+              if (dataErr && dataErr.error) msg = dataErr.error;
             } catch (e) {
               // ignore
             }
-
-            showSuccess("Cuenta creada con éxito. Redirigiendo a tu dashboard...");
-            setTimeout(function () {
-              window.location.href = "dashboard.html";
-            }, 800);
-          } catch (err) {
-            showError(err.message || "Ocurrió un error al crear tu cuenta.");
+            throw new Error(msg);
           }
-        });
+
+          const data = await res.json();
+
+          // Guardar token y usuario
+          try {
+            if (data.token) {
+              localStorage.setItem("ma_token", data.token);
+            }
+            if (data.user) {
+              localStorage.setItem("ma_user", JSON.stringify(data.user));
+            }
+          } catch (e) {
+            // ignore
+          }
+
+          setSuccess("Cuenta creada correctamente. Entrando a tu dashboard...");
+
+          setTimeout(function () {
+            window.location.href = "dashboard.html";
+          }, 900);
+        } catch (err) {
+          setError(err.message || "Error inesperado. Intenta de nuevo.");
+        } finally {
+          signupBtn.disabled = false;
+          signupBtn.textContent = "Crear mi cuenta";
+        }
+      }
+
+      if (signupForm) {
+        signupForm.addEventListener("submit", createAccount);
       }
     })();
   </script>
