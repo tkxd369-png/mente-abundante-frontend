@@ -617,7 +617,7 @@
       });
     }
 
-    // Tocar el nombre = copiar link
+        // Tocar el nombre = copiar link
     if (nameEl && personalLink) {
       nameEl.style.cursor = "pointer";
       nameEl.addEventListener("click", async () => {
@@ -629,32 +629,42 @@
         }
       });
     }
-// Botón de referidos: solo abrir la página de Referral Program
-document.addEventListener("DOMContentLoaded", function () {
-  const badge = document.getElementById("dashRefBadge");
-  if (!badge) return;
 
-  badge.addEventListener("click", function () {
-    const lang = window.maGetLang ? window.maGetLang() : "es";
-    const refTextEl = document.getElementById("dashReferralsText");
-    const estTextEl = document.getElementById("dashEstimateText");
+    // Botón de referidos: solo abrir la página de Referral Program
+    if (refBadge) {
+      refBadge.addEventListener("click", function () {
+        const lang = window.maGetLang ? window.maGetLang() : MA_LANG || "es";
 
-    const refText = refTextEl ? refTextEl.textContent.trim() : "";
-    const estText = estTextEl ? estTextEl.textContent.trim() : "";
+        // Reconstruimos los textos usando LOS MISMOS datos del backend
+        const refText =
+          referrals === 1
+            ? (lang === "en" ? "1 REFERRAL" : "1 REFERIDO")
+            : (lang === "en"
+                ? `${referrals} REFERRALS`
+                : `${referrals} REFERIDOS`);
 
-    const payload = { lang, refText, estText };
-    try {
-      localStorage.setItem("ma_ref_summary", JSON.stringify(payload));
-    } catch (e) {
-      console.warn("No se pudo guardar ma_ref_summary:", e);
+        const amountText = `$${estimated.toLocaleString()} USD ${
+          lang === "en" ? "ESTIMATED" : "ESTIMADO"
+        }`;
+
+        const payload = {
+          lang,
+          refText,
+          estText: amountText,
+          referrals,
+          estimated,
+        };
+
+        try {
+          localStorage.setItem("ma_ref_summary", JSON.stringify(payload));
+        } catch (e) {
+          console.warn("No se pudo guardar ma_ref_summary:", e);
+        }
+
+        window.location.href = "referrals.html";
+      });
     }
-
-    window.location.href = "referrals.html";
-  });
-});
-
-  
-    }
+  }
 
     // Click E-Book (placeholder)
     const ebookTile = document.getElementById("ebookTile");
