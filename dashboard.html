@@ -538,7 +538,6 @@ if (phraseEl) {
         }
       })();
     </script>
- 
  <!-- Ajuste de textos del botón de referidos según idioma + redirección a Referral Program -->
 <script>
   (function () {
@@ -573,34 +572,45 @@ if (phraseEl) {
       // pequeño delay extra para cuando app.js actualice datos
       setTimeout(updateReferralTexts, 800);
 
-      // ⛔ Interceptar cualquier click en el botón de referidos
-      // y evitar que se ejecute el código viejo que copiaba el link
-      document.addEventListener(
-        "click",
-        function (e) {
-          const badge = document.getElementById("dashRefBadge");
-          if (!badge) return;
+      // 👉 Conectar el botón para ir a referrals.html
+      const badge = document.getElementById("dashRefBadge");
+      if (badge) {
+        badge.addEventListener("click", function () {
+          const lang = window.maGetLang ? window.maGetLang() : "es";
+          const refTextEl =
+            document.getElementById("dashReferralsText");
+          const estTextEl =
+            document.getElementById("dashEstimateText");
 
-          if (badge.contains(e.target)) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (e.stopImmediatePropagation) {
-              e.stopImmediatePropagation();
-            }
+          const refText = refTextEl
+            ? refTextEl.textContent.trim()
+            : "";
+          const estText = estTextEl
+            ? estTextEl.textContent.trim()
+            : "";
 
-            const lang = window.maGetLang ? window.maGetLang() : "es";
-            const refTextEl =
-              document.getElementById("dashReferralsText");
-            const estTextEl =
-              document.getElementById("dashEstimateText");
+          // Guardamos en localStorage para que referrals.html lo lea
+          const payload = { lang, refText, estText };
+          try {
+            localStorage.setItem(
+              "ma_ref_summary",
+              JSON.stringify(payload)
+            );
+          } catch (e) {
+            console.warn("No se pudo guardar ma_ref_summary:", e);
+          }
 
-            const refText = refTextEl
-              ? refTextEl.textContent.trim()
-              : "";
-            const estText = estTextEl
-              ? estTextEl.textContent.trim()
-              : "";
+          // Redirigir a la página del programa de referidos
+          window.location.href = "referrals.html";
+        });
+      }
+    });
 
+    // Exponer para el sistema de idioma
+    window.maUpdateReferralTexts = updateReferralTexts;
+  })();
+</script>
 
+ 
   </body>
 </html>
