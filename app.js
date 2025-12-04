@@ -1,8 +1,31 @@
-// app.js – Mente Abundante 2.0
-// Flujo completo + dashboard estilo Noé
+ // app.js – The Master Key (antes Mente Abundante 2.0)
 
 (function () {
   const API_BASE = "https://mente-abundante-api-1.onrender.com";
+
+  // ---------------------------
+  // Idioma global ES / EN
+  // ---------------------------
+  function detectLang() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const fromUrl = params.get("lang");
+      if (fromUrl === "en" || fromUrl === "es") {
+        localStorage.setItem("ma_lang", fromUrl);
+        return fromUrl;
+      }
+
+      const fromStorage = localStorage.getItem("ma_lang");
+      if (fromStorage === "en" || fromStorage === "es") {
+        return fromStorage;
+      }
+    } catch (e) {
+      // ignore
+    }
+    return "es";
+  }
+
+  const MA_LANG = detectLang();
 
   // ---------------------------
   // Utilidades de sesión
@@ -83,15 +106,24 @@
   }
 
   // ---------------------------
-  // Frases motivacionales "AI"
+  // Frases motivacionales "AI" (bilingüe suave)
   // ---------------------------
-  const AI_PHRASES = [
+  const AI_PHRASES_ES = [
     "Tu decisión de hoy abre puertas que aún no imaginas.",
     "Cada ‘sí’ a la verdad es una semilla de abundancia futura.",
     "No estás empezando de cero, estás empezando desde tu experiencia.",
     "La abundancia no llega por accidente, se construye con decisiones diarias.",
     "Lo que compartes desde el corazón, regresa multiplicado.",
     "Cuando ayudas a otros a avanzar, tu camino también se abre.",
+  ];
+
+  const AI_PHRASES_EN = [
+    "Your decision today opens doors you can’t yet imagine.",
+    "Every ‘yes’ to truth is a seed of future abundance.",
+    "You’re not starting from zero, you’re starting from experience.",
+    "Abundance doesn’t arrive by accident; it’s built with daily decisions.",
+    "What you share from the heart returns multiplied.",
+    "When you help others move forward, your path opens too.",
   ];
 
   function pickDailyPhrase() {
@@ -103,8 +135,10 @@
       return storedText;
     }
 
-    const idx = Math.floor(Math.random() * AI_PHRASES.length);
-    const phrase = AI_PHRASES[idx];
+    const pool = MA_LANG === "en" ? AI_PHRASES_EN : AI_PHRASES_ES;
+    const idx = Math.floor(Math.random() * pool.length);
+    const phrase = pool[idx];
+
     localStorage.setItem("ma_phrase_date", todayKey);
     localStorage.setItem("ma_phrase_text", phrase);
     return phrase;
@@ -413,208 +447,212 @@
     });
   }
 
- // ---------------------------
-// DASHBOARD
-// ---------------------------
-async function initDashboard() {
-  const token = getToken();
-  if (!token) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  // Botón logout
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      clearSession();
-      window.location.href = "index.html";
-    });
-  }
-
-  // Frase del día
-  const phraseEl = document.getElementById("aiPhraseText");
-  if (phraseEl) {
-    phraseEl.textContent = pickDailyPhrase();
-  }
-
-  // Usuario desde localStorage, luego refrescamos con /me
-  let user = getStoredUser();
-
-  try {
-    const data = await apiGet("/me");
-    if (data && data.ok && data.user) {
-      user = data.user;
-      setSession(token, user);
+  // ---------------------------
+  // DASHBOARD
+  // ---------------------------
+  async function initDashboard() {
+    const token = getToken();
+    if (!token) {
+      window.location.href = "login.html";
+      return;
     }
-  } catch (err) {
-    console.error("Error al cargar /me:", err);
+
+    // Botón logout
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        clearSession();
+        window.location.href = "index.html";
+      });
+    }
+
+    // Frase del día
+    const phraseEl = document.getElementById("aiPhraseText");
+    if (phraseEl) {
+      phraseEl.textContent = pickDailyPhrase();
+    }
+
+    // Usuario desde localStorage, luego refrescamos con /me
+    let user = getStoredUser();
+
+    try {
+      const data = await apiGet("/me");
+      if (data && data.ok && data.user) {
+        user = data.user;
+        setSession(token, user);
+      }
+    } catch (err) {
+      console.error("Error al cargar /me:", err);
+      if (!user) {
+        clearSession();
+        window.location.href = "login.html";
+        return;
+      }
+    }
+
     if (!user) {
       clearSession();
       window.location.href = "login.html";
       return;
     }
-  }
 
-  if (!user) {
-    clearSession();
-    window.location.href = "login.html";
-    return;
-  }
+    // Elementos del DOM
+    const nameEl = document.getElementById("dashName");
+    const refBadge = document.getElementById("dashRefBadge");
+    const refTextEl = document.getElementById("dashReferralsText");
+    const estTextEl = document.getElementById("dashEstimateText");
+    const refInput = document.getElementById("referralLink");
+    const copyLinkBtn = document.getElementById("copyLinkBtn");
+    const footerRefIdEl = document.getElementById("footerRefId");
 
-  // Elementos del DOM
-  const nameEl = document.getElementById("dashName");
-  const refBadge = document.getElementById("dashRefBadge");
-  const refTextEl = document.getElementById("dashReferralsText");
-  const estTextEl = document.getElementById("dashEstimateText");
-  const refInput = document.getElementById("referralLink");
-  const copyLinkBtn = document.getElementById("copyLinkBtn");
-  const footerRefIdEl = document.getElementById("footerRefId");
-  const qrCanvas = document.getElementById("qrCanvas");
-  const ebookTile = document.getElementById("ebookTile");
-
-  // Nombre (solo el primer nombre)
-  if (nameEl) {
-    const fullName = user.full_name || "";
-    const firstName = fullName.split(" ")[0] || fullName || "Bienvenido";
-    nameEl.textContent = firstName;
-  }
-
-  // REFERIDOS + ESTIMADO
-  const referrals = Number(user.referrals) || 0;
-  const rewardPerReferral = 177;
-  const estimated = referrals * rewardPerReferral;
-
-  if (refTextEl) {
-    refTextEl.textContent =
-      referrals === 1 ? "1 REFERIDO" : `${referrals} REFERIDOS`;
-  }
-
-  if (estTextEl) {
-    estTextEl.textContent =
-      `$${estimated.toLocaleString()} USD ESTIMADO`;
-  }
-
-  // Enlace personal
-  let personalLink = "";
-  if (user.refid) {
-    const baseUrl = window.location.origin + "/index.html";
-    personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
-  }
-
-  if (refInput && personalLink) {
-    refInput.value = personalLink;
-  }
-
-  // === QR pequeño en tarjeta "TU QR" ===
-const qrSmallCanvas = document.getElementById("dashQrSmall");
-if (qrSmallCanvas && typeof QRious !== "undefined") {
-  new QRious({
-    element: qrSmallCanvas,
-    value: personalLink,
-    size: 80
-  });
-}
-// === MODAL QR GRANDE ===
-const qrQuickButton = document.querySelector(".ma-quick-card-qr");
-const qrModal = document.getElementById("qrModal");
-const qrModalClose = document.getElementById("qrModalClose");
-const qrBigCanvas = document.getElementById("dashQrBig");
-const qrModalCode = document.getElementById("qrModalCode");
-
-if (
-  qrQuickButton &&
-  qrModal &&
-  qrBigCanvas &&
-  typeof QRious !== "undefined"
-) {
-  // Generar QR grande una sola vez
-  new QRious({
-    element: qrBigCanvas,
-    value: personalLink,
-    size: 220
-  });
-
-  if (qrModalCode) {
-    qrModalCode.textContent = user.refid || "";
-  }
-
-  const openQrModal = () => {
-    qrModal.classList.add("is-open");
-  };
-
-  const closeQrModal = () => {
-    qrModal.classList.remove("is-open");
-  };
-
-  qrQuickButton.addEventListener("click", openQrModal);
-  qrModalClose.addEventListener("click", closeQrModal);
-  qrModal.addEventListener("click", (e) => {
-    if (e.target === qrModal || e.target.classList.contains("ma-modal-backdrop")) {
-      closeQrModal();
+    // Nombre (solo el primer nombre)
+    if (nameEl) {
+      const fullName = user.full_name || "";
+      const defaultName = MA_LANG === "en" ? "Welcome" : "Bienvenido";
+      const firstName = fullName.split(" ")[0] || fullName || defaultName;
+      nameEl.textContent = firstName;
     }
-  });
-}
 
+    // REFERIDOS + ESTIMADO
+    const referrals = Number(user.referrals) || 0;
+    const rewardPerReferral = 177;
+    const estimated = referrals * rewardPerReferral;
 
-  // Código en el footer
-  if (footerRefIdEl && user.refid) {
-    footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
-  }
+    if (refTextEl) {
+      refTextEl.textContent =
+        referrals === 1 ? "1 REFERIDO" : `${referrals} REFERIDOS`;
+    }
 
-  // Botón copiar link
-  if (copyLinkBtn && personalLink) {
-    copyLinkBtn.addEventListener("click", async () => {
+    if (estTextEl) {
+      estTextEl.textContent = `$${estimated.toLocaleString()} USD ESTIMADO`;
+    }
+
+    // Enlace personal
+    let personalLink = "";
+    if (user.refid) {
+      const baseUrl = window.location.origin + "/index.html";
+      personalLink = `${baseUrl}?ref=${encodeURIComponent(user.refid)}`;
+    }
+
+    if (refInput && personalLink) {
+      refInput.value = personalLink;
+    }
+
+    // === QR pequeño en tarjeta "TU QR" ===
+    const qrSmallCanvas = document.getElementById("dashQrSmall");
+    if (qrSmallCanvas && typeof QRious !== "undefined" && personalLink) {
       try {
-        await navigator.clipboard.writeText(personalLink);
-        showToast("Enlace personal copiado");
-      } catch {
-        alert("No se pudo copiar el enlace.");
+        new QRious({
+          element: qrSmallCanvas,
+          value: personalLink,
+          size: 80,
+        });
+      } catch (e) {
+        console.warn("No se pudo generar el QR pequeño:", e);
       }
-    });
-  }
+    }
 
-  // Tocar el nombre = copiar link
-  if (nameEl && personalLink) {
-    nameEl.style.cursor = "pointer";
-    nameEl.addEventListener("click", async () => {
+    // === MODAL QR GRANDE (diseño nuevo) ===
+    const qrQuickButton = document.querySelector(".ma-quick-card-qr");
+    const qrModal = document.getElementById("qrModal");
+    const qrModalClose = document.getElementById("qrModalClose");
+    const qrBigCanvas = document.getElementById("dashQrBig");
+    const qrModalCode = document.getElementById("qrModalCode");
+
+    if (
+      qrQuickButton &&
+      qrModal &&
+      qrBigCanvas &&
+      typeof QRious !== "undefined" &&
+      personalLink
+    ) {
       try {
-        await navigator.clipboard.writeText(personalLink);
-        showToast("Enlace personal copiado");
-      } catch {
-        alert("No se pudo copiar el enlace.");
+        new QRious({
+          element: qrBigCanvas,
+          value: personalLink,
+          size: 220,
+        });
+      } catch (e) {
+        console.warn("No se pudo generar el QR grande:", e);
       }
-    });
-  }
 
-  // Tocar badge = copiar código
-  if (refBadge && user.refid) {
-    refBadge.style.cursor = "pointer";
-    refBadge.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(user.refid);
-        showToast("Código copiado");
-      } catch {
-        alert("Tu código: " + user.refid);
+      if (qrModalCode) {
+        qrModalCode.textContent = user.refid || "";
       }
-    });
-  }
 
-  // Click E-Book
-  if (ebookTile) {
-    ebookTile.addEventListener("click", () => {
-      alert(
-        "Aquí abriremos tu E-Book 'Yo Decido Ser Abundante' (falta definir URL)."
-      );
-    });
-  }
+      const openQrModal = () => {
+        qrModal.classList.add("is-open");
+      };
 
-  // Popup QR grande
-  if (personalLink) {
-    setupQrModal(user, personalLink);
+      const closeQrModal = () => {
+        qrModal.classList.remove("is-open");
+      };
+
+      qrQuickButton.addEventListener("click", openQrModal);
+      if (qrModalClose) qrModalClose.addEventListener("click", closeQrModal);
+      qrModal.addEventListener("click", (e) => {
+        if (
+          e.target === qrModal ||
+          e.target.classList.contains("ma-modal-backdrop")
+        ) {
+          closeQrModal();
+        }
+      });
+    }
+
+    // Código en el footer
+    if (footerRefIdEl && user.refid) {
+      footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
+    }
+
+    // Botón copiar link (si existe)
+    if (copyLinkBtn && personalLink) {
+      copyLinkBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(personalLink);
+          showToast("Enlace personal copiado");
+        } catch {
+          alert("No se pudo copiar el enlace.");
+        }
+      });
+    }
+
+    // Tocar el nombre = copiar link
+    if (nameEl && personalLink) {
+      nameEl.style.cursor = "pointer";
+      nameEl.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(personalLink);
+          showToast("Enlace personal copiado");
+        } catch {
+          alert("No se pudo copiar el enlace.");
+        }
+      });
+    }
+
+    // Tocar badge = copiar código
+    if (refBadge && user.refid) {
+      refBadge.style.cursor = "pointer";
+      refBadge.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(user.refid);
+          showToast("Código copiado");
+        } catch {
+          alert("Tu código: " + user.refid);
+        }
+      });
+    }
+
+    // Click E-Book (placeholder)
+    const ebookTile = document.getElementById("ebookTile");
+    if (ebookTile) {
+      ebookTile.addEventListener("click", () => {
+        alert(
+          "Aquí abriremos tu E-Book 'Yo Decido Ser Abundante' (falta definir URL)."
+        );
+      });
+    }
   }
-}
- 
 
   // ---------------------------
   // SETTINGS
@@ -765,150 +803,4 @@ if (
       toast.classList.remove("visible");
     }, 1800);
   }
- // === Acciones extra del dashboard: copiar link, copiar REF, popup de QR ===
-document.addEventListener("DOMContentLoaded", function () {
-  const nameEl = document.getElementById("dashName");
-  const refBadgeEl = document.getElementById("dashRefBadge");
-  const linkInput = document.getElementById("referralLink");
-  const qrCanvas = document.getElementById("qrCanvas");
-  const footerQrBtn = document.getElementById("footerQrBtn");
-  const qrCard = document.querySelector(".ma-quick-card-qr");
-
-  // Leer usuario desde localStorage
-  let currentUser = null;
-  try {
-    const raw = localStorage.getItem("ma_user");
-    if (raw) currentUser = JSON.parse(raw);
-  } catch (e) {
-    console.error("Error leyendo ma_user:", e);
-  }
-
-  function copyText(text) {
-    if (!text) return;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(
-        () => alert("Copiado: " + text),
-        () => alert("No se pudo copiar. Copia manualmente.")
-      );
-    } else {
-      const temp = document.createElement("textarea");
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      try {
-        document.execCommand("copy");
-        alert("Copiado: " + text);
-      } catch (e) {
-        alert("No se pudo copiar. Copia manualmente.");
-      }
-      document.body.removeChild(temp);
-    }
-  }
-
-  // Construir el link personal aunque el input esté vacío
-  function getPersonalLink() {
-    if (linkInput && linkInput.value) return linkInput.value;
-
-    if (!currentUser || !currentUser.refid) return "";
-    const baseUrl = window.location.origin + "/index.html";
-    return `${baseUrl}?ref=${encodeURIComponent(currentUser.refid)}`;
-  }
-
-  // Al tocar el NOMBRE: copia el link completo
-  function handleNameClick() {
-    const url = getPersonalLink();
-    if (!url) return;
-    copyText(url);
-  }
-
-  // Al tocar el badge: copia solo el REF
-  function handleRefBadgeClick(e) {
-    e.stopPropagation();
-    if (currentUser && currentUser.refid) {
-      copyText(currentUser.refid);
-      return;
-    }
-    const urlStr = getPersonalLink();
-    if (!urlStr) return;
-    try {
-      const url = new URL(urlStr);
-      copyText(url.searchParams.get("ref") || urlStr);
-    } catch {
-      copyText(urlStr);
-    }
-  }
-
-  if (nameEl) nameEl.onclick = handleNameClick;
-  if (refBadgeEl) refBadgeEl.onclick = handleRefBadgeClick;
-
-  // === Modal QR ===
-
-  // Crear modal si no existe aún
-  let modal = document.getElementById("qrModal");
-  if (!modal) {
-    modal = document.createElement("div");
-    modal.id = "qrModal";
-    modal.className = "ma-modal";
-    modal.innerHTML = `
-      <div class="ma-modal-overlay"></div>
-      <div class="ma-modal-content">
-        <h2>Tu código &amp; QR</h2>
-        <canvas id="qrModalCanvas"></canvas>
-        <p id="modalRefText" class="ma-modal-ref"></p>
-        <input id="modalLink" type="text" readonly />
-        <button type="button" id="closeModalBtn" class="ma-btn ma-btn-outline">
-          Cerrar
-        </button>
-      </div>
-    `;
-    document.body.appendChild(modal);
-  }
-
-  const modalCanvas = document.getElementById("qrModalCanvas");
-  const modalRefText = document.getElementById("modalRefText");
-  const modalLink = document.getElementById("modalLink");
-  const overlay = modal.querySelector(".ma-modal-overlay");
-  const closeModalBtn = document.getElementById("closeModalBtn");
-
-  function openQrModal() {
-    const url = getPersonalLink();
-    if (!url || !modalCanvas) return;
-
-    modal.classList.add("open");
-
-    const refCode = currentUser && currentUser.refid ? currentUser.refid : "";
-
-    if (modalRefText) {
-      modalRefText.textContent = refCode ? `Tu código: ${refCode}` : "";
-    }
-    if (modalLink) modalLink.value = url;
-
-    new QRious({
-      element: modalCanvas,
-      value: url,
-      size: 260,
-      background: "white",
-      foreground: "#3b3026",
-    });
-  }
-
-  function closeQrModal() {
-    modal.classList.remove("open");
-  }
-
-  // Disparadores: click en la tarjeta QR, en el canvas o en el botón del footer
-  if (qrCard) {
-    qrCard.style.cursor = "pointer";
-    qrCard.addEventListener("click", openQrModal);
-  } else if (qrCanvas) {
-    qrCanvas.style.cursor = "pointer";
-    qrCanvas.onclick = openQrModal;
-  }
-
-  if (footerQrBtn) footerQrBtn.onclick = openQrModal;
-
-  if (overlay) overlay.addEventListener("click", closeQrModal);
-  if (closeModalBtn) closeModalBtn.addEventListener("click", closeQrModal);
-});
-
 })();
