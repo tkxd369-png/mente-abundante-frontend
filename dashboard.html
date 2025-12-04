@@ -1,4 +1,3 @@
- 
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -12,22 +11,39 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Estilos simples para el selector de idioma -->
+    <style>
+      .ma-dashboard-brand-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .ma-lang-switch {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .ma-lang-btn {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: #ffffff;
+        padding: 0.18rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .ma-lang-btn.active {
+        border-color: #d4af37;
+        background: #d4af37;
+        color: #ffffff;
+      }
+    </style>
   </head>
-<!-- === MODAL QR GRANDE === -->
-<div id="qrModal" class="ma-modal">
-  <div class="ma-modal-backdrop"></div>
-  <div class="ma-modal-content">
-    <button type="button" class="ma-modal-close" id="qrModalClose">×</button>
-
-    <h2 class="ma-modal-title">Tu QR personal</h2>
-    <p class="ma-modal-subtitle">
-      Muestra este código a tus invitados o envíales tu link para que lleguen directo a tu página de inicio.
-    </p>
-
-    <canvas id="dashQrBig"></canvas>
-    <p class="ma-modal-code" id="qrModalCode"></p>
-  </div>
-</div>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
@@ -35,6 +51,26 @@
       <header id="dashboardHeader" class="ma-dashboard-header">
         <div class="ma-dashboard-brand-row">
           <h1 class="ma-logo">MENTE ABUNDANTE</h1>
+
+          <!-- Selector de idioma ES / EN -->
+          <div class="ma-lang-switch">
+            <button
+              type="button"
+              class="ma-lang-btn"
+              data-lang="es"
+              id="langEsBtn"
+            >
+              ES
+            </button>
+            <button
+              type="button"
+              class="ma-lang-btn"
+              data-lang="en"
+              id="langEnBtn"
+            >
+              EN
+            </button>
+          </div>
         </div>
 
         <div class="ma-dashboard-user-row">
@@ -59,7 +95,9 @@
       <main class="ma-dashboard-main">
         <!-- Bloque 1: Frase AI -->
         <section class="ma-card ma-block ma-block-phrase">
-          <h2 class="ma-section-label">TU FRASE DE HOY</h2>
+          <h2 class="ma-section-label" data-i18n="phrase.title">
+            TU FRASE DE HOY
+          </h2>
           <p id="aiPhraseText" class="ma-phrase-text">
             “Tu decisión de hoy abre puertas que aún no imaginas.”
           </p>
@@ -67,7 +105,9 @@
 
         <!-- Bloque 2: Pinterest -->
         <section class="ma-card">
-          <h2 class="ma-section-label">INSPIRACIÓN VISUAL</h2>
+          <h2 class="ma-section-label" data-i18n="pinterest.title">
+            INSPIRACIÓN VISUAL
+          </h2>
           <div id="pinterestEmbed" class="ma-embed-box">
             <a
               data-pin-do="embedBoard"
@@ -82,7 +122,9 @@
 
         <!-- Bloque 3: TikTok -->
         <section class="ma-card">
-          <h2 class="ma-section-label">VIDEOS TIKTOK / REELS</h2>
+          <h2 class="ma-section-label" data-i18n="tiktok.title">
+            VIDEOS TIKTOK / REELS
+          </h2>
           <div class="ma-embed-box ma-embed-elfsight">
             <div
               class="elfsight-app-c7aa3b7a-2625-4e48-932a-c5a323679564"
@@ -90,45 +132,73 @@
             ></div>
           </div>
         </section>
- 
- <!-- === TUS ACCESOS RÁPIDOS === -->
-<section class="ma-card ma-quick-section">
-  <div class="ma-section-label">TUS ACCESOS RÁPIDOS</div>
 
-  <div class="ma-quick-row">
-    <!-- E-BOOK -->
-    <button type="button" class="ma-quick-card ma-quick-card-ebook">
-      <span class="ma-quick-icon">📘</span>
-      <span class="ma-quick-label">E-BOOK</span>
-      <span class="ma-quick-cta">Leer ahora</span>
-    </button>
+        <!-- === TUS ACCESOS RÁPIDOS === -->
+        <section class="ma-card ma-quick-section">
+          <div class="ma-section-label" data-i18n="quick.title">
+            TUS ACCESOS RÁPIDOS
+          </div>
 
-   <!-- HERRAMIENTAS -->
-<a href="herramientas.html"
-   class="ma-quick-card ma-quick-card-tools ma-quick-card-link">
-  <span class="ma-quick-icon ma-quick-icon-money">$</span>
-  <span class="ma-quick-label">HERRAMIENTAS</span>
-  <span class="ma-quick-cta">Guías para compartir</span>
-</a>
+          <div class="ma-quick-row">
+            <!-- E-BOOK -->
+            <button
+              type="button"
+              class="ma-quick-card ma-quick-card-ebook"
+            >
+              <span class="ma-quick-icon">📘</span>
+              <span class="ma-quick-label">E-BOOK</span>
+              <span class="ma-quick-cta" data-i18n="quick.ebookCta">
+                Leer ahora
+              </span>
+            </button>
 
-    <!-- TU QR -->
-    <button type="button" class="ma-quick-card ma-quick-card-qr">
-      <canvas id="dashQrSmall"></canvas>
-      <span class="ma-quick-label">TU QR</span>
-      <span class="ma-quick-cta">Compartir</span>
-    </button>
-  </div>
+            <!-- HERRAMIENTAS -->
+            <a
+              href="herramientas.html"
+              class="ma-quick-card ma-quick-card-tools ma-quick-card-link"
+            >
+              <span class="ma-quick-icon ma-quick-icon-money">$</span>
+              <span
+                class="ma-quick-label"
+                data-i18n="quick.toolsTitle"
+              >
+                HERRAMIENTAS
+              </span>
+              <span class="ma-quick-cta" data-i18n="quick.toolsCta">
+                Guías para compartir
+              </span>
+            </a>
 
-  <p class="ma-quick-note">
-    Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
-  </p>
-</section>
+            <!-- TU QR -->
+            <button
+              type="button"
+              class="ma-quick-card ma-quick-card-qr"
+            >
+              <canvas id="dashQrSmall"></canvas>
+              <span
+                class="ma-quick-label"
+                data-i18n="quick.qrTitle"
+              >
+                TU QR
+              </span>
+              <span class="ma-quick-cta" data-i18n="quick.qrCta">
+                Compartir
+              </span>
+            </button>
+          </div>
 
+          <p class="ma-quick-note" data-i18n="quick.note">
+            Comparte tu QR para que tus invitados lleguen directo a tu
+            página de inicio.
+          </p>
+        </section>
 
         <!-- Bloque 5: Newsletter / anuncios -->
         <section class="ma-card ma-block ma-block-news">
-          <h2 class="ma-section-label">NEWSLETTER & ANUNCIOS</h2>
-          <p class="ma-news-text">
+          <h2 class="ma-section-label" data-i18n="news.title">
+            NEWSLETTER & ANUNCIOS
+          </h2>
+          <p class="ma-news-text" data-i18n="news.text">
             Próximos lanzamientos, noticias de la comunidad y recordatorios
             importantes aparecerán aquí.
           </p>
@@ -142,18 +212,38 @@
         </div>
 
         <div class="ma-footer-btn-row">
-          <button type="button" class="ma-footer-btn" id="footerNewBooksBtn">
+          <button
+            type="button"
+            class="ma-footer-btn"
+            id="footerNewBooksBtn"
+            data-i18n="footer.newBooks"
+          >
             NUEVOS LIBROS
           </button>
-          <button type="button" class="ma-footer-btn" id="footerNewsBtn">
+          <button
+            type="button"
+            class="ma-footer-btn"
+            id="footerNewsBtn"
+            data-i18n="footer.news"
+          >
             NOVEDADES
           </button>
-          <button type="button" class="ma-footer-btn" id="footerExtraBtn">
+          <button
+            type="button"
+            class="ma-footer-btn"
+            id="footerExtraBtn"
+            data-i18n="footer.extra"
+          >
             ANUNCIOS
           </button>
         </div>
 
-        <button type="button" class="ma-footer-logout" id="logoutBtn">
+        <button
+          type="button"
+          class="ma-footer-logout"
+          id="logoutBtn"
+          data-i18n="footer.logout"
+        >
           CERRAR SESIÓN
         </button>
       </footer>
@@ -169,10 +259,18 @@
         <button class="ma-qr-modal-close" id="qrModalClose" type="button">
           &times;
         </button>
-        <h2 class="ma-qr-modal-title">Tu código de invitación</h2>
+        <h2
+          class="ma-qr-modal-title"
+          data-i18n="qr.title"
+        >
+          Tu código de invitación
+        </h2>
         <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
-        <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
-        <p class="ma-qr-modal-help">
+        <canvas
+          id="qrModalCanvas"
+          class="ma-qr-modal-canvas"
+        ></canvas>
+        <p class="ma-qr-modal-help" data-i18n="qr.help">
           Pide que escaneen este QR o comparte tu enlace personal.
         </p>
       </div>
@@ -181,8 +279,115 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
     <script src="app.js"></script>
-    <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+    <script
+      async
+      defer
+      src="https://assets.pinterest.com/js/pinit.js"
+    ></script>
     <script src="https://elfsightcdn.com/platform.js" async></script>
+
+    <!-- Sistema de idioma ES / EN para el dashboard -->
+    <script>
+      (function () {
+        const LANG_KEY = "ma_lang";
+
+        const DASH_TRANSLATIONS = {
+          es: {
+            "phrase.title": "TU FRASE DE HOY",
+            "pinterest.title": "INSPIRACIÓN VISUAL",
+            "tiktok.title": "VIDEOS TIKTOK / REELS",
+            "quick.title": "TUS ACCESOS RÁPIDOS",
+            "quick.ebookCta": "Leer ahora",
+            "quick.toolsTitle": "HERRAMIENTAS",
+            "quick.toolsCta": "Guías para compartir",
+            "quick.qrTitle": "TU QR",
+            "quick.qrCta": "Compartir",
+            "quick.note":
+              "Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.",
+            "news.title": "NEWSLETTER & ANUNCIOS",
+            "news.text":
+              "Próximos lanzamientos, noticias de la comunidad y recordatorios importantes aparecerán aquí.",
+            "footer.newBooks": "NUEVOS LIBROS",
+            "footer.news": "NOVEDADES",
+            "footer.extra": "ANUNCIOS",
+            "footer.logout": "CERRAR SESIÓN",
+            "qr.title": "Tu código de invitación",
+            "qr.help":
+              "Pide que escaneen este QR o comparte tu enlace personal.",
+          },
+          en: {
+            "phrase.title": "YOUR PHRASE FOR TODAY",
+            "pinterest.title": "VISUAL INSPIRATION",
+            "tiktok.title": "TIKTOK / REELS VIDEOS",
+            "quick.title": "YOUR QUICK ACCESS",
+            "quick.ebookCta": "Read now",
+            "quick.toolsTitle": "TOOLS",
+            "quick.toolsCta": "Sharing guides",
+            "quick.qrTitle": "YOUR QR",
+            "quick.qrCta": "Share",
+            "quick.note":
+              "Share your QR so your guests go directly to your start page.",
+            "news.title": "NEWSLETTER & ANNOUNCEMENTS",
+            "news.text":
+              "Upcoming launches, community news and important reminders will appear here.",
+            "footer.newBooks": "NEW BOOKS",
+            "footer.news": "UPDATES",
+            "footer.extra": "ANNOUNCEMENTS",
+            "footer.logout": "LOG OUT",
+            "qr.title": "Your invitation code",
+            "qr.help":
+              "Ask them to scan this QR or share your personal link.",
+          },
+        };
+
+        function getCurrentLang() {
+          const stored = localStorage.getItem(LANG_KEY);
+          if (stored === "en" || stored === "es") return stored;
+          return "es"; // por defecto español
+        }
+
+        function setCurrentLang(lang) {
+          localStorage.setItem(LANG_KEY, lang);
+        }
+
+        function applyDashboardLanguage() {
+          const lang = getCurrentLang();
+          const dict = DASH_TRANSLATIONS[lang];
+
+          // Textos con data-i18n
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (dict[key]) {
+              el.textContent = dict[key];
+            }
+          });
+
+          // Botones de idioma activos
+          document
+            .querySelectorAll(".ma-lang-btn")
+            .forEach((btn) => {
+              const btnLang = btn.getAttribute("data-lang");
+              btn.classList.toggle("active", btnLang === lang);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          if (!document.body.classList.contains("ma-dashboard")) return;
+
+          applyDashboardLanguage();
+
+          document
+            .querySelectorAll(".ma-lang-btn")
+            .forEach((btn) => {
+              btn.addEventListener("click", function () {
+                const lang = this.getAttribute("data-lang");
+                setCurrentLang(lang);
+                applyDashboardLanguage();
+              });
+            });
+        });
+      })();
+    </script>
 
     <!-- Header compact al hacer scroll -->
     <script>
@@ -205,10 +410,11 @@
     <!-- QR pequeño + modal QR grande -->
     <script>
       (function () {
-        // Elementos del dashboard
-        const qrTile = document.getElementById("qrTile");
-        const qrCanvasSmall = document.getElementById("qrCanvas");
+        // Tarjeta QR pequeña
+        const qrTile = document.querySelector(".ma-quick-card-qr");
+        const qrCanvasSmall = document.getElementById("dashQrSmall");
 
+        // Modal QR grande
         const modal = document.getElementById("qrModal");
         const modalBackdrop = document.getElementById("qrModalBackdrop");
         const modalClose = document.getElementById("qrModalClose");
@@ -284,3 +490,4 @@
     </script>
   </body>
 </html>
+ 
