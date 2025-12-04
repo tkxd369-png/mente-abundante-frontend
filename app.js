@@ -629,18 +629,31 @@
         }
       });
     }
+// Botón de referidos: solo abrir la página de Referral Program
+document.addEventListener("DOMContentLoaded", function () {
+  const badge = document.getElementById("dashRefBadge");
+  if (!badge) return;
 
-    // Tocar badge = copiar código
-    if (refBadge && user.refid) {
-      refBadge.style.cursor = "pointer";
-      refBadge.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(user.refid);
-          showToast("Código copiado");
-        } catch {
-          alert("Tu código: " + user.refid);
-        }
-      });
+  badge.addEventListener("click", function () {
+    const lang = window.maGetLang ? window.maGetLang() : "es";
+    const refTextEl = document.getElementById("dashReferralsText");
+    const estTextEl = document.getElementById("dashEstimateText");
+
+    const refText = refTextEl ? refTextEl.textContent.trim() : "";
+    const estText = estTextEl ? estTextEl.textContent.trim() : "";
+
+    const payload = { lang, refText, estText };
+    try {
+      localStorage.setItem("ma_ref_summary", JSON.stringify(payload));
+    } catch (e) {
+      console.warn("No se pudo guardar ma_ref_summary:", e);
+    }
+
+    window.location.href = "referrals.html";
+  });
+});
+
+  
     }
 
     // Click E-Book (placeholder)
