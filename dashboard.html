@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Mente Abundante - Dashboard</title>
+    <title>The Master Key - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Fuentes -->
@@ -50,7 +50,7 @@
       <!-- HEADER -->
       <header id="dashboardHeader" class="ma-dashboard-header">
         <div class="ma-dashboard-brand-row">
-          <h1 class="ma-logo">MENTE ABUNDANTE</h1>
+          <h1 class="ma-logo">THE MASTER KEY</h1>
 
           <!-- Selector de idioma ES / EN -->
           <div class="ma-lang-switch">
@@ -79,7 +79,7 @@
           </div>
 
           <div class="ma-dashboard-user-meta">
-            <!-- Badge referidos + estimado (JS escribe el texto) -->
+            <!-- Badge referidos + estimado (JS escribe el texto y luego lo ajustamos por idioma) -->
             <button id="dashRefBadge" class="ma-ref-badge" type="button">
               <span id="dashReferralsText">0 REFERIDOS</span>
               <span id="dashEstimateText">$0 USD ESTIMADO</span>
@@ -152,7 +152,7 @@
               </span>
             </button>
 
-            <!-- HERRAMIENTAS -->
+            <!-- HERRAMIENTAS (por ahora a la versión en español) -->
             <a
               href="herramientas.html"
               class="ma-quick-card ma-quick-card-tools ma-quick-card-link"
@@ -369,7 +369,52 @@
               const btnLang = btn.getAttribute("data-lang");
               btn.classList.toggle("active", btnLang === lang);
             });
+
+          // Frase por defecto (solo si no hay una personalizada)
+          const phraseEl = document.getElementById("aiPhraseText");
+          if (phraseEl) {
+            const current = phraseEl.textContent.trim();
+            const esDefault =
+              "“Tu decisión de hoy abre puertas que aún no imaginas.”";
+            const enDefault =
+              "“Your decision today opens doors you can't yet imagine.”";
+
+            if (lang === "en" && (!current || current === esDefault)) {
+              phraseEl.textContent = enDefault;
+            } else if (lang === "es" && (!current || current === enDefault)) {
+              phraseEl.textContent = esDefault;
+            }
+          }
+
+          // Actualizar textos de referidos si está disponible el helper
+          if (window.maUpdateReferralTexts) {
+            window.maUpdateReferralTexts();
+          }
+
+          // Actualizar etiqueta de CÓDIGO / CODE en footer y modal
+          const codeLabel = lang === "en" ? "CODE: " : "CÓDIGO: ";
+          const footerRef = document.getElementById("footerRefId");
+          const modalRefText = document.getElementById("qrModalRefText");
+
+          let user = null;
+          try {
+            user = JSON.parse(localStorage.getItem("ma_user") || "{}");
+          } catch (e) {
+            user = {};
+          }
+          const refid = user.refid || user.refId || "———";
+
+          if (footerRef) {
+            footerRef.textContent = codeLabel + (refid || "———");
+          }
+          if (modalRefText) {
+            modalRefText.textContent = codeLabel + (refid || "———");
+          }
         }
+
+        // Exponer función para otros scripts
+        window.maGetLang = getCurrentLang;
+        window.maApplyDashboardLanguage = applyDashboardLanguage;
 
         document.addEventListener("DOMContentLoaded", function () {
           if (!document.body.classList.contains("ma-dashboard")) return;
@@ -464,9 +509,16 @@
           console.warn("No se pudo generar el QR grande:", e);
         }
 
-        // Texto del código en el modal
+        // Etiqueta CÓDIGO / CODE según idioma
+        const lang = window.maGetLang ? window.maGetLang() : "es";
+        const codeLabel = lang === "en" ? "CODE: " : "CÓDIGO: ";
+
         if (modalRefText) {
-          modalRefText.textContent = "CÓDIGO: " + (refid || "———");
+          modalRefText.textContent = codeLabel + (refid || "———");
+        }
+        const footerRef = document.getElementById("footerRefId");
+        if (footerRef) {
+          footerRef.textContent = codeLabel + (refid || "———");
         }
 
         // Funciones para abrir/cerrar modal
@@ -488,6 +540,45 @@
         }
       })();
     </script>
+
+    <!-- Ajuste de textos del botón de referidos según idioma -->
+    <script>
+      (function () {
+        function updateReferralTexts() {
+          const lang = window.maGetLang ? window.maGetLang() : "es";
+          const refEl = document.getElementById("dashReferralsText");
+          const estEl = document.getElementById("dashEstimateText");
+
+          if (refEl) {
+            const text = refEl.textContent.trim();
+            const parts = text.split(" ");
+            const num = parts[0] || "0";
+            if (lang === "en") {
+              refEl.textContent = num + " REFERRALS";
+            } else {
+              refEl.textContent = num + " REFERIDOS";
+            }
+          }
+
+          if (estEl) {
+            const text = estEl.textContent.trim();
+            const tokens = text.split(" ");
+            const amount = tokens[0] || "$0";
+            const currency = tokens[1] || "USD";
+            const label = lang === "en" ? "ESTIMATED" : "ESTIMADO";
+            estEl.textContent = amount + " " + currency + " " + label;
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          updateReferralTexts();
+          // pequeño delay extra para cuando app.js actualice datos
+          setTimeout(updateReferralTexts, 800);
+        });
+
+        // Exponer para que el sistema de idioma pueda llamarlo
+        window.maUpdateReferralTexts = updateReferralTexts;
+      })();
+    </script>
   </body>
 </html>
- 
