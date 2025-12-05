@@ -231,14 +231,15 @@ body.ma-body {
 
 /* Tarjetas grandes: frase, inspiración, TikTok, newsletter */
 
-.ma-card,
+ .ma-card,
 .ma-widget-card {
-  background: var(--ma-card-bg);
+  background: #ffffff;  /* blanco limpio sobre gris */
   border-radius: 12px;
   padding: 1.3rem 1.4rem 1.4rem;
   box-shadow: var(--ma-shadow-soft);
-  border: 1px solid rgba(227, 204, 165, 0.35);
+  border: 1px solid rgba(227, 204, 165, 0.25);
 }
+
 
 /* Títulos de cada tarjeta */
 
