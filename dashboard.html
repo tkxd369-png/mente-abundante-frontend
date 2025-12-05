@@ -583,6 +583,81 @@ if (phraseEl) {
   })();
 </script>
 
+<script>
+  (function () {
+    const LANG_KEY = "ma_lang";
+
+    function getLang() {
+      try {
+        const stored = localStorage.getItem(LANG_KEY);
+        if (stored === "en" || stored === "es") return stored;
+      } catch {}
+      return "es";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("maLangToggle");
+      const menu = document.getElementById("maLangMenu");
+      const currentSpan = document.getElementById("maLangCurrent");
+
+      const buttons = menu
+        ? menu.querySelectorAll(".ma-lang-btn")
+        : [];
+
+      // Estado inicial
+      const currentLang = getLang();
+      if (currentSpan) currentSpan.textContent = currentLang.toUpperCase();
+
+      buttons.forEach((btn) => {
+        const lang = btn.getAttribute("data-lang");
+        btn.classList.toggle("active", lang === currentLang);
+      });
+
+      // Abrir / cerrar menú
+      if (toggle && menu) {
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          menu.classList.toggle("open");
+        });
+      }
+
+      // Cerrar al hacer click fuera
+      document.addEventListener("click", function () {
+        if (menu) menu.classList.remove("open");
+      });
+
+      // Click en opción de idioma
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const lang = this.getAttribute("data-lang") || "es";
+
+          try {
+            localStorage.setItem(LANG_KEY, lang);
+          } catch {}
+
+          if (currentSpan)
+            currentSpan.textContent = lang.toUpperCase();
+
+          buttons.forEach((b) => {
+            b.classList.toggle(
+              "active",
+              b.getAttribute("data-lang") === lang
+            );
+          });
+
+          // Notificar al resto del sistema (si existe maSetLang / maUpdateTexts)
+          if (window.maSetLang) window.maSetLang(lang);
+          if (window.maUpdateTexts) window.maUpdateTexts();
+          if (window.maUpdateReferralTexts)
+            window.maUpdateReferralTexts();
+
+          if (menu) menu.classList.remove("open");
+        });
+      });
+    });
+  })();
+</script>
 
  
   </body>
