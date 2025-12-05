@@ -285,126 +285,43 @@ body.ma-body {
   font-size: 0.9rem;
   color: #5a4b3f;
 }
-/* ====== HEADER PREMIUM ====== */
-.ma-dashboard-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  gap: 1rem;
-}
-
-.ma-dashboard-brand-row {
-  display: flex;
-  align-items: center;
-}
-
-.ma-logo {
-  letter-spacing: 0.25em;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-}
-
-/* ====== LANG DROPDOWN PREMIUM ====== */
-.ma-lang-switch {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  min-width: 120px;
-}
-
-.ma-lang-toggle {
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
-  padding: 0.25rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-}
-
-.ma-lang-chevron {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-.ma-lang-menu {
-  position: absolute;
-  right: 0;
-  top: 120%;
-  background: #ffffff;
-  border-radius: 0.75rem;
-  padding: 0.4rem;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-  display: none;
-  min-width: 150px;
-  z-index: 20;
-}
-
-.ma-lang-menu.open {
-  display: block;
-}
-
-.ma-lang-btn {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: transparent;
-  padding: 0.45rem 0.65rem;
-  border-radius: 0.55rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.ma-lang-btn:hover {
-  background: #f5f1e9;
-}
-
-.ma-lang-btn.active {
-  background: #d4af37;
-  color: #111;
-}
-
-/* ====== MOBILE: TÍTULO CENTRADO Y IDIOMA ABAJO ====== */
+ /* ===== FIX HEADER MOBILE SENCILLO Y ELEGANTE ===== */
 @media (max-width: 620px) {
+  /* El header ya no en fila, sino en columna */
   .ma-dashboard-header {
-    flex-direction: column;
-    align-items: center;
+    display: block;
     text-align: center;
+    padding: 1.25rem 1rem 0.75rem;
   }
 
+  /* Fila de marca: centrada */
   .ma-dashboard-brand-row {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.35rem;
+  }
+
+  /* Título THE MASTER KEY en UNA sola línea, centrado */
+  .ma-logo {
+    font-size: 1.2rem;
+    letter-spacing: 0.18em;
+    text-align: center;
+    white-space: nowrap;      /* <-- evita que se parta en 3 líneas */
+  }
+
+  /* Selector de idioma abajo, centrado */
+  .ma-lang-switch {
+    margin-top: 0.4rem;
     display: flex;
     justify-content: center;
   }
 
-  .ma-logo {
-    font-size: 1.5rem;
-    line-height: 1.2;
-    text-align: center;
-  }
-
-  .ma-lang-switch {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.25rem;
-  }
-
+  /* El menú desplegable, si se abre, se centra bajo el botón */
   .ma-lang-menu {
     right: 50%;
     transform: translateX(50%);
   }
 }
-
 
 /* ============================
    ACCESOS RÁPIDOS / LINK / QR
