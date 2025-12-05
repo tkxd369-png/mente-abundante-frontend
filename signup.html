@@ -512,19 +512,21 @@
 
         try {
           const res = await fetch(API_BASE + "/auth/create-account", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              fullName,
-              email,
-              phone,
-              password,
-              username: username || undefined,
-              refCode: refCodeLocal || undefined
-            })
-          });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    fullName,
+    email,
+    phone,
+    password,
+    username: username || undefined,
+    refCode: refCodeLocal || undefined,
+    lang: "es"   // 👈 aquí marcamos que este usuario es de flujo español
+  })
+});
+
 
           if (!res.ok) {
             let msg = "Hubo un problema al crear tu cuenta. Intenta de nuevo.";
