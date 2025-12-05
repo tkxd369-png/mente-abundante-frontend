@@ -1179,60 +1179,57 @@ body.ma-theme-steel .ma-style-chip.is-active {
   border-color: #d4af37;
   color: #111111;
 }
-/* =========================================
-   THE MASTER KEY – DASHBOARD TMK (UNISEX)
-   Overrides de color y sensación visual
-   (Pegar al final de styles.css)
+ /* =========================================
+   THE MASTER KEY – DASHBOARD TMK v2 (NEUTRO EJECUTIVO)
+   Pegar AL FINAL de styles.css
 ========================================= */
 
 :root {
-  /* Nuevo set neutro */
-  --tmk-bg-page: #f3f3f5;         /* fondo general gris claro */
-  --tmk-bg-card: #ffffff;         /* tarjetas blancas limpias */
-  --tmk-text-main: #222222;       /* texto principal más neutro */
-  --tmk-text-soft: #6e6e72;       /* texto suave gris */
-  --tmk-accent-gold: #caa86a;     /* dorado más sobrio */
-  --tmk-accent-gold-soft: #e2d4b1;
-  --tmk-border-soft: rgba(0, 0, 0, 0.05);
-  --tmk-shadow-soft: 0 16px 40px rgba(15, 15, 20, 0.06);
+  --tmk2-bg-page: #f4f4f6;       /* fondo general */
+  --tmk2-bg-card: #ffffff;       /* tarjetas blancas */
+  --tmk2-text-main: #202125;     /* texto principal gris oscuro */
+  --tmk2-text-soft: #6f7278;     /* texto secundario */
+  --tmk2-accent-gold: #c5a76a;   /* dorado solo como acento */
+  --tmk2-border-soft: rgba(0, 0, 0, 0.06);
+  --tmk2-shadow-soft: 0 14px 36px rgba(15, 15, 20, 0.06);
 }
 
-/* Fondo del dashboard más neutro y unisex */
+/* Fondo general del dashboard: gris muy claro, unisex */
 .ma-dashboard-wrapper {
-  background: var(--tmk-bg-page);
+  background: var(--tmk2-bg-page);
 }
 
-/* HEADER – fondo blanco, línea sutil, menos “crema” */
+/* HEADER – blanco, limpio, casi corporativo */
 .ma-dashboard-header {
   background: #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--tmk2-border-soft);
 }
 
-/* Línea que divide el título: más neutra, menos dorada pesada */
+/* Fila del logo – sin tanto café, más neutro */
 .ma-dashboard-brand-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  color: #262629;
+  border-bottom: 1px solid var(--tmk2-border-soft);
+  color: var(--tmk2-text-main);
 }
 
-/* Logo: mismo estilo pero color más neutro */
+/* Logo THE MASTER KEY – gris oscuro elegante */
 .ma-logo {
-  color: #222328;
+  color: var(--tmk2-text-main);
 }
 
-/* Nombre de usuario – menos café, más neutro */
+/* Nombre del usuario – menos marrón, más serio */
 .ma-user-name {
-  color: #222328;
+  color: var(--tmk2-text-main);
 }
 
-/* Badge de referidos – chip neutro con toque dorado */
+/* Badge de referidos – chip gris, dorado solo en el texto pequeño si quieres */
 .ma-ref-badge {
-  background: #f4f4f6;
+  background: #f0f0f2;
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  color: #55535a;
+  border: 1px solid var(--tmk2-border-soft);
+  color: var(--tmk2-text-soft);
 }
 
-/* Línea de “estimado” más sobria */
+/* Texto de “estimado” dentro del badge */
 .ma-ref-badge #dashEstimateText {
   font-size: 0.7rem;
   margin-top: 0.15rem;
@@ -1240,112 +1237,112 @@ body.ma-theme-steel .ma-style-chip.is-active {
   letter-spacing: 0.14em;
 }
 
-/* Icono menú – gris neutro */
+/* Icono ⋮ – gris discreto */
 .ma-icon-button {
-  color: #8a8a92;
+  color: #8c8f96;
 }
 
-/* Tarjetas del dashboard – más estilo app moderna */
+/* Tarjetas principales – estilo plataforma moderna */
 .ma-card,
 .ma-widget-card {
-  background: var(--tmk-bg-card);
+  background: var(--tmk2-bg-card);
   border-radius: 14px;
   padding: 1.3rem 1.4rem 1.4rem;
-  box-shadow: var(--tmk-shadow-soft);
-  border: 1px solid var(--tmk-border-soft);
+  box-shadow: var(--tmk2-shadow-soft);
+  border: 1px solid var(--tmk2-border-soft);
 }
 
-/* Títulos de sección – dorado sobrio, no tan marrón */
+/* Títulos de secciones – dorado suave solo en el texto, no en fondos */
 .ma-section-label,
 .ma-card > .ma-section-label {
-  color: var(--tmk-accent-gold);
+  color: var(--tmk2-accent-gold);
 }
 
-/* Frase principal – menos café, más neutro */
+/* Frase del día – texto más neutro, sin tono café */
 .ma-phrase-text {
-  color: #2c2c31;
+  color: var(--tmk2-text-main);
 }
 
-/* Texto de newsletter / descripciones */
+/* Texto general tipo news / descripciones */
 .ma-news-text {
-  color: var(--tmk-text-soft);
+  color: var(--tmk2-text-soft);
 }
 
-/* Caja de embed (Pinterest / TikTok) – sin fondo “crema” */
+/* Caja de embeds – blanca, borde gris, nada de crema */
 .ma-embed-box {
   border-radius: 12px;
-  border: 1px dashed rgba(0, 0, 0, 0.12);
+  border: 1px dashed var(--tmk2-border-soft);
   padding: 1rem;
   min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #f7f7f9; /* gris muy claro en vez de crema */
+  background: #ffffff;
 }
 
 .ma-embed-placeholder {
   font-size: 0.9rem;
-  color: #8a8a92;
+  color: var(--tmk2-text-soft);
 }
 
-/* ACCESOS RÁPIDOS – hacerlos sentir más “app” que vintage */
+/* Accesos rápidos – tarjetas tipo app */
 .ma-quick-card {
   background: #ffffff;
   border-radius: 14px;
-  border: 1px solid var(--tmk-border-soft);
+  border: 1px solid var(--tmk2-border-soft);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
 }
 
-/* Iconos de accesos rápidos – neutros con toque dorado */
+/* Iconos de accesos rápidos – neutros */
 .ma-quick-icon,
 .ma-quick-icon-money {
-  color: #303036;
+  color: var(--tmk2-text-main);
 }
 
-/* Nota bajo accesos rápidos – gris suave */
+/* Nota bajo accesos rápidos – gris */
 .ma-quick-note {
-  color: var(--tmk-text-soft);
+  color: var(--tmk2-text-soft);
 }
 
-/* Footer – línea + botones más neutros */
+/* FOOTER – gris muy clarito, botones blancos */
 .ma-dashboard-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  background: #f6f6f8;
+  border-top: 1px solid var(--tmk2-border-soft);
+  background: #f5f5f7;
 }
 
 .ma-footer-refid {
-  color: #55535a;
+  color: var(--tmk2-text-soft);
 }
 
 .ma-footer-btn {
   background: #ffffff;
-  border: 1px solid var(--tmk-border-soft);
-  color: #333338;
+  border: 1px solid var(--tmk2-border-soft);
+  color: var(--tmk2-text-main);
 }
 
-/* Botón Cerrar sesión – texto más neutro */
+/* Botón cerrar sesión */
 .ma-footer-logout {
-  color: #55535a;
+  color: var(--tmk2-text-soft);
 }
 
-/* Modal QR – base blanca, borde suave, fondo oscuro semi neutro */
+/* MODAL QR – fondo oscuro suave, contenido blanco limpio */
 .ma-modal {
-  background: rgba(8, 8, 10, 0.45);
+  background: rgba(8, 9, 12, 0.48);
 }
 
 .ma-modal-content {
   background: #ffffff;
   border-radius: 18px;
-  border: 1px solid var(--tmk-border-soft);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--tmk2-border-soft);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.32);
 }
 
 .ma-modal-title {
-  color: #222328;
+  color: var(--tmk2-text-main);
 }
 
 .ma-modal-subtitle,
 .ma-modal-code {
-  color: var(--tmk-text-soft);
+  color: var(--tmk2-text-soft);
 }
