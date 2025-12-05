@@ -54,23 +54,29 @@
 
           <!-- Selector de idioma ES / EN -->
           <div class="ma-lang-switch">
-            <button
-              type="button"
-              class="ma-lang-btn"
-              data-lang="es"
-              id="langEsBtn"
-            >
-              ES
-            </button>
-            <button
-              type="button"
-              class="ma-lang-btn"
-              data-lang="en"
-              id="langEnBtn"
-            >
-              EN
-            </button>
-          </div>
+  <button type="button" class="ma-lang-toggle" id="maLangToggle">
+    <span id="maLangCurrent">ES</span>
+    <span class="ma-lang-chevron">⌄</span>
+  </button>
+
+  <div class="ma-lang-menu" id="maLangMenu">
+    <button
+      type="button"
+      class="ma-lang-btn"
+      data-lang="es"
+    >
+      ES • Español
+    </button>
+    <button
+      type="button"
+      class="ma-lang-btn"
+      data-lang="en"
+    >
+      EN • English
+    </button>
+  </div>
+</div>
+
         </div>
 
         <div class="ma-dashboard-user-row">
