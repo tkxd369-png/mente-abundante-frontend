@@ -111,12 +111,13 @@ body.ma-body {
    DASHBOARD – CONTENEDOR
 ============================ */
 
-.ma-dashboard-wrapper {
+ .ma-dashboard-wrapper {
   min-height: 100vh;
-  background: var(--ma-bg-soft);
+  background: #f2f2f2;  /* gris claro neutro */
   display: flex;
   flex-direction: column;
 }
+
 
 /* HEADER */
 
