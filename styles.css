@@ -1179,3 +1179,173 @@ body.ma-theme-steel .ma-style-chip.is-active {
   border-color: #d4af37;
   color: #111111;
 }
+/* =========================================
+   THE MASTER KEY – DASHBOARD TMK (UNISEX)
+   Overrides de color y sensación visual
+   (Pegar al final de styles.css)
+========================================= */
+
+:root {
+  /* Nuevo set neutro */
+  --tmk-bg-page: #f3f3f5;         /* fondo general gris claro */
+  --tmk-bg-card: #ffffff;         /* tarjetas blancas limpias */
+  --tmk-text-main: #222222;       /* texto principal más neutro */
+  --tmk-text-soft: #6e6e72;       /* texto suave gris */
+  --tmk-accent-gold: #caa86a;     /* dorado más sobrio */
+  --tmk-accent-gold-soft: #e2d4b1;
+  --tmk-border-soft: rgba(0, 0, 0, 0.05);
+  --tmk-shadow-soft: 0 16px 40px rgba(15, 15, 20, 0.06);
+}
+
+/* Fondo del dashboard más neutro y unisex */
+.ma-dashboard-wrapper {
+  background: var(--tmk-bg-page);
+}
+
+/* HEADER – fondo blanco, línea sutil, menos “crema” */
+.ma-dashboard-header {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Línea que divide el título: más neutra, menos dorada pesada */
+.ma-dashboard-brand-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  color: #262629;
+}
+
+/* Logo: mismo estilo pero color más neutro */
+.ma-logo {
+  color: #222328;
+}
+
+/* Nombre de usuario – menos café, más neutro */
+.ma-user-name {
+  color: #222328;
+}
+
+/* Badge de referidos – chip neutro con toque dorado */
+.ma-ref-badge {
+  background: #f4f4f6;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #55535a;
+}
+
+/* Línea de “estimado” más sobria */
+.ma-ref-badge #dashEstimateText {
+  font-size: 0.7rem;
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Icono menú – gris neutro */
+.ma-icon-button {
+  color: #8a8a92;
+}
+
+/* Tarjetas del dashboard – más estilo app moderna */
+.ma-card,
+.ma-widget-card {
+  background: var(--tmk-bg-card);
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem 1.4rem;
+  box-shadow: var(--tmk-shadow-soft);
+  border: 1px solid var(--tmk-border-soft);
+}
+
+/* Títulos de sección – dorado sobrio, no tan marrón */
+.ma-section-label,
+.ma-card > .ma-section-label {
+  color: var(--tmk-accent-gold);
+}
+
+/* Frase principal – menos café, más neutro */
+.ma-phrase-text {
+  color: #2c2c31;
+}
+
+/* Texto de newsletter / descripciones */
+.ma-news-text {
+  color: var(--tmk-text-soft);
+}
+
+/* Caja de embed (Pinterest / TikTok) – sin fondo “crema” */
+.ma-embed-box {
+  border-radius: 12px;
+  border: 1px dashed rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f7f7f9; /* gris muy claro en vez de crema */
+}
+
+.ma-embed-placeholder {
+  font-size: 0.9rem;
+  color: #8a8a92;
+}
+
+/* ACCESOS RÁPIDOS – hacerlos sentir más “app” que vintage */
+.ma-quick-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--tmk-border-soft);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+}
+
+/* Iconos de accesos rápidos – neutros con toque dorado */
+.ma-quick-icon,
+.ma-quick-icon-money {
+  color: #303036;
+}
+
+/* Nota bajo accesos rápidos – gris suave */
+.ma-quick-note {
+  color: var(--tmk-text-soft);
+}
+
+/* Footer – línea + botones más neutros */
+.ma-dashboard-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  background: #f6f6f8;
+}
+
+.ma-footer-refid {
+  color: #55535a;
+}
+
+.ma-footer-btn {
+  background: #ffffff;
+  border: 1px solid var(--tmk-border-soft);
+  color: #333338;
+}
+
+/* Botón Cerrar sesión – texto más neutro */
+.ma-footer-logout {
+  color: #55535a;
+}
+
+/* Modal QR – base blanca, borde suave, fondo oscuro semi neutro */
+.ma-modal {
+  background: rgba(8, 8, 10, 0.45);
+}
+
+.ma-modal-content {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid var(--tmk-border-soft);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28);
+}
+
+.ma-modal-title {
+  color: #222328;
+}
+
+.ma-modal-subtitle,
+.ma-modal-code {
+  color: var(--tmk-text-soft);
+}
