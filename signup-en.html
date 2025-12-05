@@ -511,20 +511,22 @@
         signupBtn.textContent = "Creating account...";
 
         try {
-          const res = await fetch(API_BASE + "/auth/create-account", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              fullName,
-              email,
-              phone,
-              password,
-              username: username || undefined,
-              refCode: refCodeLocal || undefined
-            })
-          });
+       const res = await fetch(API_BASE + "/auth/create-account", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    fullName,
+    email,
+    phone,
+    password,
+    username: username || undefined,
+    refCode: refCodeLocal || undefined,
+    lang: "en"
+  })
+});
+ 
 
           if (!res.ok) {
             let msg = "There was an issue creating your account. Please try again.";
