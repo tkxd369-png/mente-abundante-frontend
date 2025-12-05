@@ -619,6 +619,59 @@ if (phraseEl) {
   })();
 </script>
 
- 
+ <script>
+  (function () {
+    const THEME_KEY = "ma_theme";
+
+    function applyTheme(theme) {
+      const body = document.body;
+      body.classList.remove("ma-theme-classic", "ma-theme-steel");
+
+      if (theme === "steel") {
+        body.classList.add("ma-theme-steel");
+      } else {
+        body.classList.add("ma-theme-classic");
+        theme = "classic";
+      }
+
+      // guardar preferencia
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch (e) {}
+
+      // marcar botón activo
+      document
+        .querySelectorAll(".ma-style-chip")
+        .forEach((chip) => {
+          const t = chip.getAttribute("data-theme");
+          chip.classList.toggle("is-active", t === theme);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // cargar tema guardado
+      let saved = "classic";
+      try {
+        const stored = localStorage.getItem(THEME_KEY);
+        if (stored === "classic" || stored === "steel") {
+          saved = stored;
+        }
+      } catch (e) {}
+
+      applyTheme(saved);
+
+      // escuchar clicks en los chips
+      document
+        .querySelectorAll(".ma-style-chip")
+        .forEach((chip) => {
+          chip.addEventListener("click", function () {
+            const t = this.getAttribute("data-theme") || "classic";
+            applyTheme(t);
+          });
+        });
+    });
+  })();
+</script>
+
   </body>
 </html>
