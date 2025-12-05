@@ -447,7 +447,7 @@
     });
   }
 
-  // ---------------------------
+    // ---------------------------
   // DASHBOARD
   // ---------------------------
   async function initDashboard() {
@@ -466,9 +466,9 @@
       });
     }
 
-    // Frase del día
+    // Frase del día (luego la pisa el sistema de idioma si hace falta)
     const phraseEl = document.getElementById("aiPhraseText");
-    if (phraseEl) {
+    if (phraseEl && typeof pickDailyPhrase === "function") {
       phraseEl.textContent = pickDailyPhrase();
     }
 
@@ -505,26 +505,41 @@
     const copyLinkBtn = document.getElementById("copyLinkBtn");
     const footerRefIdEl = document.getElementById("footerRefId");
 
+    // Idioma actual
+    const currentLang =
+      typeof MA_LANG !== "undefined" && MA_LANG ? MA_LANG : "es";
+
     // Nombre (solo el primer nombre)
     if (nameEl) {
       const fullName = user.full_name || "";
-      const defaultName = MA_LANG === "en" ? "Welcome" : "Bienvenido";
-      const firstName = fullName.split(" ")[0] || fullName || defaultName;
+      const defaultName = currentLang === "en" ? "Welcome" : "Bienvenido";
+      const firstName =
+        fullName.trim().split(" ")[0] || fullName || defaultName;
       nameEl.textContent = firstName;
     }
 
-    // REFERIDOS + ESTIMADO
+    // REFERIDOS + ESTIMADO (desde backend)
     const referrals = Number(user.referrals) || 0;
-    const rewardPerReferral = 177;
+    const rewardPerReferral = 177; // neto después de fee
     const estimated = referrals * rewardPerReferral;
 
     if (refTextEl) {
-      refTextEl.textContent =
-        referrals === 1 ? "1 REFERIDO" : `${referrals} REFERIDOS`;
+      if (currentLang === "en") {
+        refTextEl.textContent =
+          referrals === 1
+            ? "1 REFERRAL"
+            : `${referrals} REFERRALS`;
+      } else {
+        refTextEl.textContent =
+          referrals === 1
+            ? "1 REFERIDO"
+            : `${referrals} REFERIDOS`;
+      }
     }
 
     if (estTextEl) {
-      estTextEl.textContent = `$${estimated.toLocaleString()} USD ESTIMADO`;
+      const label = currentLang === "en" ? "ESTIMATED" : "ESTIMADO";
+      estTextEl.textContent = `$${estimated.toLocaleString()} USD ${label}`;
     }
 
     // Enlace personal
@@ -602,7 +617,8 @@
 
     // Código en el footer
     if (footerRefIdEl && user.refid) {
-      footerRefIdEl.textContent = "CÓDIGO: " + user.refid;
+      footerRefIdEl.textContent =
+        (currentLang === "en" ? "CODE: " : "CÓDIGO: ") + user.refid;
     }
 
     // Botón copiar link (si existe)
@@ -610,22 +626,38 @@
       copyLinkBtn.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(personalLink);
-          showToast("Enlace personal copiado");
+          showToast(
+            currentLang === "en"
+              ? "Personal link copied"
+              : "Enlace personal copiado"
+          );
         } catch {
-          alert("No se pudo copiar el enlace.");
+          alert(
+            currentLang === "en"
+              ? "Could not copy the link."
+              : "No se pudo copiar el enlace."
+          );
         }
       });
     }
 
-        // Tocar el nombre = copiar link
+    // Tocar el nombre = copiar link
     if (nameEl && personalLink) {
       nameEl.style.cursor = "pointer";
       nameEl.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(personalLink);
-          showToast("Enlace personal copiado");
+          showToast(
+            currentLang === "en"
+              ? "Personal link copied"
+              : "Enlace personal copiado"
+          );
         } catch {
-          alert("No se pudo copiar el enlace.");
+          alert(
+            currentLang === "en"
+              ? "Could not copy the link."
+              : "No se pudo copiar el enlace."
+          );
         }
       });
     }
@@ -633,15 +665,18 @@
     // Botón de referidos: solo abrir la página de Referral Program
     if (refBadge) {
       refBadge.addEventListener("click", function () {
-        const lang = window.maGetLang ? window.maGetLang() : MA_LANG || "es";
+        const lang =
+          window.maGetLang ? window.maGetLang() : currentLang;
 
-        // Reconstruimos los textos usando LOS MISMOS datos del backend
+        // Construimos los textos de la badge igual que en el dashboard
         const refText =
-          referrals === 1
-            ? (lang === "en" ? "1 REFERRAL" : "1 REFERIDO")
-            : (lang === "en"
-                ? `${referrals} REFERRALS`
-                : `${referrals} REFERIDOS`);
+          lang === "en"
+            ? referrals === 1
+              ? "1 REFERRAL"
+              : `${referrals} REFERRALS`
+            : referrals === 1
+            ? "1 REFERIDO"
+            : `${referrals} REFERIDOS`;
 
         const amountText = `$${estimated.toLocaleString()} USD ${
           lang === "en" ? "ESTIMATED" : "ESTIMADO"
@@ -664,7 +699,6 @@
         window.location.href = "referrals.html";
       });
     }
-  }
 
     // Click E-Book (placeholder)
     const ebookTile = document.getElementById("ebookTile");
