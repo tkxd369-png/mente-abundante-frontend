@@ -1078,3 +1078,103 @@ body.ma-body {
 .ma-membership-footer a:hover {
   color: #5a4937;
 }
+/* =========================
+   THEMES
+   ========================= */
+
+/* Tema por defecto: Classic (dorado, claro) */
+body.ma-theme-classic {
+  background: #f7f5f0;
+  color: #111111;
+}
+
+body.ma-theme-classic .ma-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.ma-theme-classic .ma-logo {
+  color: #111111;
+}
+
+/* Botones principales en classic */
+body.ma-theme-classic .ma-ref-badge,
+body.ma-theme-classic .ma-footer-btn {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Tema 2: Steel (más oscuro, más masculino) */
+body.ma-theme-steel {
+  background: #050608;
+  color: #f5f5f5;
+}
+
+body.ma-theme-steel .ma-card {
+  background: #101217;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.ma-theme-steel .ma-logo {
+  color: #f5f5f5;
+}
+
+/* Texto de secciones en steel */
+body.ma-theme-steel .ma-section-label,
+body.ma-theme-steel .ma-user-name,
+body.ma-theme-steel .ma-news-text,
+body.ma-theme-steel .ma-phrase-text {
+  color: #f5f5f5;
+}
+
+/* Botones en steel */
+body.ma-theme-steel .ma-ref-badge,
+body.ma-theme-steel .ma-footer-btn {
+  background: #151822;
+  border-color: #2a2f3a;
+  color: #f5f5f5;
+}
+
+/* Footer code en steel */
+body.ma-theme-steel #footerRefId {
+  color: #d4d4d4;
+}
+
+/* Toggle de estilo (botoncitos pequeños) */
+.ma-style-toggle {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+}
+
+.ma-style-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.ma-style-chip.is-active {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #111111;
+}
+
+/* En tema oscuro, ajustar fondo de chips */
+body.ma-theme-steel .ma-style-chip {
+  background: #151822;
+  border-color: #2a2f3a;
+  color: #f5f5f5;
+}
+
+body.ma-theme-steel .ma-style-chip.is-active {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #111111;
+}
