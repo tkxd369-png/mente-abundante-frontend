@@ -494,53 +494,75 @@
         window.maUpdateReferralTexts = updateReferralTexts;
       })();
     </script>
+ 
+ <!-- Tema visual: clásico / Black Edition + glow dorado en el título -->
+<script>
+  (function () {
+    const THEME_KEY = "ma_theme";
 
-    <!-- Tema visual: clásico / Black Edition -->
-    <script>
-      (function () {
-        const THEME_KEY = "ma_theme";
+    function applyTheme(theme, skipSave) {
+      const body = document.body;
+      const btn = document.getElementById("styleToggleBtn");
+      const logo = document.querySelector(".ma-logo");
 
-        function applyTheme(theme, skipSave) {
-          const body = document.body;
-          const btn = document.getElementById("styleToggleBtn");
+      if (theme === "dark") {
+        body.classList.add("ma-theme-dark");
+        if (btn) btn.textContent = "ESTILO: BLACK EDITION";
 
-          if (theme === "dark") {
-            body.classList.add("ma-theme-dark");
-            if (btn) btn.textContent = "ESTILO: BLACK EDITION";
-          } else {
-            body.classList.remove("ma-theme-dark");
-            if (btn) btn.textContent = "ESTILO: CLÁSICO";
-            theme = "classic";
-          }
-
-          if (!skipSave) {
-            try {
-              localStorage.setItem(THEME_KEY, theme);
-            } catch (e) {}
-          }
+        // 💡 Glow dorado flotante en el título
+        if (logo) {
+          logo.style.color = "#fdfaf0";
+          logo.style.textShadow =
+            "0 0 4px rgba(0,0,0,0.9)," +       // sombra cerca
+            "0 10px 20px rgba(0,0,0,0.95)," +  // caída hacia abajo (flotando)
+            "0 0 16px rgba(212,175,55,0.9)," + // glow dorado fuerte
+            "0 0 40px rgba(212,175,55,0.65)";  // halo dorado amplio
+          logo.style.transform = "translateY(1px)";
         }
+      } else {
+        body.classList.remove("ma-theme-dark");
+        if (btn) btn.textContent = "ESTILO: CLÁSICO";
+        theme = "classic";
 
-        document.addEventListener("DOMContentLoaded", function () {
-          // Leer tema guardado
-          let saved = "classic";
-          try {
-            const stored = localStorage.getItem(THEME_KEY);
-            if (stored === "dark" || stored === "classic") {
-              saved = stored;
-            }
-          } catch (e) {}
+        // Volver al estilo normal del logo (sin glow)
+        if (logo) {
+          logo.style.color = "";
+          logo.style.textShadow = "";
+          logo.style.transform = "";
+        }
+      }
 
-          applyTheme(saved, true);
+      if (!skipSave) {
+        try {
+          localStorage.setItem(THEME_KEY, theme);
+        } catch (e) {}
+      }
+    }
 
-          const styleBtn = document.getElementById("styleToggleBtn");
-          if (!styleBtn) return;
+    document.addEventListener("DOMContentLoaded", function () {
+      // Leer tema guardado
+      let saved = "classic";
+      try {
+        const stored = localStorage.getItem(THEME_KEY);
+        if (stored === "dark" || stored === "classic") {
+          saved = stored;
+        }
+      } catch (e) {}
 
-          styleBtn.addEventListener("click", function () {
-            const isDark = document.body.classList.contains("ma-theme-dark");
-            applyTheme(isDark ? "classic" : "dark", false);
-          });
-        });
-      })();
-    </script>
+      // Aplicar tema inicial sin sobre-escribir
+      applyTheme(saved, true);
+
+      const styleBtn = document.getElementById("styleToggleBtn");
+      if (!styleBtn) return;
+
+      styleBtn.addEventListener("click", function () {
+        const isDark = document.body.classList.contains("ma-theme-dark");
+        applyTheme(isDark ? "classic" : "dark", false);
+      });
+    });
+  })();
+</script>
+
+
   </body>
 </html>
