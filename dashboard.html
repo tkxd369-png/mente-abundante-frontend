@@ -481,7 +481,7 @@
             const tokens = text.split(" ");
             const amount = tokens[0] || "$0";
             const currency = tokens[1] || "USD";
-            const label = lang === "en" ? "ESTIMATED" : "ESTIMADO";
+            const label = lang === "en" ? "EST" : "EST";
             estEl.textContent = amount + " " + currency + " " + label;
           }
         }
