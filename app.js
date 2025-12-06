@@ -859,5 +859,55 @@
     setTimeout(() => {
       toast.classList.remove("visible");
     }, 1800);
+
+    // ============================
+    // TEMA VISUAL: CLÁSICO / BLACK EDITION
+    // ============================
+    (function () {
+      const THEME_KEY = "ma_theme";
+      const body = document.body;
+      const styleBtn = document.getElementById("styleToggleBtn");
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          body.classList.add("ma-theme-dark");
+          if (styleBtn) {
+            styleBtn.textContent = "ESTILO: BLACK EDITION";
+          }
+        } else {
+          body.classList.remove("ma-theme-dark");
+          if (styleBtn) {
+            styleBtn.textContent = "ESTILO: CLÁSICO";
+          }
+          theme = "classic";
+        }
+
+        try {
+          localStorage.setItem(THEME_KEY, theme);
+        } catch (e) {}
+      }
+
+      // Leer tema guardado
+      let savedTheme = "classic";
+      try {
+        const stored = localStorage.getItem(THEME_KEY);
+        if (stored === "dark" || stored === "classic") {
+          savedTheme = stored;
+        }
+      } catch (e) {}
+
+      applyTheme(savedTheme);
+
+      // Click en el botón del footer para alternar
+      if (styleBtn) {
+        styleBtn.addEventListener("click", () => {
+          const current =
+            body.classList.contains("ma-theme-dark") ? "dark" : "classic";
+          const next = current === "dark" ? "classic" : "dark";
+          applyTheme(next);
+        });
+      }
+    })();
+
   }
 })();
