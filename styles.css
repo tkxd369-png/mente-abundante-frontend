@@ -1267,7 +1267,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
   border-radius: 999px;
   background: radial-gradient(circle at top left, #262326, #121318);
   color: #f4f4f4;
-  font-size: 0.78rem;
+  font-size: 0.55rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
