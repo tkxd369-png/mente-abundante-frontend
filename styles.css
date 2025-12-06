@@ -1179,13 +1179,13 @@ body.ma-theme-steel .ma-style-chip.is-active {
   border-color: #d4af37;
   color: #111111;
 }
- /* =========================================
-   THE MASTER KEY – BLACK & GOLD DASHBOARD
-   (Pegar AL FINAL de styles.css)
+/* =========================================
+   THE MASTER KEY – BLACK & GOLD DASHBOARD THEME
+   Aplica SOLO cuando el body tiene .ma-theme-dark
 ========================================= */
 
 /* Fondo general: casi negro, tipo app premium */
-.ma-dashboard-wrapper {
+.ma-theme-dark .ma-dashboard-wrapper {
   min-height: 100vh;
   background: #050608;
   display: flex;
@@ -1193,7 +1193,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* HEADER – barra negra elegante con línea dorada muy sutil */
-.ma-dashboard-header {
+.ma-theme-dark .ma-dashboard-header {
   position: sticky;
   top: 0;
   z-index: 20;
@@ -1203,13 +1203,13 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Header compacto con sombra suave dorada */
-.ma-dashboard-header.ma-header-compact {
+.ma-theme-dark .ma-dashboard-header.ma-header-compact {
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
   transform: translateY(-2px);
 }
 
 /* Fila del título "THE MASTER KEY" */
-.ma-dashboard-brand-row {
+.ma-theme-dark .ma-dashboard-brand-row {
   padding: 1.1rem 1.4rem 1.1rem;
   text-align: center;
   text-transform: uppercase;
@@ -1222,7 +1222,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
   transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
 }
 
-.ma-logo {
+.ma-theme-dark .ma-logo {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-weight: 500;
   letter-spacing: 0.24em;
@@ -1230,7 +1230,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Ocultar título al hacer scroll (sigue igual) */
-.ma-header-compact .ma-dashboard-brand-row {
+.ma-theme-dark .ma-header-compact .ma-dashboard-brand-row {
   opacity: 0;
   max-height: 0;
   transform: translateY(-15px);
@@ -1238,7 +1238,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Fila usuario */
-.ma-dashboard-user-row {
+.ma-theme-dark .ma-dashboard-user-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1246,7 +1246,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Nombre del usuario – dorado suave manuscrito */
-.ma-user-name {
+.ma-theme-dark .ma-user-name {
   font-family: "Dancing Script", "Playfair Display", serif;
   font-size: 2.2rem;
   letter-spacing: 0.04em;
@@ -1254,14 +1254,14 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Meta (badge + menú) */
-.ma-dashboard-user-meta {
+.ma-theme-dark .ma-dashboard-user-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 /* Badge de referidos – cápsula gris oscuro con borde dorado sutil */
-.ma-ref-badge {
+.ma-theme-dark .ma-ref-badge {
   border: 1px solid rgba(212, 175, 55, 0.55);
   padding: 0.32rem 1rem;
   border-radius: 999px;
@@ -1272,11 +1272,11 @@ body.ma-theme-steel .ma-style-chip.is-active {
   letter-spacing: 0.12em;
 }
 
-.ma-ref-badge span {
+.ma-theme-dark .ma-ref-badge span {
   display: block;
 }
 
-.ma-ref-badge #dashEstimateText {
+.ma-theme-dark .ma-ref-badge #dashEstimateText {
   font-size: 0.7rem;
   margin-top: 0.15rem;
   text-transform: uppercase;
@@ -1285,7 +1285,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Botón de menú ⋮ */
-.ma-icon-button {
+.ma-theme-dark .ma-icon-button {
   border: none;
   background: transparent;
   font-size: 1.2rem;
@@ -1294,7 +1294,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* CONTENIDO – padding igual pero sobre fondo oscuro */
-.ma-dashboard-main {
+.ma-theme-dark .ma-dashboard-main {
   flex: 1;
   padding: 1.1rem 1.2rem 1.6rem;
   display: flex;
@@ -1303,8 +1303,8 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Tarjetas – bloques negro profundo con borde dorado muy suave */
-.ma-card,
-.ma-widget-card {
+.ma-theme-dark .ma-card,
+.ma-theme-dark .ma-widget-card {
   background: #11131a;
   border-radius: 14px;
   padding: 1.3rem 1.4rem 1.4rem;
@@ -1313,8 +1313,8 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Títulos de sección – dorado */
-.ma-section-label,
-.ma-card > .ma-section-label {
+.ma-theme-dark .ma-section-label,
+.ma-theme-dark .ma-card > .ma-section-label {
   font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.22em;
@@ -1325,7 +1325,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Frase principal – blanco suave */
-.ma-phrase-text {
+.ma-theme-dark .ma-phrase-text {
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -1334,7 +1334,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Caja de embeds (Pinterest / TikTok) – marco oscuro */
-.ma-embed-box {
+.ma-theme-dark .ma-embed-box {
   border-radius: 12px;
   border: 1px dashed rgba(212, 175, 55, 0.38);
   padding: 1rem;
@@ -1346,19 +1346,19 @@ body.ma-theme-steel .ma-style-chip.is-active {
   background: radial-gradient(circle at top left, #161821, #0b0c10);
 }
 
-.ma-embed-placeholder {
+.ma-theme-dark .ma-embed-placeholder {
   font-size: 0.9rem;
   color: #c9c6bb;
 }
 
 /* Texto newsletter/anuncios */
-.ma-news-text {
+.ma-theme-dark .ma-news-text {
   font-size: 0.9rem;
   color: #d0ccc2;
 }
 
 /* ACCESOS RÁPIDOS – estilo “cards negras” */
-.ma-quick-card {
+.ma-theme-dark .ma-quick-card {
   background: #141621;
   border-radius: 14px;
   border: 1px solid rgba(212, 175, 55, 0.16);
@@ -1366,85 +1366,103 @@ body.ma-theme-steel .ma-style-chip.is-active {
 }
 
 /* Iconos accesos rápidos */
-.ma-quick-icon,
-.ma-quick-icon-money {
+.ma-theme-dark .ma-quick-icon,
+.ma-theme-dark .ma-quick-icon-money {
   color: #f9e7b3;
 }
 
 /* Nota bajo accesos rápidos */
-.ma-quick-note {
+.ma-theme-dark .ma-quick-note {
   color: #c1bcaf;
 }
 
 /* FOOTER – franja oscura */
-.ma-dashboard-footer {
+.ma-theme-dark .ma-dashboard-footer {
   border-top: 1px solid rgba(212, 175, 55, 0.3);
   background: #080a0f;
 }
 
 /* Código en footer */
-.ma-footer-refid {
+.ma-theme-dark .ma-footer-refid {
   color: #f1e6c8;
 }
 
 /* Botones de footer */
-.ma-footer-btn {
+.ma-theme-dark .ma-footer-btn {
   background: #151722;
   border: 1px solid rgba(212, 175, 55, 0.3);
   color: #f5f5f5;
 }
 
 /* Botón cerrar sesión */
-.ma-footer-logout {
+.ma-theme-dark .ma-footer-logout {
   color: #c1bcaf;
 }
 
 /* ===== MODAL QR NUEVO (NEGRO + DORADO) ===== */
 
-.ma-modal {
+.ma-theme-dark .ma-modal {
   background: rgba(0, 0, 0, 0.75);
 }
 
-.ma-modal-content {
+.ma-theme-dark .ma-modal-content {
   background: #11131a;
   border-radius: 18px;
   border: 1px solid rgba(212, 175, 55, 0.35);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
 }
 
-.ma-modal-title {
+.ma-theme-dark .ma-modal-title {
   color: #f9e7b3;
 }
 
-.ma-modal-subtitle,
-.ma-modal-code {
+.ma-theme-dark .ma-modal-subtitle,
+.ma-theme-dark .ma-modal-code {
   color: #d0ccc2;
 }
 
-/* Botón cerrar del modal */
-.ma-modal-close {
+.ma-theme-dark .ma-modal-close {
   background: transparent;
   color: #f5f5f5;
 }
 
-/* ===== HEADER MOBILE – sin cambios fuertes, solo colores ===== */
+/* ===== HEADER MOBILE – solo colores en dark theme ===== */
 @media (max-width: 620px) {
-  .ma-dashboard-header {
+  .ma-theme-dark .ma-dashboard-header {
     display: block;
     text-align: center;
     padding: 1.25rem 1rem 0.75rem;
   }
 
-  .ma-dashboard-brand-row {
+  .ma-theme-dark .ma-dashboard-brand-row {
     display: flex;
     justify-content: center;
     margin-bottom: 0.35rem;
   }
 
-  .ma-logo {
+  .ma-theme-dark .ma-logo {
     font-size: 1.2rem;
     letter-spacing: 0.18em;
     text-align: center;
     white-space: nowrap;
   }
 }
+
+/* ===== Botón discreto en el footer para cambiar estilo ===== */
+
+.ma-footer-style {
+  margin-top: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #8e887c;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.ma-footer-style:hover {
+  opacity: 1;
+}
+ 
