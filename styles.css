@@ -1465,24 +1465,41 @@ body.ma-theme-steel .ma-style-chip.is-active {
 .ma-footer-style:hover {
   opacity: 1;
 }
- /* === BLACK EDITION: efecto flotante dorado en el título (forzado) === */
+ /* =========================================
+   BLACK EDITION – Sombra en el suelo bajo THE MASTER KEY
+   (solo cuando está activo ma-theme-dark)
+========================================= */
 
-.ma-theme-dark .ma-dashboard-header .ma-dashboard-brand-row .ma-logo {
+.ma-theme-dark .ma-dashboard-brand-row {
   position: relative;
-  color: #fdfaf0 !important;
-  text-shadow:
-    0 0 4px rgba(0, 0, 0, 0.9),         /* sombra oscura cerca */
-    0 10px 20px rgba(0, 0, 0, 0.95),    /* caída hacia abajo (flotando) */
-    0 0 16px rgba(212, 175, 55, 0.9),   /* glow dorado cerca */
-    0 0 40px rgba(212, 175, 55, 0.65);  /* halo dorado amplio */
-  transform: translateY(1px);
 }
 
-/* Cuando el header está compacto, bajamos un poco el glow */
-.ma-theme-dark .ma-header-compact .ma-dashboard-brand-row .ma-logo {
-  text-shadow:
-    0 0 3px rgba(0, 0, 0, 0.8),
-    0 6px 14px rgba(0, 0, 0, 0.9),
-    0 0 12px rgba(212, 175, 55, 0.8);
+.ma-theme-dark .ma-logo {
+  position: relative;
+  z-index: 2; /* el texto va arriba de la sombra */
 }
 
+/* Sombra/halo en el piso, como si el título flotara */
+.ma-theme-dark .ma-logo::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -0.9rem;           /* qué tan abajo está la sombra */
+  width: 70%;                /* ancho de la sombra */
+  height: 0.7rem;            /* grosor de la sombra */
+
+  /* “charco” dorado-oscuro en el piso */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.8) 0%,           /* centro oscuro */
+    rgba(0, 0, 0, 0.9) 35%,
+    rgba(212, 175, 55, 0.4) 60%,     /* borde con tinte dorado */
+    rgba(0, 0, 0, 0) 100%            /* se desvanece */
+  );
+
+  filter: blur(4px);
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 1; /* debajo del texto, encima del fondo */
+}
