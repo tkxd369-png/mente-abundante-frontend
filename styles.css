@@ -1213,7 +1213,7 @@ body.ma-theme-steel .ma-style-chip.is-active {
   padding: 1.1rem 1.4rem 1.1rem;
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   letter-spacing: 0.24em;
   color: #f5f5f5;
   font-weight: 500;
@@ -1465,4 +1465,25 @@ body.ma-theme-steel .ma-style-chip.is-active {
 .ma-footer-style:hover {
   opacity: 1;
 }
- 
+ /* === BLACK EDITION: efecto flotante dorado en el título === */
+
+.ma-theme-dark .ma-logo {
+  position: relative;
+  color: #fdfaf0;
+  text-shadow:
+    0 0 4px rgba(0, 0, 0, 0.8),        /* sombra suave oscura cerca */
+    0 8px 18px rgba(0, 0, 0, 0.9),      /* caída hacia abajo (flotando) */
+    0 0 14px rgba(212, 175, 55, 0.85),  /* glow dorado cerca */
+    0 0 32px rgba(212, 175, 55, 0.5);   /* halo dorado más amplio */
+  transform: translateY(1px);
+}
+
+/* Opcional: cuando el header está compacto, bajamos un poco el efecto
+   para que no se mire exagerado en scroll */
+.ma-theme-dark .ma-header-compact .ma-logo {
+  text-shadow:
+    0 0 3px rgba(0, 0, 0, 0.7),
+    0 5px 12px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(212, 175, 55, 0.7);
+}
+
