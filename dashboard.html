@@ -11,13 +11,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-   
   </head>
 
   <body class="ma-body ma-dashboard">
     <div class="ma-page-wrapper ma-dashboard-wrapper">
-    
-     <!-- HEADER -->
+      <!-- HEADER -->
       <header id="dashboardHeader" class="ma-dashboard-header">
         <div class="ma-dashboard-brand-row">
           <h1 class="ma-logo">THE MASTER KEY</h1>
@@ -40,7 +38,6 @@
           </div>
         </div>
       </header>
-
 
       <!-- CONTENIDO SCROLL -->
       <main class="ma-dashboard-main">
@@ -92,10 +89,7 @@
 
           <div class="ma-quick-row">
             <!-- E-BOOK -->
-            <button
-              type="button"
-              class="ma-quick-card ma-quick-card-ebook"
-            >
+            <button type="button" class="ma-quick-card ma-quick-card-ebook">
               <span class="ma-quick-icon">📘</span>
               <span class="ma-quick-label">E-BOOK</span>
               <span class="ma-quick-cta" data-i18n="quick.ebookCta">
@@ -109,10 +103,7 @@
               class="ma-quick-card ma-quick-card-tools ma-quick-card-link"
             >
               <span class="ma-quick-icon ma-quick-icon-money">$</span>
-              <span
-                class="ma-quick-label"
-                data-i18n="quick.toolsTitle"
-              >
+              <span class="ma-quick-label" data-i18n="quick.toolsTitle">
                 HERRAMIENTAS
               </span>
               <span class="ma-quick-cta" data-i18n="quick.toolsCta">
@@ -121,15 +112,9 @@
             </a>
 
             <!-- TU QR -->
-            <button
-              type="button"
-              class="ma-quick-card ma-quick-card-qr"
-            >
+            <button type="button" class="ma-quick-card ma-quick-card-qr">
               <canvas id="dashQrSmall"></canvas>
-              <span
-                class="ma-quick-label"
-                data-i18n="quick.qrTitle"
-              >
+              <span class="ma-quick-label" data-i18n="quick.qrTitle">
                 TU QR
               </span>
               <span class="ma-quick-cta" data-i18n="quick.qrCta">
@@ -189,14 +174,22 @@
           </button>
         </div>
 
+        <!-- Botón para cambiar estilo del dashboard -->
+        <button
+          type="button"
+          class="ma-footer-style"
+          id="styleToggleBtn"
+        >
+          ESTILO: CLÁSICO
+        </button>
+
         <button
           type="button"
           class="ma-footer-logout"
           id="logoutBtn"
-          data-i18n="footer.logout">
-         
-        </div>
-       
+          data-i18n="footer.logout"
+        >
+          CERRAR SESIÓN
         </button>
       </footer>
     </div>
@@ -211,17 +204,11 @@
         <button class="ma-qr-modal-close" id="qrModalClose" type="button">
           &times;
         </button>
-        <h2
-          class="ma-qr-modal-title"
-          data-i18n="qr.title"
-        >
+        <h2 class="ma-qr-modal-title" data-i18n="qr.title">
           Tu código de invitación
         </h2>
         <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
-        <canvas
-          id="qrModalCanvas"
-          class="ma-qr-modal-canvas"
-        ></canvas>
+        <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
         <p class="ma-qr-modal-help" data-i18n="qr.help">
           Pide que escaneen este QR o comparte tu enlace personal.
         </p>
@@ -314,27 +301,17 @@
             }
           });
 
-          // Botones de idioma activos
-          document
-            .querySelectorAll(".ma-lang-btn")
-            .forEach((btn) => {
-              const btnLang = btn.getAttribute("data-lang");
-              btn.classList.toggle("active", btnLang === lang);
-            });
-
           // Frase por defecto según idioma (por ahora sin AI)
-const phraseEl = document.getElementById("aiPhraseText");
-if (phraseEl) {
-  if (lang === "en") {
-    phraseEl.textContent =
-      "“Your decision today opens doors you can't yet imagine.”";
-  } else {
-    phraseEl.textContent =
-      "“Tu decisión de hoy abre puertas que aún no imaginas.”";
-  }
-}
-
-         
+          const phraseEl = document.getElementById("aiPhraseText");
+          if (phraseEl) {
+            if (lang === "en") {
+              phraseEl.textContent =
+                "“Your decision today opens doors you can't yet imagine.”";
+            } else {
+              phraseEl.textContent =
+                "“Tu decisión de hoy abre puertas que aún no imaginas.”";
+            }
+          }
 
           // Actualizar textos de referidos si está disponible el helper
           if (window.maUpdateReferralTexts) {
@@ -368,18 +345,7 @@ if (phraseEl) {
 
         document.addEventListener("DOMContentLoaded", function () {
           if (!document.body.classList.contains("ma-dashboard")) return;
-
           applyDashboardLanguage();
-
-          document
-            .querySelectorAll(".ma-lang-btn")
-            .forEach((btn) => {
-              btn.addEventListener("click", function () {
-                const lang = this.getAttribute("data-lang");
-                setCurrentLang(lang);
-                applyDashboardLanguage();
-              });
-            });
         });
       })();
     </script>
@@ -490,120 +456,91 @@ if (phraseEl) {
         }
       })();
     </script>
- 
-<!-- Ajuste de textos del botón de referidos según idioma -->
-<script>
-  (function () {
-    function updateReferralTexts() {
-      const lang = window.maGetLang ? window.maGetLang() : "es";
-      const refEl = document.getElementById("dashReferralsText");
-      const estEl = document.getElementById("dashEstimateText");
 
-      if (refEl) {
-        const text = refEl.textContent.trim();
-        const parts = text.split(" ");
-        const num = parts[0] || "0";
-        if (lang === "en") {
-          refEl.textContent = num + " REFERRALS";
-        } else {
-          refEl.textContent = num + " REFERIDOS";
+    <!-- Ajuste de textos del botón de referidos según idioma -->
+    <script>
+      (function () {
+        function updateReferralTexts() {
+          const lang = window.maGetLang ? window.maGetLang() : "es";
+          const refEl = document.getElementById("dashReferralsText");
+          const estEl = document.getElementById("dashEstimateText");
+
+          if (refEl) {
+            const text = refEl.textContent.trim();
+            const parts = text.split(" ");
+            const num = parts[0] || "0";
+            if (lang === "en") {
+              refEl.textContent = num + " REFERRALS";
+            } else {
+              refEl.textContent = num + " REFERIDOS";
+            }
+          }
+
+          if (estEl) {
+            const text = estEl.textContent.trim();
+            const tokens = text.split(" ");
+            const amount = tokens[0] || "$0";
+            const currency = tokens[1] || "USD";
+            const label = lang === "en" ? "ESTIMATED" : "ESTIMADO";
+            estEl.textContent = amount + " " + currency + " " + label;
+          }
         }
-      }
 
-      if (estEl) {
-        const text = estEl.textContent.trim();
-        const tokens = text.split(" ");
-        const amount = tokens[0] || "$0";
-        const currency = tokens[1] || "USD";
-        const label = lang === "en" ? "ESTIMATED" : "ESTIMADO";
-        estEl.textContent = amount + " " + currency + " " + label;
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      updateReferralTexts();
-      setTimeout(updateReferralTexts, 800);
-    });
-
-    window.maUpdateReferralTexts = updateReferralTexts;
-  })();
-</script>
-
-<script>
-  (function () {
-    const LANG_KEY = "ma_lang";
-
-    function getLang() {
-      try {
-        const stored = localStorage.getItem(LANG_KEY);
-        if (stored === "en" || stored === "es") return stored;
-      } catch {}
-      return "es";
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggle = document.getElementById("maLangToggle");
-      const menu = document.getElementById("maLangMenu");
-      const currentSpan = document.getElementById("maLangCurrent");
-
-      const buttons = menu
-        ? menu.querySelectorAll(".ma-lang-btn")
-        : [];
-
-      // Estado inicial
-      const currentLang = getLang();
-      if (currentSpan) currentSpan.textContent = currentLang.toUpperCase();
-
-      buttons.forEach((btn) => {
-        const lang = btn.getAttribute("data-lang");
-        btn.classList.toggle("active", lang === currentLang);
-      });
-
-      // Abrir / cerrar menú
-      if (toggle && menu) {
-        toggle.addEventListener("click", function (e) {
-          e.stopPropagation();
-          menu.classList.toggle("open");
+        document.addEventListener("DOMContentLoaded", function () {
+          updateReferralTexts();
+          setTimeout(updateReferralTexts, 800);
         });
-      }
 
-      // Cerrar al hacer click fuera
-      document.addEventListener("click", function () {
-        if (menu) menu.classList.remove("open");
-      });
+        window.maUpdateReferralTexts = updateReferralTexts;
+      })();
+    </script>
 
-      // Click en opción de idioma
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          const lang = this.getAttribute("data-lang") || "es";
+    <!-- Tema visual: clásico / Black Edition -->
+    <script>
+      (function () {
+        const THEME_KEY = "ma_theme";
 
+        function applyTheme(theme, skipSave) {
+          const body = document.body;
+          const btn = document.getElementById("styleToggleBtn");
+
+          if (theme === "dark") {
+            body.classList.add("ma-theme-dark");
+            if (btn) btn.textContent = "ESTILO: BLACK EDITION";
+          } else {
+            body.classList.remove("ma-theme-dark");
+            if (btn) btn.textContent = "ESTILO: CLÁSICO";
+            theme = "classic";
+          }
+
+          if (!skipSave) {
+            try {
+              localStorage.setItem(THEME_KEY, theme);
+            } catch (e) {}
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          // Leer tema guardado
+          let saved = "classic";
           try {
-            localStorage.setItem(LANG_KEY, lang);
-          } catch {}
+            const stored = localStorage.getItem(THEME_KEY);
+            if (stored === "dark" || stored === "classic") {
+              saved = stored;
+            }
+          } catch (e) {}
 
-          if (currentSpan)
-            currentSpan.textContent = lang.toUpperCase();
+          applyTheme(saved, true);
 
-          buttons.forEach((b) => {
-            b.classList.toggle(
-              "active",
-              b.getAttribute("data-lang") === lang
-            );
+          const styleBtn = document.getElementById("styleToggleBtn");
+          if (!styleBtn) return;
+
+          styleBtn.addEventListener("click", function () {
+            const isDark = document.body.classList.contains("ma-theme-dark");
+            applyTheme(isDark ? "classic" : "dark", false);
           });
-
-          // Notificar al resto del sistema (si existe maSetLang / maUpdateTexts)
-          if (window.maSetLang) window.maSetLang(lang);
-          if (window.maUpdateTexts) window.maUpdateTexts();
-          if (window.maUpdateReferralTexts)
-            window.maUpdateReferralTexts();
-
-          if (menu) menu.classList.remove("open");
         });
-      });
-    });
-  })();
-</script>
- 
+      })();
+    </script>
   </body>
 </html>
