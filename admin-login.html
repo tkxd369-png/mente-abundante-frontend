@@ -1,50 +1,75 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Admin - Mente Abundante</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="ma-body ma-admin-login">
-  <div class="ma-page-wrapper">
-    <header class="ma-header">
-      <div class="ma-header-inner">
-        <h1 class="ma-logo">Mente Abundante</h1>
-        <span class="ma-tagline">Panel de Administración</span>
-      </div>
-    </header>
+// admin.js – Login de administrador TMK
 
-    <main class="ma-main">
-      <section class="ma-card ma-card-narrow">
-        <h2 class="ma-card-title">Acceso Admin</h2>
-        <p class="ma-card-subtitle">
-          Ingresa con tu correo y contraseña de administrador.
-        </p>
+(function () {
+  const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-        <form id="adminLoginForm" class="ma-form">
-          <div class="ma-form-group">
-            <label for="adminEmail">Correo electrónico</label>
-            <input type="email" id="adminEmail" required />
-          </div>
+  const form = document.getElementById("adminLoginForm");
+  const emailInput = document.getElementById("adminEmail");
+  const passInput = document.getElementById("adminPassword");
+  const errorEl = document.getElementById("adminLoginError");
 
-          <div class="ma-form-group">
-            <label for="adminPassword">Contraseña</label>
-            <input type="password" id="adminPassword" required />
-          </div>
+  function showError(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg || "Error al iniciar sesión.";
+    errorEl.style.display = "block";
+  }
 
-          <div class="ma-form-footer">
-            <button type="submit" class="ma-btn ma-btn-gold">
-              Entrar al panel
-            </button>
-          </div>
+  function clearError() {
+    if (!errorEl) return;
+    errorEl.textContent = "";
+    errorEl.style.display = "none";
+  }
 
-          <p id="adminLoginError" class="ma-error-text" style="display:none;"></p>
-        </form>
-      </section>
-    </main>
-  </div>
+  async function handleAdminLogin(evt) {
+    evt.preventDefault();
+    clearError();
 
-  <script src="admin.js"></script>
-</body>
-</html>
+    const email = (emailInput?.value || "").trim();
+    const password = passInput?.value || "";
+
+    if (!email || !password) {
+      showError("Por favor ingresa tu correo y contraseña.");
+      return;
+    }
+
+    try {
+      // Llamar a /admin/login en tu backend
+      const res = await fetch(API_BASE + "/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        const msg = data && data.error ? data.error : "Credenciales inválidas.";
+        throw new Error(msg);
+      }
+
+      // ✅ AQUÍ VIENE LA CLAVE:
+      // Guardar el token de admin para usarlo en admin-monitor.html
+      try {
+        if (data.token) {
+          localStorage.setItem("ma_admin_token", data.token);
+        }
+        if (data.admin) {
+          localStorage.setItem("ma_admin_user", JSON.stringify(data.admin));
+        }
+      } catch (e) {
+        console.warn("No se pudo guardar el token de admin:", e);
+      }
+
+      // Redirigir al monitor de administración
+      window.location.href = "admin-monitor.html";
+    } catch (err) {
+      console.error("Error en login admin:", err);
+      showError(err.message || "Error al iniciar sesión.");
+    }
+  }
+
+  if (form) {
+    form.addEventListener("submit", handleAdminLogin);
+  }
+})();
+ 
