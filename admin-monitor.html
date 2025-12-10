@@ -37,9 +37,34 @@
       flex-wrap: wrap;
     }
 
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo-drop {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #f7e1b8, #c79c57);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo-text-main {
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.75rem;
+      color: #777;
+    }
+
     .admin-title-block h2 {
       margin: 0;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 600;
     }
 
@@ -113,12 +138,39 @@
     }
 
     .admin-search-input {
-      min-width: 220px;
-      max-width: 280px;
+      min-width: 200px;
+      max-width: 260px;
       border-radius: 999px;
       border: 1px solid rgba(0, 0, 0, 0.12);
       padding: 0.35rem 0.8rem;
       font-size: 0.85rem;
+    }
+
+    .admin-sort-controls {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .admin-sort-label {
+      font-size: 0.75rem;
+      color: #777;
+    }
+
+    .admin-sort-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      background: #ffffff;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .admin-sort-btn.active {
+      border-color: #c79c57;
+      background: #f9efe0;
+      color: #6b4b20;
     }
 
     .admin-table-wrapper {
@@ -191,6 +243,16 @@
       margin-top: 1rem;
     }
 
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.18);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: #444;
+      background: #fff;
+    }
+
     @media (max-width: 768px) {
       .admin-card {
         padding: 1.4rem 1.3rem 1.5rem;
@@ -221,23 +283,38 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PRINCIPAL DEL ADMIN (AHORA SIEMPRE VISIBLE) -->
+      <!-- CONTENIDO PRINCIPAL DEL ADMIN -->
       <div id="adminMainContent">
         <!-- METRICAS -->
         <div class="admin-metrics-grid" id="adminMetrics">
-          <!-- Se rellenan por JS -->
+          <!-- JS rellena -->
         </div>
 
         <!-- TABLA DE USUARIOS -->
         <section class="admin-table-section">
           <div class="admin-table-header">
             <h3>Miembros registrados</h3>
-            <input
-              type="text"
-              id="adminSearchInput"
-              class="admin-search-input"
-              placeholder="Buscar por nombre, email o REF..."
-            />
+
+            <div class="admin-sort-controls">
+              <span class="admin-sort-label">Orden:</span>
+              <button type="button"
+                      class="admin-sort-btn active"
+                      data-sort="created_desc">
+                Más recientes
+              </button>
+              <button type="button"
+                      class="admin-sort-btn"
+                      data-sort="name_asc">
+                Nombre A–Z
+              </button>
+
+              <input
+                type="text"
+                id="adminSearchInput"
+                class="admin-search-input"
+                placeholder="Buscar por nombre, email o REF..."
+              />
+            </div>
           </div>
 
           <div class="admin-table-wrapper">
@@ -247,6 +324,7 @@
                   <th>Nombre</th>
                   <th>Email</th>
                   <th>Teléfono</th>
+                  <th>País</th>
                   <th>REF personal</th>
                   <th>Patrocinador</th>
                   <th>Referidos</th>
@@ -261,225 +339,283 @@
         </section>
 
         <div class="admin-footer-row">
-          <a href="index.html" class="btn btn-ghost">Volver a la vista pública</a>
+          <a href="index.html" class="btn-ghost">Volver a la vista pública</a>
         </div>
       </div>
     </div>
   </div>
-<script>
-  (function () {
-    const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-    function formatDate(isoString) {
-      if (!isoString) return "—";
-      const d = new Date(isoString);
-      if (isNaN(d.getTime())) return "—";
-      return d.toLocaleDateString("es-MX", {
-        year: "numeric",
-        month: "short",
-        day: "2-digit",
-      });
-    }
+  <script>
+    (function () {
+      const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-    function renderMetricsFromApi(stats, topReferrer) {
-      const container = document.getElementById("adminMetrics");
-      if (!container) return;
+      let allUsers = [];
+      let currentSort = "created_desc"; // o "name_asc"
 
-      container.innerHTML = "";
+      const metricsContainer = document.getElementById("adminMetrics");
+      const usersTable = document.getElementById("adminUsersTable");
+      const searchInput = document.getElementById("adminSearchInput");
+      const sortButtons = document.querySelectorAll(".admin-sort-btn");
 
-      const card1 = document.createElement("div");
-      card1.className = "metric-card";
-      card1.innerHTML = `
-        <div class="metric-label">Total de miembros</div>
-        <div class="metric-value">${stats.total_users ?? 0}</div>
-        <div class="metric-sub">Usuarios registrados en la plataforma</div>
-      `;
-
-      const card2 = document.createElement("div");
-      card2.className = "metric-card";
-      card2.innerHTML = `
-        <div class="metric-label">Referidos acumulados</div>
-        <div class="metric-value">${stats.total_referrals ?? 0}</div>
-        <div class="metric-sub">Suma de todos los referidos registrados</div>
-      `;
-
-      const card3 = document.createElement("div");
-      card3.className = "metric-card";
-      card3.innerHTML = `
-        <div class="metric-label">Nuevos últimos 7 días</div>
-        <div class="metric-value">${stats.users_last_7_days ?? 0}</div>
-        <div class="metric-sub">Miembros que se unieron recientemente</div>
-      `;
-
-      const card4 = document.createElement("div");
-      card4.className = "metric-card";
-      if (topReferrer) {
-        card4.innerHTML = `
-          <div class="metric-label">Top referidor</div>
-          <div class="metric-value" style="font-size:1rem;">
-            ${topReferrer.full_name || topReferrer.email || "—"}
-          </div>
-          <div class="metric-sub">
-            REF: ${topReferrer.refid || "—"} · ${topReferrer.referrals || 0} referidos
-          </div>
-        `;
-      } else {
-        card4.innerHTML = `
-          <div class="metric-label">Top referidor</div>
-          <div class="metric-value">—</div>
-          <div class="metric-sub">Aún no hay datos suficientes</div>
-        `;
+      function formatDate(isoString) {
+        if (!isoString) return "—";
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) return "—";
+        return d.toLocaleDateString("es-MX", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        });
       }
 
-      container.appendChild(card1);
-      container.appendChild(card2);
-      container.appendChild(card3);
-      container.appendChild(card4);
-    }
-
-    function renderUsersTable(users) {
-      const table = document.getElementById("adminUsersTable");
-      if (!table) return;
-      const tbody = table.querySelector("tbody");
-      tbody.innerHTML = "";
-
-      users.forEach((u) => {
-        const tr = document.createElement("tr");
-
-        const tdName = document.createElement("td");
-        tdName.textContent = u.full_name || "—";
-
-        const tdEmail = document.createElement("td");
-        tdEmail.textContent = u.email || "—";
-
-        const tdPhone = document.createElement("td");
-        tdPhone.textContent = u.phone || "—";
-
-        const tdRef = document.createElement("td");
-        tdRef.innerHTML = u.refid
-          ? `<span class="admin-chip-ref">${u.refid}</span>`
-          : "—";
-
-        const tdRefBy = document.createElement("td");
-        tdRefBy.textContent = u.referredby || "—";
-
-        const tdRefs = document.createElement("td");
-        const refs = u.referrals || 0;
-        tdRefs.innerHTML = `<span class="admin-chip-referrals ${
-          refs === 0 ? "zero" : ""
-        }">${refs}</span>`;
-
-        const tdDate = document.createElement("td");
-        tdDate.innerHTML = `<span class="admin-date">${formatDate(
-          u.created_at
-        )}</span>`;
-
-        tr.appendChild(tdName);
-        tr.appendChild(tdEmail);
-        tr.appendChild(tdPhone);
-        tr.appendChild(tdRef);
-        tr.appendChild(tdRefBy);
-        tr.appendChild(tdRefs);
-        tr.appendChild(tdDate);
-
-        tbody.appendChild(tr);
-      });
-    }
-
-    function applySearchFilter(users, query) {
-      if (!query) return users;
-      const q = query.toLowerCase();
-      return users.filter((u) => {
-        return (
-          (u.full_name && u.full_name.toLowerCase().includes(q)) ||
-          (u.email && u.email.toLowerCase().includes(q)) ||
-          (u.refid && u.refid.toLowerCase().includes(q))
+      function computeStats(users) {
+        const totalUsers = users.length;
+        const totalReferrals = users.reduce(
+          (sum, u) => sum + (u.referrals || 0),
+          0
         );
-      });
-    }
 
-    async function loadAdminData() {
-      const searchInput = document.getElementById("adminSearchInput");
-      const mainContent = document.getElementById("adminMainContent");
+        // Nuevos últimos 7 días
+        const now = new Date();
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const newLast7 = users.filter((u) => {
+          const d = new Date(u.created_at);
+          return d >= sevenDaysAgo;
+        }).length;
 
-      // 1) Leer token de admin (o normal) desde localStorage
-      let token = null;
-      try {
-        token =
+        // Top referidor
+        const sortedByReferrals = [...users].sort(
+          (a, b) => (b.referrals || 0) - (a.referrals || 0)
+        );
+        const topReferrer = sortedByReferrals[0] || null;
+
+        return {
+          totalUsers,
+          totalReferrals,
+          newLast7,
+          topReferrer,
+        };
+      }
+
+      function renderMetrics(users) {
+        if (!metricsContainer) return;
+        const stats = computeStats(users);
+        metricsContainer.innerHTML = "";
+
+        const card1 = document.createElement("div");
+        card1.className = "metric-card";
+        card1.innerHTML = `
+          <div class="metric-label">Total de miembros</div>
+          <div class="metric-value">${stats.totalUsers}</div>
+          <div class="metric-sub">Usuarios registrados en la plataforma</div>
+        `;
+
+        const card2 = document.createElement("div");
+        card2.className = "metric-card";
+        card2.innerHTML = `
+          <div class="metric-label">Referidos acumulados</div>
+          <div class="metric-value">${stats.totalReferrals}</div>
+          <div class="metric-sub">Suma de todos los referidos activos</div>
+        `;
+
+        const card3 = document.createElement("div");
+        card3.className = "metric-card";
+        card3.innerHTML = `
+          <div class="metric-label">Nuevos últimos 7 días</div>
+          <div class="metric-value">${stats.newLast7}</div>
+          <div class="metric-sub">Miembros que se unieron recientemente</div>
+        `;
+
+        const card4 = document.createElement("div");
+        card4.className = "metric-card";
+        if (stats.topReferrer) {
+          card4.innerHTML = `
+            <div class="metric-label">Top referidor</div>
+            <div class="metric-value" style="font-size:1rem;">
+              ${stats.topReferrer.full_name || stats.topReferrer.username || "—"}
+            </div>
+            <div class="metric-sub">
+              REF: ${stats.topReferrer.refid || "—"} · ${stats.topReferrer.referrals || 0} referidos
+            </div>
+          `;
+        } else {
+          card4.innerHTML = `
+            <div class="metric-label">Top referidor</div>
+            <div class="metric-value">—</div>
+            <div class="metric-sub">Aún no hay datos suficientes</div>
+          `;
+        }
+
+        metricsContainer.appendChild(card1);
+        metricsContainer.appendChild(card2);
+        metricsContainer.appendChild(card3);
+        metricsContainer.appendChild(card4);
+      }
+
+      function renderUsersTable(users) {
+        if (!usersTable) return;
+        const tbody = usersTable.querySelector("tbody");
+        tbody.innerHTML = "";
+
+        users.forEach((u) => {
+          const tr = document.createElement("tr");
+
+          const tdName = document.createElement("td");
+          tdName.textContent = u.full_name || "—";
+
+          const tdEmail = document.createElement("td");
+          tdEmail.textContent = u.email || "—";
+
+          const tdPhone = document.createElement("td");
+          tdPhone.textContent = u.phone || "—";
+
+          const tdCountry = document.createElement("td");
+          tdCountry.textContent = u.country || "—";
+
+          const tdRef = document.createElement("td");
+          tdRef.innerHTML = u.refid
+            ? `<span class="admin-chip-ref">${u.refid}</span>`
+            : "—";
+
+          const tdRefBy = document.createElement("td");
+          tdRefBy.textContent = u.referredby || "—";
+
+          const tdRefs = document.createElement("td");
+          const refs = u.referrals || 0;
+          tdRefs.innerHTML = `<span class="admin-chip-referrals ${
+            refs === 0 ? "zero" : ""
+          }">${refs}</span>`;
+
+          const tdDate = document.createElement("td");
+          tdDate.innerHTML = `<span class="admin-date">${formatDate(
+            u.created_at
+          )}</span>`;
+
+          tr.appendChild(tdName);
+          tr.appendChild(tdEmail);
+          tr.appendChild(tdPhone);
+          tr.appendChild(tdCountry);
+          tr.appendChild(tdRef);
+          tr.appendChild(tdRefBy);
+          tr.appendChild(tdRefs);
+          tr.appendChild(tdDate);
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      function applySearchFilter(users, query) {
+        if (!query) return users;
+        const q = query.toLowerCase();
+        return users.filter((u) => {
+          return (
+            (u.full_name && u.full_name.toLowerCase().includes(q)) ||
+            (u.email && u.email.toLowerCase().includes(q)) ||
+            (u.refid && u.refid.toLowerCase().includes(q))
+          );
+        });
+      }
+
+      function sortUsers(users) {
+        const arr = [...users];
+        if (currentSort === "name_asc") {
+          arr.sort((a, b) => {
+            const an = (a.full_name || "").toLowerCase();
+            const bn = (b.full_name || "").toLowerCase();
+            if (an < bn) return -1;
+            if (an > bn) return 1;
+            return 0;
+          });
+        } else {
+          // created_at DESC
+          arr.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+        }
+        return arr;
+      }
+
+      function refreshTable() {
+        const q = (searchInput?.value || "").trim();
+        let filtered = applySearchFilter(allUsers, q);
+        const sorted = sortUsers(filtered);
+        renderUsersTable(sorted);
+      }
+
+      async function loadAdminData() {
+        // 1) tomar token admin
+        const token =
           localStorage.getItem("ma_admin_token") ||
           localStorage.getItem("ma_token");
-      } catch (e) {}
 
-      if (!token) {
-        if (mainContent) {
-          mainContent.innerHTML = `
-            <p style="color:#b33434; font-size:0.9rem;">
-              No se encontró token de administrador. Inicia sesión de nuevo en la página de admin.
-            </p>
-          `;
-        }
-        return;
-      }
-
-      const headers = {
-        Authorization: "Bearer " + token,
-      };
-
-      try {
-        // 2) Pedir stats y usuarios reales al backend
-        const [statsRes, usersRes] = await Promise.all([
-          fetch(API_BASE + "/admin/stats", { headers }),
-          fetch(API_BASE + "/admin/users?page=1&pageSize=500", { headers }),
-        ]);
-
-        if (!statsRes.ok) {
-          throw new Error("Error al cargar /admin/stats");
-        }
-        if (!usersRes.ok) {
-          throw new Error("Error al cargar /admin/users");
+        if (!token) {
+          // si no hay token, mandamos al login admin
+          window.location.href = "admin-login.html";
+          return;
         }
 
-        const statsJson = await statsRes.json();
-        const usersJson = await usersRes.json();
-
-        const stats = statsJson.stats || {
-          total_users: 0,
-          total_referrals: 0,
-          users_last_7_days: 0,
+        const headers = {
+          Authorization: "Bearer " + token,
         };
-        const topReferrers = statsJson.topReferrers || [];
-        const topReferrer = topReferrers[0] || null;
 
-        const users = usersJson.users || usersJson.data || [];
-
-        // 3) Render métricas y tabla
-        renderMetricsFromApi(stats, topReferrer);
-        renderUsersTable(users);
-
-        // 4) Búsqueda en vivo
-        if (searchInput) {
-          searchInput.addEventListener("input", () => {
-            const q = searchInput.value.trim();
-            const filtered = applySearchFilter(users, q);
-            renderUsersTable(filtered);
+        try {
+          // stats
+          const statsRes = await fetch(API_BASE + "/admin/stats", {
+            headers,
           });
-        }
-      } catch (err) {
-        console.error(err);
-        if (mainContent) {
-          mainContent.innerHTML = `
-            <p style="color:#b33434; font-size:0.9rem;">
-              Hubo un problema al cargar los datos del panel. Verifica que tu usuario sea admin y que la API esté activa.
-            </p>
-          `;
+          const statsData = await statsRes.json();
+          if (statsData && statsData.ok && Array.isArray(statsData.topReferrers)) {
+            // Puedes usar statsData.stats/topReferrers si quieres
+          }
+
+          // users
+          const usersRes = await fetch(API_BASE + "/admin/users?page=1&pageSize=500", {
+            headers,
+          });
+          const usersData = await usersRes.json();
+          if (!usersData.ok) {
+            throw new Error(usersData.error || "Error cargando usuarios.");
+          }
+
+          allUsers = usersData.users || [];
+
+          renderMetrics(allUsers);
+          refreshTable();
+        } catch (err) {
+          console.error("Error cargando admin data:", err);
+          if (metricsContainer) {
+            metricsContainer.innerHTML =
+              '<p style="color:#b33434;font-size:0.9rem;">Error al cargar datos del administrador.</p>';
+          }
         }
       }
-    }
 
-    document.addEventListener("DOMContentLoaded", loadAdminData);
-  })();
-</script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Eventos de búsqueda
+        if (searchInput) {
+          searchInput.addEventListener("input", refreshTable);
+        }
 
-  
+        // Eventos de sort
+        sortButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const sort = btn.getAttribute("data-sort") || "created_desc";
+            currentSort = sort;
+
+            sortButtons.forEach((b) =>
+              b.classList.toggle(
+                "active",
+                b.getAttribute("data-sort") === sort
+              )
+            );
+
+            refreshTable();
+          });
+        });
+
+        loadAdminData();
+      });
+    })();
+  </script>
 </body>
 </html>
