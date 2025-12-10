@@ -1,4 +1,4 @@
- <!doctype html>
+  <!doctype html>
 <html lang="es-MX">
 <head>
   <meta charset="utf-8" />
@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* ====== ESTILOS ESPECÍFICOS DEL PANEL ADMIN ====== */
-
     .admin-shell {
       min-height: 100vh;
       display: flex;
@@ -16,7 +14,6 @@
       padding: 1.5rem;
       background: #f5f3f0;
     }
-
     .admin-card {
       background: #ffffff;
       border-radius: 24px;
@@ -28,7 +25,6 @@
       flex-direction: column;
       gap: 1.5rem;
     }
-
     .admin-header-row {
       display: flex;
       justify-content: space-between;
@@ -36,13 +32,11 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .logo-row {
       display: flex;
       align-items: center;
       gap: 0.8rem;
     }
-
     .logo-drop {
       width: 32px;
       height: 32px;
@@ -50,30 +44,25 @@
       background: radial-gradient(circle at 30% 20%, #f7e1b8, #c79c57);
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
     }
-
     .logo-text-main {
       font-size: 0.9rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
     }
-
     .logo-text-sub {
       font-size: 0.75rem;
       color: #777;
     }
-
     .admin-title-block h2 {
       margin: 0;
       font-size: 1.3rem;
       font-weight: 600;
     }
-
     .admin-title-block p {
       margin: 0.2rem 0 0;
       font-size: 0.85rem;
       color: #555;
     }
-
     .admin-badge {
       font-size: 0.75rem;
       padding: 0.2rem 0.7rem;
@@ -83,45 +72,38 @@
       background: #faf6ee;
     }
 
-    /* Métricas */
     .admin-metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
     }
-
     .metric-card {
       border-radius: 18px;
       padding: 0.9rem 1rem;
       background: #f8f5ef;
       border: 1px solid rgba(0, 0, 0, 0.04);
     }
-
     .metric-label {
       font-size: 0.8rem;
       color: #666;
       margin-bottom: 0.15rem;
     }
-
     .metric-value {
       font-size: 1.3rem;
       font-weight: 600;
     }
-
     .metric-sub {
       font-size: 0.75rem;
       color: #888;
       margin-top: 0.2rem;
     }
 
-    /* Tabla usuarios */
     .admin-table-section {
       border-radius: 20px;
       border: 1px solid rgba(0, 0, 0, 0.04);
       padding: 1rem 1.1rem;
       background: #fafafa;
     }
-
     .admin-table-header {
       display: flex;
       justify-content: space-between;
@@ -130,53 +112,23 @@
       align-items: center;
       margin-bottom: 0.8rem;
     }
-
     .admin-table-header h3 {
       margin: 0;
       font-size: 1rem;
       font-weight: 600;
     }
-
     .admin-search-input {
-      min-width: 200px;
-      max-width: 260px;
+      min-width: 220px;
+      max-width: 280px;
       border-radius: 999px;
       border: 1px solid rgba(0, 0, 0, 0.12);
       padding: 0.35rem 0.8rem;
       font-size: 0.85rem;
     }
 
-    .admin-sort-controls {
-      display: flex;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .admin-sort-label {
-      font-size: 0.75rem;
-      color: #777;
-    }
-
-    .admin-sort-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.18);
-      background: #ffffff;
-      padding: 0.25rem 0.7rem;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    .admin-sort-btn.active {
-      border-color: #c79c57;
-      background: #f9efe0;
-      color: #6b4b20;
-    }
-
     .admin-table-wrapper {
       overflow-x: auto;
     }
-
     table.admin-table {
       width: 100%;
       border-collapse: collapse;
@@ -185,11 +137,9 @@
       border-radius: 16px;
       overflow: hidden;
     }
-
     .admin-table thead {
       background: #f1ece2;
     }
-
     .admin-table th,
     .admin-table td {
       padding: 0.55rem 0.7rem;
@@ -197,17 +147,16 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
       white-space: nowrap;
     }
-
     .admin-table th {
       font-weight: 600;
       font-size: 0.78rem;
       color: #555;
     }
-
     .admin-table tbody tr:nth-child(even) {
       background: #faf7f2;
     }
 
+    /* celdas especiales */
     .admin-chip-ref {
       display: inline-flex;
       align-items: center;
@@ -218,7 +167,6 @@
       font-size: 0.75rem;
       color: #8a5b1e;
     }
-
     .admin-chip-referrals {
       font-size: 0.75rem;
       padding: 0.05rem 0.5rem;
@@ -226,15 +174,47 @@
       background: #edf9f1;
       color: #2f7b3b;
     }
-
     .admin-chip-referrals.zero {
       background: #f3f3f3;
       color: #777;
     }
-
     .admin-date {
       font-size: 0.75rem;
       color: #777;
+    }
+
+    /* País más compacto */
+    .admin-country-cell {
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* headers clicables para ordenar */
+    .admin-sortable {
+      cursor: pointer;
+      position: relative;
+    }
+    .admin-sortable::after {
+      content: "";
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 4px solid transparent;
+      border-top-color: transparent;
+      opacity: 0.3;
+    }
+    .admin-sortable.sort-name::after {
+      border-top-color: #555; /* solo para indicar que es sortable */
+    }
+    .admin-sortable.sort-ref::after {
+      border-top-color: #555;
+    }
+    .admin-sort-active {
+      color: #6b4b20;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .admin-footer-row {
@@ -242,7 +222,6 @@
       justify-content: flex-end;
       margin-top: 1rem;
     }
-
     .btn-ghost {
       border-radius: 999px;
       border: 1px solid rgba(0,0,0,0.18);
@@ -283,57 +262,44 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PRINCIPAL DEL ADMIN -->
+      <!-- CONTENIDO PRINCIPAL -->
       <div id="adminMainContent">
-        <!-- METRICAS -->
-        <div class="admin-metrics-grid" id="adminMetrics">
-          <!-- JS rellena -->
-        </div>
+        <!-- MÉTRICAS -->
+        <div class="admin-metrics-grid" id="adminMetrics"></div>
 
-        <!-- TABLA DE USUARIOS -->
+        <!-- TABLA USUARIOS -->
         <section class="admin-table-section">
           <div class="admin-table-header">
             <h3>Miembros registrados</h3>
-
-            <div class="admin-sort-controls">
-              <span class="admin-sort-label">Orden:</span>
-              <button type="button"
-                      class="admin-sort-btn active"
-                      data-sort="created_desc">
-                Más recientes
-              </button>
-              <button type="button"
-                      class="admin-sort-btn"
-                      data-sort="name_asc">
-                Nombre A–Z
-              </button>
-
-              <input
-                type="text"
-                id="adminSearchInput"
-                class="admin-search-input"
-                placeholder="Buscar por nombre, email o REF..."
-              />
-            </div>
+            <input
+              type="text"
+              id="adminSearchInput"
+              class="admin-search-input"
+              placeholder="Buscar por nombre, email o REF..."
+            />
           </div>
 
           <div class="admin-table-wrapper">
             <table class="admin-table" id="adminUsersTable">
               <thead>
                 <tr>
-                  <th>Nombre</th>
+                  <th id="thName"
+                      class="admin-sortable sort-name">
+                    Nombre
+                  </th>
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>País</th>
                   <th>REF personal</th>
                   <th>Patrocinador</th>
-                  <th>Referidos</th>
+                  <th id="thRefs"
+                      class="admin-sortable sort-ref">
+                    Referidos
+                  </th>
                   <th>Fecha de alta</th>
                 </tr>
               </thead>
-              <tbody>
-                <!-- Filas generadas por JS -->
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </section>
@@ -350,12 +316,13 @@
       const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
       let allUsers = [];
-      let currentSort = "created_desc"; // o "name_asc"
+      let currentSort = "created_desc"; // created_desc | name_asc | referrals_desc
 
       const metricsContainer = document.getElementById("adminMetrics");
       const usersTable = document.getElementById("adminUsersTable");
       const searchInput = document.getElementById("adminSearchInput");
-      const sortButtons = document.querySelectorAll(".admin-sort-btn");
+      const thName = document.getElementById("thName");
+      const thRefs = document.getElementById("thRefs");
 
       function formatDate(isoString) {
         if (!isoString) return "—";
@@ -375,7 +342,6 @@
           0
         );
 
-        // Nuevos últimos 7 días
         const now = new Date();
         const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
         const newLast7 = users.filter((u) => {
@@ -383,7 +349,6 @@
           return d >= sevenDaysAgo;
         }).length;
 
-        // Top referidor
         const sortedByReferrals = [...users].sort(
           (a, b) => (b.referrals || 0) - (a.referrals || 0)
         );
@@ -470,7 +435,10 @@
           tdPhone.textContent = u.phone || "—";
 
           const tdCountry = document.createElement("td");
-          tdCountry.textContent = u.country || "—";
+          tdCountry.className = "admin-country-cell";
+          const countryRaw = (u.country || "—").trim();
+          tdCountry.textContent =
+            countryRaw.length > 16 ? countryRaw.slice(0, 16) + "…" : countryRaw;
 
           const tdRef = document.createElement("td");
           tdRef.innerHTML = u.refid
@@ -526,8 +494,11 @@
             if (an > bn) return 1;
             return 0;
           });
+        } else if (currentSort === "referrals_desc") {
+          arr.sort(
+            (a, b) => (b.referrals || 0) - (a.referrals || 0)
+          );
         } else {
-          // created_at DESC
           arr.sort(
             (a, b) => new Date(b.created_at) - new Date(a.created_at)
           );
@@ -535,50 +506,56 @@
         return arr;
       }
 
+      function updateHeaderActive() {
+        if (thName) thName.classList.remove("admin-sort-active");
+        if (thRefs) thRefs.classList.remove("admin-sort-active");
+
+        if (currentSort === "name_asc" && thName) {
+          thName.classList.add("admin-sort-active");
+        } else if (currentSort === "referrals_desc" && thRefs) {
+          thRefs.classList.add("admin-sort-active");
+        }
+      }
+
       function refreshTable() {
         const q = (searchInput?.value || "").trim();
         let filtered = applySearchFilter(allUsers, q);
         const sorted = sortUsers(filtered);
         renderUsersTable(sorted);
+        updateHeaderActive();
       }
 
       async function loadAdminData() {
-        // 1) tomar token admin
         const token =
           localStorage.getItem("ma_admin_token") ||
           localStorage.getItem("ma_token");
 
         if (!token) {
-          // si no hay token, mandamos al login admin
           window.location.href = "admin-login.html";
           return;
         }
 
-        const headers = {
-          Authorization: "Bearer " + token,
-        };
+        const headers = { Authorization: "Bearer " + token };
 
         try {
           // stats
-          const statsRes = await fetch(API_BASE + "/admin/stats", {
-            headers,
-          });
+          const statsRes = await fetch(API_BASE + "/admin/stats", { headers });
           const statsData = await statsRes.json();
-          if (statsData && statsData.ok && Array.isArray(statsData.topReferrers)) {
-            // Puedes usar statsData.stats/topReferrers si quieres
+          if (statsData && statsData.ok) {
+            // podrías usar statsData.stats/topReferrers si quieres
           }
 
-          // users
-          const usersRes = await fetch(API_BASE + "/admin/users?page=1&pageSize=500", {
-            headers,
-          });
+          // usuarios
+          const usersRes = await fetch(
+            API_BASE + "/admin/users?page=1&pageSize=500",
+            { headers }
+          );
           const usersData = await usersRes.json();
           if (!usersData.ok) {
             throw new Error(usersData.error || "Error cargando usuarios.");
           }
 
           allUsers = usersData.users || [];
-
           renderMetrics(allUsers);
           refreshTable();
         } catch (err) {
@@ -591,27 +568,29 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Eventos de búsqueda
         if (searchInput) {
           searchInput.addEventListener("input", refreshTable);
         }
 
-        // Eventos de sort
-        sortButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const sort = btn.getAttribute("data-sort") || "created_desc";
-            currentSort = sort;
-
-            sortButtons.forEach((b) =>
-              b.classList.toggle(
-                "active",
-                b.getAttribute("data-sort") === sort
-              )
-            );
-
+        if (thName) {
+          thName.addEventListener("click", () => {
+            // toggle entre A–Z y default
+            currentSort =
+              currentSort === "name_asc" ? "created_desc" : "name_asc";
             refreshTable();
           });
-        });
+        }
+
+        if (thRefs) {
+          thRefs.addEventListener("click", () => {
+            // toggle entre más referidos y default
+            currentSort =
+              currentSort === "referrals_desc"
+                ? "created_desc"
+                : "referrals_desc";
+            refreshTable();
+          });
+        }
 
         loadAdminData();
       });
