@@ -266,52 +266,9 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // 🔹 DATOS DE EJEMPLO (MOCK) PARA EL PANEL
-    // Más adelante, esto se reemplaza por llamadas reales al backend.
-    const MOCK_USERS = [
-      {
-        full_name: "Ana López",
-        email: "ana@example.com",
-        phone: "+1 555 101 2020",
-        username: "analopez",
-        refid: "ANA555",
-        referredby: null,
-        referrals: 12,
-        created_at: "2025-11-01T10:15:00Z",
-      },
-      {
-        full_name: "Juan Pérez",
-        email: "juan@example.com",
-        phone: "+1 555 333 4444",
-        username: "juanperez",
-        refid: "JPE444",
-        referredby: "ANA555",
-        referrals: 3,
-        created_at: "2025-11-05T15:22:00Z",
-      },
-      {
-        full_name: "María García",
-        email: "maria@example.com",
-        phone: "+52 1 55 1234 5678",
-        username: "mariag",
-        refid: "MGA678",
-        referredby: "ANA555",
-        referrals: 0,
-        created_at: "2025-11-10T09:05:00Z",
-      },
-      {
-        full_name: "Luis Herrera",
-        email: "luis@example.com",
-        phone: "+57 300 445 5566",
-        username: "luish",
-        refid: "LHE566",
-        referredby: "JPE444",
-        referrals: 1,
-        created_at: "2025-11-12T18:40:00Z",
-      }
-    ];
+<script>
+  (function () {
+    const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
     function formatDate(isoString) {
       if (!isoString) return "—";
@@ -324,47 +281,17 @@
       });
     }
 
-    function computeStats(users) {
-      const totalUsers = users.length;
-      const totalReferrals = users.reduce(
-        (sum, u) => sum + (u.referrals || 0),
-        0
-      );
-
-      // Nuevos últimos 7 días
-      const now = new Date();
-      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-      const newLast7 = users.filter((u) => {
-        const d = new Date(u.created_at);
-        return d >= sevenDaysAgo;
-      }).length;
-
-      // Top referidores
-      const sortedByReferrals = [...users].sort(
-        (a, b) => (b.referrals || 0) - (a.referrals || 0)
-      );
-      const topReferrer = sortedByReferrals[0] || null;
-
-      return {
-        totalUsers,
-        totalReferrals,
-        newLast7,
-        topReferrer,
-      };
-    }
-
-    function renderMetrics(users) {
+    function renderMetricsFromApi(stats, topReferrer) {
       const container = document.getElementById("adminMetrics");
       if (!container) return;
 
-      const stats = computeStats(users);
       container.innerHTML = "";
 
       const card1 = document.createElement("div");
       card1.className = "metric-card";
       card1.innerHTML = `
         <div class="metric-label">Total de miembros</div>
-        <div class="metric-value">${stats.totalUsers}</div>
+        <div class="metric-value">${stats.total_users ?? 0}</div>
         <div class="metric-sub">Usuarios registrados en la plataforma</div>
       `;
 
@@ -372,28 +299,28 @@
       card2.className = "metric-card";
       card2.innerHTML = `
         <div class="metric-label">Referidos acumulados</div>
-        <div class="metric-value">${stats.totalReferrals}</div>
-        <div class="metric-sub">Suma de todos los referidos activos</div>
+        <div class="metric-value">${stats.total_referrals ?? 0}</div>
+        <div class="metric-sub">Suma de todos los referidos registrados</div>
       `;
 
       const card3 = document.createElement("div");
       card3.className = "metric-card";
       card3.innerHTML = `
         <div class="metric-label">Nuevos últimos 7 días</div>
-        <div class="metric-value">${stats.newLast7}</div>
+        <div class="metric-value">${stats.users_last_7_days ?? 0}</div>
         <div class="metric-sub">Miembros que se unieron recientemente</div>
       `;
 
       const card4 = document.createElement("div");
       card4.className = "metric-card";
-      if (stats.topReferrer) {
+      if (topReferrer) {
         card4.innerHTML = `
           <div class="metric-label">Top referidor</div>
           <div class="metric-value" style="font-size:1rem;">
-            ${stats.topReferrer.full_name || stats.topReferrer.username || "—"}
+            ${topReferrer.full_name || topReferrer.email || "—"}
           </div>
           <div class="metric-sub">
-            REF: ${stats.topReferrer.refid || "—"} · ${stats.topReferrer.referrals || 0} referidos
+            REF: ${topReferrer.refid || "—"} · ${topReferrer.referrals || 0} referidos
           </div>
         `;
       } else {
@@ -471,28 +398,88 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const adminSearchInput = document.getElementById("adminSearchInput");
-      let currentUsers = MOCK_USERS.slice();
+    async function loadAdminData() {
+      const searchInput = document.getElementById("adminSearchInput");
+      const mainContent = document.getElementById("adminMainContent");
 
-      // Render inicial directo (sin PIN)
-      renderMetrics(currentUsers);
-      renderUsersTable(currentUsers);
+      // 1) Leer token de admin (o normal) desde localStorage
+      let token = null;
+      try {
+        token =
+          localStorage.getItem("ma_admin_token") ||
+          localStorage.getItem("ma_token");
+      } catch (e) {}
 
-      // Búsqueda
-      if (adminSearchInput) {
-        adminSearchInput.addEventListener("input", () => {
-          const q = adminSearchInput.value.trim();
-          const filtered = applySearchFilter(currentUsers, q);
-          renderUsersTable(filtered);
-        });
+      if (!token) {
+        if (mainContent) {
+          mainContent.innerHTML = `
+            <p style="color:#b33434; font-size:0.9rem;">
+              No se encontró token de administrador. Inicia sesión de nuevo en la página de admin.
+            </p>
+          `;
+        }
+        return;
       }
 
-      // 🔜 Más adelante:
-      // Aquí podríamos llamar a tu backend con token de admin real, por ejemplo:
-      // fetch("https://mente-abundante-api-1.onrender.com/admin/users", { headers: { Authorization: "Bearer <admin-token>" }})
-      // y reemplazar MOCK_USERS por los datos reales.
-    });
-  </script>
+      const headers = {
+        Authorization: "Bearer " + token,
+      };
+
+      try {
+        // 2) Pedir stats y usuarios reales al backend
+        const [statsRes, usersRes] = await Promise.all([
+          fetch(API_BASE + "/admin/stats", { headers }),
+          fetch(API_BASE + "/admin/users?page=1&pageSize=500", { headers }),
+        ]);
+
+        if (!statsRes.ok) {
+          throw new Error("Error al cargar /admin/stats");
+        }
+        if (!usersRes.ok) {
+          throw new Error("Error al cargar /admin/users");
+        }
+
+        const statsJson = await statsRes.json();
+        const usersJson = await usersRes.json();
+
+        const stats = statsJson.stats || {
+          total_users: 0,
+          total_referrals: 0,
+          users_last_7_days: 0,
+        };
+        const topReferrers = statsJson.topReferrers || [];
+        const topReferrer = topReferrers[0] || null;
+
+        const users = usersJson.users || usersJson.data || [];
+
+        // 3) Render métricas y tabla
+        renderMetricsFromApi(stats, topReferrer);
+        renderUsersTable(users);
+
+        // 4) Búsqueda en vivo
+        if (searchInput) {
+          searchInput.addEventListener("input", () => {
+            const q = searchInput.value.trim();
+            const filtered = applySearchFilter(users, q);
+            renderUsersTable(filtered);
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (mainContent) {
+          mainContent.innerHTML = `
+            <p style="color:#b33434; font-size:0.9rem;">
+              Hubo un problema al cargar los datos del panel. Verifica que tu usuario sea admin y que la API esté activa.
+            </p>
+          `;
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadAdminData);
+  })();
+</script>
+
+  
 </body>
 </html>
