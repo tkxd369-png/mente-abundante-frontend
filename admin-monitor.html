@@ -1,9 +1,9 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es-MX">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mente Abundante – Panel Administrador</title>
+  <title>The Master Key – Panel Administrador</title>
   <link rel="stylesheet" href="styles.css" />
 
   <style>
@@ -56,14 +56,6 @@
       border: 1px solid rgba(0, 0, 0, 0.12);
       color: #555;
       background: #faf6ee;
-    }
-
-    /* PIN bloque */
-    .admin-pin-block {
-      border-radius: 18px;
-      border: 1px dashed rgba(0, 0, 0, 0.12);
-      padding: 1rem 1.2rem;
-      background: #fffaf2;
     }
 
     /* Métricas */
@@ -214,7 +206,7 @@
         <div class="logo-row">
           <div class="logo-drop"></div>
           <div>
-            <div class="logo-text-main">MENTE ABUNDANTE</div>
+            <div class="logo-text-main">THE MASTER KEY</div>
             <div class="logo-text-sub">Panel de administración</div>
           </div>
         </div>
@@ -229,23 +221,8 @@
         </div>
       </div>
 
-      <!-- BLOQUE PIN DE ADMINISTRADOR -->
-      <div id="adminPinBlock" class="admin-pin-block">
-        <div class="label">PIN de administrador</div>
-        <input
-          class="input"
-          type="password"
-          id="adminPinInput"
-          placeholder="Escribe tu PIN de acceso"
-        />
-        <button type="button" class="btn btn-secondary" id="adminPinButton" style="margin-top: 0.6rem;">
-          Entrar al panel
-        </button>
-        <p id="adminPinMessage" class="small-note" style="margin-top: 0.4rem;"></p>
-      </div>
-
-      <!-- CONTENIDO PRINCIPAL DEL ADMIN (OCULTO HASTA PIN CORRECTO) -->
-      <div id="adminMainContent" style="display:none;">
+      <!-- CONTENIDO PRINCIPAL DEL ADMIN (AHORA SIEMPRE VISIBLE) -->
+      <div id="adminMainContent">
         <!-- METRICAS -->
         <div class="admin-metrics-grid" id="adminMetrics">
           <!-- Se rellenan por JS -->
@@ -291,9 +268,6 @@
   </div>
 
   <script>
-    // ⚠️ CAMBIA ESTE PIN POR UNO TUYO Y NO LO COMPARTAS
-    const ADMIN_PIN = "MA-MONITOR-2025";
-
     // 🔹 DATOS DE EJEMPLO (MOCK) PARA EL PANEL
     // Más adelante, esto se reemplaza por llamadas reales al backend.
     const MOCK_USERS = [
@@ -419,9 +393,7 @@
             ${stats.topReferrer.full_name || stats.topReferrer.username || "—"}
           </div>
           <div class="metric-sub">
-            REF: ${stats.topReferrer.refid || "—"} · ${
-          stats.topReferrer.referrals || 0
-        } referidos
+            REF: ${stats.topReferrer.refid || "—"} · ${stats.topReferrer.referrals || 0} referidos
           </div>
         `;
       } else {
@@ -500,41 +472,12 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      const adminPinBlock = document.getElementById("adminPinBlock");
-      const adminPinInput = document.getElementById("adminPinInput");
-      const adminPinButton = document.getElementById("adminPinButton");
-      const adminPinMessage = document.getElementById("adminPinMessage");
-      const adminMainContent = document.getElementById("adminMainContent");
       const adminSearchInput = document.getElementById("adminSearchInput");
-
       let currentUsers = MOCK_USERS.slice();
 
-      // Manejar PIN
-      adminPinButton.addEventListener("click", () => {
-        const pin = adminPinInput.value.trim();
-        if (!pin) {
-          adminPinMessage.textContent = "Escribe el PIN de administrador.";
-          adminPinMessage.style.color = "#b33434";
-          return;
-        }
-
-        if (pin !== ADMIN_PIN) {
-          adminPinMessage.textContent = "PIN incorrecto.";
-          adminPinMessage.style.color = "#b33434";
-          return;
-        }
-
-        adminPinMessage.textContent = "Acceso concedido.";
-        adminPinMessage.style.color = "#2f7b3b";
-
-        // Mostrar contenido admin
-        adminPinBlock.style.display = "none";
-        adminMainContent.style.display = "block";
-
-        // Render inicial con mock
-        renderMetrics(currentUsers);
-        renderUsersTable(currentUsers);
-      });
+      // Render inicial directo (sin PIN)
+      renderMetrics(currentUsers);
+      renderUsersTable(currentUsers);
 
       // Búsqueda
       if (adminSearchInput) {
@@ -546,7 +489,7 @@
       }
 
       // 🔜 Más adelante:
-      // Aquí podríamos llamar a tu backend:
+      // Aquí podríamos llamar a tu backend con token de admin real, por ejemplo:
       // fetch("https://mente-abundante-api-1.onrender.com/admin/users", { headers: { Authorization: "Bearer <admin-token>" }})
       // y reemplazar MOCK_USERS por los datos reales.
     });
