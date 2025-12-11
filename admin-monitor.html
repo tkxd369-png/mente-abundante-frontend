@@ -1,4 +1,4 @@
-  <!doctype html>
+<!doctype html>
 <html lang="es-MX">
 <head>
   <meta charset="utf-8" />
@@ -7,24 +7,29 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* ====== FONDO BLACK EDITION ====== */
     .admin-shell {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       padding: 1.5rem;
-      background: #f5f3f0;
+      background: radial-gradient(circle at top, #1a1a1e, #050508);
+      color: #f5f3ea;
     }
+
     .admin-card {
-      background: #ffffff;
+      background: rgba(10, 10, 14, 0.96);
       border-radius: 24px;
       width: 100%;
       max-width: 1100px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.7);
       padding: 1.8rem 2rem 2rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      border: 1px solid rgba(212, 175, 55, 0.22);
     }
+
     .admin-header-row {
       display: flex;
       justify-content: space-between;
@@ -32,78 +37,95 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
+
     .logo-row {
       display: flex;
       align-items: center;
       gap: 0.8rem;
     }
+
     .logo-drop {
       width: 32px;
       height: 32px;
       border-radius: 12px;
       background: radial-gradient(circle at 30% 20%, #f7e1b8, #c79c57);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6);
     }
+
     .logo-text-main {
       font-size: 0.9rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
+      color: #f7f3e8;
     }
+
     .logo-text-sub {
       font-size: 0.75rem;
-      color: #777;
+      color: #a9a395;
     }
+
     .admin-title-block h2 {
       margin: 0;
       font-size: 1.3rem;
       font-weight: 600;
+      color: #f7f3e8;
     }
+
     .admin-title-block p {
       margin: 0.2rem 0 0;
       font-size: 0.85rem;
-      color: #555;
+      color: #b4aea0;
     }
+
     .admin-badge {
       font-size: 0.75rem;
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      color: #555;
-      background: #faf6ee;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #f5e7c4;
+      background: rgba(212, 175, 55, 0.08);
     }
 
+    /* MÉTRICAS */
     .admin-metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
     }
+
     .metric-card {
       border-radius: 18px;
       padding: 0.9rem 1rem;
-      background: #f8f5ef;
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      background: radial-gradient(circle at top, #1c1b21, #121117);
+      border: 1px solid rgba(212, 175, 55, 0.2);
     }
+
     .metric-label {
       font-size: 0.8rem;
-      color: #666;
+      color: #b8b2a4;
       margin-bottom: 0.15rem;
     }
+
     .metric-value {
       font-size: 1.3rem;
       font-weight: 600;
+      color: #fdf7e5;
     }
+
     .metric-sub {
       font-size: 0.75rem;
-      color: #888;
+      color: #8d877b;
       margin-top: 0.2rem;
     }
 
+    /* TABLA */
     .admin-table-section {
       border-radius: 20px;
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.25);
       padding: 1rem 1.1rem;
-      background: #fafafa;
+      background: radial-gradient(circle at top, #14131a, #09090d);
     }
+
     .admin-table-header {
       display: flex;
       justify-content: space-between;
@@ -112,82 +134,104 @@
       align-items: center;
       margin-bottom: 0.8rem;
     }
+
     .admin-table-header h3 {
       margin: 0;
       font-size: 1rem;
       font-weight: 600;
+      color: #f3eee2;
     }
+
     .admin-search-input {
       min-width: 220px;
       max-width: 280px;
       border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       padding: 0.35rem 0.8rem;
       font-size: 0.85rem;
+      background: rgba(8, 8, 12, 0.9);
+      color: #f5f3ea;
+    }
+    .admin-search-input::placeholder {
+      color: #7e7a72;
     }
 
     .admin-table-wrapper {
       overflow-x: auto;
     }
+
     table.admin-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82rem;
-      background: #ffffff;
+      background: #0b0b10;
       border-radius: 16px;
       overflow: hidden;
     }
+
     .admin-table thead {
-      background: #f1ece2;
+      background: linear-gradient(90deg, #26232e, #1b1a22);
     }
+
     .admin-table th,
     .admin-table td {
       padding: 0.55rem 0.7rem;
       text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       white-space: nowrap;
     }
+
     .admin-table th {
       font-weight: 600;
       font-size: 0.78rem;
-      color: #555;
-    }
-    .admin-table tbody tr:nth-child(even) {
-      background: #faf7f2;
+      color: #e1dccf;
     }
 
-    /* celdas especiales */
+    .admin-table tbody tr:nth-child(even) {
+      background: #111018;
+    }
+    .admin-table tbody tr:nth-child(odd) {
+      background: #0c0b12;
+    }
+
+    /* chips */
     .admin-chip-ref {
       display: inline-flex;
       align-items: center;
       padding: 0.1rem 0.55rem;
       border-radius: 999px;
-      background: #fff7ea;
-      border: 1px solid rgba(199, 145, 62, 0.4);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.5);
       font-size: 0.75rem;
-      color: #8a5b1e;
+      color: #f0e0b2;
     }
+
     .admin-chip-referrals {
       font-size: 0.75rem;
       padding: 0.05rem 0.5rem;
       border-radius: 999px;
-      background: #edf9f1;
-      color: #2f7b3b;
-    }
-    .admin-chip-referrals.zero {
-      background: #f3f3f3;
-      color: #777;
-    }
-    .admin-date {
-      font-size: 0.75rem;
-      color: #777;
+      background: rgba(61, 163, 98, 0.1);
+      color: #86d9a8;
+      border: 1px solid rgba(94, 214, 142, 0.4);
     }
 
-    /* País más compacto */
+    .admin-chip-referrals.zero {
+      background: rgba(255, 255, 255, 0.03);
+      color: #9a9488;
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .admin-date {
+      font-size: 0.75rem;
+      color: #a8a297;
+    }
+
+    /* País compacto */
     .admin-country-cell {
       max-width: 120px;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: #ddd6c6;
     }
 
     /* headers clicables para ordenar */
@@ -195,6 +239,7 @@
       cursor: pointer;
       position: relative;
     }
+
     .admin-sortable::after {
       content: "";
       position: absolute;
@@ -205,14 +250,9 @@
       border-top-color: transparent;
       opacity: 0.3;
     }
-    .admin-sortable.sort-name::after {
-      border-top-color: #555; /* solo para indicar que es sortable */
-    }
-    .admin-sortable.sort-ref::after {
-      border-top-color: #555;
-    }
+
     .admin-sort-active {
-      color: #6b4b20;
+      color: #f0e0b2;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
@@ -222,14 +262,18 @@
       justify-content: flex-end;
       margin-top: 1rem;
     }
+
     .btn-ghost {
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       padding: 0.4rem 0.9rem;
       font-size: 0.8rem;
       text-decoration: none;
-      color: #444;
-      background: #fff;
+      color: #f5f3ea;
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
     }
 
     @media (max-width: 768px) {
@@ -283,19 +327,13 @@
             <table class="admin-table" id="adminUsersTable">
               <thead>
                 <tr>
-                  <th id="thName"
-                      class="admin-sortable sort-name">
-                    Nombre
-                  </th>
+                  <th id="thName" class="admin-sortable">Nombre</th>
                   <th>Email</th>
                   <th>Teléfono</th>
                   <th>País</th>
                   <th>REF personal</th>
                   <th>Patrocinador</th>
-                  <th id="thRefs"
-                      class="admin-sortable sort-ref">
-                    Referidos
-                  </th>
+                  <th id="thRefs" class="admin-sortable">Referidos</th>
                   <th>Fecha de alta</th>
                 </tr>
               </thead>
@@ -417,71 +455,69 @@
         metricsContainer.appendChild(card4);
       }
 
-     function renderUsersTable(users) {
-  if (!usersTable) return;
-  const tbody = usersTable.querySelector("tbody");
-  tbody.innerHTML = "";
+      function renderUsersTable(users) {
+        if (!usersTable) return;
+        const tbody = usersTable.querySelector("tbody");
+        tbody.innerHTML = "";
 
-  users.forEach((u) => {
-    const tr = document.createElement("tr");
+        users.forEach((u) => {
+          const tr = document.createElement("tr");
 
-    // NOMBRE
-    const tdName = document.createElement("td");
-    tdName.textContent = u.full_name || "—";
+          // NOMBRE
+          const tdName = document.createElement("td");
+          tdName.textContent = u.full_name || "—";
 
-    // EMAIL
-    const tdEmail = document.createElement("td");
-    tdEmail.textContent = u.email || "—";
+          // EMAIL
+          const tdEmail = document.createElement("td");
+          tdEmail.textContent = u.email || "—";
 
-    // TELÉFONO
-    const tdPhone = document.createElement("td");
-    tdPhone.textContent = u.phone || "—";
+          // TELÉFONO
+          const tdPhone = document.createElement("td");
+          tdPhone.textContent = u.phone || "—";
 
-    // PAÍS (compacto, sin que se haga eterno)
-    const tdCountry = document.createElement("td");
-    tdCountry.className = "admin-country-cell";
-    const countryRaw = (u.country || "—").trim();
-    tdCountry.textContent =
-      countryRaw.length > 16 ? countryRaw.slice(0, 16) + "…" : countryRaw;
+          // PAÍS (compacto)
+          const tdCountry = document.createElement("td");
+          tdCountry.className = "admin-country-cell";
+          const countryRaw = (u.country || "—").trim();
+          tdCountry.textContent =
+            countryRaw.length > 16 ? countryRaw.slice(0, 16) + "…" : countryRaw;
 
-    // REF PERSONAL
-    const tdRef = document.createElement("td");
-    tdRef.innerHTML = u.refid
-      ? `<span class="admin-chip-ref">${u.refid}</span>`
-      : "—";
+          // REF PERSONAL
+          const tdRef = document.createElement("td");
+          tdRef.innerHTML = u.refid
+            ? `<span class="admin-chip-ref">${u.refid}</span>`
+            : "—";
 
-    // PATROCINADOR
-    const tdRefBy = document.createElement("td");
-    tdRefBy.textContent = u.referredby || "—";
+          // PATROCINADOR
+          const tdRefBy = document.createElement("td");
+          tdRefBy.textContent = u.referredby || "—";
 
-    // REFERIDOS
-    const tdRefs = document.createElement("td");
-    const refs = u.referrals || 0;
-    tdRefs.innerHTML = `<span class="admin-chip-referrals ${
-      refs === 0 ? "zero" : ""
-    }">${refs}</span>`;
+          // REFERIDOS
+          const tdRefs = document.createElement("td");
+          const refs = u.referrals || 0;
+          tdRefs.innerHTML = `<span class="admin-chip-referrals ${
+            refs === 0 ? "zero" : ""
+          }">${refs}</span>`;
 
-    // FECHA DE ALTA
-    const tdDate = document.createElement("td");
-    tdDate.innerHTML = `<span class="admin-date">${formatDate(
-      u.created_at
-    )}</span>`;
+          // FECHA DE ALTA
+          const tdDate = document.createElement("td");
+          tdDate.innerHTML = `<span class="admin-date">${formatDate(
+            u.created_at
+          )}</span>`;
 
-    // 👉 Orden EXACTO que debe coincidir con los <th>:
-    // Nombre | Email | Teléfono | País | REF | Patrocinador | Referidos | Fecha
-    tr.appendChild(tdName);
-    tr.appendChild(tdEmail);
-    tr.appendChild(tdPhone);
-    tr.appendChild(tdCountry);
-    tr.appendChild(tdRef);
-    tr.appendChild(tdRefBy);
-    tr.appendChild(tdRefs);
-    tr.appendChild(tdDate);
+          // 👉 ORDEN EXACTO: Nombre | Email | Teléfono | País | REF | Patrocinador | Referidos | Fecha
+          tr.appendChild(tdName);
+          tr.appendChild(tdEmail);
+          tr.appendChild(tdPhone);
+          tr.appendChild(tdCountry);
+          tr.appendChild(tdRef);
+          tr.appendChild(tdRefBy);
+          tr.appendChild(tdRefs);
+          tr.appendChild(tdDate);
 
-    tbody.appendChild(tr);
-  });
-}
-
+          tbody.appendChild(tr);
+        });
+      }
 
       function applySearchFilter(users, query) {
         if (!query) return users;
@@ -549,12 +585,8 @@
         const headers = { Authorization: "Bearer " + token };
 
         try {
-          // stats
-          const statsRes = await fetch(API_BASE + "/admin/stats", { headers });
-          const statsData = await statsRes.json();
-          if (statsData && statsData.ok) {
-            // podrías usar statsData.stats/topReferrers si quieres
-          }
+          // stats (si las usas luego)
+          await fetch(API_BASE + "/admin/stats", { headers });
 
           // usuarios
           const usersRes = await fetch(
@@ -573,7 +605,7 @@
           console.error("Error cargando admin data:", err);
           if (metricsContainer) {
             metricsContainer.innerHTML =
-              '<p style="color:#b33434;font-size:0.9rem;">Error al cargar datos del administrador.</p>';
+              '<p style="color:#ff9b9b;font-size:0.9rem;">Error al cargar datos del administrador.</p>';
           }
         }
       }
@@ -585,7 +617,6 @@
 
         if (thName) {
           thName.addEventListener("click", () => {
-            // toggle entre A–Z y default
             currentSort =
               currentSort === "name_asc" ? "created_desc" : "name_asc";
             refreshTable();
@@ -594,7 +625,6 @@
 
         if (thRefs) {
           thRefs.addEventListener("click", () => {
-            // toggle entre más referidos y default
             currentSort =
               currentSort === "referrals_desc"
                 ? "created_desc"
@@ -609,3 +639,4 @@
   </script>
 </body>
 </html>
+ 
