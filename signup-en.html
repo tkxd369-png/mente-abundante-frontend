@@ -276,117 +276,131 @@
         Here you will create your private account. This login will be used to access your dashboard,
         your referral link and your future materials inside the Program.
       </p>
+<form id="signupForm" class="ma-signup-form">
+  <div class="ma-form-field ma-form-field-full">
+    <label class="ma-form-label" for="fullName">Full name</label>
+    <input
+      id="fullName"
+      class="ma-form-input"
+      type="text"
+      placeholder="As it appears in your documents"
+      autocomplete="name"
+    />
+  </div>
 
-      <form id="signupForm" class="ma-signup-form">
-        <div class="ma-form-field ma-form-field-full">
-          <label class="ma-form-label" for="fullName">Full name</label>
-          <input
-            id="fullName"
-            class="ma-form-input"
-            type="text"
-            placeholder="As it appears in your documents"
-            autocomplete="name"
-          />
-        </div>
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="email">Email</label>
+    <input
+      id="email"
+      class="ma-form-input"
+      type="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+    />
+  </div>
 
-        <div class="ma-form-field">
-          <label class="ma-form-label" for="email">Email</label>
-          <input
-            id="email"
-            class="ma-form-input"
-            type="email"
-            placeholder="you@example.com"
-            autocomplete="email"
-          />
-        </div>
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="phone">Phone / WhatsApp</label>
+    <input
+      id="phone"
+      class="ma-form-input"
+      type="tel"
+      placeholder="+1 ..."
+      autocomplete="tel"
+    />
+  </div>
 
-        <div class="ma-form-field">
-          <label class="ma-form-label" for="phone">Phone / WhatsApp</label>
-          <input
-            id="phone"
-            class="ma-form-input"
-            type="tel"
-            placeholder="+1 ..."
-            autocomplete="tel"
-          />
-        </div>
+  <!-- 👇 NUEVO: COUNTRY -->
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="country">Country</label>
+    <input
+      id="country"
+      class="ma-form-input"
+      type="text"
+      placeholder="Country where you live"
+      autocomplete="country"
+    />
+  </div>
+  <!-- 👆 NUEVO -->
 
-        <div class="ma-form-field">
-          <label class="ma-form-label" for="username">Username (optional)</label>
-          <input
-            id="username"
-            class="ma-form-input"
-            type="text"
-            placeholder="If empty, we’ll create one for you"
-            autocomplete="username"
-          />
-          <div class="ma-field-hint">
-            This will be used to build your personal referral code.
-          </div>
-        </div>
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="username">Username (optional)</label>
+    <input
+      id="username"
+      class="ma-form-input"
+      type="text"
+      placeholder="If empty, we’ll create one for you"
+      autocomplete="username"
+    />
+    <div class="ma-field-hint">
+      This will be used to build your personal referral code.
+    </div>
+  </div>
 
-        <div class="ma-form-field">
-          <label class="ma-form-label" for="password">Password</label>
-          <div class="ma-password-wrap">
-            <input
-              id="password"
-              class="ma-form-input"
-              type="password"
-              placeholder="Create a secure password"
-              autocomplete="new-password"
-            />
-            <button
-              type="button"
-              class="ma-password-toggle"
-              data-target="password"
-              aria-label="Toggle password visibility"
-            >
-              👁
-            </button>
-          </div>
-        </div>
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="password">Password</label>
+    <div class="ma-password-wrap">
+      <input
+        id="password"
+        class="ma-form-input"
+        type="password"
+        placeholder="Create a secure password"
+        autocomplete="new-password"
+      />
+      <button
+        type="button"
+        class="ma-password-toggle"
+        data-target="password"
+        aria-label="Toggle password visibility"
+      >
+        👁
+      </button>
+    </div>
+  </div>
 
-        <div class="ma-form-field">
-          <label class="ma-form-label" for="passwordConfirm">Confirm password</label>
-          <div class="ma-password-wrap">
-            <input
-              id="passwordConfirm"
-              class="ma-form-input"
-              type="password"
-              placeholder="Repeat your password"
-              autocomplete="new-password"
-            />
-            <button
-              type="button"
-              class="ma-password-toggle"
-              data-target="passwordConfirm"
-              aria-label="Toggle password visibility"
-            >
-              👁
-            </button>
-          </div>
-        </div>
+  <div class="ma-form-field">
+    <label class="ma-form-label" for="passwordConfirm">Confirm password</label>
+    <div class="ma-password-wrap">
+      <input
+        id="passwordConfirm"
+        class="ma-form-input"
+        type="password"
+        placeholder="Repeat your password"
+        autocomplete="new-password"
+      />
+      <button
+        type="button"
+        class="ma-password-toggle"
+        data-target="passwordConfirm"
+        aria-label="Toggle password visibility"
+      >
+        👁
+      </button>
+    </div>
+  </div>
 
-        <div class="ma-form-field ma-form-field-full">
-          <label class="ma-form-label" for="refCode">Invitation code</label>
-          <input
-            id="refCode"
-            class="ma-form-input"
-            type="text"
-            readonly
-          />
-          <div id="refHint" class="ma-signup-ref"></div>
-        </div>
+  <div class="ma-form-field ma-form-field-full">
+    <label class="ma-form-label" for="refCode">Invitation code</label>
+    <input
+      id="refCode"
+      class="ma-form-input"
+      type="text"
+      readonly
+    />
+    <div id="refHint" class="ma-signup-ref"></div>
+  </div>
 
-        <div id="signupError" class="ma-signup-error"></div>
-        <div id="signupSuccess" class="ma-signup-success"></div>
+  <div id="signupError" class="ma-signup-error"></div>
+  <div id="signupSuccess" class="ma-signup-success"></div>
 
-        <div class="ma-signup-cta">
-          <button id="signupBtn" type="submit" class="ma-signup-btn">
-            Create my account
-          </button>
-        </div>
-      </form>
+  <div class="ma-signup-cta">
+    <button id="signupBtn" type="submit" class="ma-signup-btn">
+      Create my account
+    </button>
+  </div>
+</form>
+
+       
     </section>
 
     <div class="ma-signup-footer">
@@ -394,182 +408,194 @@
       <a href="login.html?lang=en">sign in here</a>.
     </div>
   </div>
+<script>
+  (function () {
+    // mark language as EN
+    try {
+      localStorage.setItem("ma_lang", "en");
+    } catch (e) {}
 
-  <script>
-    (function () {
-      // mark language as EN
-      try {
-        localStorage.setItem("ma_lang", "en");
-      } catch (e) {}
+    const API_BASE = "https://mente-abundante-api-1.onrender.com";
 
-      const API_BASE = "https://mente-abundante-api-1.onrender.com";
+    const fullNameInput = document.getElementById("fullName");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const passwordConfirmInput = document.getElementById("passwordConfirm");
+    const refInput = document.getElementById("refCode");
+    const refHint = document.getElementById("refHint");
+    const signupForm = document.getElementById("signupForm");
+    const signupError = document.getElementById("signupError");
+    const signupSuccess = document.getElementById("signupSuccess");
+    const signupBtn = document.getElementById("signupBtn");
 
-      const fullNameInput = document.getElementById("fullName");
-      const emailInput = document.getElementById("email");
-      const phoneInput = document.getElementById("phone");
-      const usernameInput = document.getElementById("username");
-      const passwordInput = document.getElementById("password");
-      const passwordConfirmInput = document.getElementById("passwordConfirm");
-      const refInput = document.getElementById("refCode");
-      const refHint = document.getElementById("refHint");
-      const signupForm = document.getElementById("signupForm");
-      const signupError = document.getElementById("signupError");
-      const signupSuccess = document.getElementById("signupSuccess");
-      const signupBtn = document.getElementById("signupBtn");
+    // 👇 NUEVO: campo de país (input o select con id="country")
+    const countryInput = document.getElementById("country");
 
-      // Prefill from localStorage
-      let refCode = "";
-      try {
-        const preName = localStorage.getItem("ma_pre_fullName");
-        const preEmail = localStorage.getItem("ma_pre_email");
-        const prePhone = localStorage.getItem("ma_pre_phone");
-        const storedRef = localStorage.getItem("ma_ref_code");
+    // Prefill from localStorage
+    let refCode = "";
+    try {
+      const preName = localStorage.getItem("ma_pre_fullName");
+      const preEmail = localStorage.getItem("ma_pre_email");
+      const prePhone = localStorage.getItem("ma_pre_phone");
+      const storedRef = localStorage.getItem("ma_ref_code");
 
-        if (preName && fullNameInput) fullNameInput.value = preName;
-        if (preEmail && emailInput) emailInput.value = preEmail;
-        if (prePhone && phoneInput) phoneInput.value = prePhone;
-        if (storedRef) refCode = storedRef;
-      } catch (e) {
-        // ignore
+      if (preName && fullNameInput) fullNameInput.value = preName;
+      if (preEmail && emailInput) emailInput.value = preEmail;
+      if (prePhone && phoneInput) phoneInput.value = prePhone;
+      if (storedRef) refCode = storedRef;
+    } catch (e) {
+      // ignore
+    }
+
+    if (refInput) {
+      refInput.value = refCode || "";
+    }
+    if (refHint) {
+      if (refCode) {
+        refHint.textContent =
+          "Your sponsor’s invitation code is linked to your account: " +
+          refCode +
+          ".";
+      } else {
+        refHint.textContent =
+          "If someone shared this Program with you, their code will be registered through their link.";
       }
+    }
 
-      if (refInput) {
-        refInput.value = refCode || "";
-      }
-      if (refHint) {
-        if (refCode) {
-          refHint.textContent =
-            "Your sponsor’s invitation code is linked to your account: " + refCode + ".";
-        } else {
-          refHint.textContent =
-            "If someone shared this Program with you, their code will be registered through their link.";
-        }
-      }
+    function setError(msg) {
+      if (signupError) signupError.textContent = msg || "";
+      if (signupSuccess) signupSuccess.textContent = "";
+    }
 
-      function setError(msg) {
-        if (signupError) signupError.textContent = msg || "";
-        if (signupSuccess) signupSuccess.textContent = "";
-      }
+    function setSuccess(msg) {
+      if (signupSuccess) signupSuccess.textContent = msg || "";
+      if (signupError) signupError.textContent = "";
+    }
 
-      function setSuccess(msg) {
-        if (signupSuccess) signupSuccess.textContent = msg || "";
-        if (signupError) signupError.textContent = "";
-      }
+    // password toggles
+    function setupPasswordToggles() {
+      const toggles = document.querySelectorAll(".ma-password-toggle");
+      toggles.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-target");
+          if (!targetId) return;
+          const input = document.getElementById(targetId);
+          if (!input) return;
 
-      // toggle de ojito
-      function setupPasswordToggles() {
-        const toggles = document.querySelectorAll(".ma-password-toggle");
-        toggles.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const targetId = btn.getAttribute("data-target");
-            if (!targetId) return;
-            const input = document.getElementById(targetId);
-            if (!input) return;
-
-            if (input.type === "password") {
-              input.type = "text";
-              btn.textContent = "🙈";
-            } else {
-              input.type = "password";
-              btn.textContent = "👁";
-            }
-          });
-        });
-      }
-
-      setupPasswordToggles();
-
-      async function createAccount(evt) {
-        evt.preventDefault();
-        setError("");
-        setSuccess("");
-
-        const fullName = (fullNameInput?.value || "").trim();
-        const email = (emailInput?.value || "").trim();
-        const phone = (phoneInput?.value || "").trim();
-        const username = (usernameInput?.value || "").trim();
-        const password = passwordInput?.value || "";
-        const passwordConfirm = passwordConfirmInput?.value || "";
-        const refCodeLocal = (refInput?.value || refCode || "").trim();
-
-        if (!fullName || !email || !phone || !password) {
-          setError("Please complete full name, email, phone and password.");
-          return;
-        }
-
-        if (password.length < 8) {
-          setError("Your password must be at least 8 characters long.");
-          return;
-        }
-
-        if (password !== passwordConfirm) {
-          setError("Password and confirmation do not match.");
-          return;
-        }
-
-        signupBtn.disabled = true;
-        signupBtn.textContent = "Creating account...";
-
-        try {
-       const res = await fetch(API_BASE + "/auth/create-account", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    fullName,
-    email,
-    phone,
-    password,
-    username: username || undefined,
-    refCode: refCodeLocal || undefined,
-    lang: "en"
-  })
-});
- 
-
-          if (!res.ok) {
-            let msg = "There was an issue creating your account. Please try again.";
-            try {
-              const dataErr = await res.json();
-              if (dataErr && dataErr.error) msg = dataErr.error;
-            } catch (e) {
-              // ignore
-            }
-            throw new Error(msg);
+          if (input.type === "password") {
+            input.type = "text";
+            btn.textContent = "🙈";
+          } else {
+            input.type = "password";
+            btn.textContent = "👁";
           }
+        });
+      });
+    }
 
-          const data = await res.json();
+    setupPasswordToggles();
 
-          // Save token & user
+    async function createAccount(evt) {
+      evt.preventDefault();
+      setError("");
+      setSuccess("");
+
+      const fullName = (fullNameInput?.value || "").trim();
+      const email = (emailInput?.value || "").trim();
+      const phone = (phoneInput?.value || "").trim();
+      const username = (usernameInput?.value || "").trim();
+      const password = passwordInput?.value || "";
+      const passwordConfirm = passwordConfirmInput?.value || "";
+      const refCodeLocal = (refInput?.value || refCode || "").trim();
+
+      // 👇 NUEVO: leer país
+      const country = (countryInput?.value || "").trim() || null;
+
+      if (!fullName || !email || !phone || !password) {
+        setError("Please complete full name, email, phone and password.");
+        return;
+      }
+
+      if (password.length < 8) {
+        setError("Your password must be at least 8 characters long.");
+        return;
+      }
+
+      if (password !== passwordConfirm) {
+        setError("Password and confirmation do not match.");
+        return;
+      }
+
+      signupBtn.disabled = true;
+      signupBtn.textContent = "Creating account...";
+
+      try {
+        const res = await fetch(API_BASE + "/auth/create-account", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName,
+            email,
+            phone,
+            password,
+            username: username || undefined,
+            refCode: refCodeLocal || undefined,
+            lang: "en",   // idioma
+            country,      // 👈 país
+          }),
+        });
+
+        if (!res.ok) {
+          let msg =
+            "There was an issue creating your account. Please try again.";
           try {
-            if (data.token) {
-              localStorage.setItem("ma_token", data.token);
-            }
-            if (data.user) {
-              localStorage.setItem("ma_user", JSON.stringify(data.user));
-            }
+            const dataErr = await res.json();
+            if (dataErr && dataErr.error) msg = dataErr.error;
           } catch (e) {
             // ignore
           }
-
-          setSuccess("Account created successfully. Redirecting to your dashboard...");
-
-          setTimeout(function () {
-            window.location.href = "dashboard.html?lang=en";
-          }, 900);
-        } catch (err) {
-          setError(err.message || "Unexpected error. Please try again.");
-        } finally {
-          signupBtn.disabled = false;
-          signupBtn.textContent = "Create my account";
+          throw new Error(msg);
         }
-      }
 
-      if (signupForm) {
-        signupForm.addEventListener("submit", createAccount);
+        const data = await res.json();
+
+        // Save token & user
+        try {
+          if (data.token) {
+            localStorage.setItem("ma_token", data.token);
+          }
+          if (data.user) {
+            localStorage.setItem("ma_user", JSON.stringify(data.user));
+          }
+        } catch (e) {
+          // ignore
+        }
+
+        setSuccess(
+          "Account created successfully. Redirecting to your dashboard..."
+        );
+
+        setTimeout(function () {
+          window.location.href = "dashboard.html?lang=en";
+        }, 900);
+      } catch (err) {
+        setError(err.message || "Unexpected error. Please try again.");
+      } finally {
+        signupBtn.disabled = false;
+        signupBtn.textContent = "Create my account";
       }
-    })();
-  </script>
+    }
+
+    if (signupForm) {
+      signupForm.addEventListener("submit", createAccount);
+    }
+  })();
+</script>
+
+  
 </body>
 </html>
