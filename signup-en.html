@@ -408,7 +408,9 @@
       <a href="login.html?lang=en">sign in here</a>.
     </div>
   </div>
-<script>
+
+ 
+ <script>
   (function () {
     // mark language as EN
     try {
@@ -420,6 +422,7 @@
     const fullNameInput = document.getElementById("fullName");
     const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
+    const countryInput = document.getElementById("country"); // 👈 NUEVO
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
     const passwordConfirmInput = document.getElementById("passwordConfirm");
@@ -429,9 +432,6 @@
     const signupError = document.getElementById("signupError");
     const signupSuccess = document.getElementById("signupSuccess");
     const signupBtn = document.getElementById("signupBtn");
-
-    // 👇 NUEVO: campo de país (input o select con id="country")
-    const countryInput = document.getElementById("country");
 
     // Prefill from localStorage
     let refCode = "";
@@ -474,7 +474,7 @@
       if (signupError) signupError.textContent = "";
     }
 
-    // password toggles
+    // password eye toggles
     function setupPasswordToggles() {
       const toggles = document.querySelectorAll(".ma-password-toggle");
       toggles.forEach((btn) => {
@@ -505,13 +505,11 @@
       const fullName = (fullNameInput?.value || "").trim();
       const email = (emailInput?.value || "").trim();
       const phone = (phoneInput?.value || "").trim();
+      const country = (countryInput?.value || "").trim(); // 👈 NUEVO
       const username = (usernameInput?.value || "").trim();
       const password = passwordInput?.value || "";
       const passwordConfirm = passwordConfirmInput?.value || "";
       const refCodeLocal = (refInput?.value || refCode || "").trim();
-
-      // 👇 NUEVO: leer país
-      const country = (countryInput?.value || "").trim() || null;
 
       if (!fullName || !email || !phone || !password) {
         setError("Please complete full name, email, phone and password.");
@@ -544,8 +542,8 @@
             password,
             username: username || undefined,
             refCode: refCodeLocal || undefined,
-            lang: "en",   // idioma
-            country,      // 👈 país
+            lang: "en",
+            country: country || undefined, // 👈 NUEVO
           }),
         });
 
@@ -595,6 +593,7 @@
     }
   })();
 </script>
+
 
   
 </body>
