@@ -416,7 +416,7 @@
       const signupError = document.getElementById("signupError");
       const signupSuccess = document.getElementById("signupSuccess");
       const signupBtn = document.getElementById("signupBtn");
-
+      const countryInput = document.getElementById("country");
       // Prefill desde localStorage
       let refCode = "";
       try {
@@ -491,7 +491,7 @@
         const password = passwordInput?.value || "";
         const passwordConfirm = passwordConfirmInput?.value || "";
         const refCodeLocal = (refInput?.value || refCode || "").trim();
-
+        const country = (countryInput?.value || "").trim() || null;
         if (!fullName || !email || !phone || !password) {
           setError("Por favor completa nombre, email, teléfono y contraseña.");
           return;
@@ -523,7 +523,8 @@
     password,
     username: username || undefined,
     refCode: refCodeLocal || undefined,
-    lang: "es"   // 👈 aquí marcamos que este usuario es de flujo español
+    lang: "es",          // 👈 se guarda idioma
+    country,             // 👈 se guarda país 
   })
 });
 
