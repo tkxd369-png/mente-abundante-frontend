@@ -455,70 +455,69 @@
         metricsContainer.appendChild(card4);
       }
 
-      function renderUsersTable(users) {
-        if (!usersTable) return;
-        const tbody = usersTable.querySelector("tbody");
-        tbody.innerHTML = "";
+     function renderUsersTable(users) {
+  const table = document.getElementById("adminUsersTable");
+  if (!table) return;
+  const tbody = table.querySelector("tbody");
+  tbody.innerHTML = "";
 
-        users.forEach((u) => {
-          const tr = document.createElement("tr");
+  users.forEach((u) => {
+    const tr = document.createElement("tr");
 
-          // NOMBRE
-          const tdName = document.createElement("td");
-          tdName.textContent = u.full_name || "—";
+    // Nombre
+    const tdName = document.createElement("td");
+    tdName.textContent = u.full_name || "—";
 
-          // EMAIL
-          const tdEmail = document.createElement("td");
-          tdEmail.textContent = u.email || "—";
+    // Email
+    const tdEmail = document.createElement("td");
+    tdEmail.textContent = u.email || "—";
 
-          // TELÉFONO
-          const tdPhone = document.createElement("td");
-          tdPhone.textContent = u.phone || "—";
+    // Teléfono
+    const tdPhone = document.createElement("td");
+    tdPhone.textContent = u.phone || "—";
 
-          // PAÍS (compacto)
-          const tdCountry = document.createElement("td");
-          tdCountry.className = "admin-country-cell";
-          const countryRaw = (u.country || "—").trim();
-          tdCountry.textContent =
-            countryRaw.length > 16 ? countryRaw.slice(0, 16) + "…" : countryRaw;
+    // País
+    const tdCountry = document.createElement("td");
+    tdCountry.textContent = u.country || "—";
 
-          // REF PERSONAL
-          const tdRef = document.createElement("td");
-          tdRef.innerHTML = u.refid
-            ? `<span class="admin-chip-ref">${u.refid}</span>`
-            : "—";
+    // REF personal
+    const tdRef = document.createElement("td");
+    tdRef.innerHTML = u.refid
+      ? `<span class="admin-chip-ref">${u.refid}</span>`
+      : "—";
 
-          // PATROCINADOR
-          const tdRefBy = document.createElement("td");
-          tdRefBy.textContent = u.referredby || "—";
+    // Patrocinador
+    const tdRefBy = document.createElement("td");
+    tdRefBy.textContent = u.referredby || "—";
 
-          // REFERIDOS
-          const tdRefs = document.createElement("td");
-          const refs = u.referrals || 0;
-          tdRefs.innerHTML = `<span class="admin-chip-referrals ${
-            refs === 0 ? "zero" : ""
-          }">${refs}</span>`;
+    // Referidos
+    const tdRefs = document.createElement("td");
+    const refs = u.referrals || 0;
+    tdRefs.innerHTML = `<span class="admin-chip-referrals ${
+      refs === 0 ? "zero" : ""
+    }">${refs}</span>`;
 
-          // FECHA DE ALTA
-          const tdDate = document.createElement("td");
-          tdDate.innerHTML = `<span class="admin-date">${formatDate(
-            u.created_at
-          )}</span>`;
+    // Fecha de alta
+    const tdDate = document.createElement("td");
+    tdDate.innerHTML = `<span class="admin-date">${formatDate(
+      u.created_at
+    )}</span>`;
 
-          // 👉 ORDEN EXACTO: Nombre | Email | Teléfono | País | REF | Patrocinador | Referidos | Fecha
-          tr.appendChild(tdName);
-          tr.appendChild(tdEmail);
-          tr.appendChild(tdPhone);
-          tr.appendChild(tdCountry);
-          tr.appendChild(tdRef);
-          tr.appendChild(tdRefBy);
-          tr.appendChild(tdRefs);
-          tr.appendChild(tdDate);
+    tr.append(
+      tdName,
+      tdEmail,
+      tdPhone,
+      tdCountry,
+      tdRef,
+      tdRefBy,
+      tdRefs,
+      tdDate
+    );
 
-          tbody.appendChild(tr);
-        });
-      }
-
+    tbody.appendChild(tr);
+  });
+}
+ 
       function applySearchFilter(users, query) {
         if (!query) return users;
         const q = query.toLowerCase();
