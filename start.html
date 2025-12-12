@@ -199,39 +199,35 @@
     </main>
   </div>
  <script>
-  // === Simple logic for the starting page ===
   (function () {
     const input = document.getElementById("tmAccessInput");
     const errorEl = document.getElementById("tmAccessError");
     const buttons = document.querySelectorAll(".tm-start-btn");
 
     function goNext(lang) {
-      const code = (input.value || "").trim();
+      const code = (input.value || "").trim().toUpperCase();
 
       if (!code) {
-        errorEl.textContent = "Por favor ingresa tu llave de acceso.";
+        errorEl.textContent = "Por favor ingresa tu código.";
         input.focus();
         return;
       }
 
-      // Guardamos el código por si lo quieres usar después
       try {
+        // ✅ Lo que ya tenías
         localStorage.setItem("tm_access_code", code);
-      } catch (e) {
-        // ignore
-      }
 
-      // Aquí decides a dónde mandar:
-      if (lang === "en") {
-        // 👉 Landing en inglés
-        window.location.href = "index-en.html?lang=en";
-      } else {
-        // 👉 Landing en español
-        window.location.href = "index.html?lang=es";
-      }
+        // ✅ Lo IMPORTANTE: esto es lo que el signup usa para el sponsor/referral
+        localStorage.setItem("ma_ref_code", code);
+
+        // ✅ Guardar idioma para que todo siga en ese idioma
+        localStorage.setItem("ma_lang", lang === "en" ? "en" : "es");
+      } catch (e) {}
+
+      // Ir al landing correspondiente
+      window.location.href = lang === "en" ? "index-en.html?lang=en" : "index.html?lang=es";
     }
 
-    // 4) Botones de idioma
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const btnLang = btn.getAttribute("data-lang") || "es";
@@ -240,18 +236,18 @@
       });
     });
 
-    // 5) Enter en el campo (por defecto español)
     if (input) {
       input.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter") {
           ev.preventDefault();
           errorEl.textContent = "";
-          goNext("es"); // <- aquí ya no usamos 'lang' indefinida
+          goNext("es");
         }
       });
     }
   })();
 </script>
+
   <script>
   (function () {
     // Este script se ejecuta SOLO en la Start Page.
