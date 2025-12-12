@@ -411,6 +411,38 @@
 
  
  <script>
+// --- ✅ FIX: asegurar ref code en SIGNUP (viene de QR/link o de start) ---
+function getRefCodeFromAnywhere() {
+  // 1) localStorage ma_ref_code
+  try {
+    const a = (localStorage.getItem("ma_ref_code") || "").trim();
+    if (a) return a;
+  } catch {}
+
+  // 2) localStorage tm_access_code (fallback)
+  try {
+    const b = (localStorage.getItem("tm_access_code") || "").trim();
+    if (b) return b;
+  } catch {}
+
+  // 3) URL ?ref=XXXX (fallback)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const c = (params.get("ref") || "").trim();
+    if (c) return c;
+  } catch {}
+
+  return "";
+}
+
+let refCode = getRefCodeFromAnywhere().toUpperCase();
+
+try {
+  if (refCode) localStorage.setItem("ma_ref_code", refCode);
+} catch {}
+// --- ✅ END FIX ---
+
+  
   (function () {
     // mark language as EN
     try {
