@@ -415,160 +415,152 @@
       <a href="terms-en.html" target="_blank">Terms &amp; Conditions</a>
     </footer>
   </div>
+<script>
+(function () {
+  // Mark language as EN for the rest of the flow
+  try { localStorage.setItem("ma_lang", "en"); } catch (e) {}
 
-  <script>
-    (function () {
-      // Mark language as EN for the rest of the flow
-      try {
-        localStorage.setItem("ma_lang", "en");
-      } catch (e) {}
+  // ✅ SOLO países donde Stripe Connect aplica (los que ya estabas usando)
+  const MA_PAYOUT_COUNTRIES = [
+    { code: "US", name: "United States" },
+    { code: "CA", name: "Canada" },
+    { code: "MX", name: "Mexico" },
+    { code: "AR", name: "Argentina" },
+    { code: "BO", name: "Bolivia" },
+    { code: "BR", name: "Brazil" },
+    { code: "CL", name: "Chile" },
+    { code: "CO", name: "Colombia" },
+    { code: "CR", name: "Costa Rica" },
+    { code: "DO", name: "Dominican Republic" },
+    { code: "EC", name: "Ecuador" },
+    { code: "PA", name: "Panama" },
+    { code: "PE", name: "Peru" },
+    { code: "PY", name: "Paraguay" },
+    { code: "SV", name: "El Salvador" },
+    { code: "UY", name: "Uruguay" }
+  ];
 
-      const MA_PAYOUT_COUNTRIES = [
-        { code: "US", name: "United States" },
-        { code: "CA", name: "Canada" },
-        { code: "MX", name: "Mexico" },
-        { code: "AR", name: "Argentina" },
-        { code: "BO", name: "Bolivia" },
-        { code: "BR", name: "Brazil" },
-        { code: "CL", name: "Chile" },
-        { code: "CO", name: "Colombia" },
-        { code: "CR", name: "Costa Rica" },
-        { code: "DO", name: "Dominican Republic" },
-        { code: "EC", name: "Ecuador" },
-        { code: "PA", name: "Panama" },
-        { code: "PE", name: "Peru" },
-        { code: "PY", name: "Paraguay" },
-        { code: "SV", name: "El Salvador" },
-        { code: "UY", name: "Uruguay" }
-      ];
+  // -------------------------
+  // 1) Referral code
+  // -------------------------
+  const params = new URLSearchParams(window.location.search);
+  const refFromUrl = (params.get("ref") || "").trim();
+  let refCode = refFromUrl;
 
-      const params = new URLSearchParams(window.location.search);
-      const refFromUrl = params.get("ref") || "";
-      let refCode = refFromUrl;
-
-      // Recover ref from localStorage if not in URL
-      try {
-        const storedRef = localStorage.getItem("ma_ref_code");
-        if (!refCode && storedRef) {
-          refCode = storedRef;
-        }
-      } catch (e) {
-        // ignore
-      }
-
-      // Save ref in localStorage for the rest of the flow
-      try {
-        if (refCode) {
-          localStorage.setItem("ma_ref_code", refCode);
-        }
-      } catch (e) {
-        // ignore
-      }
-
-      // Prefill code in field
-      const refInput = document.getElementById("refCode");
-      const refInfo = document.getElementById("refInfo");
-      if (refInput) {
-        refInput.value = refCode || "";
-      }
-      if (refInfo) {
-        if (refCode) {
-          refInfo.textContent =
-            "You are activating your access with the invitation code: " + refCode + ".";
-        } else {
-          refInfo.textContent =
-            "If someone invited you, make sure you use their personal link so their code is registered correctly.";
-        }
-      }
-
-      function populateCountrySelect(selectEl, preSelected) {
-        if (!selectEl) return;
-
-        selectEl.innerHTML = "";
-
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = "Select your country";
-        selectEl.appendChild(placeholder);
-
-        MA_PAYOUT_COUNTRIES.forEach((c) => {
-          const opt = document.createElement("option");
-          opt.value = c.code;
-          opt.textContent = c.name;
-          selectEl.appendChild(opt);
-        });
-
-        if (preSelected) {
-          selectEl.value = preSelected;
-        }
-      }
-
-      // Prefill stored data
-      const fullNameInput = document.getElementById("fullName");
-      const emailInput = document.getElementById("email");
-      const phoneInput = document.getElementById("phone");
-      const countryInput = document.getElementById("country");
-      const termsCheck = document.getElementById("termsCheck");
-      const formError = document.getElementById("formError");
-      const btnContinuar = document.getElementById("btnContinuarPago");
-
-      try {
-        const preName = localStorage.getItem("ma_pre_fullName");
-        const preEmail = localStorage.getItem("ma_pre_email");
-        const prePhone = localStorage.getItem("ma_pre_phone");
-        const preCountry = localStorage.getItem("ma_pre_country");
-
-        if (preName && fullNameInput) fullNameInput.value = preName;
-        if (preEmail && emailInput) emailInput.value = preEmail;
-        if (prePhone && phoneInput) phoneInput.value = prePhone;
-
-        // fill dropdown
-        populateCountrySelect(countryInput, preCountry || "");
-      } catch (e) {
-        // ignore
-      }
-
-      function showError(msg) {
-        if (formError) formError.textContent = msg || "";
-      }
-
-    btnContinuar.addEventListener("click", function () {
-  const fullName = (fullNameInput?.value || "").trim();
-  const email = (emailInput?.value || "").trim();
-  const phone = (phoneInput?.value || "").trim();
-  const country = (countryInput?.value || "").trim(); // ✅ AQUI ESTABA EL BUG
-  const termsAccepted = !!(termsCheck && termsCheck.checked);
-
-  if (!country) {
-    showError("Select your country before continuing.");
-    return;
-  }
-
-  if (!fullName || !email || !phone) {
-    showError("Please complete at least full name, email and phone.");
-    return;
-  }
-
-  if (!termsAccepted) {
-    showError("You must confirm the terms before continuing.");
-    return;
-  }
-
-  showError("");
-
+  // Fallback: localStorage
   try {
-    localStorage.setItem("ma_pre_fullName", fullName);
-    localStorage.setItem("ma_pre_email", email);
-    localStorage.setItem("ma_pre_phone", phone);
-    localStorage.setItem("ma_pre_country", country); // ✅ ahora sí se guarda bien
+    const storedRef = (localStorage.getItem("ma_ref_code") || "").trim();
+    if (!refCode && storedRef) refCode = storedRef;
+  } catch (e) {}
+
+  // Save for rest of flow
+  try {
     if (refCode) localStorage.setItem("ma_ref_code", refCode);
   } catch (e) {}
 
-  window.location.href = "puente-video-en.html";
-});
+  // Fill referral field + message
+  const refInput = document.getElementById("refCode");
+  const refInfo = document.getElementById("refInfo");
+  if (refInput) refInput.value = refCode || "";
+  if (refInfo) {
+    refInfo.textContent = refCode
+      ? ("You are activating your access with the invitation code: " + refCode + ".")
+      : ("If someone invited you, use their personal link so their code is registered correctly.");
+  }
 
+  // -------------------------
+  // 2) Country dropdown
+  // -------------------------
+  function populateCountrySelect(selectEl, preSelected) {
+    if (!selectEl) return;
+
+    selectEl.innerHTML = "";
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select your country";
+    selectEl.appendChild(placeholder);
+
+    MA_PAYOUT_COUNTRIES.forEach((c) => {
+      const opt = document.createElement("option");
+      opt.value = c.code;       // guardamos el code (US, MX, etc.)
+      opt.textContent = c.name; // mostramos el nombre
+      selectEl.appendChild(opt);
+    });
+
+    if (preSelected) selectEl.value = preSelected;
+  }
+
+  // -------------------------
+  // 3) Prefill saved data
+  // -------------------------
+  const fullNameInput = document.getElementById("fullName");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  const countryInput = document.getElementById("country"); // <select id="country">
+  const termsCheck = document.getElementById("termsCheck");
+  const formError = document.getElementById("formError");
+  const btnContinuar = document.getElementById("btnContinuarPago");
+
+  try {
+    const preName = localStorage.getItem("ma_pre_fullName");
+    const preEmail = localStorage.getItem("ma_pre_email");
+    const prePhone = localStorage.getItem("ma_pre_phone");
+    const preCountry = localStorage.getItem("ma_pre_country");
+
+    if (preName && fullNameInput) fullNameInput.value = preName;
+    if (preEmail && emailInput) emailInput.value = preEmail;
+    if (prePhone && phoneInput) phoneInput.value = prePhone;
+
+    populateCountrySelect(countryInput, preCountry || "");
+  } catch (e) {}
+
+  function showError(msg) {
+    if (formError) formError.textContent = msg || "";
+  }
+
+  // -------------------------
+  // 4) Continue to next step
+  // -------------------------
+  if (btnContinuar) {
+    btnContinuar.addEventListener("click", function () {
+      const fullName = (fullNameInput?.value || "").trim();
+      const email = (emailInput?.value || "").trim();
+      const phone = (phoneInput?.value || "").trim();
+      const country = (countryInput?.value || "").trim(); // ✅ YA NO FALLA
+      const termsAccepted = !!(termsCheck && termsCheck.checked);
+
+      if (!fullName || !email || !phone) {
+        showError("Please complete at least full name, email and phone.");
+        return;
       }
-    })();
-  </script>
+
+      if (!country) {
+        showError("Select your country before continuing.");
+        return;
+      }
+
+      if (!termsAccepted) {
+        showError("You must confirm the terms before continuing.");
+        return;
+      }
+
+      showError("");
+
+      try {
+        localStorage.setItem("ma_pre_fullName", fullName);
+        localStorage.setItem("ma_pre_email", email);
+        localStorage.setItem("ma_pre_phone", phone);
+        localStorage.setItem("ma_pre_country", country);
+        if (refCode) localStorage.setItem("ma_ref_code", refCode);
+      } catch (e) {}
+
+      window.location.href = "puente-video-en.html";
+    });
+  }
+})();
+</script>
+
+  
 </body>
 </html>
