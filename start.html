@@ -215,7 +215,11 @@
 
       try {
         // ✅ Lo que ya tenías
-        localStorage.setItem("tm_access_code", code);
+       try {
+  localStorage.setItem("tm_access_code", code);
+  localStorage.setItem("ma_ref_code", code.toUpperCase()); // ✅ ADD
+} catch (e) {}
+ 
 
         // ✅ Lo IMPORTANTE: esto es lo que el signup usa para el sponsor/referral
         localStorage.setItem("ma_ref_code", code);
