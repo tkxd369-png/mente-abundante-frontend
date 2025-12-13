@@ -284,33 +284,145 @@
 
   <!-- LÓGICA PARA REF Y BOTÓN "SÍ QUIERO" -->
   <script>
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const ref = params.get("ref") || "";
+(function () {
+  const API = "https://mente-abundante-api-1.onrender.com"; // <-- si tu API base es otra, dímelo
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref") || "";
 
-      // Guardar ref en localStorage (para membresía, signup, etc.)
-      try {
-        if (ref) {
-          localStorage.setItem("ma_ref_code", ref);
-        }
-      } catch (e) {
-        // ignore
-      }
+  const btnSiQuiero = document.getElementById("btnSiQuiero");
+  const overlay = document.getElementById("tmkGateOverlay");
+  const cdEl = document.getElementById("tmkGateCountdown");
 
-      // Botón Sí Quiero -> ir a membresía, preservando ref si existe
-      const btnSiQuiero = document.getElementById("btnSiQuiero");
-      if (btnSiQuiero) {
-        btnSiQuiero.addEventListener("click", function () {
-          let target = "membresia.html";
-          if (ref) {
-            const url = new URL(target, window.location.origin);
-            url.searchParams.set("ref", ref);
-            target = url.pathname + url.search;
-          }
-          window.location.href = target;
-        });
+  // 1) Guardar ref si viene por link / QR
+  try {
+    if (ref) localStorage.setItem("ma_ref_code", ref);
+  } catch (e) {}
+
+  function hasValidGatePass() {
+    try {
+      const until = parseInt(localStorage.getItem("ma_gate_pass_until") || "0", 10);
+      return Date.now() < until;
+    } catch {
+      return false;
+    }
+  }
+
+  function grantGatePass() {
+    try {
+      localStorage.setItem("ma_gate_pass_until", String(Date.now() + 2 * 60 * 60 * 1000)); // 2 horas
+    } catch (e) {}
+  }
+
+  function formatTime(sec) {
+    sec = Math.max(0, sec | 0);
+    const m = String(Math.floor(sec / 60)).padStart(2, "0");
+    const s = String(sec % 60).padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  function showOverlay(retrySeconds) {
+    if (!overlay) return;
+    overlay.style.display = "flex";
+
+    let remaining = retrySeconds || 3600;
+    if (cdEl) cdEl.textContent = formatTime(remaining);
+
+    // bloquear botón
+    if (btnSiQuiero) {
+      btnSiQuiero.disabled = true;
+      btnSiQuiero.style.opacity = "0.6";
+      btnSiQuiero.style.cursor = "not-allowed";
+    }
+
+    setInterval(() => {
+      remaining--;
+      if (remaining >= 0 && cdEl) cdEl.textContent = formatTime(remaining);
+    }, 1000);
+  }
+
+  async function getGate() {
+    try {
+      const r = await fetch(API + "/gate/status");
+      const j = await r.json();
+      return j?.gate || { open: true };
+    } catch (e) {
+      // staging-friendly: si falla, no bloqueamos
+      return { open: true };
+    }
+  }
+
+  function wireContinue() {
+    if (!btnSiQuiero) return;
+
+    btnSiQuiero.addEventListener("click", function () {
+      let target = "membresia.html";
+      if (ref) {
+        const url = new URL(target, window.location.origin);
+        url.searchParams.set("ref", ref);
+        target = url.pathname + url.search;
       }
-    })();
-  </script>
+      window.location.href = target;
+    });
+  }
+
+  async function init() {
+    const gate = await getGate();
+
+    // Si está cerrado y NO tiene pase -> bloquear (nuevos)
+    if (!gate.open && !hasValidGatePass()) {
+      showOverlay(gate.retrySeconds);
+      return;
+    }
+
+    // Si está abierto -> dar pase (para que si se cierra después, puedan terminar)
+    if (gate.open) {
+      grantGatePass();
+    }
+
+    // continuar normal
+    wireContinue();
+  }
+
+  init();
+})();
+<!-- OVERLAY GATE (solo aparece cuando está cerrado) -->
+<div id="tmkGateOverlay" style="
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(0,0,0,0.55);
+  z-index:9999;
+">
+  <div style="
+    max-width:420px;
+    width:100%;
+    background:#fdf8f1;
+    border-radius:22px;
+    padding:22px 18px;
+    text-align:center;
+    border:1px solid rgba(0,0,0,0.08);
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    color:#3a2f25;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  ">
+    <h2 style="margin:0 0 10px 0;">Acceso temporalmente en pausa</h2>
+    <p style="margin:0 0 14px 0; color:#7a6650;">
+      Estamos cuidando la experiencia de los miembros.<br>
+      Intenta nuevamente en:
+    </p>
+    <div id="tmkGateCountdown" style="font-size:34px; margin:10px 0 12px 0;">
+      60:00
+    </div>
+    <p style="margin:0; color:#97826b; opacity:.9;">
+      Gracias por tu paciencia 🙏
+    </p>
+  </div>
+</div>
+
+</script>
+
 </body>
 </html>
