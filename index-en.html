@@ -262,38 +262,144 @@
 
   <!-- LÓGICA PARA REF Y BOTÓN "I'M IN" -->
   <script>
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const ref = params.get("ref") || "";
+(function () {
+  const API = "https://mente-abundante-api-1.onrender.com"; // <-- ajusta si tu API base es otra
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref") || "";
 
-      // Marcar idioma en localStorage para el resto del flujo
-      try {
-        localStorage.setItem("ma_lang", "en");
-      } catch (e) {}
+  // Mark language for the rest of the flow
+  try { localStorage.setItem("ma_lang", "en"); } catch (e) {}
 
-      // Guardar ref en localStorage (para membership-en, signup-en, etc.)
-      try {
-        if (ref) {
-          localStorage.setItem("ma_ref_code", ref);
-        }
-      } catch (e) {
-        // ignore
+  const btnImIn = document.getElementById("btnImIn");
+  const overlay = document.getElementById("tmkGateOverlay");
+  const cdEl = document.getElementById("tmkGateCountdown");
+
+  // Save ref (for membership-en, signup-en, etc.)
+  try {
+    if (ref) localStorage.setItem("ma_ref_code", ref);
+  } catch (e) {}
+
+  function hasValidGatePass() {
+    try {
+      const until = parseInt(localStorage.getItem("ma_gate_pass_until") || "0", 10);
+      return Date.now() < until;
+    } catch {
+      return false;
+    }
+  }
+
+  function grantGatePass() {
+    try {
+      localStorage.setItem("ma_gate_pass_until", String(Date.now() + 2 * 60 * 60 * 1000)); // 2 hours
+    } catch (e) {}
+  }
+
+  function formatTime(sec) {
+    sec = Math.max(0, sec | 0);
+    const m = String(Math.floor(sec / 60)).padStart(2, "0");
+    const s = String(sec % 60).padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  function showOverlay(retrySeconds) {
+    if (!overlay) return;
+    overlay.style.display = "flex";
+
+    let remaining = retrySeconds || 3600;
+    if (cdEl) cdEl.textContent = formatTime(remaining);
+
+    // Disable button
+    if (btnImIn) {
+      btnImIn.disabled = true;
+      btnImIn.style.opacity = "0.6";
+      btnImIn.style.cursor = "not-allowed";
+    }
+
+    setInterval(() => {
+      remaining--;
+      if (remaining >= 0 && cdEl) cdEl.textContent = formatTime(remaining);
+    }, 1000);
+  }
+
+  async function getGate() {
+    try {
+      const r = await fetch(API + "/gate/status");
+      const j = await r.json();
+      return j?.gate || { open: true };
+    } catch (e) {
+      // staging-friendly: if it fails, don’t block
+      return { open: true };
+    }
+  }
+
+  function wireContinue() {
+    if (!btnImIn) return;
+
+    btnImIn.addEventListener("click", function () {
+      let target = "membresia-en.html";
+      if (ref) {
+        const url = new URL(target, window.location.origin);
+        url.searchParams.set("ref", ref);
+        target = url.pathname + url.search;
       }
+      window.location.href = target;
+    });
+  }
 
-      // Botón I'm in -> ir a membresía EN, preservando ref si existe
-      const btnImIn = document.getElementById("btnImIn");
-      if (btnImIn) {
-        btnImIn.addEventListener("click", function () {
-          let target = "membresia-en.html";
-          if (ref) {
-            const url = new URL(target, window.location.origin);
-            url.searchParams.set("ref", ref);
-            target = url.pathname + url.search;
-          }
-          window.location.href = target;
-        });
-      }
-    })();
+  async function init() {
+    const gate = await getGate();
+
+    // If closed and no pass -> block new users
+    if (!gate.open && !hasValidGatePass()) {
+      showOverlay(gate.retrySeconds);
+      return;
+    }
+
+    // If open -> grant pass so they can finish even if it closes later
+    if (gate.open) grantGatePass();
+
+    wireContinue();
+  }
+
+  init();
+ 
+    <!-- GATE OVERLAY (shows only when closed) -->
+<div id="tmkGateOverlay" style="
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(0,0,0,0.55);
+  z-index:9999;
+">
+  <div style="
+    max-width:420px;
+    width:100%;
+    background:#fdf8f1;
+    border-radius:22px;
+    padding:22px 18px;
+    text-align:center;
+    border:1px solid rgba(0,0,0,0.08);
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    color:#3a2f25;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  ">
+    <h2 style="margin:0 0 10px 0;">Access temporarily paused</h2>
+    <p style="margin:0 0 14px 0; color:#7a6650;">
+      We’re protecting the member experience.<br>
+      Try again in:
+    </p>
+    <div id="tmkGateCountdown" style="font-size:34px; margin:10px 0 12px 0;">
+      60:00
+    </div>
+    <p style="margin:0; color:#97826b; opacity:.9;">
+      Thank you for your patience 🙏
+    </p>
+  </div>
+</div>
+
   </script>
 </body>
 </html>
