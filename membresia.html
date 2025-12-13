@@ -327,7 +327,10 @@
       <!-- LADO DERECHO: FORMULARIO -->
       <aside class="ma-membership-form-card">
         <div class="ma-form-title">Confirmar activación</div>
-        <div class="ma-form-amount">Contribución única: <strong>USD $777</strong></div>
+        <div class="ma-form-amount">
+  Contribución única: <strong id="maPriceText">USD $777</strong>
+  <div id="maPromoNote" style="margin-top:.5rem; font-size:.85rem; color:#7a6650; display:none;"></div>
+</div>
 
         <div class="ma-form-row ma-form-inline">
           <div style="flex:1;">
@@ -439,6 +442,35 @@
   { code: "SV", name: "El Salvador" },
   { code: "UY", name: "Uruguay" }
 ];
+const API = "https://mente-abundante-api-1.onrender.com"; // ajusta si tu API base es otra
+
+const priceEl = document.getElementById("maPriceText");
+const promoEl = document.getElementById("maPromoNote");
+
+async function applyPhasePricing() {
+  try {
+    const r = await fetch(API + "/gate/status");
+    const j = await r.json();
+
+    const phase = j?.phase?.phase || 2;
+    const price = j?.phase?.price || 777;
+
+    if (priceEl) priceEl.textContent = `USD $${price}`;
+
+    // Nota promo solo en fase 1 (cupón)
+    if (promoEl) {
+      if (phase === 1) {
+        promoEl.style.display = "block";
+        promoEl.textContent = "Cupón Early Access aplicado (Fase 1).";
+      } else {
+        promoEl.style.display = "none";
+        promoEl.textContent = "";
+      }
+    }
+  } catch (e) {
+    // Si falla, dejamos el default del HTML ($777)
+  }
+}
 
       const params = new URLSearchParams(window.location.search);
       const refFromUrl = params.get("ref") || "";
@@ -478,6 +510,9 @@
             "Si alguien te invitó, asegúrate de usar su link personal para que su código se registre correctamente.";
         }
       }
+applyPhasePricing();
+
+     
 function populateCountrySelect(selectEl, preSelected) {
   if (!selectEl) return;
 
@@ -534,10 +569,13 @@ populateCountrySelect(countryInput, preCountry || "");
           const fullName = (fullNameInput?.value || "").trim();
           const email = (emailInput?.value || "").trim();
           const phone = (phoneInput?.value || "").trim();
-          if (!country) {
-          showError("Selecciona tu país antes de continuar.");
+          const country = (countryInput?.value || "").trim();
+
+           if (!country) {
+            showError("Selecciona tu país antes de continuar.");
            return;
-         }
+        }
+ 
           const termsAccepted = !!(termsCheck && termsCheck.checked);
 
           if (!fullName || !email || !phone) {
