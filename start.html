@@ -200,13 +200,39 @@
   </div>
  <script>
   (function () {
+    const API = "https://mente-abundante-api-1.onrender.com"; // <-- si tu API base es otra, me lo dices y lo ajusto
     const input = document.getElementById("tmAccessInput");
     const errorEl = document.getElementById("tmAccessError");
     const buttons = document.querySelectorAll(".tm-start-btn");
 
-    function goNext(lang) {
-      const code = (input.value || "").trim().toUpperCase();
+    async function getGate() {
+      try {
+        const r = await fetch(API + "/gate/status");
+        const j = await r.json();
+        return j?.gate || { open: true };
+      } catch (e) {
+        // Si falla el gate endpoint, por seguridad puedes decidir:
+        // - permitir (open) para no bloquear staging
+        // - o bloquear (closed) para seguridad dura
+        return { open: true };
+      }
+    }
 
+    function formatTime(sec) {
+      sec = Math.max(0, sec|0);
+      const m = String(Math.floor(sec / 60)).padStart(2,"0");
+      const s = String(sec % 60).padStart(2,"0");
+      return `${m}:${s}`;
+    }
+
+    async function goNext(lang) {
+      const gate = await getGate();
+      if (!gate.open) {
+        errorEl.textContent = `Acceso temporalmente cerrado. Intenta en ${formatTime(gate.retrySeconds || 3600)}.`;
+        return;
+      }
+
+      const code = (input.value || "").trim().toUpperCase();
       if (!code) {
         errorEl.textContent = "Por favor ingresa tu código.";
         input.focus();
@@ -214,21 +240,14 @@
       }
 
       try {
-        // ✅ Lo que ya tenías
-       try {
-  localStorage.setItem("tm_access_code", code);
-  localStorage.setItem("ma_ref_code", code.toUpperCase()); // ✅ ADD
-} catch (e) {}
- 
-
-        // ✅ Lo IMPORTANTE: esto es lo que el signup usa para el sponsor/referral
-        localStorage.setItem("ma_ref_code", code);
-
-        // ✅ Guardar idioma para que todo siga en ese idioma
+        localStorage.setItem("tm_access_code", code);
+        localStorage.setItem("ma_ref_code", code.toUpperCase());
         localStorage.setItem("ma_lang", lang === "en" ? "en" : "es");
+
+        // Gate pass para permitir continuar si gate se cierra después
+        localStorage.setItem("ma_gate_pass_until", String(Date.now() + 2 * 60 * 60 * 1000)); // 2 horas
       } catch (e) {}
 
-      // Ir al landing correspondiente
       window.location.href = lang === "en" ? "index-en.html?lang=en" : "index.html?lang=es";
     }
 
@@ -251,6 +270,7 @@
     }
   })();
 </script>
+
 
   <script>
   (function () {
