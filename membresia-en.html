@@ -327,7 +327,11 @@
       <!-- RIGHT SIDE: FORM -->
       <aside class="ma-membership-form-card">
         <div class="ma-form-title">Confirm activation</div>
-        <div class="ma-form-amount">One-time contribution: <strong>USD $777</strong></div>
+        <div class="ma-form-amount">
+  One-time contribution: <strong id="maPriceText">USD $777</strong>
+  <div id="maPromoNote" style="margin-top:.5rem; font-size:.85rem; color:#7a6650; display:none;"></div>
+</div>
+ 
 
         <div class="ma-form-row ma-form-inline">
           <div style="flex:1;">
@@ -419,6 +423,35 @@
 (function () {
   // Mark language as EN for the rest of the flow
   try { localStorage.setItem("ma_lang", "en"); } catch (e) {}
+
+ const API = "https://mente-abundante-api-1.onrender.com"; // ajusta si tu API base es otra
+const priceEl = document.getElementById("maPriceText");
+const promoEl = document.getElementById("maPromoNote");
+
+async function applyPhasePricing() {
+  try {
+    const r = await fetch(API + "/gate/status");
+    const j = await r.json();
+
+    const phase = j?.phase?.phase || 2;
+    const price = j?.phase?.price || 777;
+
+    if (priceEl) priceEl.textContent = `USD $${price}`;
+
+    if (promoEl) {
+      if (phase === 1) {
+        promoEl.style.display = "block";
+        promoEl.textContent = "Early Access coupon applied (Phase 1).";
+      } else {
+        promoEl.style.display = "none";
+        promoEl.textContent = "";
+      }
+    }
+  } catch (e) {
+    // If it fails, keep default $777
+  }
+}
+
 
   // ✅ SOLO países donde Stripe Connect aplica (los que ya estabas usando)
   const MA_PAYOUT_COUNTRIES = [
@@ -518,6 +551,7 @@
   function showError(msg) {
     if (formError) formError.textContent = msg || "";
   }
+applyPhasePricing();
 
   // -------------------------
   // 4) Continue to next step
