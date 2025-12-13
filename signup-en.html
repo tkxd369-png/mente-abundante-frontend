@@ -472,7 +472,8 @@ try {
       const preEmail = localStorage.getItem("ma_pre_email");
       const prePhone = localStorage.getItem("ma_pre_phone");
       const storedRef = localStorage.getItem("ma_ref_code");
-
+     const preCountry = localStorage.getItem("ma_pre_country") || "";
+      if (preCountry && countryInput) countryInput.value = preCountry;
       if (preName && fullNameInput) fullNameInput.value = preName;
       if (preEmail && emailInput) emailInput.value = preEmail;
       if (prePhone && phoneInput) phoneInput.value = prePhone;
