@@ -466,7 +466,7 @@ try {
     const signupBtn = document.getElementById("signupBtn");
 
     // Prefill from localStorage
-    let refCode = "";
+     refCode = (refCode || "").toUpperCase();
     try {
       const preName = localStorage.getItem("ma_pre_fullName");
       const preEmail = localStorage.getItem("ma_pre_email");
