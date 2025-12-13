@@ -532,44 +532,41 @@
         if (formError) formError.textContent = msg || "";
       }
 
-      if (btnContinuar) {
-        btnContinuar.addEventListener("click", function () {
-          const fullName = (fullNameInput?.value || "").trim();
-          const email = (emailInput?.value || "").trim();
-          const phone = (phoneInput?.value || "").trim();
-          if (!country) {
-          showError("Selecciona tu país antes de continuar.");
-           return;
-          }
-          const termsAccepted = !!(termsCheck && termsCheck.checked);
+    btnContinuar.addEventListener("click", function () {
+  const fullName = (fullNameInput?.value || "").trim();
+  const email = (emailInput?.value || "").trim();
+  const phone = (phoneInput?.value || "").trim();
+  const country = (countryInput?.value || "").trim(); // ✅ AQUI ESTABA EL BUG
+  const termsAccepted = !!(termsCheck && termsCheck.checked);
 
-          if (!fullName || !email || !phone) {
-            showError("Please complete at least full name, email and phone.");
-            return;
-          }
-          if (!termsAccepted) {
-            showError("You must confirm the terms before continuing.");
-            return;
-          }
+  if (!country) {
+    showError("Select your country before continuing.");
+    return;
+  }
 
-          showError("");
+  if (!fullName || !email || !phone) {
+    showError("Please complete at least full name, email and phone.");
+    return;
+  }
 
-          // Save data for next screens
-          try {
-            localStorage.setItem("ma_pre_fullName", fullName);
-            localStorage.setItem("ma_pre_email", email);
-            localStorage.setItem("ma_pre_phone", phone);
-            localStorage.setItem("ma_pre_country", country || "");
-            if (refCode) {
-              localStorage.setItem("ma_ref_code", refCode);
-            }
-          } catch (e) {
-            // ignore
-          }
+  if (!termsAccepted) {
+    showError("You must confirm the terms before continuing.");
+    return;
+  }
 
-          // Simulated flow: go to English bridge page
-          window.location.href = "puente-video-en.html";
-        });
+  showError("");
+
+  try {
+    localStorage.setItem("ma_pre_fullName", fullName);
+    localStorage.setItem("ma_pre_email", email);
+    localStorage.setItem("ma_pre_phone", phone);
+    localStorage.setItem("ma_pre_country", country); // ✅ ahora sí se guarda bien
+    if (refCode) localStorage.setItem("ma_ref_code", refCode);
+  } catch (e) {}
+
+  window.location.href = "puente-video-en.html";
+});
+
       }
     })();
   </script>
