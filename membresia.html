@@ -534,7 +534,10 @@ populateCountrySelect(countryInput, preCountry || "");
           const fullName = (fullNameInput?.value || "").trim();
           const email = (emailInput?.value || "").trim();
           const phone = (phoneInput?.value || "").trim();
-          const country = (countryInput?.value || "").trim();
+          if (!country) {
+          showError("Selecciona tu país antes de continuar.");
+           return;
+         }
           const termsAccepted = !!(termsCheck && termsCheck.checked);
 
           if (!fullName || !email || !phone) {
