@@ -285,4 +285,12 @@ button{
    If you want it cooler/gray, switch --bg to:
    --bg: #eceff1;
 */
- 
+ /* ✅ Baja el botón y evita que “choque” con el título */
+.ebook-topbar{
+  align-items: flex-start;
+}
+
+.actions{
+  margin-top: 18px;   /* súbelo/bájalo aquí: 12–26 */
+}
+
