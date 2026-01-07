@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+ <body>
   <div class="ebook-shell">
 
     <!-- TOP BAR -->
@@ -22,7 +22,9 @@
         <div class="eyebrow">WebBook · The Master Key</div>
         <div class="title">Yo Decido Ser Abundante</div>
       </div>
-      <div class="actions">
+
+      <!-- ✅ Botón más abajo para que no estorbe al título -->
+      <div class="actions actions-lowered">
         <button class="btn" onclick="window.location.href='cap01.html'">
           Capítulo 1
         </button>
@@ -32,17 +34,14 @@
     <!-- READER -->
     <section class="reader-card">
 
-      <!-- STICKY HEADER -->
+      <!-- STICKY HEADER (más limpio) -->
       <div class="reader-sticky">
         <div class="reader-header">
           <div class="kicker">Introducción</div>
-          <h1 class="reader-h1">
-            Conocer la verdad transforma la manera en que vives
-          </h1>
-          <p class="reader-sub">
-            Este no es un libro para aprender algo nuevo,  
-            sino para reconocer lo que siempre ha estado frente a ti.
-          </p>
+          <h1 class="reader-h1">Conocer la verdad transforma la manera en que vives</h1>
+
+          <!-- ✅ Más corto para que no quite espacio -->
+          <p class="reader-sub">Una invitación a claridad, orden y dirección interior.</p>
         </div>
 
         <div class="reader-progress">
@@ -50,7 +49,7 @@
           <div class="pagecount">1 / 1</div>
         </div>
       </div>
-
+     
       <!-- CONTENT -->
       <div class="reader-body">
         <div class="pages">
