@@ -291,3 +291,52 @@ a{color:inherit}
   .page p{font-size:1rem}
   .dots{max-width: 62%}
 }
+
+/* ===== TOP BAR ===== */
+.ebook-topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding:18px 16px 12px;
+}
+
+.brand{
+  flex:1;
+  min-width:0; /* ✅ permite que el título use todo el espacio */
+}
+
+.brand .eyebrow{
+  font-family:"DM Sans", system-ui, sans-serif;
+  font-size:12px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  opacity:.65;
+  margin:0 0 6px 0;
+}
+
+.brand .title{
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  font-size:34px;      /* ✅ más grande = más premium */
+  line-height:1.05;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin:0;
+}
+
+.actions{
+  flex:0 0 auto;
+}
+
+.actions .btn{
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(8px);
+  border-radius:999px;
+  padding:10px 14px;
+  font-family:"DM Sans", system-ui, sans-serif;
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
