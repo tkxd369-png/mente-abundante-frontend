@@ -1,390 +1,272 @@
-/* =========================================================
-   TMK WebBook — styles.css (FULL)
+ /* =========================
+   TMK WebBook — styles.css (FULL REPLACE)
    Neutral / Premium / Mobile-first
-   Uses: Playfair Display + DM Sans (loaded in HTML)
-   ========================================================= */
+========================= */
 
-/* ---------- Root + Theme ---------- */
-:root{
-  /* Neutral background (less peachy) */
-  --bg: #efece6;            /* neutral warm gray */
-  --ink: #2f2a24;           /* main text */
-  --muted: rgba(47,42,36,.68);
-
-  --card: rgba(255,255,255,.72);
-  --cardSolid: #ffffff;
-
-  --border: rgba(0,0,0,.08);
-  --shadow: 0 18px 45px rgba(0,0,0,.08);
-
-  --radius-lg: 20px;
-  --radius-md: 14px;
-
-  --pad-x: 16px;
-  --pad-y: 18px;
-
-  --maxw: 720px;
-
-  /* Accent (subtle gold, not loud) */
-  --gold: #e3a95a;
-  --gold2: #f2c47b;
-
-  /* Sticky offset (if you want it more “flush”, set to 0) */
-  --sticky-top: 10px;
-}
-
-/* ---------- Base ---------- */
-*{ box-sizing: border-box; }
-
-html, body{
-  height: 100%;
-}
-
-body{
+/* Reset */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
   margin: 0;
-  background: var(--bg);
-  color: var(--ink);
   font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: rgba(20, 18, 16, 0.86);
+  background: #efeeea; /* neutral (less peachy) */
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Make sure buttons look consistent on mobile */
-button{
-  font-family: inherit;
-}
-
-/* ---------- Layout Shell ---------- */
+/* Layout */
 .ebook-shell{
-  max-width: var(--maxw);
+  max-width: 980px;
   margin: 0 auto;
-  padding-bottom: 44px;
+  padding: 18px 16px 24px;
 }
 
-/* ---------- Top Bar ---------- */
+/* =========================
+   Topbar (Title area)
+========================= */
 .ebook-topbar{
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
-  padding: var(--pad-y) var(--pad-x) 12px;
-}
-
-.brand{
-  flex: 1;
-  min-width: 0;
+  padding: 10px 6px 14px;
 }
 
 .brand .eyebrow{
-  font-size: 12px;
-  letter-spacing: .24em;
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 6px 0;
+  color: rgba(30, 28, 26, 0.48);
+  margin-bottom: 8px;
 }
 
 .brand .title{
-  margin: 0;
-  width: 100%;
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", "Times New Roman", serif;
   font-weight: 700;
-  font-size: 34px;
-  line-height: 1.05;
-  letter-spacing: .12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink);
+  font-size: 2.05rem;
+  line-height: 1.02;
+  margin: 0;
+  color: rgba(16, 14, 12, 0.90);
 }
 
-/* actions button */
-.actions{
-  flex: 0 0 auto;
-}
-
+/* Action button in topbar */
 .actions .btn,
 .btn{
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.65);
+  color: rgba(20,18,16,0.72);
   border-radius: 999px;
-  padding: 10px 14px;
-  font-size: 13px;
-  letter-spacing: .12em;
+  padding: 10px 12px;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(47,42,36,.82);
   cursor: pointer;
-  box-shadow: 0 10px 26px rgba(0,0,0,.05);
+  white-space: nowrap;
 }
-
 .actions .btn:hover,
 .btn:hover{
-  filter: brightness(1.02);
+  background: rgba(255,255,255,0.82);
 }
 
-/* ---------- Reader Card ---------- */
+/* Make the topbar nicer on mobile */
+@media (max-width: 520px){
+  .brand .title{
+    font-size: 1.9rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* =========================
+   Reader card (the "fixed" elegant module)
+========================= */
 .reader-card{
-  padding: 0 var(--pad-x);
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 26px;
+  box-shadow: 0 18px 46px rgba(0,0,0,0.06);
+  overflow: hidden;
 }
 
-/* Sticky area (your “blue” section) */
-.reader-sticky{
-  position: sticky;
-  top: var(--sticky-top);
-  z-index: 50;
-
-  /* neutral glass card */
-  background: var(--card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px 16px 12px;
-  box-shadow: var(--shadow);
+/* Header inside card */
+.reader-header{
+  padding: 18px 18px 12px;
 }
 
-/* Header inside sticky */
-.reader-header .kicker{
-  font-size: 12px;
-  letter-spacing: .22em;
+.kicker{
+  font-size: 0.74rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(47,42,36,.62);
-  margin: 0 0 8px;
+  color: rgba(30, 28, 26, 0.50);
+  margin-bottom: 10px;
 }
 
-.reader-header .reader-h1{
-  margin: 0 0 8px;
-  font-family: "Playfair Display", serif;
+.reader-h1{
+  font-family: "Playfair Display", "Times New Roman", serif;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 1.22;
-  color: var(--ink);
+  font-size: 1.65rem;
+  line-height: 1.18;
+  margin: 0 0 10px;
+  color: rgba(16, 14, 12, 0.90);
 }
 
-.reader-header .reader-sub{
+.reader-sub{
   margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(47,42,36,.70);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: rgba(20,18,16,0.62);
 }
 
-/* Progress row (dots + pagecount) */
+/* Progress row (dots + page count) */
 .reader-progress{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(0,0,0,.06);
+  padding: 12px 18px 14px;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 
 .dots{
-  display: flex;
-  align-items: center;
+  display: inline-flex;
   gap: 6px;
-  min-height: 14px;
+  align-items: center;
+  min-height: 10px;
 }
-
-/* fallback dots (if JS fills them, it will still work) */
 .dots::before{
   content: "";
-  display: inline-block;
-  width: 6px; height: 6px;
+  width: 8px; height: 8px;
   border-radius: 999px;
-  background: rgba(47,42,36,.35);
+  background: rgba(0,0,0,0.16);
+  display: inline-block;
   box-shadow:
-    12px 0 0 rgba(47,42,36,.20),
-    24px 0 0 rgba(47,42,36,.14),
-    36px 0 0 rgba(47,42,36,.10);
-  opacity: .8;
+    14px 0 0 rgba(0,0,0,0.10),
+    28px 0 0 rgba(0,0,0,0.08);
 }
 
 .pagecount{
-  font-size: 12px;
-  letter-spacing: .16em;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(47,42,36,.60);
+  color: rgba(20,18,16,0.46);
 }
 
-/* ---------- Reader Body (scrolling text) ---------- */
+/* =========================
+   Body content (fix "text wall")
+========================= */
 .reader-body{
-  margin-top: 18px;
-  padding-bottom: 26px;
+  padding: 18px 18px 22px;
+  font-size: 1.02rem;
+  line-height: 1.92;
+  color: rgba(18, 16, 14, 0.82);
 }
 
-/* Pages container */
-.pages{
-  display: block; /* safe default */
+/* Paragraph rhythm */
+.reader-body p{
+  margin: 0 0 1.2em;
 }
-
-/* Each page */
-.page{
-  background: rgba(255,255,255,.40);
-  border: 1px solid rgba(0,0,0,.05);
-  border-radius: var(--radius-lg);
-  padding: 18px 16px;
-  box-shadow: 0 14px 38px rgba(0,0,0,.05);
-}
-
-/* Text styles */
-.page p{
-  margin: 0 0 1.05em 0;
-  font-size: 16px;
-  line-height: 1.75;
-  color: rgba(47,42,36,.88);
-}
-
-.page p:last-child{
+.reader-body p:last-child{
   margin-bottom: 0;
 }
 
-/* Optional: emphasize short lines / quotes if you add them later */
-.page .pullquote{
-  margin: 14px 0 16px;
-  padding: 14px 14px 12px;
-  border-left: 3px solid rgba(227,169,90,.55);
-  background: rgba(255,255,255,.55);
-  border-radius: var(--radius-md);
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  line-height: 1.4;
-  color: rgba(47,42,36,.92);
-}
-
-/* ---------- Swipe-friendly spacing (doesn't require JS) ---------- */
-.page + .page{
-  margin-top: 14px;
-}
-
-/* ---------- Responsive tweaks ---------- */
-@media (max-width: 520px){
-  :root{
-    --sticky-top: 8px;
-  }
-
-  .brand .title{
-    font-size: 30px;
-    letter-spacing: .10em;
-  }
-
-  .reader-header .reader-h1{
-    font-size: 20px;
-  }
-
-  .page{
-    padding: 16px 14px;
-  }
-
-  .page p{
-    font-size: 15.5px;
-  }
-}
-
-/* ---------- Optional: reduce “peach” even more ----------
-   If you want it cooler/gray, switch --bg to:
-   --bg: #eceff1;
-*/
- /* ✅ Baja el botón y evita que “choque” con el título */
-.ebook-topbar{
-  align-items: flex-start;
-}
-
-.actions{
-  margin-top: 18px;   /* súbelo/bájalo aquí: 12–26 */
-}
-/* ✅ Frase elegante con líneas (para el cuerpo del texto) */
-.rulequote{
-  margin: 18px 0 18px;
-  text-align: center;
-}
-
-.rulequote .line{
+/* Soft separators */
+.reader-body hr{
+  border: 0;
   height: 1px;
-  width: 70%;
-  margin: 0 auto;
-  background: rgba(0,0,0,.10);
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.10), transparent);
+  margin: 1.75em 0;
 }
 
-.rulequote p{
-  margin: 12px auto;
-  max-width: 34ch;
+/* Lists */
+.reader-body ul,
+.reader-body ol{
+  margin: 0.4em 0 1.2em 1.25em;
+}
+.reader-body li{
+  margin: 0.6em 0;
+}
+
+/* Headings if you use them */
+.reader-body h2,
+.reader-body h3{
   font-family: "Playfair Display", serif;
-  font-size: 18px;
-  line-height: 1.45;
-  color: rgba(47,42,36,.92);
+  margin: 1.6em 0 0.65em;
+  line-height: 1.2;
+  color: rgba(16, 14, 12, 0.90);
 }
 
-/* ✅ Baja el botón del topbar sin afectar el título */
-.actions-lowered{
-  margin-top: 18px; /* cambia a 22px si lo quieres más abajo */
+/* Quote card (optional) */
+.reader-body blockquote{
+  margin: 1.6em 0;
+  padding: 1.05em 1.05em;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: rgba(18,16,14,0.78);
+}
+.reader-body blockquote p{
+  margin: 0;
 }
 
-/* ✅ Bloque elegante con líneas (para el cuerpo del texto) */
-.rulequote{
-  margin: 18px 0 18px;
-  text-align: center;
-}
-
-.rulequote .line{
-  height: 1px;
-  width: 70%;
-  margin: 0 auto;
-  background: rgba(0,0,0,.10);
-}
-
-.rulequote p{
-  margin: 12px auto;
-  max-width: 34ch;
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  line-height: 1.45;
-  color: rgba(47,42,36,.92);
-}
 /* =========================
-   Bottom Nav (Sticky)
+   Section cards below (optional if you used them)
+========================= */
+.section-card{
+  margin-top: 14px;
+  background: rgba(255,255,255,0.62);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 22px;
+  padding: 16px 18px;
+}
+
+/* =========================
+   Bottom nav (small, fixed)
+   (Always visible by default; if you want "smart show",
+    we can add the JS after this is stable)
 ========================= */
 .ebook-bottomnav{
-  position: sticky;
+  position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
-  z-index: 50;
+  z-index: 80;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 
-  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
-  margin: 22px 0 0;
-
-  background: rgba(245,245,243,0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(239,238,234,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 
 .navbtn{
   border: 1px solid rgba(0,0,0,0.10);
-  background: rgba(255,255,255,0.85);
-  color: rgba(20,20,20,0.78);
+  background: rgba(255,255,255,0.75);
+  color: rgba(20,18,16,0.72);
 
   border-radius: 999px;
-  padding: 12px 14px;
-
+  padding: 9px 12px;
   font-family: "DM Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.86rem;
-  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-
   cursor: pointer;
+  white-space: nowrap;
 }
-
-.navbtn:active{
-  transform: scale(0.99);
-}
+.navbtn:active{ transform: scale(0.99); }
 
 .navbtn.primary{
   border: 1px solid rgba(0,0,0,0.08);
   background: linear-gradient(135deg, rgba(242,196,123,0.95), rgba(227,169,90,0.95));
   color: rgba(24,18,10,0.92);
 }
+
+/* Prevent bottom bar from covering text */
+.reader-body{
+  padding-bottom: 98px;
+}
+
