@@ -341,3 +341,50 @@ button{
   line-height: 1.45;
   color: rgba(47,42,36,.92);
 }
+/* =========================
+   Bottom Nav (Sticky)
+========================= */
+.ebook-bottomnav{
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+  margin: 22px 0 0;
+
+  background: rgba(245,245,243,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.navbtn{
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.85);
+  color: rgba(20,20,20,0.78);
+
+  border-radius: 999px;
+  padding: 12px 14px;
+
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.86rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.navbtn:active{
+  transform: scale(0.99);
+}
+
+.navbtn.primary{
+  border: 1px solid rgba(0,0,0,0.08);
+  background: linear-gradient(135deg, rgba(242,196,123,0.95), rgba(227,169,90,0.95));
+  color: rgba(24,18,10,0.92);
+}
