@@ -315,3 +315,29 @@ button{
   color: rgba(47,42,36,.92);
 }
 
+/* ✅ Baja el botón del topbar sin afectar el título */
+.actions-lowered{
+  margin-top: 18px; /* cambia a 22px si lo quieres más abajo */
+}
+
+/* ✅ Bloque elegante con líneas (para el cuerpo del texto) */
+.rulequote{
+  margin: 18px 0 18px;
+  text-align: center;
+}
+
+.rulequote .line{
+  height: 1px;
+  width: 70%;
+  margin: 0 auto;
+  background: rgba(0,0,0,.10);
+}
+
+.rulequote p{
+  margin: 12px auto;
+  max-width: 34ch;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  line-height: 1.45;
+  color: rgba(47,42,36,.92);
+}
