@@ -71,15 +71,14 @@
   <button class="navbtn primary" type="button" onclick="window.location.href='cap02.html'">Cap 2</button>
 </div>
 
-<script>
+ <script>
   // ----- Dots + pagecount (simple, stable) -----
   (function () {
     const dotsEl = document.getElementById("dots");
     const countEl = document.getElementById("pagecount");
     if (!dotsEl || !countEl) return;
 
-    // 1 page for now
-    const total = 1;
+    const total = 1;  // cambia cuando tengas más páginas
     const active = 1;
 
     dotsEl.innerHTML = "";
@@ -91,7 +90,7 @@
     countEl.textContent = active + " / " + total;
   })();
 
-  <script>
+  // ----- Bottom nav: aparece cuando TERMINAS de leer (scroll DOWN) -----
   (function () {
     const nav = document.getElementById("ebookNav");
     if (!nav) return;
@@ -108,16 +107,14 @@
     window.addEventListener("scroll", function () {
       const y = window.scrollY || 0;
 
-      // Dirección real del scroll
-      if (y > lastY) lastDir = "down";      // leyendo (arrastrando el texto hacia arriba)
-      else if (y < lastY) lastDir = "up";   // regresando (arrastrando el texto hacia abajo)
+      if (y > lastY) lastDir = "down";      // leyendo
+      else if (y < lastY) lastDir = "up";   // regresando
 
-      // Mientras se mueve, oculto (para no estorbar)
-      hide();
+      hide(); // mientras se mueve, oculto
 
-      // Al DETENERSE: si la última dirección fue "down" => mostrar
       clearTimeout(stopTimer);
       stopTimer = setTimeout(function () {
+        // cuando se DETIENE el scroll:
         if (lastDir === "down") show();
         else hide();
       }, 160);
