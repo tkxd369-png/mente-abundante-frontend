@@ -216,6 +216,15 @@ body{
   line-height: 1.2;
   color: rgba(16, 14, 12, 0.90);
 }
+.gold-note{
+  margin: 1.25em 0;
+  padding: 0.9em 1em;
+  border-left: 3px solid rgba(185, 140, 70, 0.55);
+  background: rgba(185, 140, 70, 0.06);
+  border-radius: 14px;
+  color: rgba(45, 36, 26, 0.84);
+  font-weight: 600;
+}
 
 /* =========================
    Bottom nav (small, hidden by default)
