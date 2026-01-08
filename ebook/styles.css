@@ -294,4 +294,21 @@ body {
   padding-top: 1.6em;
   border-top: 1px solid rgba(0,0,0,0.08);
 }
+.ebook-topbar{
+  position: sticky;
+  top: 0;
+  z-index: 40;
+
+  background: rgba(245, 242, 238, 0.88); /* gris/café claro elegante */
+  backdrop-filter: blur(6px);
+
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.ebook-topbar{
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+body:has(.reader-card){
+  scroll-behavior: smooth;
+}
 
