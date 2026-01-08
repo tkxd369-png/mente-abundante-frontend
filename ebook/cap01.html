@@ -91,47 +91,41 @@
     countEl.textContent = active + " / " + total;
   })();
 
-  // ----- Bottom nav show rule -----
+  <script>
   (function () {
     const nav = document.getElementById("ebookNav");
     if (!nav) return;
 
     let lastY = window.scrollY || 0;
-    let lastDir = "up"; // "up" or "down"
+    let lastDir = "down"; // down = leyendo (arrastras el texto hacia arriba)
     let stopTimer = null;
 
     function hide() { nav.classList.remove("show"); }
     function show() { nav.classList.add("show"); }
 
-    // inicia oculto
-    hide();
+    hide(); // inicia oculto
 
-    window.addEventListener(
-      "scroll",
-      function () {
-        const y = window.scrollY || 0;
+    window.addEventListener("scroll", function () {
+      const y = window.scrollY || 0;
 
-        // dirección
-        if (y < lastY) lastDir = "down";
-        else if (y > lastY) lastDir = "up";
+      // Dirección real del scroll
+      if (y > lastY) lastDir = "down";      // leyendo (arrastrando el texto hacia arriba)
+      else if (y < lastY) lastDir = "up";   // regresando (arrastrando el texto hacia abajo)
 
-        // si va hacia abajo: ocultar inmediato
-        if (lastDir === "up") hide();
+      // Mientras se mueve, oculto (para no estorbar)
+      hide();
 
-        // cuando se DETIENE el scroll: si la última dirección fue hacia arriba => mostrar
-        clearTimeout(stopTimer);
-        stopTimer = setTimeout(function () {
-          if (lastDir === "down") show();
-          else hide();
-        }, 160);
+      // Al DETENERSE: si la última dirección fue "down" => mostrar
+      clearTimeout(stopTimer);
+      stopTimer = setTimeout(function () {
+        if (lastDir === "down") show();
+        else hide();
+      }, 160);
 
-        lastY = y;
-      },
-      { passive: true }
-    );
+      lastY = y;
+    }, { passive: true });
   })();
 </script>
-
-
+ 
 </body>
 </html>
