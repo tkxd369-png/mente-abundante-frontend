@@ -72,6 +72,14 @@ body{
 }
 
 .btn:hover{ background: rgba(255,255,255,0.82); }
+.book-link{
+  color: inherit;
+  text-decoration: none;
+}
+
+.book-link:hover{
+  opacity: 0.85;
+}
 
 /* =========================
    Reader card
