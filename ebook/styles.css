@@ -225,6 +225,11 @@ body{
   color: rgba(45, 36, 26, 0.84);
   font-weight: 600;
 }
+.gold-aside{
+  display: inline;
+  color: rgba(185, 140, 70, 0.92);
+  font-weight: 600;
+}
 
 /* =========================
    Bottom nav (small, hidden by default)
