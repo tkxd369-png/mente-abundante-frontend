@@ -65,68 +65,73 @@
     </section>
   </div>
 
-  <!-- Bottom nav (hidden by default; shows after scroll-up stop near top) -->
-  <div class="ebook-bottomnav" id="ebookNav">
-    <button class="navbtn" type="button" onclick="window.location.href='index.html'">Intro</button>
-    <button class="navbtn primary" type="button" onclick="window.location.href='cap02.html'">Cap 2</button>
-  </div>
+ <!-- Bottom nav (hidden by default; shows when you finish scrolling UP) -->
+<div class="ebook-bottomnav" id="ebookNav">
+  <button class="navbtn" type="button" onclick="window.location.href='index.html'">Intro</button>
+  <button class="navbtn primary" type="button" onclick="window.location.href='cap02.html'">Cap 2</button>
+</div>
 
-  <script>
-    // ----- Dots + pagecount (simple, stable) -----
-    (function(){
-      const dotsEl = document.getElementById("dots");
-      const countEl = document.getElementById("pagecount");
-      if(!dotsEl || !countEl) return;
+<script>
+  // ----- Dots + pagecount (simple, stable) -----
+  (function () {
+    const dotsEl = document.getElementById("dots");
+    const countEl = document.getElementById("pagecount");
+    if (!dotsEl || !countEl) return;
 
-      // 1 page for now
-      const total = 1;
-      const active = 1;
+    // 1 page for now
+    const total = 1;
+    const active = 1;
 
-      dotsEl.innerHTML = "";
-      for(let i=1;i<=total;i++){
-        const d = document.createElement("i");
-        if(i === active) d.classList.add("active");
-        dotsEl.appendChild(d);
-      }
-      countEl.textContent = active + " / " + total;
-    })();
+    dotsEl.innerHTML = "";
+    for (let i = 1; i <= total; i++) {
+      const d = document.createElement("i");
+      if (i === active) d.classList.add("active");
+      dotsEl.appendChild(d);
+    }
+    countEl.textContent = active + " / " + total;
+  })();
 
-    // ----- Bottom nav show rule -----
-    <script>
-(function(){
-  const nav = document.getElementById("ebookNav");
-  if(!nav) return;
+  // ----- Bottom nav show rule -----
+  (function () {
+    const nav = document.getElementById("ebookNav");
+    if (!nav) return;
 
-  let lastY = window.scrollY || 0;
-  let lastDir = "down";   // "up" o "down"
-  let stopTimer = null;
+    let lastY = window.scrollY || 0;
+    let lastDir = "down"; // "up" or "down"
+    let stopTimer = null;
 
-  function hide(){ nav.classList.remove("show"); }
-  function show(){ nav.classList.add("show"); }
+    function hide() { nav.classList.remove("show"); }
+    function show() { nav.classList.add("show"); }
 
-  window.addEventListener("scroll", function(){
-    const y = window.scrollY || 0;
+    // inicia oculto
+    hide();
 
-    // detectar dirección real
-    if (y < lastY) lastDir = "up";
-    else if (y > lastY) lastDir = "down";
+    window.addEventListener(
+      "scroll",
+      function () {
+        const y = window.scrollY || 0;
 
-    // si va hacia abajo, ocultar inmediatamente
-    if (lastDir === "down") hide();
+        // dirección
+        if (y < lastY) lastDir = "up";
+        else if (y > lastY) lastDir = "down";
 
-    // cuando "termina" el scroll (stop), si la última dirección fue hacia arriba: mostrar
-    clearTimeout(stopTimer);
-    stopTimer = setTimeout(function(){
-      if (lastDir === "up") show();
-      else hide();
-    }, 160);
+        // si va hacia abajo: ocultar inmediato
+        if (lastDir === "down") hide();
 
-    lastY = y;
-  }, { passive: true });
+        // cuando se DETIENE el scroll: si la última dirección fue hacia arriba => mostrar
+        clearTimeout(stopTimer);
+        stopTimer = setTimeout(function () {
+          if (lastDir === "up") show();
+          else hide();
+        }, 160);
 
-  hide(); // inicia oculto
-})();
+        lastY = y;
+      },
+      { passive: true }
+    );
+  })();
 </script>
+
 
 </body>
 </html>
