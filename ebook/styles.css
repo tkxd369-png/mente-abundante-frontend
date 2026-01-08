@@ -73,7 +73,8 @@ body {
 /* Make the topbar nicer on mobile */
 @media (max-width: 520px){
   .brand .title{
-    font-size: 1.5rem;
+    font-size: 1.3
+     rem;
     letter-spacing: 0.05em;
   }
 }
