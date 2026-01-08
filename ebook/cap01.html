@@ -1,5 +1,4 @@
- 
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -17,122 +16,113 @@
 <body>
   <div class="ebook-shell">
 
-    <!-- TOPBAR (book title) — NOT sticky -->
+    <!-- TOPBAR -->
     <div class="ebook-topbar">
       <div class="brand">
         <div class="eyebrow">WebBook · TMK</div>
-       <h1 class="title">
-  <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
-</h1>
- 
+        <h1 class="title">
+          <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+        </h1>
       </div>
- </div>
-      
+    </div>
 
-    <!-- READER CARD -->
-    <section class="reader-card" id="reader">
+    <!-- READER -->
+    <section class="reader-card">
 
-      <!-- Sticky chapter header + progress -->
-   <div class="reader-header sticky-head">
-  <div class="sticky-row">
-    <div class="kicker">✨ Capítulo 1</div>
-    <div class="pagecount" data-pagecount>1/1</div>
-  </div>
+      <!-- Sticky header -->
+      <div class="reader-header sticky-head">
+        <div class="sticky-row">
+          <div class="kicker">✨ Capítulo 1</div>
+          <div class="pagecount">1/1</div>
+        </div>
 
-  <h1 class="reader-h1">La verdadera abundancia vs. el éxito, la riqueza y los lujos</h1>
-  <p class="reader-sub">Lo externo puede cambiar tu vida… pero no puede sostener tu paz.</p>
-</div>
- 
+        <h1 class="reader-h1">La verdadera abundancia vs. el éxito, la riqueza y los lujos</h1>
+        <p class="reader-sub">Lo externo puede cambiar tu vida… pero no puede sostener tu paz.</p>
+      </div>
 
-      <!-- Body -->
+      <!-- BODY -->
       <div class="reader-body">
         <div class="page">
 
-          <!-- ✅ PEGA AQUÍ TU TEXTO EN PÁRRAFOS -->
-          <p>Vivimos en tiempos donde la abundancia parece medirse en cifras, objetos, cosas materiales y apariencias.</p>
-          <p>Donde el éxito está asociado a fotos perfectas, reconocimientos públicos y una vida “admirable” desde afuera. Pero tú sabes que hay algo más.</p>
-          <p>Porque incluso cuando el mundo te dice que “lo lograste”, si tu alma no descansa, no hay victoria real.</p>
+          <p>Vivimos en una época donde la abundancia suele confundirse con éxito.</p>
+          <p>Con cifras, posesiones, estatus y validación externa.</p>
+          <p>Pero hay una diferencia profunda entre parecer pleno y vivir en plenitud.</p>
 
-          <p>Hay quienes han alcanzado metas extraordinarias… y aun así despiertan con ansiedad, miedo y sensación de vacío.</p>
-          <p>Hay quienes han acumulado riquezas… y sienten que jamás es suficiente.</p>
-          <p>Y hay quienes han sido aplaudidos por multitudes… pero por dentro se sienten solos, desconectados, agotados.</p>
+          <p>Muchas personas alcanzan metas extraordinarias…</p>
+          <p>Y aun así despiertan con ansiedad, presión o vacío.</p>
 
-          <p>¿Por qué?</p>
-          <p>Porque lo exterior no puede llenar un corazón que se desconectó de su verdad.</p>
-          <p>El mundo nos enseñó a buscar la abundancia como si fuera algo que se conquista: con fuerza, competencia y sacrificio extremo.</p>
+          <hr class="soft-divider">
 
-          <!-- ... sigue pegando el resto en <p> ... </p> -->
-<p class="gold-note">“Texto clave…”</p>
-<span class="gold-aside">(Frase importante aquí…)</span>
+          <p>No porque hayan fallado.</p>
+          <p>Sino porque buscaron afuera algo que solo puede construirse dentro.</p>
+
+          <p class="gold-note">La verdadera abundancia no es una carrera.</p>
+
+          <p>Cuando el éxito se convierte en identidad, cualquier pérdida se siente como una amenaza.</p>
+          <p>Cuando la riqueza se vuelve el fin, nunca parece suficiente.</p>
+
+          <hr class="soft-divider">
+
+          <p><strong>LA VERDAD</strong></p>
+          <ul>
+            <li>La abundancia nace de la plenitud interior</li>
+            <li>La prosperidad es consecuencia, no objetivo</li>
+            <li>Servir con propósito genera paz</li>
+          </ul>
+
+          <p><strong>LO FALSO</strong></p>
+          <ul>
+            <li>Creer que más es siempre mejor</li>
+            <li>Medir tu valor por resultados</li>
+            <li>Confundir riqueza con identidad</li>
+          </ul>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">Pregunta para tu corazón</p>
+          <p><span class="gold-aside">(Si el mundo dejara de mirarte, ¿quién serías?)</span></p>
+
+          <p>Ahí comienza tu libertad.</p>
+          <p>Ahí nace la verdadera abundancia.</p>
 
         </div>
       </div>
     </section>
   </div>
 
- <!-- Bottom nav (hidden by default; shows when you finish scrolling UP) -->
- <div class="ebook-bottomnav" id="ebookNav">
-  <button class="navbtn" type="button" onclick="window.location.href='cap01.html'">
-    ← Capítulo anterior
-  </button>
+  <!-- Bottom nav -->
+  <div class="ebook-bottomnav" id="ebookNav">
+    <button class="navbtn" onclick="window.location.href='index.html'">
+      ← Introducción
+    </button>
+    <button class="navbtn primary" onclick="window.location.href='cap02.html'">
+      Capítulo siguiente →
+    </button>
+  </div>
 
-  <button class="navbtn primary" type="button" onclick="window.location.href='cap03.html'">
-    Capítulo siguiente →
-  </button>
-</div>
+  <script>
+    (function () {
+      const nav = document.getElementById("ebookNav");
+      let lastY = window.scrollY;
+      let lastDir = "down";
+      let timer;
 
- <script>
-  // ----- Dots + pagecount (simple, stable) -----
-  (function () {
-    const dotsEl = document.getElementById("dots");
-    const countEl = document.getElementById("pagecount");
-    if (!dotsEl || !countEl) return;
+      function hide(){ nav.classList.remove("show"); }
+      function show(){ nav.classList.add("show"); }
 
-    const total = 1;  // cambia cuando tengas más páginas
-    const active = 1;
+      hide();
 
-    dotsEl.innerHTML = "";
-    for (let i = 1; i <= total; i++) {
-      const d = document.createElement("i");
-      if (i === active) d.classList.add("active");
-      dotsEl.appendChild(d);
-    }
-    countEl.textContent = active + " / " + total;
-  })();
-
-  // ----- Bottom nav: aparece cuando TERMINAS de leer (scroll DOWN) -----
-  (function () {
-    const nav = document.getElementById("ebookNav");
-    if (!nav) return;
-
-    let lastY = window.scrollY || 0;
-    let lastDir = "down"; // down = leyendo (arrastras el texto hacia arriba)
-    let stopTimer = null;
-
-    function hide() { nav.classList.remove("show"); }
-    function show() { nav.classList.add("show"); }
-
-    hide(); // inicia oculto
-
-    window.addEventListener("scroll", function () {
-      const y = window.scrollY || 0;
-
-      if (y > lastY) lastDir = "down";      // leyendo
-      else if (y < lastY) lastDir = "up";   // regresando
-
-      hide(); // mientras se mueve, oculto
-
-      clearTimeout(stopTimer);
-      stopTimer = setTimeout(function () {
-        // cuando se DETIENE el scroll:
-        if (lastDir === "down") show();
-        else hide();
-      }, 160);
-
-      lastY = y;
-    }, { passive: true });
-  })();
-</script>
- 
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+        lastDir = y > lastY ? "down" : "up";
+        hide();
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          if (lastDir === "down") show();
+        }, 160);
+        lastY = y;
+      }, { passive:true });
+    })();
+  </script>
 </body>
 </html>
