@@ -64,9 +64,9 @@
           <p>más logros,</p>
           <p>más reconocimiento.</p>
 
-          <hr class="soft-divider">
-
           <p>Y aunque esas cosas pueden traer comodidad, ninguna garantiza plenitud.</p>
+
+          <hr class="soft-divider">
 
           <p>Puedes tenerlo todo…</p>
           <p>y aun así sentirte vacío.</p>
@@ -148,7 +148,7 @@
     </section>
   </div>
 
-  <!-- Bottom nav (hidden by default; shows when you finish scrolling DOWN + stop) -->
+  <!-- Bottom nav (hidden by default; shows ONLY when you reach the end) -->
   <div class="ebook-bottomnav" id="ebookNav">
     <button class="navbtn primary" type="button" onclick="window.location.href='cap01.html'">
       Empezar →
@@ -156,7 +156,9 @@
   </div>
 
   <script>
-    // ----- Bottom nav: aparece cuando TERMINAS de leer (scroll DOWN + stop) -----
+    // Bottom nav:
+    // - Se oculta mientras se hace scroll
+    // - Solo aparece si llegaste al FINAL (casi bottom) y te detuviste
     (function () {
       const nav = document.getElementById("ebookNav");
       if (!nav) return;
@@ -168,6 +170,16 @@
       function hide() { nav.classList.remove("show"); }
       function show() { nav.classList.add("show"); }
 
+      function atBottom(thresholdPx = 80) {
+        const y = window.scrollY || 0;
+        const h = window.innerHeight || 0;
+        const docH = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        return (y + h) >= (docH - thresholdPx);
+      }
+
       hide();
 
       window.addEventListener("scroll", function () {
@@ -176,13 +188,15 @@
         if (y > lastY) lastDir = "down";
         else if (y < lastY) lastDir = "up";
 
+        // mientras se mueve, oculto (no estorba lectura)
         hide();
 
         clearTimeout(stopTimer);
         stopTimer = setTimeout(function () {
-          if (lastDir === "down") show();
+          // al detenerse:
+          if (lastDir === "down" && atBottom()) show();
           else hide();
-        }, 160);
+        }, 170);
 
         lastY = y;
       }, { passive: true });
@@ -191,3 +205,4 @@
 
 </body>
 </html>
+ 
