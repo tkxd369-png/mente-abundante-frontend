@@ -44,13 +44,12 @@ body {
 .brand .title{
   font-family: "Playfair Display", "Times New Roman", serif;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-size: 2.05rem;
-  line-height: 1.02;
-  margin: 0;
-  color: rgba(16, 14, 12, 0.90);
+  font-size: 1.85rem;   /* ⬅️ un poco más elegante */
+  line-height: 1.08;
 }
+ 
 
 /* Action button in topbar */
 .actions .btn,
@@ -59,9 +58,9 @@ body {
   background: rgba(255,255,255,0.65);
   color: rgba(20,18,16,0.72);
   border-radius: 999px;
-  padding: 10px 12px;
-  font-size: 0.76rem;
-  letter-spacing: 0.14em;
+  padding: 7px 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
@@ -216,7 +215,7 @@ body {
   margin-top: 14px;
   background: rgba(255,255,255,0.62);
   border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 22px;
+  border-radius: 18px;
   padding: 16px 18px;
 }
 
@@ -249,10 +248,10 @@ body {
   color: rgba(20,18,16,0.72);
 
   border-radius: 999px;
-  padding: 9px 12px;
+  padding: 7px 10px;
   font-family: "DM Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
@@ -268,5 +267,30 @@ body {
 /* Prevent bottom bar from covering text */
 .reader-body{
   padding-bottom: 98px;
+}
+.reader-body p{
+  margin-bottom: 1.35em;
+}
+
+.reader-body p + p{
+  margin-top: 0.2em;
+}
+.reader-body p:nth-of-type(3n)::after{
+  content: "";
+  display: block;
+  height: 1px;
+  width: 42%;
+  margin: 1.6em auto 1.4em;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0,0,0,0.12),
+    transparent
+  );
+}
+.reader-body h3{
+  margin-top: 2.4em;
+  padding-top: 1.6em;
+  border-top: 1px solid rgba(0,0,0,0.08);
 }
 
