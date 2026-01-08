@@ -312,3 +312,27 @@ body:has(.reader-card){
   scroll-behavior: smooth;
 }
 
+/* =========================
+   Sticky: Chapter title + progress
+========================= */
+.reader-sticky{
+  position: sticky;
+  top: 10px;          /* separación suave del borde */
+  z-index: 60;
+
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+
+  margin: 12px 0 0;
+  padding: 16px 16px 12px;
+}
+
+/* Para que el sticky no se “pegue” demasiado en mobile */
+@media (max-width: 520px){
+  .reader-sticky{ top: 8px; }
+}
