@@ -94,38 +94,41 @@
     })();
 
     // ----- Bottom nav show rule -----
-    // Show ONLY after you finish scrolling UP (stop) and you're near top.
-    (function(){
-      const nav = document.getElementById("ebookNav");
-      if(!nav) return;
+    <script>
+(function(){
+  const nav = document.getElementById("ebookNav");
+  if(!nav) return;
 
-      let lastY = window.scrollY || 0;
-      let stopTimer = null;
+  let lastY = window.scrollY || 0;
+  let lastDir = "down";   // "up" o "down"
+  let stopTimer = null;
 
-      function hide(){ nav.classList.remove("show"); }
-      function show(){ nav.classList.add("show"); }
+  function hide(){ nav.classList.remove("show"); }
+  function show(){ nav.classList.add("show"); }
 
-      window.addEventListener("scroll", function(){
-        const y = window.scrollY || 0;
-        const goingUp = y < lastY;
+  window.addEventListener("scroll", function(){
+    const y = window.scrollY || 0;
 
-        // scrolling down: hide
-        if(!goingUp) hide();
+    // detectar dirección real
+    if (y < lastY) lastDir = "up";
+    else if (y > lastY) lastDir = "down";
 
-        clearTimeout(stopTimer);
+    // si va hacia abajo, ocultar inmediatamente
+    if (lastDir === "down") hide();
 
-        stopTimer = setTimeout(function(){
-          const y2 = window.scrollY || 0;
-          const nearTop = y2 <= 220; // adjust if you want sooner/later
-          if(goingUp && nearTop) show();
-          else hide();
-        }, 180);
+    // cuando "termina" el scroll (stop), si la última dirección fue hacia arriba: mostrar
+    clearTimeout(stopTimer);
+    stopTimer = setTimeout(function(){
+      if (lastDir === "up") show();
+      else hide();
+    }, 160);
 
-        lastY = y;
-      }, { passive: true });
+    lastY = y;
+  }, { passive: true });
 
-      hide();
-    })();
-  </script>
+  hide(); // inicia oculto
+})();
+</script>
+
 </body>
 </html>
