@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Yo Decido Ser Abundante — Introducción</title>
+  <title>TMK WebBook — Introduccion</title>
 
-  <!-- Fuentes TMK -->
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -13,105 +13,161 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
- <body>
+<body>
   <div class="ebook-shell">
 
-    <!-- TOP BAR -->
+    <!-- TOPBAR (book title) — NOT sticky -->
     <div class="ebook-topbar">
       <div class="brand">
-        <div class="eyebrow">WebBook · The Master Key</div>
-        <div class="title">Yo Decido Ser Abundante</div>
-      </div>
-
-      <!-- ✅ Botón más abajo para que no estorbe al título -->
-      <div class="actions actions-lowered">
-        <button class="btn" onclick="window.location.href='cap01.html'">
-          Capítulo 1
-        </button>
-      </div>
-    </div>
-
-    <!-- READER -->
-    <section class="reader-card">
-
-      <!-- STICKY HEADER (más limpio) -->
-      <div class="reader-sticky">
-        <div class="reader-header">
-          <div class="kicker">Introducción</div>
-          <h1 class="reader-h1">Conocer la verdad transforma la manera en que vives</h1>
-
-          <!-- ✅ Más corto para que no quite espacio -->
-          <p class="reader-sub">Una invitación a claridad, orden y dirección interior.</p>
-        </div>
-
-        <div class="reader-progress">
-          <div class="dots"></div>
-          <div class="pagecount">1 / 1</div>
-        </div>
-      </div>
-     
-      <!-- CONTENT -->
-      <div class="reader-body">
-        <div class="pages">
-
-          <div class="page">
-            <p>
-              No llegaste a este libro por accidente. Tampoco por una coincidencia
-              superficial. 
-            </p>
-           
-           <p>
-              Llegaste porque, en algún punto, comenzaste a cuestionar
-              la forma en que estabas viviendo.
-             </p>
+        <div class="eyebrow">WebBook · TMK</div>
+       <h1 class="title">
+  <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+</h1>
  
-            <p>
-              Tal vez no con palabras, sino con una sensación difícil de ignorar:
-              una incomodidad silenciosa, una inquietud persistente, una intuición
-              de que la vida puede ser más que repetir rutinas y perseguir resultados.
-            </p>
+      </div>
+ </div>
+      
 
-            <p>
-              Durante mucho tiempo se nos ha enseñado que la abundancia consiste en
-              tener más. Más ingresos. Más reconocimiento. Más logros visibles.
-            </p>
+    <!-- READER CARD -->
+    <section class="reader-card" id="reader">
 
-            <p>
-              Y aunque esas cosas pueden traer comodidad, no garantizan plenitud.
-              Hay personas que lo han conseguido todo y aun así viven en tensión
-              constante. Y otras que, teniendo poco, experimentan una paz que no
-              depende de las circunstancias.
-            </p>
+      <!-- Sticky chapter header + progress -->
+   <div class="reader-header sticky-head">
+  <div class="sticky-row">
+    <div class="kicker">✨ Introduccion</div>
+    <div class="pagecount" data-pagecount>1/1</div>
+  </div>
 
-            <p>
-              La verdadera abundancia no tiene que ver con lo que acumulas, sino con
-              el lugar interno desde el que eliges vivir.
-            </p>
+  <h1 class="reader-h1">Introducion</h1>
+  <p class="reader-sub">Que mas hay cuando a tu alma ya no le satisface lo material</p>
+</div>
+ 
 
-            <p>
-              Este libro no propone una religión ni una ideología. Propone una verdad
-              simple y verificable: cuando tu percepción se ordena, tu vida comienza
-              a alinearse.
-            </p>
+      <!-- Body -->
+      <div class="reader-body">
+        <div class="page">
+ <p>Has llegado a este libro porque, de una u otra forma, tu interior te ha estado llamando a algo más.</p>
 
-            <p>
-              No encontrarás fórmulas mágicas ni promesas irreales. Encontrarás
-              principios que han estado presentes en todas las épocas, porque no
-              pertenecen a una creencia, sino a la realidad misma.
-            </p>
+<p>Dentro de ti existe una resistencia natural a vivir en escasez, pobreza o limitaciones. No es rebeldía ni ambición desmedida; es reconocimiento. Algo en ti sabe que no fuiste creado para vivir así.</p>
 
-            <p>
-              Cada capítulo es una invitación a recordar algo esencial:
-              la abundancia no se persigue afuera, se despierta dentro.
-            </p>
-          </div>
+<p class="gold-aside">(Esa intuición no es casualidad. Es memoria interior.)</p>
+
+<p>Quizás lo sientas como un vacío silencioso en medio de la rutina, o como una voz interna que susurra que la vida debe tener un propósito más grande que trabajar, pagar cuentas o perseguir cosas que nunca parecen ser suficientes.</p>
+
+<p>Durante mucho tiempo se nos ha enseñado que la abundancia es tener más: más dinero, más logros, más reconocimiento.</p>
+
+<p>Y aunque esas cosas pueden traer comodidad, ninguna de ellas garantiza plenitud.</p>
+
+<p>Puedes tenerlo todo y sentirte vacío.<br>
+Puedes tener poco y, aun así, sentirte completo.</p>
+
+<p class="gold-note">La verdadera abundancia no tiene que ver con lo que posees, sino con desde dónde vives.</p>
+
+<p>Es un estado interior. Una forma de habitar la vida.</p>
+
+<p>Cuando algo dentro de ti se ordena, tu manera de relacionarte con el mundo cambia. Dejas de vivir desde la carencia y comienzas a vivir desde la claridad.</p>
+
+<p>Muchos viven atrapados en una carrera sin fin, midiendo su valor por el éxito o por la aprobación de otros.</p>
+
+<p>Y en esa búsqueda constante, pierden de vista lo más valioso: la paz, la presencia, el amor y la conexión con su esencia.</p>
+
+<p class="gold-aside">(Esa desconexión es la raíz de la escasez, del miedo y del sufrimiento.)</p>
+
+<p>Este libro no te invita a rechazar el mundo material. Al contrario, te invita a reordenarlo.</p>
+
+<p>A descubrir que puedes disfrutar de los bienes, los logros y las oportunidades sin convertirte en esclavo de ellos.</p>
+
+<p>Cuando tu interior se alinea con la verdad, lo externo deja de dominarte y comienza a servirte.</p>
+
+<hr class="soft-divider">
+
+<p>Aquí no vas a encontrar fórmulas mágicas ni promesas vacías.</p>
+
+<p>Vas a encontrar principios que trascienden culturas, religiones y sistemas de pensamiento, porque no pertenecen a una doctrina: pertenecen a la vida.</p>
+
+<p>Este libro no pretende enseñarte religión, misticismo ni técnicas secretas.</p>
+
+<p class="gold-note">Lo que vamos a explorar aquí es la verdad — y la verdad no necesita adornos.</p>
+
+<p>Cada capítulo es un paso consciente en este recorrido: un recordatorio de que la abundancia no se busca afuera, sino que se despierta dentro.</p>
+
+<p>Y cuando esa abundancia interior se activa, la vida externa comienza a transformarse de forma natural.</p>
+
+<p>Prepárate para soltar creencias que ya no te sirven, sanar tu relación con lo material y abrir tu mente a una manera más clara y liviana de vivir.</p>
+
+<p class="gold-aside">(No estás aquí para sobrevivir. Estás aquí para vivir con sentido.)</p>
+
+<p class="gold-note">“Texto clave…”</p>
+<span class="gold-aside">(Frase importante aquí…)</span>
 
         </div>
       </div>
-
     </section>
-
   </div>
+
+ <!-- Bottom nav (hidden by default; shows when you finish scrolling UP) -->
+ <div class="ebook-bottomnav" id="ebookNav">
+  <button class="navbtn" type="button" onclick="window.location.href='cap01.html'">
+    ← Capítulo anterior
+  </button>
+
+  <button class="navbtn primary" type="button" onclick="window.location.href='cap03.html'">
+    Capítulo siguiente →
+  </button>
+</div>
+
+ <script>
+  // ----- Dots + pagecount (simple, stable) -----
+  (function () {
+    const dotsEl = document.getElementById("dots");
+    const countEl = document.getElementById("pagecount");
+    if (!dotsEl || !countEl) return;
+
+    const total = 1;  // cambia cuando tengas más páginas
+    const active = 1;
+
+    dotsEl.innerHTML = "";
+    for (let i = 1; i <= total; i++) {
+      const d = document.createElement("i");
+      if (i === active) d.classList.add("active");
+      dotsEl.appendChild(d);
+    }
+    countEl.textContent = active + " / " + total;
+  })();
+
+  // ----- Bottom nav: aparece cuando TERMINAS de leer (scroll DOWN) -----
+  (function () {
+    const nav = document.getElementById("ebookNav");
+    if (!nav) return;
+
+    let lastY = window.scrollY || 0;
+    let lastDir = "down"; // down = leyendo (arrastras el texto hacia arriba)
+    let stopTimer = null;
+
+    function hide() { nav.classList.remove("show"); }
+    function show() { nav.classList.add("show"); }
+
+    hide(); // inicia oculto
+
+    window.addEventListener("scroll", function () {
+      const y = window.scrollY || 0;
+
+      if (y > lastY) lastDir = "down";      // leyendo
+      else if (y < lastY) lastDir = "up";   // regresando
+
+      hide(); // mientras se mueve, oculto
+
+      clearTimeout(stopTimer);
+      stopTimer = setTimeout(function () {
+        // cuando se DETIENE el scroll:
+        if (lastDir === "down") show();
+        else hide();
+      }, 160);
+
+      lastY = y;
+    }, { passive: true });
+  })();
+</script>
+ 
 </body>
 </html>
-
