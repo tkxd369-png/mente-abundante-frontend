@@ -225,12 +225,18 @@ body {
    (Always visible by default; if you want "smart show",
     we can add the JS after this is stable)
 ========================= */
-.ebook-bottomnav{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 80;
+ .ebook-bottomnav{
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.ebook-bottomnav.show{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 
   display: grid;
   grid-template-columns: 1fr 1fr;
