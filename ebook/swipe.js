@@ -52,6 +52,21 @@
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
     });
+<script>
+(function(){
+  const nav = document.querySelector(".ebook-bottomnav");
+  if(!nav) return;
+
+  function update(){
+    const y = window.scrollY || 0;
+    if (y <= 30) nav.classList.add("show");  // solo arriba
+    else nav.classList.remove("show");
+  }
+
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+</script>
 
     // swipe
     const body = root.querySelector(".reader-body");
