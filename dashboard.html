@@ -563,6 +563,26 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    const btn = document.getElementById("ebookBtn");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      // Idioma guardado (si no existe, ES)
+      const lang = (window.maGetLang && window.maGetLang()) || "es";
+
+      // Rutas del WebBook
+      // ✅ ES: ebook/index.html
+      // (si luego haces EN, puedes crear ebook-en/index.html y se activa solo)
+      const target = (lang === "en")
+        ? "ebook-en/index.html"
+        : "ebook/index.html";
+
+      window.location.href = target;
+    });
+  })();
+</script>
 
 
   </body>
