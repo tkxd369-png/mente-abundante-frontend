@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TMK WebBook — Palabras del Autor</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ebook-shell">
+
+    <div class="ebook-topbar">
+      <div class="brand">
+        <div class="eyebrow">WebBook · TMK</div>
+        <h1 class="title">
+          <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+        </h1>
+      </div>
+    </div>
+
+    <section class="reader-card" id="reader">
+
+      <div class="reader-header sticky-head">
+        <div class="sticky-row">
+          <div class="kicker">✨ Palabras del autor</div>
+          <div class="pagecount" data-pagecount>1/1</div>
+        </div>
+
+        <h1 class="reader-h1">Una carta breve</h1>
+        <p class="reader-sub">De corazón a corazón — Light &amp; Crown</p>
+      </div>
+
+      <div class="reader-body">
+        <div class="page">
+
+          <p class="gold-note">Este libro no nació para impresionar.<br>
+          Nació para despertar.</p>
+
+          <p>Si estás leyendo esto, queremos honrarte.</p>
+          <p>Porque hay personas que pasan la vida entera “funcionando”, pero pocas se detienen a recordar.</p>
+
+          <p>Recordar quiénes son.</p>
+          <p>Recordar de dónde viene la vida.</p>
+          <p>Recordar que existe una verdad más alta que la presión diaria.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 La intención</p>
+
+          <p>La intención detrás de estas páginas es simple:</p>
+          <p>devolverle al ser humano su centro.</p>
+
+          <p>No estamos enseñando religión.</p>
+          <p>No estamos vendiendo misticismo.</p>
+          <p>No estamos creando dependencia.</p>
+
+          <p>Estamos apuntando hacia la Verdad.</p>
+          <p>Una Verdad que existe antes de los sistemas, antes de los títulos, antes de la comparación.</p>
+
+          <p>Una Verdad que, cuando se reconoce, libera.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌱 Lo que esperamos de ti</p>
+
+          <p>No queremos que memorices frases.</p>
+          <p>Queremos que vivas principios.</p>
+
+          <p>Porque una sola decisión real, sostenida con constancia,</p>
+          <p>vale más que mil momentos emocionales.</p>
+
+          <p>Si este libro te dio claridad, úsala.</p>
+          <p>Si te dio paz, protégela.</p>
+          <p>Si te devolvió esperanza, actúa con ella.</p>
+
+          <p>Y si te confrontó, agradece.</p>
+          <p>A veces lo que confronta, es lo que sana.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 El cierre</p>
+
+          <p>Que estas palabras no se queden en lectura.</p>
+          <p>Que se conviertan en dirección.</p>
+
+          <p>Que tu vida se convierta en un mensaje vivo.</p>
+          <p>Que tu caminar sea una expresión de abundancia.</p>
+
+          <p>Y que la verdad que ahora conoces</p>
+          <p>se manifieste como libertad real.</p>
+
+          <p class="gold-note">Con gratitud y propósito,<br>
+          <span class="gold-aside">Light &amp; Crown</span></p>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="ebook-bottomnav" id="ebookNav">
+    <button class="navbtn" type="button" onclick="window.location.href='conclusion.html'">
+      ← Conclusión
+    </button>
+
+    <button class="navbtn primary" type="button" onclick="window.location.href='end.html'">
+      End →
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const nav = document.getElementById("ebookNav");
+      if (!nav) return;
+
+      let lastY = window.scrollY || 0;
+      let lastDir = "down";
+      let stopTimer = null;
+
+      function hide() { nav.classList.remove("show"); }
+      function show() { nav.classList.add("show"); }
+
+      function atBottom(thresholdPx = 80) {
+        const y = window.scrollY || 0;
+        const h = window.innerHeight || 0;
+        const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        return (y + h) >= (docH - thresholdPx);
+      }
+
+      hide();
+
+      window.addEventListener("scroll", function () {
+        const y = window.scrollY || 0;
+        if (y > lastY) lastDir = "down";
+        else if (y < lastY) lastDir = "up";
+
+        hide();
+        clearTimeout(stopTimer);
+        stopTimer = setTimeout(function () {
+          if (lastDir === "down" && atBottom()) show();
+          else hide();
+        }, 170);
+
+        lastY = y;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
