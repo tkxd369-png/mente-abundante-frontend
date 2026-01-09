@@ -26,17 +26,43 @@ body{
   padding: 18px 16px 40px;
 }
 
- <!-- TOPBAR (book title) — NOT sticky -->
-<div class="ebook-topbar">
-  <div class="brand">
-    <div class="eyebrow">WebBook · TMK</div>
-    <h1 class="title">
-      <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
-    </h1>
-  </div>
+ /* =========================
+   Book topbar (NOT sticky)
+========================= */
+.ebook-topbar{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 6px 14px;
+}
 
-  <a href="../dashboard.html" class="ebook-dashboard-link">Dashboard</a>
-</div>
+.brand{ min-width: 0; }
+
+.brand .eyebrow{
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(30, 28, 26, 0.48);
+  margin: 0 0 8px 0;
+}
+
+.brand .title{
+  margin: 0;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.85rem;
+  line-height: 1.08;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(16, 14, 12, 0.90);
+}
+
+.book-link{
+  color: inherit;
+  text-decoration: none;
+}
+.book-link:hover{ opacity: 0.85; }
 
 /* =========================
    Reader card
@@ -227,4 +253,18 @@ body{
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+}
+/* Link discreto a Dashboard (lado derecho) */
+.ebook-dashboard-link{
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(30, 28, 26, 0.48);
+  margin-top: 2px;         /* lo alinea visualmente con el eyebrow */
+  white-space: nowrap;
+}
+
+.ebook-dashboard-link:hover{
+  opacity: 0.85;
 }
