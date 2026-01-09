@@ -275,3 +275,41 @@ body{
     letter-spacing: 0.03em;
   }
 }
+/* --- Protection A: no select --- */
+.ebook-no-select, .ebook-no-select *{
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* --- Watermark (subtle) --- */
+.ebook-watermark{
+  position: fixed;
+  inset: 0;
+  z-index: 5;               /* debajo del sticky (tu sticky tiene z-index alto) */
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  opacity: 0.08;            /* sutil */
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+  transform: rotate(-18deg);
+  mix-blend-mode: multiply;
+}
+
+/* Repite el texto tipo patrón */
+.ebook-watermark::before{
+  content: attr(data-text);
+}
+
+/* Truco: duplicamos el texto en patrón usando background-image */
+.ebook-watermark{
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(0,0,0,0.12) 0px,
+    rgba(0,0,0,0.12) 1px,
+    transparent 1px,
+    transparent 160px
+  );
+}
