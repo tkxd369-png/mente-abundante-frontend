@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -16,7 +16,6 @@
 <body>
   <div class="ebook-shell">
 
-    <!-- TOPBAR (book title) — NOT sticky -->
     <div class="ebook-topbar">
       <div class="brand">
         <div class="eyebrow">WebBook · TMK</div>
@@ -26,10 +25,8 @@
       </div>
     </div>
 
-    <!-- READER CARD -->
     <section class="reader-card" id="reader">
 
-      <!-- Sticky chapter header + progress -->
       <div class="reader-header sticky-head">
         <div class="sticky-row">
           <div class="kicker">✨ Capítulo 7</div>
@@ -40,7 +37,6 @@
         <p class="reader-sub">La decisión nace del recuerdo de quién eres</p>
       </div>
 
-      <!-- Body -->
       <div class="reader-body">
         <div class="page">
 
@@ -225,92 +221,22 @@
           <p>La abundancia comienza</p>
           <p>cuando eliges recordar quién eres.</p>
 
-          <hr class="soft-divider">
-
-          <p class="gold-note">🌿 Conclusión</p>
-
-          <p>Himno de Identidad</p>
-          <p>Yo Decido Ser Abundante</p>
-
-          <p>Este camino no termina aquí.</p>
-          <p>En realidad, comienza aquí.</p>
-
-          <p>Después de recorrer estas leyes —la Vida, la Provisión, la Causa..., la Gratitud—</p>
-          <p>ya no se trata de entender más, sino de recordar.</p>
-
-          <p>Recordar quién eres.</p>
-          <p>Recordar de dónde vienes.</p>
-          <p>Recordar desde dónde eliges vivir.</p>
-
-          <p>La abundancia no es una meta futura.</p>
-          <p>Es una identidad presente.</p>
-
-          <p>No es algo que persigues.</p>
-          <p>Es algo que expresas.</p>
-
-          <p>Cuando vives alineado con El Creador,</p>
-          <p>tu vida se convierte en un cauce por donde fluye la vida misma.</p>
-
-          <p>Ya no caminas con miedo.</p>
-          <p>Ya no decides desde la carencia.</p>
-          <p>Ya no cargas con el peso de “tener que lograr”.</p>
-
-          <p>Descansas.</p>
-          <p>Fluyes.</p>
-          <p>Creas.</p>
-
-          <p>Este libro no fue escrito para imponerte una verdad,</p>
-          <p>sino para recordarte que la verdad ya vive dentro de ti.</p>
-
-          <p>Creemos que la abundancia es real.</p>
-          <p>Creemos que el ser humano fue creado para vivir con propósito.</p>
-          <p>Creemos que la verdad no divide,</p>
-          <p>la verdad libera.</p>
-
-          <p>Este libro no pretende ser un punto final,</p>
-          <p>sino un puente.</p>
-
-          <p>Un puente entre lo que has sido</p>
-          <p>y lo que estás recordando que eres.</p>
-
-          <p>Si alguna palabra aquí tocó tu corazón,</p>
-          <p>si alguna página te devolvió paz,</p>
-          <p>si alguna verdad te ayudó a soltar una carga,</p>
-          <p>entonces el propósito ya se cumplió.</p>
-
-          <p>Llévalo contigo.</p>
-          <p>Compártelo con quien lo necesite.</p>
-          <p>Vívelo más allá de estas páginas.</p>
-
-          <p>Que tu vida misma se convierta en un mensaje.</p>
-          <p>Que tu caminar sea una expresión de abundancia.</p>
-          <p>Que tu existencia refleje la verdad que ahora conoces.</p>
-
-          <p>Porque cuando la verdad se vive,</p>
-          <p>la libertad no se explica…</p>
-          <p>se manifiesta.</p>
-
-          <p>Con gratitud y propósito,</p>
-          <p>Light &amp; Crown</p>
-
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Bottom nav (hidden by default; shows ONLY when you reach the end) -->
   <div class="ebook-bottomnav" id="ebookNav">
     <button class="navbtn" type="button" onclick="window.location.href='cap06.html'">
       ← Capítulo anterior
     </button>
 
-    <button class="navbtn primary" type="button" onclick="window.location.href='index.html'">
-      Volver al inicio →
+    <button class="navbtn primary" type="button" onclick="window.location.href='conclusion.html'">
+      Conclusión →
     </button>
   </div>
 
   <script>
-    // Bottom nav: hidden while scrolling; shows only at bottom + stop
     (function () {
       const nav = document.getElementById("ebookNav");
       if (!nav) return;
@@ -325,10 +251,7 @@
       function atBottom(thresholdPx = 80) {
         const y = window.scrollY || 0;
         const h = window.innerHeight || 0;
-        const docH = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight
-        );
+        const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
         return (y + h) >= (docH - thresholdPx);
       }
 
@@ -336,12 +259,10 @@
 
       window.addEventListener("scroll", function () {
         const y = window.scrollY || 0;
-
         if (y > lastY) lastDir = "down";
         else if (y < lastY) lastDir = "up";
 
         hide();
-
         clearTimeout(stopTimer);
         stopTimer = setTimeout(function () {
           if (lastDir === "down" && atBottom()) show();
