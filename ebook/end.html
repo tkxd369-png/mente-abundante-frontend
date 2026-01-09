@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TMK WebBook — End</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ebook-shell">
+
+    <div class="ebook-topbar">
+      <div class="brand">
+        <div class="eyebrow">WebBook · TMK</div>
+        <h1 class="title">
+          <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+        </h1>
+      </div>
+    </div>
+
+    <section class="reader-card" id="reader">
+
+      <div class="reader-header sticky-head">
+        <div class="sticky-row">
+          <div class="kicker">✨ End</div>
+          <div class="pagecount" data-pagecount>1/1</div>
+        </div>
+
+        <h1 class="reader-h1">Gracias por leer</h1>
+        <p class="reader-sub">Que la verdad se convierta en tu manera de vivir.</p>
+      </div>
+
+      <div class="reader-body">
+        <div class="page">
+
+          <p class="gold-note">Si este libro te ayudó, compártelo con alguien que lo necesite.</p>
+
+          <p>La abundancia no es un destino.</p>
+          <p>Es una identidad.</p>
+          <p>Y cada día es una oportunidad para elegirla.</p>
+
+          <p class="gold-note">“Yo decido ser abundante.”</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 Próximo paso</p>
+          <p>Vuelve al inicio cuando quieras releer con más calma.</p>
+          <p>La comprensión madura con repetición, y la repetición crea transformación.</p>
+
+          <p class="gold-note">Con gratitud,<br><span class="gold-aside">Light &amp; Crown</span></p>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="ebook-bottomnav" id="ebookNav">
+    <button class="navbtn" type="button" onclick="window.location.href='autor.html'">
+      ← Palabras del autor
+    </button>
+
+    <button class="navbtn primary" type="button" onclick="window.location.href='index.html'">
+      Volver al inicio →
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const nav = document.getElementById("ebookNav");
+      if (!nav) return;
+
+      let lastY = window.scrollY || 0;
+      let lastDir = "down";
+      let stopTimer = null;
+
+      function hide() { nav.classList.remove("show"); }
+      function show() { nav.classList.add("show"); }
+
+      function atBottom(thresholdPx = 80) {
+        const y = window.scrollY || 0;
+        const h = window.innerHeight || 0;
+        const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        return (y + h) >= (docH - thresholdPx);
+      }
+
+      hide();
+
+      window.addEventListener("scroll", function () {
+        const y = window.scrollY || 0;
+        if (y > lastY) lastDir = "down";
+        else if (y < lastY) lastDir = "up";
+
+        hide();
+        clearTimeout(stopTimer);
+        stopTimer = setTimeout(function () {
+          if (lastDir === "down" && atBottom()) show();
+          else hide();
+        }, 170);
+
+        lastY = y;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
