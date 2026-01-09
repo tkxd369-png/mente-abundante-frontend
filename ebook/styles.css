@@ -63,6 +63,19 @@ body{
   text-decoration: none;
 }
 .book-link:hover{ opacity: 0.85; }
+.ebook-dashboard-link {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(20,18,16,0.55);
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.ebook-dashboard-link:hover {
+  opacity: 0.85;
+}
 
 /* =========================
    Reader card
