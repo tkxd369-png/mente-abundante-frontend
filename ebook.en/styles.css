@@ -1,4 +1,4 @@
- /* =========================================================
+  /* =========================================================
    TMK WebBook — CLEAN STABLE VERSION (FINAL CLEAN)
    - Book title (topbar) NOT sticky
    - Chapter header + progress IS sticky
@@ -26,7 +26,7 @@ body{
   padding: 18px 16px 40px;
 }
 
-/* =========================
+ /* =========================
    Book topbar (NOT sticky)
 ========================= */
 .ebook-topbar{
@@ -253,4 +253,63 @@ body{
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+}
+/* Link discreto a Dashboard (lado derecho) */
+.ebook-dashboard-link{
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(30, 28, 26, 0.48);
+  margin-top: 2px;         /* lo alinea visualmente con el eyebrow */
+  white-space: nowrap;
+}
+
+.ebook-dashboard-link:hover{
+  opacity: 0.85;
+}
+@media (max-width: 520px){
+  .brand .title{
+    white-space: nowrap;
+    font-size: 1.25rem;   /* ajustable */
+    letter-spacing: 0.03em;
+  }
+}
+/* --- Protection A: no select --- */
+.ebook-no-select, .ebook-no-select *{
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* --- Watermark (subtle) --- */
+.ebook-watermark{
+  position: fixed;
+  inset: 0;
+  z-index: 5;               /* debajo del sticky (tu sticky tiene z-index alto) */
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  opacity: 0.08;            /* sutil */
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+  transform: rotate(-18deg);
+  mix-blend-mode: multiply;
+}
+
+/* Repite el texto tipo patrón */
+.ebook-watermark::before{
+  content: attr(data-text);
+}
+
+/* Truco: duplicamos el texto en patrón usando background-image */
+.ebook-watermark{
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(0,0,0,0.12) 0px,
+    rgba(0,0,0,0.12) 1px,
+    transparent 1px,
+    transparent 160px
+  );
 }
