@@ -16,14 +16,18 @@
 <body>
   <div class="ebook-shell">
 
-    <div class="ebook-topbar">
-      <div class="brand">
-        <div class="eyebrow">WebBook · TMK</div>
-        <h1 class="title">
-          <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
-        </h1>
-      </div>
-    </div>
+    <!-- TOPBAR (book title) — NOT sticky -->
+<div class="ebook-topbar">
+  <div class="brand">
+    <div class="eyebrow">WebBook · TMK</div>
+    <h1 class="title">
+      <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+    </h1>
+  </div>
+
+  <a href="../dashboard.html" class="ebook-dashboard-link">Dashboard</a>
+</div> 
+ 
 
     <section class="reader-card" id="reader">
 
@@ -273,6 +277,8 @@
       }, { passive: true });
     })();
   </script>
+  <!-- TMK: protección ligera (no copia / watermark) -->
+  <script src="ebook-protect.js"></script>
 
 </body>
 </html>
