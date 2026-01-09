@@ -146,9 +146,10 @@
       ← Capítulo anterior
     </button>
 
-    <button class="navbtn primary" type="button" onclick="window.location.href='autor.html'">
-      Palabras del autor →
-    </button>
+<button class="navbtn primary" type="button" onclick="window.location.href='autor.html'">
+  Palabras del autor →
+</button>
+ 
   </div>
 
   <script>
