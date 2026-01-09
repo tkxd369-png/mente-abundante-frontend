@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TMK WebBook — Conclusión</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ebook-shell">
+
+    <!-- TOPBAR (book title) — NOT sticky -->
+    <div class="ebook-topbar">
+      <div class="brand">
+        <div class="eyebrow">WebBook · TMK</div>
+        <h1 class="title">
+          <a href="index.html" class="book-link">Yo Decido Ser Abundante</a>
+        </h1>
+      </div>
+    </div>
+
+    <!-- READER CARD -->
+    <section class="reader-card" id="reader">
+
+      <!-- Sticky header -->
+      <div class="reader-header sticky-head">
+        <div class="sticky-row">
+          <div class="kicker">🌿 Conclusión</div>
+          <div class="pagecount" data-pagecount>1/1</div>
+        </div>
+
+        <h1 class="reader-h1">La Verdad que se Vive</h1>
+        <p class="reader-sub">Lo que recuerdas por dentro, se manifiesta por fuera.</p>
+      </div>
+
+      <!-- Body -->
+      <div class="reader-body">
+        <div class="page">
+
+          <p class="gold-note">“La libertad no se explica… se manifiesta.”<br>
+          <span class="gold-aside">Conocerás la Verdad y Serás Verdaderamente Libre</span></p>
+
+          <p>Si llegaste hasta aquí, no fue por casualidad.</p>
+          <p>Algo en ti estaba buscando una verdad que no depende de circunstancias, ni de un momento emocional, ni de la opinión de nadie.</p>
+
+          <p>Este libro no fue diseñado para llenarte de información.</p>
+          <p>Fue diseñado para devolverte visión.</p>
+
+          <p>Porque la abundancia no se “consigue” como un objeto.</p>
+          <p>La abundancia se revela cuando recuerdas tu posición.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌱 Lo que cambió no fue el mundo</p>
+
+          <p>Quizá tu entorno siga igual por un tiempo.</p>
+          <p>Quizá tus números no cambien de un día para otro.</p>
+          <p>Quizá todavía existan retos.</p>
+
+          <p>Pero algo sí cambió:</p>
+          <p><span class="gold-aside">tu forma de ver.</span></p>
+
+          <p>Y cuando cambia la visión, cambia la dirección.</p>
+          <p>Cuando cambia la dirección, cambia la vida.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 Las leyes no te presionan, te ordenan</p>
+
+          <p>Las leyes que recorrimos no existen para condenarte.</p>
+          <p>Existen para alinearte.</p>
+
+          <p>La Vida te recuerda que puedes levantarte.</p>
+          <p>La Provisión te recuerda que hay más de lo que creías.</p>
+          <p>La Causa y Efecto te devuelve responsabilidad con esperanza.</p>
+          <p>La Siembra y la Cosecha te enseña a crear resultados reales.</p>
+          <p>La Gratitud te sostiene cuando aún no ves todo.</p>
+
+          <p>Y la decisión final te devuelve a tu centro:</p>
+          <p class="gold-note">“Yo decido ser abundante.”</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌱 Abundancia: una forma de estar en el mundo</p>
+
+          <p>La abundancia no es solo dinero.</p>
+          <p>Es paz en medio del ruido.</p>
+          <p>Es claridad en medio de la confusión.</p>
+          <p>Es dignidad en medio de la presión.</p>
+          <p>Es excelencia en medio de lo común.</p>
+
+          <p>Es una forma de caminar.</p>
+          <p>Una forma de decidir.</p>
+          <p>Una forma de sembrar.</p>
+
+          <p>Cuando tu vida se convierte en una semilla de bien,</p>
+          <p>la cosecha no se limita a ti.</p>
+
+          <p>Se vuelve herencia.</p>
+          <p>Se vuelve legado.</p>
+          <p>Se vuelve luz para otros.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 La Verdad que Libera</p>
+
+          <p>Este libro no te pide que creas algo “nuevo”.</p>
+          <p>Te invita a recordar lo que siempre estuvo ahí.</p>
+
+          <p>La verdad no es pesada.</p>
+          <p>La verdad es simple.</p>
+          <p>Y por eso libera.</p>
+
+          <p>Si tomas una sola cosa de estas páginas, que sea esta:</p>
+          <p class="gold-note">No estás aquí para sobrevivir. Estás aquí para vivir… y para multiplicar vida.</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">✨ Cierre</p>
+
+          <p>No necesitas perfección para empezar.</p>
+          <p>Necesitas decisión.</p>
+
+          <p>No necesitas tener todo resuelto.</p>
+          <p>Necesitas volver a tu verdad.</p>
+
+          <p>Porque cuando la verdad se vive,</p>
+          <p>la abundancia deja de ser una idea…</p>
+          <p>y se convierte en tu manera de existir.</p>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="ebook-bottomnav" id="ebookNav">
+    <button class="navbtn" type="button" onclick="window.location.href='cap07.html'">
+      ← Capítulo anterior
+    </button>
+
+    <button class="navbtn primary" type="button" onclick="window.location.href='autor.html'">
+      Palabras del autor →
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const nav = document.getElementById("ebookNav");
+      if (!nav) return;
+
+      let lastY = window.scrollY || 0;
+      let lastDir = "down";
+      let stopTimer = null;
+
+      function hide() { nav.classList.remove("show"); }
+      function show() { nav.classList.add("show"); }
+
+      function atBottom(thresholdPx = 80) {
+        const y = window.scrollY || 0;
+        const h = window.innerHeight || 0;
+        const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        return (y + h) >= (docH - thresholdPx);
+      }
+
+      hide();
+
+      window.addEventListener("scroll", function () {
+        const y = window.scrollY || 0;
+        if (y > lastY) lastDir = "down";
+        else if (y < lastY) lastDir = "up";
+
+        hide();
+        clearTimeout(stopTimer);
+        stopTimer = setTimeout(function () {
+          if (lastDir === "down" && atBottom()) show();
+          else hide();
+        }, 170);
+
+        lastY = y;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
