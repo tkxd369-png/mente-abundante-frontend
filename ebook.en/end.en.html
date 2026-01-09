@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TMK WebBook — End</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="ebook-shell">
+
+    <div class="ebook-topbar">
+      <div class="brand">
+        <div class="eyebrow">WebBook · TMK</div>
+        <h1 class="title">
+          <a href="index.en.html" class="book-link">I Choose to Be Abundant</a>
+        </h1>
+      </div>
+    </div>
+
+    <section class="reader-card" id="reader">
+
+      <div class="reader-header sticky-head">
+        <div class="sticky-row">
+          <div class="kicker">✨ End</div>
+          <div class="pagecount" data-pagecount>1/1</div>
+        </div>
+
+        <h1 class="reader-h1">Thank you for reading</h1>
+        <p class="reader-sub">May truth become your way of living.</p>
+      </div>
+
+      <div class="reader-body">
+        <div class="page">
+
+          <p class="gold-note">If this book helped you, share it with someone who needs it.</p>
+
+          <p>Abundance is not a destination.</p>
+          <p>It is an identity.</p>
+          <p>And each day is an opportunity to choose it again.</p>
+
+          <p class="gold-note">“I choose to be abundant.”</p>
+
+          <hr class="soft-divider">
+
+          <p class="gold-note">🌿 Next step</p>
+          <p>Come back to the beginning anytime you want to read again—slowly, deeply.</p>
+          <p>Understanding matures through repetition, and repetition creates transformation.</p>
+
+          <p class="gold-note">With gratitude,<br>
+          <span class="gold-aside">Light &amp; Crown</span></p>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="ebook-bottomnav" id="ebookNav">
+    <button class="navbtn" type="button" onclick="window.location.href='author.en.html'">
+      ← Author’s note
+    </button>
+
+    <button class="navbtn primary" type="button" onclick="window.location.href='index.en.html'">
+      Back to intro →
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const nav = document.getElementById("ebookNav");
+      if (!nav) return;
+
+      let lastY = window.scrollY || 0;
+      let lastDir = "down";
+      let stopTimer = null;
+
+      function hide() { nav.classList.remove("show"); }
+      function show() { nav.classList.add("show"); }
+
+      function atBottom(thresholdPx = 80) {
+        const y = window.scrollY || 0;
+        const h = window.innerHeight || 0;
+        const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        return (y + h) >= (docH - thresholdPx);
+      }
+
+      hide();
+
+      window.addEventListener("scroll", function () {
+        const y = window.scrollY || 0;
+        if (y > lastY) lastDir = "down";
+        else if (y < lastY) lastDir = "up";
+
+        hide();
+        clearTimeout(stopTimer);
+        stopTimer = setTimeout(function () {
+          if (lastDir === "down" && atBottom()) show();
+          else hide();
+        }, 170);
+
+        lastY = y;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
