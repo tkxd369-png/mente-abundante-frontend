@@ -271,7 +271,7 @@ body{
 @media (max-width: 520px){
   .brand .title{
     white-space: nowrap;
-    font-size: 1.25rem;   /* ajustable */
+    font-size: 1.5rem;   /* ajustable */
     letter-spacing: 0.03em;
   }
 }
