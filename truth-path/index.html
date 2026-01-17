@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Bienvenido</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Usa el mismo skin del quiz -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+</head>
+
+<body class="tp-body">
+  <div class="tp-shell">
+
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK · The Truth Path</div>
+        <div class="tp-title">The Truth Path</div>
+      </div>
+      <a class="tp-link" href="../dashboard.html">Dashboard</a>
+    </header>
+
+    <main class="tp-card">
+      <div class="tp-sticky">
+        <div class="tp-kicker">Welcome</div>
+        <div class="tp-meta" id="metaLine">Día 1 disponible</div>
+      </div>
+
+      <section class="tp-content">
+        <div class="tp-note">
+          <div class="tp-note-title">Bienvenido</div>
+          <p class="tp-muted" style="margin-top:8px;">
+            Un día a la vez. En privado. Sin intermediarios.
+          </p>
+        </div>
+
+        <hr class="tp-divider">
+
+        <div class="tp-q" style="padding-top:0;">
+          <p class="tp-q-title" style="margin-bottom:10px;">
+            Aquí no se trata de consumir más. Se trata de caminar.
+          </p>
+
+          <label class="tp-opt" style="cursor:default;">
+            • Tu reflexión es en tu libreta. <span class="tp-aside">Aquí no se guarda.</span>
+          </label>
+          <label class="tp-opt" style="cursor:default;">
+            • Puedes volver a días anteriores.
+          </label>
+          <label class="tp-opt" style="cursor:default;">
+            • El día siguiente se desbloquea al completar el actual.
+          </label>
+        </div>
+
+        <div class="tp-actions">
+          <button id="startBtn" class="tp-btn tp-btn-primary" type="button">
+            Empezar Día 1 →
+          </button>
+          <a class="tp-link" href="../dashboard.html">← Volver</a>
+        </div>
+
+        <div class="tp-msg ok" id="tipBox" style="display:none;margin-top:14px;">
+          Continuando donde te quedaste…
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      // Keys
+      const UNLOCK_KEY = "tmk_truth_path_unlocked"; // lo setea tu quiz (fallback)
+      const CURRENT_DAY_KEY = "ttp_current_day";    // "1", "2", ...
+      const DAY1_DONE_KEY = "ttp_day_01_completed"; // "true"
+      const DEFAULT_START = "./days/day-01.html";
+
+      // Guard: si no está unlocked, manda al quiz
+      const unlocked = (localStorage.getItem(UNLOCK_KEY) === "true");
+      if (!unlocked) {
+        window.location.replace("./quiz.html");
+        return;
+      }
+
+      // Decide a dónde ir: día actual si existe; si no, día 1.
+      function getResumeHref() {
+        const cur = (localStorage.getItem(CURRENT_DAY_KEY) || "").trim();
+        if (!cur) return DEFAULT_START;
+
+        // Por ahora solo tenemos day-01, así que si es 1 ok, si no, cae a day-01.
+        if (cur === "1") return DEFAULT_START;
+
+        return DEFAULT_START;
+      }
+
+      const startBtn = document.getElementById("startBtn");
+      const metaLine = document.getElementById("metaLine");
+      const tipBox = document.getElementById("tipBox");
+
+      // Si ya completó día 1, cambia CTA a "Continuar"
+      const day1Done = (localStorage.getItem(DAY1_DONE_KEY) === "true");
+      const resumeHref = getResumeHref();
+
+      if (day1Done) {
+        startBtn.textContent = "Continuar →";
+        metaLine.textContent = "En progreso";
+        tipBox.style.display = "block";
+      } else {
+        metaLine.textContent = "Día 1 disponible";
+      }
+
+      startBtn.addEventListener("click", function () {
+        window.location.href = resumeHref;
+      });
+    })();
+  </script>
+</body>
+</html>
