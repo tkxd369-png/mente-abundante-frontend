@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Bienvenida</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Usa el mismo stylesheet del quiz (Ivory Gold) -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+</head>
+
+<body class="tp-body">
+  <div class="tp-shell">
+
+    <!-- Topbar -->
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK · The Truth Path</div>
+        <div class="tp-title">The Truth Path</div>
+      </div>
+      <a class="tp-link" href="../dashboard.html">Dashboard</a>
+    </header>
+
+    <!-- Card -->
+    <main class="tp-card">
+      <div class="tp-sticky">
+        <div class="tp-kicker">Bienvenida</div>
+        <div class="tp-meta">40 días · privado · sin intermediarios</div>
+      </div>
+
+      <section class="tp-content">
+
+        <!-- Intro note -->
+        <div class="tp-note">
+          <div class="tp-note-title">Un sendero personal</div>
+          <p>
+            “Mas tú, cuando ores, entra en tu aposento y cerrada la puerta…”
+            <span class="tp-aside">(Inspiración: silencio, claridad y conexión real.)</span>
+          </p>
+          <p class="tp-muted">
+            The Truth Path no es un devocional religioso, no es coaching, y no es misticismo comercial.
+            Es un sendero de 40 días para volver a la verdad, ordenar tu interior y vivir desde la fuente.
+          </p>
+        </div>
+
+        <hr class="tp-divider">
+
+        <!-- What it is -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>¿Qué es The Truth Path?</strong></p>
+          <p class="tp-muted">
+            Un espacio íntimo para silenciar el ruido, recordar tu origen y encarnar las leyes del libro en tu vida real.
+            Aquí no vienes a “aprender más”, vienes a <em>recordar</em>… y a vivirlo.
+          </p>
+        </div>
+
+        <!-- Privacy -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Privacidad (esto importa)</strong></p>
+          <p class="tp-muted">
+            Esto se hace en privado. Sin performance. Sin exposición.
+            Nadie tiene que ver tus respuestas. Nadie tiene que validarte.
+          </p>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Tu libertad</div>
+            <p class="tp-muted" style="margin:0;">
+              El propósito es que construyas el hábito de reflexionar a solas — y que no dependas del programa.
+              TMK provee recursos, pero <strong>tú te conviertes en fuente</strong> cuando eliges vivir en verdad.
+            </p>
+          </div>
+        </div>
+
+        <hr class="tp-divider">
+
+        <!-- How to use -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Cómo se usa (simple)</strong></p>
+          <p class="tp-instructions">Cada día tiene el mismo ritmo:</p>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Estructura diaria</div>
+            <p class="tp-muted" style="margin:0;">
+              Título · Frase ancla · Micro lectura · Reflexión · Ejercicio práctico · Cierre · Continuar
+            </p>
+          </div>
+        </div>
+
+        <!-- Notebook guide -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Tu libreta (tu mapa personal)</strong></p>
+          <p class="tp-muted">
+            Recomendación: usa una libreta dedicada. Escribe con honestidad.
+            No “bonito”. No “correcto”. Real.
+          </p>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Guía para escribir (base)</div>
+            <p class="tp-muted" style="margin:0 0 10px 0;">
+              Cada día, responde esto en tu libreta:
+            </p>
+            <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.65;">
+              <li><strong>¿Qué entendí hoy?</strong> (en una frase simple)</li>
+              <li><strong>¿Qué cambio puedo hacer?</strong> (uno, pequeño, real)</li>
+              <li><strong>Me comprometo a…</strong> (acción concreta en 24 horas)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="tp-divider">
+
+        <!-- Commitment -->
+        <form class="tp-form" onsubmit="return false;" novalidate>
+          <p class="tp-instructions">Antes de comenzar, haz este acuerdo contigo:</p>
+
+          <div class="tp-q">
+            <label class="tp-opt">
+              <input type="checkbox" id="p1">
+              Haré esto en privado, sin necesidad de validación externa.
+            </label>
+            <label class="tp-opt">
+              <input type="checkbox" id="p2">
+              Voy a ser honesto: no escribiré para verme bien, sino para ver la verdad.
+            </label>
+            <label class="tp-opt">
+              <input type="checkbox" id="p3">
+              Si fallo un día, no me castigo. Regreso con calma.
+            </label>
+          </div>
+
+          <div id="welcomeMsg" class="tp-msg" style="display:none;"></div>
+
+          <div class="tp-actions">
+            <button id="startBtn" class="tp-btn tp-btn-primary" type="button">
+              Comenzar Día 1 →
+            </button>
+            <a class="tp-btn" href="../dashboard.html" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+              Volver al Dashboard
+            </a>
+          </div>
+        </form>
+
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const p1 = document.getElementById("p1");
+      const p2 = document.getElementById("p2");
+      const p3 = document.getElementById("p3");
+      const startBtn = document.getElementById("startBtn");
+      const msg = document.getElementById("welcomeMsg");
+
+      function showMsg(html, ok) {
+        msg.style.display = "block";
+        msg.classList.toggle("ok", !!ok);
+        msg.classList.toggle("bad", !ok);
+        msg.innerHTML = html;
+      }
+
+      startBtn.addEventListener("click", function () {
+        if (!(p1.checked && p2.checked && p3.checked)) {
+          showMsg(" Marca los 3 acuerdos para comenzar. Este sendero funciona con intención.", false);
+          return;
+        }
+
+        try {
+          localStorage.setItem("tp_started", "true");
+          localStorage.setItem("tp_day", "1");
+        } catch (e) {}
+
+        // Ir al Día 1
+        window.location.href = "./day01.html";
+      });
+    })();
+  </script>
+</body>
+</html>
