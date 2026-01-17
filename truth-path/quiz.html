@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -131,8 +131,8 @@
           </div>
 
           <div class="tp-actions">
-            <button class="tp-btn tp-btn-primary" type="button" onclick="window.location.href='./index.html'"
- 
+            <button class="tp-btn tp-btn-primary" type="button" onclick="window.location.href='./index.html'">
+              Continue →
             </button>
           </div>
         </div>
@@ -177,7 +177,6 @@
       }
 
       async function submitToBackend(payload){
-        // Placeholder: cámbialo cuando definamos tu endpoint real
         const url = "/api/quiz/submit";
         const res = await fetch(url, {
           method: "POST",
