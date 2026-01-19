@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -14,6 +14,47 @@
 
   <!-- Ivory Gold (mismo del quiz) -->
   <link rel="stylesheet" href="styles-ivorygold.css" />
+
+  <!-- Truth Path: protección ligera (CSS mínimo, no toca tu CSS global) -->
+  <style>
+    /* Disable selection */
+    .tp-no-select, .tp-no-select * {
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      user-select: none !important;
+    }
+
+    /* Watermark overlay */
+    .tp-watermark {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.07;
+      transform: rotate(-18deg);
+      transform-origin: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 42px 18px;
+      padding: 80px 24px;
+      mix-blend-mode: multiply;
+    }
+    .tp-watermark span {
+      font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    @media (max-width: 420px) {
+      .tp-watermark {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 34px 14px;
+        padding: 70px 18px;
+      }
+      .tp-watermark span { font-size: 11px; }
+    }
+  </style>
 </head>
 
 <body class="tp-body">
@@ -30,14 +71,15 @@
 
     <!-- Card -->
     <main class="tp-card">
-     <div class="tp-sticky"
-     style="position:sticky; top:0; z-index:10; background:inherit; padding-top:6px;">
-  <div class="tp-kicker">Día 1</div>
-  <div class="tp-meta">Afinando la visión (I)</div>
-  <div style="height:10px;"></div>
-  <hr class="tp-divider" style="margin:0;">
-</div>
 
+      <!-- Sticky header (Día + título SIEMPRE visible) -->
+      <div class="tp-sticky"
+           style="position:sticky; top:0; z-index:10; background:inherit; padding-top:6px;">
+        <div class="tp-kicker">Día 1</div>
+        <div class="tp-meta">Afinando la visión (I)</div>
+        <div style="height:10px;"></div>
+        <hr class="tp-divider" style="margin:0;">
+      </div>
 
       <section class="tp-content">
 
@@ -150,42 +192,22 @@
           </p>
         </div>
 
-        <!-- Actions -->
-<!-- Actions -->
-<div class="tp-actions"
-     style="display:flex; gap:10px; flex-wrap:nowrap; align-items:center;">
+        <!-- Actions (pequeños como libro + side-by-side móvil) -->
+        <div class="tp-actions"
+             style="display:flex; gap:10px; flex-wrap:nowrap; align-items:center;">
 
-  <button id="continueBtn"
-          class="tp-btn tp-btn-primary"
-          type="button"
-          style="
-            flex:1;
-            padding:10px 12px;
-            font-size:13px;
-            letter-spacing:.12em;
-            text-transform:uppercase;
-            border-radius:999px;
-          ">
-    Día 2 →
-  </button>
+          <button id="continueBtn" class="tp-btn tp-btn-primary" type="button"
+                  style="flex:1; padding:10px 12px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border-radius:999px;">
+            Día 2 →
+          </button>
 
-  <a class="tp-btn"
-     href="./index.html"
-     style="
-       flex:1;
-       padding:10px 12px;
-       font-size:13px;
-       letter-spacing:.12em;
-       text-transform:uppercase;
-       border-radius:999px;
-       text-decoration:none;
-       display:inline-flex;
-       align-items:center;
-       justify-content:center;
-     ">
-    Inicio
-  </a>
-</div>
+          <a class="tp-btn" href="./index.html"
+             style="flex:1; padding:10px 12px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+            Inicio
+          </a>
+        </div>
+
+        <div id="tpMsg" class="tp-msg" style="display:none;"></div>
 
       </section>
     </main>
@@ -193,30 +215,85 @@
 
   <script>
     (function () {
-      const btn = document.getElementById("continueBtn");
-      const msg = document.getElementById("tpMsg");
-
-      function showMsg(text, ok){
-        msg.style.display = "block";
-        msg.classList.toggle("ok", !!ok);
-        msg.classList.toggle("bad", !ok);
-        msg.textContent = text;
-      }
-
       // Progreso simple (sin backend)
       try {
         localStorage.setItem("tp_started", "true");
         localStorage.setItem("tp_day_last_seen", "1");
       } catch (e) {}
 
+      // Navegación
+      var btn = document.getElementById("continueBtn");
       btn.addEventListener("click", function () {
-        try {
-          localStorage.setItem("tp_day_last_seen", "2");
-        } catch (e) {}
-
-        // Si aún no existe day02.html, te mostrará 404: es normal hasta crearlo
+        try { localStorage.setItem("tp_day_last_seen", "2"); } catch (e) {}
         window.location.href = "./day02.html";
       });
+    })();
+  </script>
+
+  <script>
+    // TMK-style Light Protection (adaptado para Truth Path)
+    // Basado en tu ebook-protect.js: disable select/copy, block right click, watermark :contentReference[oaicite:1]{index=1}
+    (function () {
+      // 1) Disable selection
+      document.documentElement.classList.add("tp-no-select");
+
+      // 2) Block right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // 3) Block common copy shortcuts (soft block)
+      document.addEventListener("keydown", function (e) {
+        var key = (e.key || "").toLowerCase();
+        var ctrl = e.ctrlKey || e.metaKey;
+        if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s")) {
+          e.preventDefault();
+        }
+      });
+
+      // 4) Block copy event
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // 5) Watermark text (usa ma_user si existe)
+      function getUserStamp() {
+        try {
+          var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+          var name = (u.name || u.nombre || u.fullname || "").toString().trim();
+          var refid = (u.refid || u.refId || "").toString().trim();
+          var who = name ? name : "TMK Member";
+          var code = refid ? (" · " + refid) : "";
+          return (who + code + " · TMK").toUpperCase();
+        } catch (e) {
+          return "TMK MEMBER · TMK";
+        }
+      }
+
+      function addWatermark() {
+        if (document.getElementById("tpWatermark")) return;
+
+        var wm = document.createElement("div");
+        wm.id = "tpWatermark";
+        wm.setAttribute("aria-hidden", "true");
+        wm.className = "tp-watermark";
+
+        var stamp = getUserStamp();
+        // Rellena con muchas repeticiones (grid)
+        for (var i = 0; i < 36; i++) {
+          var s = document.createElement("span");
+          s.textContent = stamp;
+          wm.appendChild(s);
+        }
+
+        document.body.appendChild(wm);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", addWatermark);
+      } else {
+        addWatermark();
+      }
     })();
   </script>
 </body>
