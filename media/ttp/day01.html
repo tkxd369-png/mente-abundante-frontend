@@ -12,47 +12,61 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-  <!-- Ivory Gold (mismo del quiz) -->
+  <!-- Ivory Gold -->
   <link rel="stylesheet" href="styles-ivorygold.css" />
 
-  <!-- Truth Path: protección ligera (CSS mínimo, no toca tu CSS global) -->
+  <!-- FIX: sticky (sin tocar tu CSS file) -->
   <style>
-    /* Disable selection */
-    .tp-no-select, .tp-no-select * {
-      -webkit-user-select: none !important;
-      -moz-user-select: none !important;
-      user-select: none !important;
-    }
+    /* Tu CSS tiene overflow:hidden en .tp-card, eso rompe sticky en muchos casos */
+    .tp-card { overflow: visible !important; }
 
-    /* Watermark overlay */
+    /* Watermark MUY sutil (no saturado) */
     .tp-watermark {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.07;
+      opacity: 0.035;
       transform: rotate(-18deg);
       transform-origin: center;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 42px 18px;
-      padding: 80px 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 54px 22px;
+      padding: 90px 24px;
       mix-blend-mode: multiply;
     }
-    .tp-watermark span {
-      font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    .tp-watermark span{
+      font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       font-size: 12px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      white-space: nowrap;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      white-space:nowrap;
     }
-    @media (max-width: 420px) {
-      .tp-watermark {
+    @media (max-width: 520px){
+      .tp-watermark{
         grid-template-columns: repeat(2, 1fr);
-        gap: 34px 14px;
-        padding: 70px 18px;
+        gap: 48px 16px;
+        padding: 80px 18px;
       }
-      .tp-watermark span { font-size: 11px; }
+      .tp-watermark span{ font-size: 11px; }
+    }
+
+    /* Protección: no selección */
+    .tp-no-select, .tp-no-select *{
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      user-select: none !important;
+    }
+
+    /* Botones: fuerza side-by-side en móvil (tu CSS permite wrap) */
+    .tp-actions{
+      flex-wrap: nowrap !important;
+    }
+    .tp-actions .tp-btn, .tp-actions button.tp-btn{
+      flex: 1 1 0;
+      width: 50%;
+      min-width: 0;
+      text-align: center;
     }
   </style>
 </head>
@@ -72,18 +86,15 @@
     <!-- Card -->
     <main class="tp-card">
 
-      <!-- Sticky header (Día + título SIEMPRE visible) -->
-      <div class="tp-sticky"
-           style="position:sticky; top:0; z-index:10; background:inherit; padding-top:6px;">
+      <!-- Sticky header (ya existe en tu CSS; ahora sí funcionará) -->
+      <div class="tp-sticky">
         <div class="tp-kicker">Día 1</div>
         <div class="tp-meta">Afinando la visión (I)</div>
-        <div style="height:10px;"></div>
-        <hr class="tp-divider" style="margin:0;">
       </div>
 
       <section class="tp-content">
 
-        <!-- Note / anchor -->
+        <!-- Anchor -->
         <div class="tp-note">
           <div class="tp-note-title">Frase ancla</div>
           <p style="margin:0;">
@@ -187,27 +198,18 @@
           <p class="tp-q-title"><strong>Cierre</strong></p>
           <p class="tp-muted" style="margin-bottom:0;">
             Hoy no tomes decisiones grandes. No te castigues. No fuerces dirección.
-            Solo observa.
-            Afinar la visión no es empujar la vida; es permitir que la verdad aparezca.
+            Solo observa. Afinar la visión no es empujar la vida; es permitir que la verdad aparezca.
           </p>
         </div>
 
-        <!-- Actions (pequeños como libro + side-by-side móvil) -->
-        <div class="tp-actions"
-             style="display:flex; gap:10px; flex-wrap:nowrap; align-items:center;">
-
-          <button id="continueBtn" class="tp-btn tp-btn-primary" type="button"
-                  style="flex:1; padding:10px 12px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border-radius:999px;">
-            Día 2 →
-          </button>
-
+        <!-- Botones (tamaño libro + side-by-side móvil) -->
+        <div class="tp-actions">
+          <button id="continueBtn" class="tp-btn tp-btn-primary" type="button">Día 2 →</button>
           <a class="tp-btn" href="./index.html"
-             style="flex:1; padding:10px 12px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; border-radius:999px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+             style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
             Inicio
           </a>
         </div>
-
-        <div id="tpMsg" class="tp-msg" style="display:none;"></div>
 
       </section>
     </main>
@@ -215,15 +217,13 @@
 
   <script>
     (function () {
-      // Progreso simple (sin backend)
+      // progreso simple
       try {
         localStorage.setItem("tp_started", "true");
         localStorage.setItem("tp_day_last_seen", "1");
       } catch (e) {}
 
-      // Navegación
-      var btn = document.getElementById("continueBtn");
-      btn.addEventListener("click", function () {
+      document.getElementById("continueBtn").addEventListener("click", function () {
         try { localStorage.setItem("tp_day_last_seen", "2"); } catch (e) {}
         window.location.href = "./day02.html";
       });
@@ -231,18 +231,12 @@
   </script>
 
   <script>
-    // TMK-style Light Protection (adaptado para Truth Path)
-    // Basado en tu ebook-protect.js: disable select/copy, block right click, watermark :contentReference[oaicite:1]{index=1}
+    // Protección ligera basada en tu ebook-protect.js (misma idea) :contentReference[oaicite:4]{index=4}
     (function () {
-      // 1) Disable selection
       document.documentElement.classList.add("tp-no-select");
 
-      // 2) Block right-click
-      document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-      });
+      document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
 
-      // 3) Block common copy shortcuts (soft block)
       document.addEventListener("keydown", function (e) {
         var key = (e.key || "").toLowerCase();
         var ctrl = e.ctrlKey || e.metaKey;
@@ -251,12 +245,8 @@
         }
       });
 
-      // 4) Block copy event
-      document.addEventListener("copy", function (e) {
-        e.preventDefault();
-      });
+      document.addEventListener("copy", function (e) { e.preventDefault(); });
 
-      // 5) Watermark text (usa ma_user si existe)
       function getUserStamp() {
         try {
           var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
@@ -279,8 +269,8 @@
         wm.className = "tp-watermark";
 
         var stamp = getUserStamp();
-        // Rellena con muchas repeticiones (grid)
-        for (var i = 0; i < 36; i++) {
+        // MUY POCAS repeticiones (no saturado)
+        for (var i = 0; i < 10; i++) {
           var s = document.createElement("span");
           s.textContent = stamp;
           wm.appendChild(s);
