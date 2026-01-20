@@ -108,6 +108,29 @@
     }
   })();
 </script>
+<!-- TMK: Gate + Auto-Continue (Truth Path) -->
+<script>
+  (function () {
+    // 1) Require login
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) return window.location.replace("/start.html");
+    } catch (e) {
+      return window.location.replace("/start.html");
+    }
+
+    // 2) Auto-continue to last seen day
+    try {
+      var d = parseInt(localStorage.getItem("tp_day_last_seen") || "0", 10);
+      if (d && d >= 1) {
+        var dd = String(d).padStart(2, "0");
+        // Si ya tiene progreso, entra directo al día
+        window.location.replace("/media/ttp/day" + dd + ".html");
+      }
+    } catch (e) {}
+  })();
+</script>
 
 </head>
 
