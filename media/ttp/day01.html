@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -15,58 +15,83 @@
   <!-- Ivory Gold -->
   <link rel="stylesheet" href="styles-ivorygold.css" />
 
-  <!-- FIX: sticky (sin tocar tu CSS file) -->
+  <!-- Fixes locales (sin tocar tu CSS file) -->
   <style>
-    /* Tu CSS tiene overflow:hidden en .tp-card, eso rompe sticky en muchos casos */
+    /* 1) Sticky: tu CSS trae overflow:hidden en .tp-card; eso rompe sticky en muchos casos */
     .tp-card { overflow: visible !important; }
 
-    /* Watermark MUY sutil (no saturado) */
-    .tp-watermark {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.035;
-      transform: rotate(-18deg);
-      transform-origin: center;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 54px 22px;
-      padding: 90px 24px;
-      mix-blend-mode: multiply;
+    /* 2) Botones tipo libro: delgados, discretos, side-by-side, jerarquía correcta */
+    .tp-actions {
+      display: flex !important;
+      gap: 12px !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
     }
-    .tp-watermark span{
-      font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    .tp-actions .tp-navbtn {
+      flex: 1 1 0;
+      min-width: 0;
+      border-radius: 999px;
+      padding: 9px 12px;
       font-size: 12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      white-space:nowrap;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.55);
+      color: rgba(0,0,0,.58);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
-    @media (max-width: 520px){
-      .tp-watermark{
-        grid-template-columns: repeat(2, 1fr);
-        gap: 48px 16px;
-        padding: 80px 18px;
-      }
-      .tp-watermark span{ font-size: 11px; }
+    .tp-actions .tp-navbtn:hover { background: rgba(255,255,255,.70); }
+    .tp-actions .tp-navbtn:active { transform: translateY(1px); }
+
+    /* Primario (Día 2): más presente pero NO gordo */
+    .tp-actions .tp-navbtn.primary {
+      border: 1px solid rgba(176,141,69,.45);
+      background: linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color: rgba(40,30,14,.82);
     }
 
-    /* Protección: no selección */
+    /* Mobile: aún más delgados */
+    @media (max-width: 420px){
+      .tp-actions { gap: 10px !important; }
+      .tp-actions .tp-navbtn { padding: 8px 10px; font-size: 11px; }
+    }
+
+    /* 3) Protección: no selección */
     .tp-no-select, .tp-no-select *{
       -webkit-user-select: none !important;
       -moz-user-select: none !important;
       user-select: none !important;
     }
 
-    /* Botones: fuerza side-by-side en móvil (tu CSS permite wrap) */
-    .tp-actions{
-      flex-wrap: nowrap !important;
+    /* 4) Watermark ULTRA sutil (no saturado) */
+    .tp-watermark {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.02;
+      transform: rotate(-18deg);
+      transform-origin: center;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 70px 26px;
+      padding: 110px 24px;
+      mix-blend-mode: multiply;
     }
-    .tp-actions .tp-btn, .tp-actions button.tp-btn{
-      flex: 1 1 0;
-      width: 50%;
-      min-width: 0;
-      text-align: center;
+    .tp-watermark span{
+      font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      color: rgba(0,0,0,.55);
     }
   </style>
 </head>
@@ -86,7 +111,7 @@
     <!-- Card -->
     <main class="tp-card">
 
-      <!-- Sticky header (ya existe en tu CSS; ahora sí funcionará) -->
+      <!-- Sticky header -->
       <div class="tp-sticky">
         <div class="tp-kicker">Día 1</div>
         <div class="tp-meta">Afinando la visión (I)</div>
@@ -202,13 +227,10 @@
           </p>
         </div>
 
-        <!-- Botones (tamaño libro + side-by-side móvil) -->
+        <!-- Botones (sutiles + orden correcto) -->
         <div class="tp-actions">
-          <button id="continueBtn" class="tp-btn tp-btn-primary" type="button">Día 2 →</button>
-          <a class="tp-btn" href="./index.html"
-             style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
-            Inicio
-          </a>
+          <a class="tp-navbtn" href="./index.html">Inicio</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 2 →</button>
         </div>
 
       </section>
@@ -217,7 +239,6 @@
 
   <script>
     (function () {
-      // progreso simple
       try {
         localStorage.setItem("tp_started", "true");
         localStorage.setItem("tp_day_last_seen", "1");
@@ -231,12 +252,10 @@
   </script>
 
   <script>
-    // Protección ligera basada en tu ebook-protect.js (misma idea) :contentReference[oaicite:4]{index=4}
+    // Protección ligera + watermark sutil (misma idea que ebook-protect.js)
     (function () {
       document.documentElement.classList.add("tp-no-select");
-
       document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-
       document.addEventListener("keydown", function (e) {
         var key = (e.key || "").toLowerCase();
         var ctrl = e.ctrlKey || e.metaKey;
@@ -244,7 +263,6 @@
           e.preventDefault();
         }
       });
-
       document.addEventListener("copy", function (e) { e.preventDefault(); });
 
       function getUserStamp() {
@@ -262,20 +280,18 @@
 
       function addWatermark() {
         if (document.getElementById("tpWatermark")) return;
-
         var wm = document.createElement("div");
         wm.id = "tpWatermark";
         wm.setAttribute("aria-hidden", "true");
         wm.className = "tp-watermark";
-
         var stamp = getUserStamp();
-        // MUY POCAS repeticiones (no saturado)
-        for (var i = 0; i < 10; i++) {
+
+        // pocas repeticiones (sutil)
+        for (var i = 0; i < 8; i++) {
           var s = document.createElement("span");
           s.textContent = stamp;
           wm.appendChild(s);
         }
-
         document.body.appendChild(wm);
       }
 
@@ -288,3 +304,4 @@
   </script>
 </body>
 </html>
+ 
