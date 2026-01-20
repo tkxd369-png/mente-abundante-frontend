@@ -90,6 +90,25 @@
       color: rgba(0,0,0,.55);
     }
   </style>
+ <!-- TMK: Gate (require login) -->
+<script>
+  (function () {
+    // Si tu login guarda el usuario en localStorage como "ma_user"
+    // esto valida que exista una sesión básica.
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession =
+        !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+
+      if (!hasSession) {
+        window.location.replace("/start.html");
+      }
+    } catch (e) {
+      window.location.replace("/start.html");
+    }
+  })();
+</script>
+
 </head>
 
 <body class="tp-body">
