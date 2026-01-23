@@ -30,13 +30,20 @@
     // 2) Auto-continue al último capítulo
     try {
       var last = localStorage.getItem("wb_last_chapter") || "";
-      if (last && location.pathname.endsWith("/webbook/index.html")) {
+      if (last && location.pathname.endsWith("/ebook/index.html")) {
         window.location.replace(last);
       }
     } catch (e) {}
   })();
 </script>
-
+ <!-- TMK: Save progress (WebBook) -->
+<script>
+  (function () {
+    try {
+      localStorage.setItem("wb_last_chapter", "/ebook/cap03.html");
+    } catch (e) {}
+  })();
+</script>
   
 </head>
 
