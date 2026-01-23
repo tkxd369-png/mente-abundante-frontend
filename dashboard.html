@@ -563,26 +563,36 @@
     });
   })();
 </script>
-<script>
-  (function () {
-    const btn = document.getElementById("ebookBtn");
-    if (!btn) return;
+   
+ <script>
+ (function () {
+  const btn = document.getElementById("ebookBtn");
+  if (!btn) return;
 
-    btn.addEventListener("click", function () {
-      // Idioma guardado (si no existe, ES)
-      const lang = (window.maGetLang && window.maGetLang()) || "es";
+  btn.addEventListener("click", function () {
+    // Idioma guardado (si no existe, ES)
+    const lang = (window.maGetLang && window.maGetLang()) || "es";
 
-      // Rutas del WebBook
-      // ✅ ES: ebook/index.html
-      // (si luego haces EN, puedes crear ebook-en/index.html y se activa solo)
-      const target = (lang === "en")
-        ? "ebook.en/index.html"
-        : "ebook/index.html";
+    // Rutas base del WebBook
+    const baseIndex = (lang === "en")
+      ? "/ebook.en/index.html"
+      : "/ebook/index.html";
 
-      window.location.href = target;
-    });
-  })();
+    // 1) Si hay progreso guardado, abre donde se quedó
+    try {
+      const last = localStorage.getItem("wb_last_chapter") || "";
+      if (last) {
+        window.location.href = last; // debe ser ruta absoluta tipo /ebook/cap07.html
+        return;
+      }
+    } catch (e) {}
+
+    // 2) Si no hay progreso, abre el index correcto por idioma
+    window.location.href = baseIndex;
+  });
+ })();
 </script>
+
 
 
   </body>
