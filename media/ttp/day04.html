@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -30,7 +30,7 @@
 
   <!-- Local fixes (mismos para todos los días) -->
   <style>
-    /* Sticky fix (tu CSS base tiene overflow hidden en tp-card) */
+    /* Sticky fix (tu CSS base suele poner overflow hidden) */
     .tp-card { overflow: visible !important; }
 
     /* Topbar subtitle */
@@ -94,7 +94,7 @@
       inset:0;
       pointer-events:none;
       z-index:9999;
-      opacity:0.05; /* <-- punto medio */
+      opacity:0.05;
       transform:rotate(-18deg);
       transform-origin:center;
       display:grid;
@@ -117,7 +117,7 @@
 <body class="tp-body">
   <div class="tp-shell">
 
-    <!-- Topbar (CONSISTENTE) -->
+    <!-- Topbar (consistente) -->
     <header class="tp-topbar">
       <div class="tp-brand">
         <div class="tp-eyebrow">TMK</div>
@@ -130,84 +130,127 @@
     <!-- Card -->
     <main class="tp-card">
 
-      <!-- Sticky header (solo día + título del día) -->
+      <!-- Sticky header -->
       <div class="tp-sticky">
         <div class="tp-kicker">Día 4</div>
-        <div class="tp-meta">Observar sin juicio</div>
+        <div class="tp-meta">Lo que no soy</div>
       </div>
 
       <section class="tp-content">
 
+        <!-- Anchor -->
         <div class="tp-note">
           <div class="tp-note-title">Frase ancla</div>
-          <p style="margin:0;">No todo lo que pasa por tu mente te pertenece.</p>
+          <p style="margin:0;">No todo lo que aparece en mí me define.</p>
         </div>
 
         <hr class="tp-divider">
 
+        <!-- Micro lectura -->
         <div class="tp-q">
           <p class="tp-q-title"><strong>Micro lectura</strong></p>
 
           <p class="tp-muted">
-            Durante mucho tiempo aprendimos a reaccionar automáticamente a todo lo que aparece dentro de nosotros.
-            Un pensamiento surge… y lo creemos. Una emoción aparece… y nos definimos por ella.
+            Después de hacer silencio y aprender a observar, algo importante comienza a revelarse:
+            gran parte de lo que pasa por tu mente no eres tú.
           </p>
 
           <p class="tp-muted">
-            Pero observar no es reaccionar. Y pensar no es ser.
-            La mente produce contenido todo el tiempo, igual que el corazón produce latidos.
+            Son pensamientos que aparecen. Emociones que se mueven. Reacciones que se activan.
           </p>
 
           <p class="tp-muted">
-            Cuando comienzas a observar sin juzgar, algo importante ocurre:
-            se crea una pequeña distancia. No para huir, sino para ver con claridad.
+            Durante años aprendimos a decir: “Yo soy así”, “Siempre reacciono de esta manera”, “No puedo cambiar”.
+            Pero eso no es verdad. Eso es identificación automática.
+          </p>
+
+          <p class="tp-muted">
+            Un pensamiento no es una identidad. Una emoción no es un destino. Una reacción no es un veredicto.
+            Todo eso aparece… pero también desaparece.
           </p>
 
           <p class="tp-muted" style="margin-bottom:0;">
-            El juicio ata. La observación libera.
+            Y si algo puede ser observado, entonces no es lo que eres.
           </p>
         </div>
 
+        <!-- Reflexión -->
         <div class="tp-q">
           <p class="tp-q-title"><strong>Reflexión interior</strong></p>
 
           <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.65;">
-            <li>¿Qué pensamiento está presente?</li>
-            <li>¿Qué emoción lo acompaña?</li>
-            <li>¿Qué historia se activa automáticamente?</li>
+            <li>¿Qué pensamiento aparece con frecuencia?</li>
+            <li>¿Qué emoción sueles tomar como “personal”?</li>
+            <li>¿Qué reacción repites sin cuestionar?</li>
           </ul>
 
           <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
-            Nota: “Esto está ocurriendo… pero no soy esto.”
+            Ahora, sin cambiar nada, di internamente:
+            <br><strong>“Esto está ocurriendo… pero no soy esto.”</strong>
+          </p>
+
+          <p class="tp-muted" style="margin-top:10px; margin-bottom:0;">
+            No como afirmación. Como observación.
+            No estás negando nada. Solo estás dejando de confundirlo contigo.
           </p>
         </div>
 
+        <!-- Ejercicio -->
         <div class="tp-q">
-          <p class="tp-q-title"><strong>Ejercicio práctico</strong></p>
-          <p class="tp-muted" style="margin-bottom:0;">
-            Hoy, cuando algo te incomode:
-            <br>1) Detente un instante
-            <br>2) Nombra sin juicio: “Hay prisa / hay miedo / hay enojo”
-            <br>3) Evita decir: “Soy así” / “No debería sentir esto”
+          <p class="tp-q-title"><strong>Ejercicio práctico (desidentificación suave)</strong></p>
+
+          <p class="tp-muted">
+            Hoy, cada vez que algo se active en ti:
+          </p>
+
+          <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+            <li>
+              Nómbralo sin juicio:
+              <br>“Hay prisa”, “Hay miedo”, “Hay tensión”.
+            </li>
+            <li style="margin-top:10px;">
+              Evita decir:
+              <br>“Soy así”, “Siempre me pasa”, “Este soy yo”.
+            </li>
+            <li style="margin-top:10px;">
+              Cambia la frase por:
+              <br><strong>“Esto está apareciendo.”</strong>
+            </li>
+          </ol>
+
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            No lo corrijas. No lo analices. Solo obsérvalo pasar.
           </p>
         </div>
 
+        <!-- Libreta -->
         <div class="tp-q">
-          <p class="tp-q-title"><strong>Libreta</strong></p>
-          <p class="tp-muted" style="margin-bottom:0;">
-            Escribe un pensamiento que sueles creer sin cuestionar.
-            Luego escribe cómo cambia cuando solo lo observas, sin corregirlo.
+          <p class="tp-q-title"><strong>Libreta (mapa personal)</strong></p>
+
+          <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.7;">
+            <li>Algo que sueles decir “yo soy…”</li>
+            <li>Qué emoción acompaña esa frase</li>
+            <li>Qué cambia cuando lo miras como algo que aparece, no como algo que eres</li>
+          </ul>
+
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            No busques una nueva identidad. Hoy solo estamos limpiando confusión.
           </p>
         </div>
 
+        <!-- Cierre -->
         <div class="tp-q">
           <p class="tp-q-title"><strong>Cierre</strong></p>
           <p class="tp-muted" style="margin-bottom:0;">
-            Observar sin juicio no te vuelve pasivo. Te vuelve libre.
-            Mañana empezamos a reconocer quién observa.
+            No necesitas definirte mejor. Necesitas dejar de definirte mal.
+            Cuando sueltas lo que no eres, la visión se aclara sola.
+          </p>
+          <p class="tp-muted" style="margin-top:10px; margin-bottom:0;">
+            Mañana empezamos a ver qué ideas no nacieron de ti, pero aprendiste a creer.
           </p>
         </div>
 
+        <!-- Botones -->
         <div class="tp-actions">
           <a class="tp-navbtn" href="./day03.html">Día 3</a>
           <button id="continueBtn" class="tp-navbtn primary" type="button">Día 5 →</button>
@@ -274,3 +317,4 @@
   </script>
 </body>
 </html>
+ 
