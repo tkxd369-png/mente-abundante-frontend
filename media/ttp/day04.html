@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -11,13 +11,9 @@
       try {
         var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
         var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
-        if (!hasSession) {
-          window.location.replace("/start.html");
-          return;
-        }
+        if (!hasSession) { window.location.replace("/start.html"); return; }
       } catch (e) {
-        window.location.replace("/start.html");
-        return;
+        window.location.replace("/start.html"); return;
       }
     })();
   </script>
@@ -32,12 +28,10 @@
   <!-- Ivory Gold -->
   <link rel="stylesheet" href="styles-ivorygold.css" />
 
-  <!-- Fixes locales (mismo set que Día 3) -->
+  <!-- Fixes locales (mismo set que Day03) -->
   <style>
-    /* Sticky fix */
     .tp-card { overflow: visible !important; }
 
-    /* Topbar subtitle */
     .tp-subtitle{
       font-size:.7rem;
       letter-spacing:.22em;
@@ -46,59 +40,56 @@
       margin-top:2px;
     }
 
-    /* Botones tipo libro (delgados, sutiles, side-by-side) */
-    .tp-actions {
-      display: flex !important;
-      gap: 12px !important;
-      flex-wrap: nowrap !important;
-      align-items: center !important;
+    .tp-actions{
+      display:flex !important;
+      gap:12px !important;
+      flex-wrap:nowrap !important;
+      align-items:center !important;
     }
-    .tp-actions .tp-navbtn {
-      flex: 1 1 0;
-      min-width: 0;
-      border-radius: 999px;
-      padding: 9px 12px;
-      font-size: 12px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(255,255,255,.55);
-      color: rgba(0,0,0,.58);
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;
+      min-width:0;
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);
+      color:rgba(0,0,0,.58);
+      -webkit-tap-highlight-color:transparent;
+      user-select:none;
     }
-    .tp-actions .tp-navbtn:hover { background: rgba(255,255,255,.70); }
-    .tp-actions .tp-navbtn:active { transform: translateY(1px); }
-    .tp-actions .tp-navbtn.primary {
-      border: 1px solid rgba(176,141,69,.45);
-      background: linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
-      color: rgba(40,30,14,.82);
+    .tp-actions .tp-navbtn:hover{ background:rgba(255,255,255,.70); }
+    .tp-actions .tp-navbtn:active{ transform:translateY(1px); }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
     }
     @media (max-width: 420px){
-      .tp-actions { gap: 10px !important; }
-      .tp-actions .tp-navbtn { padding: 8px 10px; font-size: 11px; }
+      .tp-actions{ gap:10px !important; }
+      .tp-actions .tp-navbtn{ padding:8px 10px; font-size:11px; }
     }
 
-    /* Protección: no selección */
     .tp-no-select, .tp-no-select *{
-      -webkit-user-select: none !important;
-      -moz-user-select: none !important;
-      user-select: none !important;
+      -webkit-user-select:none !important;
+      -moz-user-select:none !important;
+      user-select:none !important;
     }
 
-    /* Watermark (user stamp) */
     .tp-watermark{
       position:fixed;
       inset:0;
       pointer-events:none;
       z-index:9999;
-      opacity:0.05; /* punto medio */
+      opacity:0.05;
       transform:rotate(-18deg);
       transform-origin:center;
       display:grid;
@@ -131,7 +122,6 @@
       <a class="tp-link" href="/dashboard.html">Dashboard</a>
     </header>
 
-    <!-- Card -->
     <main class="tp-card">
 
       <!-- Sticky header -->
@@ -142,12 +132,10 @@
 
       <section class="tp-content">
 
-        <!-- Anchor -->
+        <!-- Anchor (nota dorada) -->
         <div class="tp-note">
           <div class="tp-note-title">Frase ancla</div>
-          <p style="margin:0;">
-            No todo lo que aparece en mí me define.
-          </p>
+          <p class="tp-muted" style="margin:0;">No todo lo que aparece en mí me define.</p>
         </div>
 
         <hr class="tp-divider">
@@ -163,6 +151,7 @@
 
           <p class="tp-muted">
             Son pensamientos que aparecen. Emociones que se mueven. Reacciones que se activan.
+            Y el sistema (sin que te des cuenta) te enseñó a llamarlo “yo”.
           </p>
 
           <p class="tp-muted">
@@ -172,7 +161,7 @@
 
           <p class="tp-muted">
             Un pensamiento no es una identidad. Una emoción no es un destino. Una reacción no es un veredicto.
-            Todo eso aparece… pero también desaparece.
+            Todo eso aparece… y también desaparece.
           </p>
 
           <p class="tp-muted" style="margin-bottom:0;">
@@ -203,45 +192,51 @@
           </p>
         </div>
 
-        <!-- Ejercicio -->
+        <!-- Ejercicio (CON BLOQUES DORADOS COMO DAY03) -->
         <div class="tp-q">
           <p class="tp-q-title"><strong>Ejercicio práctico (desidentificación suave)</strong></p>
 
-          <p class="tp-muted">
-            Hoy, cada vez que algo se active en ti:
-          </p>
-
-          <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
-            <li>
-              Nómbralo sin juicio:
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 1 — Nómbralo sin juicio</div>
+            <p class="tp-muted" style="margin:0;">
+              Cuando algo se active en ti, solo nómbralo:
               <br>“Hay prisa”, “Hay miedo”, “Hay tensión”.
-            </li>
-            <li style="margin-top:10px;">
+            </p>
+          </div>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 2 — Evita identificarte</div>
+            <p class="tp-muted" style="margin:0;">
               Evita decir:
               <br>“Soy así”, “Siempre me pasa”, “Este soy yo”.
-            </li>
-            <li style="margin-top:10px;">
-              Cambia la frase por:
+            </p>
+          </div>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 3 — Cambia la frase</div>
+            <p class="tp-muted" style="margin:0;">
+              Cambia por:
               <br><strong>“Esto está apareciendo.”</strong>
-            </li>
-          </ol>
+            </p>
+          </div>
 
           <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
             No lo corrijas. No lo analices. Solo obsérvalo pasar.
           </p>
         </div>
 
-        <!-- Libreta -->
+        <!-- Libreta (CON BLOQUE DORADO) -->
         <div class="tp-q">
           <p class="tp-q-title"><strong>Libreta (mapa personal)</strong></p>
 
-          <p class="tp-muted">Escribe:</p>
-
-          <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.65;">
-            <li>Algo que sueles decir “yo soy…”</li>
-            <li>Qué emoción acompaña esa frase</li>
-            <li>Qué cambia cuando lo miras como algo que aparece, no como algo que eres</li>
-          </ul>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Tu mapa personal (hoy)</div>
+            <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+              <li>Algo que sueles decir “yo soy…”</li>
+              <li>¿Qué emoción acompaña esa frase?</li>
+              <li>¿Qué cambia cuando lo miras como algo que aparece, no como algo que eres?</li>
+            </ol>
+          </div>
 
           <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
             No busques una nueva identidad. Hoy solo estamos limpiando confusión.
@@ -254,6 +249,9 @@
           <p class="tp-muted" style="margin-bottom:0;">
             No necesitas definirte mejor. Necesitas dejar de definirte mal.
             Cuando sueltas lo que no eres, la visión se aclara sola.
+          </p>
+          <p class="tp-muted" style="margin-top:10px; margin-bottom:0;">
+            Mañana empezamos a ver qué ideas no nacieron de ti, pero aprendiste a creer.
           </p>
         </div>
 
@@ -286,9 +284,7 @@
       document.addEventListener("keydown", function (e) {
         var key = (e.key || "").toLowerCase();
         var ctrl = e.ctrlKey || e.metaKey;
-        if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s")) {
-          e.preventDefault();
-        }
+        if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s")) e.preventDefault();
       });
       document.addEventListener("copy", function (e) { e.preventDefault(); });
 
