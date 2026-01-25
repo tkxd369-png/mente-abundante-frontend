@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Día 12</title>
+
+  <!-- TMK: Gate (require login) -->
+  <script>
+    (function () {
+      try {
+        var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+        var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+        if (!hasSession) { window.location.replace("/start.html"); return; }
+      } catch (e) {
+        window.location.replace("/start.html"); return;
+      }
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Ivory Gold -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+
+  <!-- Fixes locales (idénticos a días previos) -->
+  <style>
+    .tp-card { overflow: visible !important; }
+
+    .tp-subtitle{
+      font-size:.7rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.45);
+      margin-top:2px;
+    }
+
+    .tp-actions{
+      display:flex !important;
+      gap:12px !important;
+      flex-wrap:nowrap !important;
+      align-items:center !important;
+    }
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;
+      min-width:0;
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);
+      color:rgba(0,0,0,.58);
+      -webkit-tap-highlight-color:transparent;
+      user-select:none;
+    }
+    .tp-actions .tp-navbtn:hover{ background:rgba(255,255,255,.70); }
+    .tp-actions .tp-navbtn:active{ transform:translateY(1px); }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
+    }
+    @media (max-width: 420px){
+      .tp-actions{ gap:10px !important; }
+      .tp-actions .tp-navbtn{ padding:8px 10px; font-size:11px; }
+    }
+
+    .tp-no-select, .tp-no-select *{
+      -webkit-user-select:none !important;
+      -moz-user-select:none !important;
+      user-select:none !important;
+    }
+
+    .tp-watermark{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:9999;
+      opacity:0.05;
+      transform:rotate(-18deg);
+      transform-origin:center;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:70px 26px;
+      padding:110px 24px;
+      mix-blend-mode:multiply;
+    }
+    .tp-watermark span{
+      font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:11px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      color:rgba(0,0,0,.55);
+    }
+  </style>
+</head>
+
+<body class="tp-body">
+  <div class="tp-shell">
+
+    <!-- Topbar -->
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK</div>
+        <div class="tp-title">The Truth Path</div>
+        <div class="tp-subtitle">El Sendero de la Verdad</div>
+      </div>
+      <a class="tp-link" href="/dashboard.html">Dashboard</a>
+    </header>
+
+    <main class="tp-card">
+
+      <!-- Sticky header -->
+      <div class="tp-sticky">
+        <div class="tp-kicker">Día 12</div>
+        <div class="tp-meta">Sostener el estado</div>
+      </div>
+
+      <section class="tp-content">
+
+        <!-- Frase ancla -->
+        <div class="tp-note">
+          <div class="tp-note-title">Frase ancla</div>
+          <p class="tp-muted" style="margin:0;">
+            Mi mundo no dirige mi estado. Mi estado dirige mi mundo.
+          </p>
+        </div>
+
+        <hr class="tp-divider">
+
+        <!-- Enfoque del día (AMPLIADO) -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Enfoque del día</strong></p>
+
+          <p class="tp-muted">
+            Crear desde dentro no es un momento. Es un estado.
+            Y lo más difícil no es alcanzarlo una vez… sino sostenerlo cuando el día se complica.
+          </p>
+
+          <p class="tp-muted">
+            El sistema siempre intentará devolverte a lo viejo:
+            prisa, comparación, reacción, exceso de pensamiento.
+            No porque “algo esté mal”, sino porque es la inercia del entrenamiento.
+          </p>
+
+          <p class="tp-muted">
+            Por eso la Ley de la Vida se vuelve práctica:
+            tu interior necesita un centro estable.
+            Un lugar al que regresas una y otra vez.
+            No para huir del mundo, sino para habitarlo sin perderte.
+          </p>
+
+          <p class="tp-muted">
+            Sostener el estado no significa estar “positivo” todo el tiempo.
+            Significa no regalar tu dirección.
+            Significa que aunque haya ruido afuera,
+            tu causa interna no cambia.
+          </p>
+
+          <p class="tp-muted">
+            Hay una señal clara de que perdiste el estado:
+            te vuelves reactivo.
+            Respondes desde miedo.
+            Dices sí cuando querías decir no.
+            Te aceleras por cosas que no son esenciales.
+          </p>
+
+          <p class="tp-muted" style="margin-bottom:0;">
+            Hoy practicamos algo simple y poderoso:
+            <strong>regresar al centro</strong>.
+            Un regreso que puedes hacer en medio del trabajo, en medio de una conversación,
+            en medio de un problema… sin que nadie lo note.
+          </p>
+        </div>
+
+        <!-- Reflexión interior -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Reflexión interior</strong></p>
+
+          <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.7;">
+            <li>¿Qué situaciones me sacan de mi centro más rápido?</li>
+            <li>¿Cómo se ve mi “yo reactivo”?</li>
+            <li>¿Cuál sería mi señal personal de “volver al centro”?</li>
+          </ul>
+        </div>
+
+        <!-- Ejercicio -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Ejercicio práctico — regreso al centro (30 segundos)</strong></p>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 1 — Señal</div>
+            <p class="tp-muted" style="margin:0;">
+              Elige una señal para hoy:
+              cada vez que tomes el teléfono,
+              cada vez que abras una puerta,
+              o cada vez que te sientes.
+              Esa será tu alarma silenciosa.
+            </p>
+          </div>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 2 — 3 respiraciones</div>
+            <p class="tp-muted" style="margin:0;">
+              Haz <strong>3 respiraciones lentas</strong>.
+              No para “relajarte”, sino para regresar.
+              Mientras respiras, recuerda: <strong>yo dirijo mi estado</strong>.
+            </p>
+          </div>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 3 — Pregunta de dirección</div>
+            <p class="tp-muted" style="margin:0;">
+              Pregunta en silencio:
+              <br><strong>¿Cuál es la acción más verdadera ahora?</strong>
+              <br>(no la más rápida, no la más urgente)
+            </p>
+          </div>
+
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            Hacer esto 5 veces en un día cambia tu vida más que una “gran motivación” una vez al mes.
+          </p>
+        </div>
+
+        <!-- Libreta -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Libreta (mapa personal)</strong></p>
+
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Tu mapa personal (hoy)</div>
+            <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+              <li>Mi situación más común de reacción</li>
+              <li>Mi señal para regresar al centro</li>
+              <li>Mi pregunta de dirección (la que me devuelve a la verdad)</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Cierre -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Cierre</strong></p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            La estabilidad no es ausencia de problemas.
+            Es presencia de centro.
+          </p>
+          <p class="tp-muted" style="margin-top:10px; margin-bottom:0;">
+            Mañana veremos cómo este estado interno comienza a cambiar tu percepción,
+            y con ello, tus resultados.
+          </p>
+        </div>
+
+        <!-- Botones -->
+        <div class="tp-actions">
+          <a class="tp-navbtn" href="./day11.html">Día 11</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 13 →</button>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Save progress -->
+  <script>
+    (function () {
+      try { localStorage.setItem("tp_day_last_seen", "12"); } catch (e) {}
+      document.getElementById("continueBtn").addEventListener("click", function () {
+        try { localStorage.setItem("tp_day_last_seen", "13"); } catch (e) {}
+        window.location.href = "./day13.html";
+      });
+    })();
+  </script>
+
+  <!-- Protección + watermark -->
+  <script>
+    (function () {
+      document.documentElement.classList.add("tp-no-select");
+      document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+      document.addEventListener("keydown", function (e) {
+        var key = (e.key || "").toLowerCase();
+        var ctrl = e.ctrlKey || e.metaKey;
+        if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s")) e.preventDefault();
+      });
+      document.addEventListener("copy", function (e) { e.preventDefault(); });
+
+      function getUserStamp() {
+        try {
+          var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+          var name = (u.name || u.nombre || u.fullname || "").toString().trim();
+          var refid = (u.refid || u.refId || u.ref || u.id || "").toString().trim();
+          var who = name ? name : "TMK Member";
+          var code = refid ? (" · " + refid) : "";
+          return (who + code + " · THE TRUTH PATH").toUpperCase();
+        } catch (e) {
+          return "TMK MEMBER · THE TRUTH PATH";
+        }
+      }
+
+      function addWatermark() {
+        if (document.getElementById("tpWatermark")) return;
+        var wm = document.createElement("div");
+        wm.id = "tpWatermark";
+        wm.setAttribute("aria-hidden", "true");
+        wm.className = "tp-watermark";
+        var stamp = getUserStamp();
+        for (var i = 0; i < 8; i++) {
+          var s = document.createElement("span");
+          s.textContent = stamp;
+          wm.appendChild(s);
+        }
+        document.body.appendChild(wm);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", addWatermark);
+      } else {
+        addWatermark();
+      }
+    })();
+  </script>
+</body>
+</html>
