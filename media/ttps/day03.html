@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Día 03</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Ivory Gold -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <!-- Fixes locales (template base) -->
+  <style>
+    .tp-card { overflow: visible !important; }
+    .tp-subtitle{
+      font-size:.7rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.45);
+      margin-top:2px;
+    }
+    .tp-actions{
+      display:flex !important;
+      gap:12px !important;
+      flex-wrap:nowrap !important;
+      align-items:center !important;
+    }
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;
+      min-width:0;
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);
+      color:rgba(0,0,0,.58);
+      -webkit-tap-highlight-color:transparent;
+      user-select:none;
+    }
+    .tp-actions .tp-navbtn:hover{ background:rgba(255,255,255,.70); }
+    .tp-actions .tp-navbtn:active{ transform:translateY(1px); }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
+    }
+    @media (max-width: 420px){
+      .tp-actions{ gap:10px !important; }
+      .tp-actions .tp-navbtn{ padding:8px 10px; font-size:11px; }
+    }
+    .tp-no-select, .tp-no-select *{
+      -webkit-user-select:none !important;
+      -moz-user-select:none !important;
+      user-select:none !important;
+    }
+    .tp-watermark{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:9999;
+      opacity:0.05;
+      transform:rotate(-18deg);
+      transform-origin:center;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:70px 26px;
+      padding:110px 24px;
+      mix-blend-mode:multiply;
+    }
+    .tp-watermark span{
+      font-family:"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:11px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      color:rgba(0,0,0,.55);
+    }
+    /* Helper blocks */
+    .tp-mini{
+      margin-top:10px;
+      padding:12px 14px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);
+      border-radius:14px;
+    }
+    .tp-mini-title{
+      font-size:.72rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.55);
+      margin:0 0 8px 0;
+    }
+  </style>
+</head>
+<body class="tp-body">
+  <div class="tp-shell">
+    <!-- Topbar -->
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK</div>
+        <div class="tp-title">The Truth Path</div>
+        <div class="tp-subtitle">El Sendero de la Verdad</div>
+      </div>
+      <a class="tp-link" href="/dashboard.html">Dashboard</a>
+    </header>
+    <main class="tp-card">
+      <!-- Sticky header -->
+      <div class="tp-sticky">
+        <div class="tp-kicker">Ciclo 1 · Día 03</div>
+        <div class="tp-meta">Lo que otros llaman vida</div>
+      </div>
+      <section class="tp-content">
+        <!-- Frase del día -->
+        <div class="tp-note">
+          <div class="tp-note-title">Frase del día</div>
+          <p class="tp-muted" style="margin:0;">
+            Vivir no es correr.<br>
+            Vivir es estar.
+          </p>
+        </div>
+        <hr class="tp-divider">
+        <!-- Enfoque del día -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Enfoque del día</strong></p>
+          <p class="tp-muted">
+            Después de ver la ilusión (Día 1) y reconocer la jaula (Día 2), hoy hacemos una pregunta que casi nadie se
+            atreve a hacer con honestidad:
+            <strong>¿qué es vivir?</strong>
+          </p>
+          <p class="tp-muted">
+            La mayoría aprendió una definición prestada: vivir es producir, lograr, avanzar, acumular, demostrar.
+            Y todo eso puede ser útil… pero no es la vida.
+            Son herramientas. Son resultados. Son consecuencias.
+            El problema aparece cuando el sistema toma esas herramientas y las presenta como si fueran el valor verdadero.
+          </p>
+          <p class="tp-muted">
+            El éxito no es malo.
+            La riqueza no es mala.
+            Los logros no son malos.
+            Lo peligroso es poner el peso de tu alma en lo pasajero,
+            como si lo temporal tuviera autoridad para darte identidad.
+          </p>
+          <p class="tp-muted">
+            Cuando haces eso, ocurre algo silencioso:
+            puedes “ganar” por fuera y perder por dentro.
+            Puedes llegar a metas y seguir vacío.
+            Puedes tener reconocimiento y no tener paz.
+            Puedes tener dinero y no tener vida.
+          </p>
+          <p class="tp-muted">
+            La jaula se alimenta de una confusión: te hace creer que la vida está “allá”.
+            Allá donde está la próxima meta.
+            Allá donde está la cifra final.
+            Allá donde está la aprobación.
+            Y mientras miras allá, tu presente se vuelve un simple puente: algo que soportas para “llegar”.
+          </p>
+          <p class="tp-muted">
+            Pero vivir no es un lugar al que llegas. Es una forma de estar.
+            Vivir es presencia.
+            Vivir es conciencia.
+            Vivir es sentir lo esencial sin necesitar espectáculo.
+            Vivir es poder respirar sin estar huyendo de ti mismo.
+          </p>
+          <p class="tp-muted">
+            Hay una frase que resume esta enseñanza de manera brutal:
+            <strong>“No te alcanza para vivir.”</strong>
+            Y no habla solo de dinero.
+            Habla de energía.
+            Habla de tiempo.
+            Habla de paz.
+            Habla de la vida interna que el sistema te cambió por supervivencia.
+          </p>
+          <p class="tp-muted">
+            Cuando una persona se despierta, se da cuenta de esto:
+            el sistema no solo te quita tiempo; te enseña a llamarlo “normal”.
+            Te enseña a llamar “responsabilidad” a la ansiedad.
+            Te enseña a llamar “madurez” al endurecimiento.
+            Te enseña a llamar “éxito” a vivir sin alma.
+          </p>
+          <div class="tp-mini">
+            <p class="tp-mini-title">Una medida simple</p>
+            <p class="tp-muted" style="margin:0;">
+              Si lo que haces te acerca a la paz, a la claridad, al amor y a la plenitud, estás tocando vida.
+              Si lo que haces te aleja de tu centro, te llena de afán y te vuelve otro contigo mismo,
+              estás sosteniendo una definición ajena.
+            </p>
+          </div>
+          <p class="tp-muted">
+            Hoy no vamos a despreciar el mundo material.
+            Vamos a ponerlo en su lugar.
+            El dinero es un medio.
+            El éxito es una herramienta.
+            La riqueza puede ser fruto.
+            Pero la vida — la vida real — es interior primero.
+          </p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            Este día es para recuperar la definición:
+            no lo que te enseñaron… sino lo que tu espíritu reconoce cuando se queda en silencio.
+          </p>
+        </div>
+        <!-- Reflexión interior -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Reflexión interior</strong></p>
+          <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.7;">
+            <li>¿Qué me enseñaron que era “vivir” y cuánto de eso era solo sobrevivir?</li>
+            <li>¿Qué cosas estoy usando como medida de mi valor?</li>
+            <li>Si hoy tuviera todo lo que busco, ¿qué parte de mí seguiría vacía?</li>
+            <li>¿Cuándo fue la última vez que estuve presente sin prisa ni comparación?</li>
+          </ul>
+        </div>
+        <!-- Ejercicio -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Ejercicio práctico (privado) — redefinir vida</strong></p>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 1 — Dos definiciones</div>
+            <p class="tp-muted" style="margin:0;">
+              Escribe dos frases:
+              <strong>“Lo que me enseñaron que era vivir es…”</strong>
+              y
+              <strong>“Lo que siento que es vivir (de verdad) es…”</strong>
+            </p>
+          </div>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 2 — Una señal de vida</div>
+            <p class="tp-muted" style="margin:0;">
+              Escribe una señal concreta de vida en ti: paz, claridad, gratitud, creatividad, amor, descanso.
+              Luego escribe: <strong>¿qué cosas apagan esa señal?</strong>
+            </p>
+          </div>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Paso 3 — 5 minutos de vida real</div>
+            <p class="tp-muted" style="margin:0;">
+              Hoy haz 5 minutos de “vida real”: sin pantalla, sin prisa, sin meta.
+              Solo estar presente. Respirar. Sentir. Notar.
+              Al final escribe una línea: <strong>“Esto también es vivir.”</strong>
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            No se trata de abandonar tus metas.
+            Se trata de que tus metas no te abandonen a ti.
+          </p>
+        </div>
+        <!-- Libreta -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Libreta (mapa personal)</strong></p>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Tu mapa personal (hoy)</div>
+            <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+              <li>Lo que otros llaman vida es…</li>
+              <li>Para mí, vivir de verdad se siente como…</li>
+              <li>Mi medida falsa de valor hoy ha sido…</li>
+              <li>Una señal de vida que quiero recuperar es…</li>
+            </ol>
+          </div>
+        </div>
+        <!-- Cierre -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Cierre</strong></p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            Hoy recuerdo algo simple:
+            la vida no está allá.
+            La vida está aquí.
+            Y puedo volver a ella.
+          </p>
+        </div>
+        <!-- Botones -->
+        <div class="tp-actions">
+          <a class="tp-navbtn" href="./day02.html">Día 02</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 04 →</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- Save progress -->
+  <script>
+  (function () {
+    try { localStorage.setItem("tp_day_last_seen", "3"); } catch (e) {}
+    document.getElementById("continueBtn").addEventListener("click", function () {
+      try { localStorage.setItem("tp_day_last_seen", "4"); } catch (e) {}
+      window.location.href = "./day04.html";
+    });
+  })();
+  </script>
+  <!-- Protección + watermark -->
+  <script>
+  (function () {
+    document.documentElement.classList.add("tp-no-select");
+    document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    document.addEventListener("keydown", function (e) {
+      var key = (e.key || "").toLowerCase();
+      var ctrl = e.ctrlKey || e.metaKey;
+      if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s"))
+        e.preventDefault();
+    });
+    document.addEventListener("copy", function (e) { e.preventDefault(); });
+    function getUserStamp() {
+      try {
+        var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+        var name = (u.name || u.nombre || u.fullname || "").toString().trim();
+        var refid = (u.refid || u.refId || u.ref || u.id || "").toString().trim();
+        var who = name ? name : "TMK Member";
+        var code = refid ? (" · " + refid) : "";
+        return (who + code + " · THE TRUTH PATH").toUpperCase();
+      } catch (e) {
+        return "TMK MEMBER · THE TRUTH PATH";
+      }
+    }
+    function addWatermark() {
+      if (document.getElementById("tpWatermark")) return;
+      var wm = document.createElement("div");
+      wm.id = "tpWatermark";
+      wm.setAttribute("aria-hidden", "true");
+      wm.className = "tp-watermark";
+      var stamp = getUserStamp();
+      for (var i = 0; i < 8; i++) {
+        var s = document.createElement("span");
+        s.textContent = stamp;
+        wm.appendChild(s);
+      }
+      document.body.appendChild(wm);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", addWatermark);
+    } else {
+      addWatermark();
+    }
+  })();
+  </script>
+</body>
+</html>
