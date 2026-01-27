@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Día 05</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Ivory Gold -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <style>
+    .tp-card { overflow: visible !important; }
+    .tp-subtitle{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-top:2px;}
+    .tp-actions{display:flex !important;gap:12px !important;align-items:center !important;}
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;border-radius:999px;padding:9px 12px;font-size:12px;
+      letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;
+    }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
+    }
+    .tp-mini{
+      margin-top:12px;padding:14px;border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);border-radius:14px;
+    }
+  </style>
+</head>
+<body class="tp-body">
+  <div class="tp-shell">
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK</div>
+        <div class="tp-title">The Truth Path</div>
+        <div class="tp-subtitle">El Sendero de la Verdad</div>
+      </div>
+      <a class="tp-link" href="/dashboard.html">Dashboard</a>
+    </header>
+    <main class="tp-card">
+      <div class="tp-sticky">
+        <div class="tp-kicker">Ciclo 1 · Día 05</div>
+        <div class="tp-meta">Evaluación</div>
+      </div>
+      <section class="tp-content">
+        <div class="tp-note">
+          <div class="tp-note-title">Frase del día</div>
+          <p class="tp-muted" style="margin:0;">
+            Detenerte también es avanzar.
+          </p>
+        </div>
+        <hr class="tp-divider">
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Enfoque del día</strong></p>
+          <p class="tp-muted">
+            Hoy no avanzamos hacia adelante.
+            Hoy regresamos.
+          </p>
+          <p class="tp-muted">
+            Este día es una pausa consciente.
+            Una invitación a mirar lo que ya fue revelado.
+            A revisar los días anteriores sin prisa,
+            sin juicio,
+            sin necesidad de entenderlo todo.
+          </p>
+          <p class="tp-muted">
+            Vuelve al Día 1.
+            Vuelve al Día 2.
+            Vuelve al Día 3.
+            Vuelve al Día 4.
+            Lee despacio.
+            Subraya lo que tocó tu corazón.
+            Observa qué palabras despertaron algo dentro de ti.
+          </p>
+          <p class="tp-muted">
+            Revisa tu libreta personal.
+            Saborea las verdades que se alinean con tu alma.
+            Donde sientas liberación, tómalo.
+            Donde sientas paz, tómalo.
+            Donde sientas deseo de crecer, tómalo.
+          </p>
+          <p class="tp-muted">
+            Hoy no traemos más conceptos.
+            Hoy no añadimos ideas nuevas.
+            Hoy construimos con lo que ya fue sembrado.
+          </p>
+          <p class="tp-muted">
+            Tú eres el creador de tu vida.
+            Tú eres el artista de tu destino.
+            Hoy no recibes un mapa nuevo:
+            hoy tomas el pincel.
+          </p>
+          <div class="tp-mini">
+            <p class="tp-muted" style="margin:0;">
+              Dibuja una vida abundante,
+              no de cosas,
+              sino de paz,
+              de plenitud,
+              de amor,
+              de verdad vivida.
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px;">
+            No te apresures.
+            Este día es sagrado.
+            Deja que tu corazón se llene de verdad.
+          </p>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Reflexión interior</strong></p>
+          <ul class="tp-muted" style="line-height:1.7;">
+            <li>¿Qué frase o idea tocó más mi corazón estos días?</li>
+            <li>¿Qué verdad sentí como alivio?</li>
+            <li>¿Qué ilusión comenzó a perder fuerza?</li>
+            <li>¿Qué parte de mí se siente más liviana?</li>
+          </ul>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Ejercicio práctico (privado)</strong></p>
+          <div class="tp-mini">
+            <p class="tp-muted" style="margin:0;">
+              Escribe una página libre respondiendo:
+              <br><br>
+              • Esto es lo que estoy dejando atrás…<br>
+              • Esto es lo que hoy elijo conservar…<br>
+              • Esto es lo que comienza a nacer en mí…
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px;">
+            No edites.
+            No corrijas.
+            Deja que fluya.
+          </p>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Libreta (mapa personal)</strong></p>
+          <div class="tp-mini">
+            <ol class="tp-muted" style="line-height:1.8;margin:0;padding-left:18px;">
+              <li>La verdad que más resonó conmigo fue…</li>
+              <li>La ilusión que hoy suelto es…</li>
+              <li>La nueva dirección que comienza a aparecer es…</li>
+              <li>La emoción que siento ahora es…</li>
+            </ol>
+          </div>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Cierre</strong></p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            Hoy no corro.
+            Hoy escucho.
+            Hoy construyo desde adentro.
+          </p>
+        </div>
+        <div class="tp-actions">
+          <a class="tp-navbtn" href="./day04.html">Día 04</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 06 →</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+  (function () {
+    try { localStorage.setItem("tp_day_last_seen", "5"); } catch (e) {}
+    document.getElementById("continueBtn").addEventListener("click", function () {
+      try { localStorage.setItem("tp_day_last_seen", "6"); } catch (e) {}
+      window.location.href = "./day06.html";
+    });
+  })();
+  </script>
+</body>
+</html>
