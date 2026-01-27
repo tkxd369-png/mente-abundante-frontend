@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -58,18 +58,9 @@
       color:rgba(0,0,0,.58);
     }
     .tp-pledge p{ margin:0; }
-    .tp-sign{
-      margin-top:12px;
-      display:grid;
-      gap:10px;
-    }
-    .tp-line{
-      height:1px;background:rgba(0,0,0,.10);border-radius:1px;
-    }
-    .tp-small{
-      font-size:.95rem;
-      color:rgba(0,0,0,.72);
-    }
+    .tp-sign{margin-top:12px;display:grid;gap:10px;}
+    .tp-line{height:1px;background:rgba(0,0,0,.10);border-radius:1px;}
+    .tp-small{font-size:.95rem;color:rgba(0,0,0,.72);}
   </style>
 </head>
 <body class="tp-body">
@@ -131,7 +122,6 @@
             A veces, las personas que decimos amar más,
             son las que más lastimamos…
             porque no hemos aprendido a amarnos nosotros.
-            Y sin amor propio sano, terminamos amando desde herida, desde necesidad, desde miedo.
           </p>
           <p class="tp-muted">
             Por eso hoy no hay más lectura.
@@ -219,7 +209,7 @@
         </div>
         <div class="tp-actions">
           <a class="tp-navbtn" href="./day05.html">Día 05</a>
-          <button id="continueBtn" class="tp-navbtn primary" type="button">Cerrar ciclo →</button>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 07 →</button>
         </div>
       </section>
     </main>
@@ -228,10 +218,8 @@
   (function () {
     try { localStorage.setItem("tp_day_last_seen", "6"); } catch (e) {}
     document.getElementById("continueBtn").addEventListener("click", function () {
-      // Al cerrar el ciclo, puedes llevarlos a una página de "Ciclo completado" o al Day 07 si existiera.
-      // Por ahora, enviamos a dashboard o a un future day07.html si lo agregas después.
-      try { localStorage.setItem("tp_cycle1_complete", "1"); } catch (e) {}
-      window.location.href = "/dashboard.html";
+      try { localStorage.setItem("tp_day_last_seen", "7"); } catch (e) {}
+      window.location.href = "./day07.html";
     });
   })();
   </script>
