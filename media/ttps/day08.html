@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Día 08</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Ivory Gold -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <style>
+    .tp-card { overflow: visible !important; }
+    .tp-actions{display:flex !important;gap:12px !important;align-items:center !important;}
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;border-radius:999px;padding:9px 12px;font-size:12px;
+      letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);
+      text-decoration:none;text-align:center;cursor:pointer;
+    }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
+    }
+    .tp-mini{
+      margin-top:12px;padding:14px;border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);border-radius:14px;
+    }
+    .tp-contrast{
+      margin-top:12px;
+      padding:14px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.50);
+      border-radius:14px;
+    }
+    .tp-contrast h4{
+      margin:0 0 10px 0;
+      font-size:.78rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.58);
+    }
+    .tp-cols{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:520px){ .tp-cols{ grid-template-columns:1fr; } }
+    .tp-col{
+      padding:12px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.60);
+      border-radius:12px;
+    }
+  </style>
+</head>
+<body class="tp-body">
+  <div class="tp-shell">
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK</div>
+        <div class="tp-title">The Truth Path</div>
+        <div class="tp-subtitle">El Sendero de la Verdad</div>
+      </div>
+      <a class="tp-link" href="/dashboard.html">Dashboard</a>
+    </header>
+    <main class="tp-card">
+      <div class="tp-sticky">
+        <div class="tp-kicker">Ciclo 2 · Día 08</div>
+        <div class="tp-meta">Lo que tiene vida fluye</div>
+      </div>
+      <section class="tp-content">
+        <div class="tp-note">
+          <div class="tp-note-title">Frase del día</div>
+          <p class="tp-muted" style="margin:0;">
+            Lo vivo no se fuerza.<br>
+            Lo vivo se expresa.
+          </p>
+        </div>
+        <hr class="tp-divider">
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Enfoque del día</strong></p>
+          <p class="tp-muted">
+            La vida se reconoce por su flujo.
+            Todo lo que tiene vida <strong>se mueve</strong>, <strong>se adapta</strong>, <strong>crece</strong>,
+            y encuentra camino aun cuando el terreno cambia.
+          </p>
+          <p class="tp-muted">
+            Lo vivo no necesita violencia para avanzar.
+            No necesita ansiedad para “lograr”.
+            No necesita correr para “ser”.
+            La vida avanza con poder… pero con naturalidad.
+          </p>
+          <p class="tp-muted">
+            Por eso esta ley expone una farsa:
+            la idea de que debes perseguir sin descanso para ser pleno.
+            Si tu vida se está volviendo solo empuje, solo prisa, solo presión,
+            quizá no es falta de disciplina…
+            quizá es falta de vida en lo que estás construyendo.
+          </p>
+          <p class="tp-muted">
+            La abundancia verdadera se parece a la vida:
+            <strong>fluye</strong>.
+            Se expresa desde adentro.
+            No nace del miedo.
+            Nace del orden interior.
+          </p>
+          <div class="tp-contrast">
+            <h4>Dos señales</h4>
+            <div class="tp-cols">
+              <div class="tp-col">
+                <p class="tp-muted" style="margin:0;">
+                  <strong>Cuando hay vida:</strong><br>
+                  • Hay claridad, aunque sea pequeña.<br>
+                  • Hay paz aun en el proceso.<br>
+                  • Hay dirección sin desesperación.<br>
+                  • Hay crecimiento real, no actuación.
+                </p>
+              </div>
+              <div class="tp-col">
+                <p class="tp-muted" style="margin:0;">
+                  <strong>Cuando hay ilusión:</strong><br>
+                  • Hay prisa constante.<br>
+                  • Hay comparación y ansiedad.<br>
+                  • Hay presión por aparentar.<br>
+                  • Hay agotamiento sin fruto.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="tp-muted">
+            Esto no significa que no habrá esfuerzo.
+            Significa que el esfuerzo correcto no nace de carencia,
+            nace de propósito.
+          </p>
+          <p class="tp-muted">
+            Hay un tipo de trabajo que te drena porque es persecución.
+            Y hay un tipo de trabajo que te fortalece porque es expresión.
+            La misma acción puede sentirse diferente
+            dependiendo del lugar interno desde donde nace.
+          </p>
+          <div class="tp-mini">
+            <p class="tp-muted" style="margin:0;">
+              Hoy no se trata de dejar de hacer.<br>
+              Se trata de volver a la vida dentro de ti…
+              y dejar que tu hacer nazca desde ahí.
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            Lo vivo fluye.
+            Lo vivo no se vende.
+            Lo vivo no se fabrica.
+            Lo vivo se cultiva… y luego se expresa.
+          </p>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Reflexión interior</strong></p>
+          <ul class="tp-muted" style="line-height:1.7;">
+            <li>¿Qué parte de mi vida se siente forzada, como empuje sin vida?</li>
+            <li>¿Dónde estoy persiguiendo algo por miedo a “no ser suficiente”?</li>
+            <li>¿Qué actividad me devuelve vida, claridad o paz?</li>
+          </ul>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Ejercicio práctico</strong></p>
+          <div class="tp-mini">
+            <p class="tp-muted" style="margin:0;">
+              Hoy, elige una acción pequeña y hazla <strong>sin prisa</strong>.<br>
+              Hazla como quien cultiva vida, no como quien persigue aprobación.<br><br>
+              Al terminar, respira y pregúntate:<br>
+              <strong>“¿Esto me drenó… o me alineó?”</strong>
+            </p>
+          </div>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Libreta</strong></p>
+          <div class="tp-mini">
+            <ol class="tp-muted" style="line-height:1.8;margin:0;padding-left:18px;">
+              <li>Lo que hoy se siente más “vivo” en mí es…</li>
+              <li>La persecución que hoy puedo soltar es…</li>
+              <li>Una acción que haré desde paz (no desde presión) es…</li>
+            </ol>
+          </div>
+        </div>
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Cierre</strong></p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            No tengo que forzar la vida.
+            Tengo que honrarla.
+            Y cuando la honro,
+            fluye.
+          </p>
+        </div>
+        <div class="tp-actions">
+          <a class="tp-navbtn" href="./day07.html">Día 07</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Día 09 →</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+  (function () {
+    try { localStorage.setItem("tp_day_last_seen", "8"); } catch (e) {}
+    document.getElementById("continueBtn").addEventListener("click", function () {
+      try { localStorage.setItem("tp_day_last_seen", "9"); } catch (e) {}
+      window.location.href = "./day09.html";
+    });
+  })();
+  </script>
+</body>
+</html>
