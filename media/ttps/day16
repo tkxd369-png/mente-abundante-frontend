@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Día 16</title>
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <style>
+    .tp-card{overflow:visible!important}
+    .tp-actions{display:flex;gap:12px}
+    .tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
+    .tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
+    .tp-mini{margin-top:12px;padding:14px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.55);border-radius:14px}
+    .tp-panel{margin-top:12px;padding:16px;border:1px solid rgba(176,141,69,.30);background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.44));border-radius:16px}
+    .tp-panel h4{margin:0 0 10px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.58)}
+    .tp-quote{margin-top:12px;padding:14px;border-left:3px solid rgba(176,141,69,.55);border-radius:14px;background:rgba(255,255,255,.50)}
+    .tp-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:520px){.tp-cols{grid-template-columns:1fr}}
+    .tp-col{padding:12px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.60);border-radius:12px}
+  </style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+  <div class="tp-brand">
+    <div class="tp-eyebrow">TMK</div>
+    <div class="tp-title">The Truth Path</div>
+    <div class="tp-subtitle">El Sendero de la Verdad</div>
+  </div>
+  <a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+<div class="tp-sticky">
+  <div class="tp-kicker">Ciclo 3 · Día 16</div>
+  <div class="tp-meta">Soy canal de la Fuente</div>
+</div>
+<section class="tp-content">
+<div class="tp-note">
+  <div class="tp-note-title">Frase del día</div>
+  <p class="tp-muted" style="margin:0;">
+    La Fuente no se estanca.<br>
+    Fluye… a través de ti.
+  </p>
+</div>
+<hr class="tp-divider">
+<div class="tp-q">
+<p class="tp-q-title"><strong>Enfoque del día</strong></p>
+<p class="tp-muted">
+Este día cierra la parte más práctica de la Ley de la Provisión:
+<strong>no fuiste creado para vivir como depósito, sino como canal.</strong>
+</p>
+<p class="tp-muted">
+Un depósito vive con miedo:
+“si doy, me quedo sin.”
+“si comparto, pierdo.”
+“si suelto, me falta.”
+</p>
+<p class="tp-muted">
+Pero un canal vive con otra lógica:
+recibe… y deja fluir.
+Y lo que fluye… se renueva.
+</p>
+<div class="tp-panel">
+<h4>Una verdad simple</h4>
+<p class="tp-muted" style="margin:0;">
+Cuando el agua se estanca… se pudre.<br>
+Cuando el agua fluye… da vida.
+</p>
+</div>
+<p class="tp-muted">
+El sistema enseña: “amontona para estar seguro.”
+La Fuente enseña: “conéctate y fluye con sabiduría.”
+No se trata de irresponsabilidad.
+Se trata de <strong>confianza con orden</strong>.
+</p>
+<div class="tp-quote">
+<p class="tp-muted" style="margin:0;">
+Cuando reconoces que eres canal,
+dejas de vivir desde miedo
+y comienzas a vivir desde propósito.
+</p>
+</div>
+<p class="tp-muted">
+Ser canal no solo es dinero.
+Es energía.
+Es palabra.
+Es tiempo.
+Es servicio.
+Es amor.
+Es presencia.
+</p>
+<div class="tp-cols">
+  <div class="tp-col">
+    <p class="tp-muted" style="margin:0;">
+      <strong>Señales de depósito:</strong><br>
+      • control excesivo<br>
+      • culpa al dar<br>
+      • miedo a perder<br>
+      • cerrar el corazón
+    </p>
+  </div>
+  <div class="tp-col">
+    <p class="tp-muted" style="margin:0;">
+      <strong>Señales de canal:</strong><br>
+      • gratitud al recibir<br>
+      • paz al compartir<br>
+      • claridad al decidir<br>
+      • gozo al dar vida
+    </p>
+  </div>
+</div>
+<div class="tp-mini">
+<p class="tp-muted" style="margin:0;">
+No se trata de dar para “ser aprobado”.<br>
+Se trata de fluir porque estás conectado.<br>
+<strong>Un canal no presume. Un canal cumple su función.</strong>
+</p>
+</div>
+<p class="tp-muted" style="margin-top:12px;margin-bottom:0;">
+Pregunta del día:
+<strong>¿En qué área estoy estancado… y dónde la Fuente me está llamando a fluir?</strong>
+</p>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Reflexión interior</strong></p>
+<ul class="tp-muted">
+<li>¿Qué me cuesta más soltar: dinero, tiempo, control, orgullo, palabras?</li>
+<li>¿Dónde doy desde miedo o desde expectativa?</li>
+<li>¿Cómo se vería fluir con sabiduría (sin extremos) en mi vida?</li>
+</ul>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Ejercicio práctico</strong></p>
+<div class="tp-mini">
+<p class="tp-muted" style="margin:0;">
+Hoy elige un acto pequeño de “flujo” (no exhibición):<br><br>
+• dar un mensaje de vida<br>
+• ayudar sin anunciarlo<br>
+• ordenar algo que has postergado<br>
+• compartir algo útil con alguien<br><br>
+Al final escribe:<br>
+<strong>“Hoy fui canal.”</strong>
+</p>
+</div>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Libreta</strong></p>
+<div class="tp-mini">
+<ol class="tp-muted">
+<li>Hoy reconozco que soy canal en…</li>
+<li>Mi estancamiento más claro es…</li>
+<li>El flujo sabio que elijo hoy es…</li>
+</ol>
+</div>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Cierre</strong></p>
+<p class="tp-muted" style="margin-bottom:0;">
+La Fuente no se estanca.<br>
+Fluye.<br>
+Y cuando tú fluyes… das vida.
+</p>
+</div>
+<div class="tp-actions">
+<a class="tp-navbtn" href="./day15.html">Día 15</a>
+<button class="tp-navbtn primary" onclick="location.href='./day17.html'">Día 17 →</button>
+</div>
+</section>
+</main>
+</div>
+</body>
+</html>
