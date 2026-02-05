@@ -53,7 +53,7 @@
       align-items:baseline;
       letter-spacing:.08em;
       text-transform:uppercase;
-Page 1
+ 
     }
       font-size:12px;
       color:rgba(31,34,38,.78);
@@ -113,7 +113,7 @@ Page 1
       height: calc(100vh - var(--header-h));
       display:flex;
       align-items:center;
-Page 2
+ 
     }
       justify-content:center;
       padding: 18px;
@@ -174,7 +174,7 @@ Page 2
       transform:rotate(-6deg);
       pointer-events:none;
     }
-Page 3
+ 
     /* Readability layer */
     .stage .float::before{
       content:"";
@@ -235,7 +235,7 @@ Page 3
       margin-top:6px;
     }
     .muted{
-Page 4
+ 
     }
       font-size:13px;
       opacity:.80;
@@ -295,7 +295,7 @@ Page 4
     }
   </style>
 </head>
-Page 5
+ 
 <body>
   <header class="header" id="stickyHeader">
     <div class="brand">
@@ -348,7 +348,7 @@ Page 5
           </p>
           <div class="actions" id="ttpActions">
             <button class="btn" type="button" id="viewReq">View requirements</button>
-Page 6
+ 
           </div>
           <div class="muted">Finish the book + quiz to unlock automatically.</div>
         </div>
@@ -403,7 +403,7 @@ Page 6
       if(e.target && e.target.id === "viewReq"){
         const msg = [
           "To unlock The Truth Path:",
-Page 7
+ 
           "• Book completed: " + (getBool(KEYS.bookComplete) ? "" : ""),
           "• Quiz completed: " + (getBool(KEYS.quizComplete) ? "" : "")
         ].join("\n");
