@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Media — The Master Key</title>
+
+  <!-- Fonts (puedes quitar si ya las tienes globales) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cream-1:#f6f0e6;
+      --cream-2:#efe6d7;
+      --charcoal:#111114;
+      --charcoal-2:#1a1a1f;
+      --text-dark:#1f2226;
+      --text-light:#f2f2f4;
+      --muted-dark:rgba(31,34,38,.62);
+      --muted-light:rgba(242,242,244,.72);
+      --gold:rgba(190,156,86,.95);
+      --line:rgba(190,156,86,.35);
+      --shadow: 0 20px 80px rgba(0,0,0,.20);
+      --radius: 22px;
+      --snap: 100vh;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
+      background:var(--cream-1);
+    }
+
+    /* Sticky Header */
+    .header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 18px;
+      z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(246,240,230,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:baseline;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(31,34,38,.78);
+    }
+    .brand strong{
+      font-family:"Playfair Display",serif;
+      letter-spacing:.04em;
+      font-size:18px;
+      text-transform:none;
+      color:rgba(31,34,38,.95);
+    }
+    .header-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(190,156,86,.55);
+      background:transparent;
+      color:rgba(31,34,38,.92);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      letter-spacing:.02em;
+      cursor:pointer;
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      user-select:none;
+    }
+    .btn:hover{ transform:translateY(-1px); background:rgba(190,156,86,.08); border-color:rgba(190,156,86,.75); }
+    .btn:active{ transform:translateY(0px); }
+    .btn.light{
+      color:rgba(242,242,244,.95);
+      border-color:rgba(190,156,86,.55);
+    }
+    .btn.light:hover{ background:rgba(190,156,86,.14); border-color:rgba(190,156,86,.80); }
+
+    /* Sections */
+    .section{
+      height:var(--snap);
+      width:100%;
+      scroll-snap-align:start;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 92px 18px 40px; /* top accounts for header */
+      overflow:hidden;
+    }
+
+    /* Background variants */
+    .cream{
+      background:
+        radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(900px 700px at 85% 85%, rgba(190,156,86,.16), transparent 60%),
+        linear-gradient(180deg, var(--cream-1), var(--cream-2));
+      color:var(--text-dark);
+    }
+    .charcoal{
+      background:
+        radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
+        radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
+      color:var(--text-light);
+    }
+
+    /* Quote layer (big, subtle) */
+    .quote{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 90px 18px 40px;
+      pointer-events:none;
+      z-index:1;
+    }
+    .quote p{
+      margin:0;
+      max-width: 980px;
+      font-family:"Playfair Display",serif;
+      font-weight:600;
+      line-height:1.05;
+      letter-spacing:.01em;
+      font-size: clamp(34px, 5vw, 72px);
+      text-align:center;
+      opacity:.20;
+    }
+    .cream .quote p{ color:rgba(31,34,38,.85); }
+    .charcoal .quote p{ color:rgba(242,242,244,.92); opacity:.16; }
+
+    /* Floating image card */
+    .float{
+      position:relative;
+      z-index:3;
+      width:min(980px, 92vw);
+      height:min(62vh, 520px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      transform: translateY(0);
+      transition: transform .35s ease, filter .35s ease;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Make it feel like it floats */
+    .section:hover .float{ transform: translateY(-6px); }
+
+    /* Placeholder “hero image” looks premium without external files */
+    .media-hero{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.25), transparent 55%),
+        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.25), transparent 60%),
+        linear-gradient(130deg, rgba(255,255,255,.06), rgba(0,0,0,.18));
+    }
+    .media-hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        repeating-linear-gradient( 90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
+      opacity:.25;
+      transform:rotate(-6deg);
+      pointer-events:none;
+    }
+
+    .label{
+      position:absolute;
+      left:18px; top:16px;
+      z-index:4;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .pill{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(190,156,86,.55);
+      background: rgba(0,0,0,.08);
+      color: inherit;
+      backdrop-filter: blur(10px);
+    }
+    .cream .pill{ background: rgba(255,255,255,.38); color: rgba(31,34,38,.92); }
+    .charcoal .pill{ background: rgba(0,0,0,.20); color: rgba(242,242,244,.92); }
+
+    .float-content{
+      position:absolute;
+      inset:0;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap:10px;
+      z-index:5;
+    }
+    .title{
+      margin:0;
+      font-family:"Playfair Display",serif;
+      font-size: clamp(22px, 3.2vw, 34px);
+      letter-spacing:.01em;
+    }
+    .desc{
+      margin:0;
+      font-size: 15px;
+      line-height:1.5;
+      opacity:.92;
+      max-width: 62ch;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .muted{
+      font-size:13px;
+      opacity:.80;
+      margin-top:6px;
+    }
+
+    /* Locked state for TTP card */
+    .locked .float{
+      filter: blur(0px) saturate(.88);
+    }
+    .locked .lock-overlay{
+      position:absolute;
+      inset:0;
+      z-index:6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+    }
+    .lock-box{
+      width:min(560px, 88%);
+      border:1px solid rgba(190,156,86,.55);
+      border-radius: 18px;
+      padding:16px 16px 14px;
+      background: rgba(17,17,20,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(242,242,244,.92);
+      text-align:center;
+    }
+    .lock-box strong{
+      display:block;
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      margin-bottom:6px;
+      color: rgba(242,242,244,.96);
+    }
+    .lock-box p{
+      margin:0;
+      font-size:14px;
+      opacity:.92;
+      line-height:1.5;
+    }
+
+    /* Final section center button */
+    .final-wrap{
+      position:relative;
+      z-index:3;
+      width:min(860px, 92vw);
+      text-align:center;
+      padding: 8px 0;
+    }
+    .final-wrap h2{
+      font-family:"Playfair Display",serif;
+      font-size: clamp(28px, 4vw, 52px);
+      margin:0 0 10px;
+      letter-spacing:.01em;
+    }
+    .final-wrap p{
+      margin:0 auto 18px;
+      max-width: 70ch;
+      opacity:.82;
+      line-height:1.6;
+    }
+
+    /* Dev panel (for testing unlock flow) */
+    .dev-panel{
+      position:fixed;
+      left:12px;
+      bottom:12px;
+      z-index:90;
+      width: 240px;
+      border-radius:16px;
+      border:1px solid rgba(190,156,86,.35);
+      background: rgba(246,240,230,.82);
+      backdrop-filter: blur(10px);
+      padding:12px;
+      box-shadow: 0 14px 50px rgba(0,0,0,.18);
+      color: rgba(31,34,38,.92);
+      font-size:12px;
+    }
+    .dev-panel h4{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      opacity:.75;
+    }
+    .dev-row{
+      display:flex;
+      gap:8px;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .dev-btn{
+      flex:1;
+      min-width: 100px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(190,156,86,.55);
+      background: rgba(255,255,255,.55);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .dev-btn:hover{ background: rgba(190,156,86,.10); }
+    .dev-note{ opacity:.78; line-height:1.35; margin:0; }
+
+    /* Hide dev panel easily */
+    .dev-panel[data-hidden="true"]{ display:none; }
+
+    /* Responsive tweak */
+    @media (max-width: 520px){
+      .float{ height:min(58vh, 480px); }
+      .desc{ font-size:14px; }
+      .header{ padding:0 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sticky Header -->
+  <header class="header" id="stickyHeader">
+    <div class="brand">
+      <strong>Media</strong>
+      <span>THE MASTER KEY</span>
+    </div>
+
+    <div class="header-actions">
+      <!-- Cambia el href a tu dashboard real -->
+      <a class="btn" href="index.html" id="dashboardTopBtn">Dashboard</a>
+    </div>
+  </header>
+
+  <!-- SECTION 1: BOOK -->
+  <section class="section cream" id="sec-book" aria-label="Libro">
+    <div class="quote">
+      <p>“Toda transformación comienza con una decisión.”</p>
+    </div>
+
+    <div class="float" id="bookCard" role="group" aria-label="Libro: Yo Decido Ser Abundante">
+      <div class="media-hero" aria-hidden="true"></div>
+
+      <div class="label">
+        <span class="pill">Libro</span>
+        <span class="pill" id="bookStatusPill">Disponible</span>
+      </div>
+
+      <div class="float-content">
+        <h1 class="title">Yo Decido Ser Abundante</h1>
+        <p class="desc">
+          El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.
+        </p>
+
+        <div class="actions">
+          <!-- Cambia estos links cuando tengas las rutas finales -->
+          <a class="btn" href="webbook/index.html" id="readBookBtn">Leer ahora</a>
+          <button class="btn" type="button" id="markBookCompleteBtn" title="Solo para pruebas">Marcar como completado</button>
+        </div>
+
+        <div class="muted">
+          *Nota: El Truth Path se desbloquea al terminar el libro y completar el quiz.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: TTP -->
+  <section class="section charcoal" id="sec-ttp" aria-label="The Truth Path">
+    <div class="quote">
+      <p>“La verdad no se lee. Se recorre.”</p>
+    </div>
+
+    <div class="float" id="ttpCard" role="group" aria-label="The Truth Path">
+      <div class="media-hero" aria-hidden="true"></div>
+
+      <div class="label">
+        <span class="pill">Truth Path</span>
+        <span class="pill" id="ttpStatusPill">Bloqueado</span>
+      </div>
+
+      <div class="float-content">
+        <h2 class="title">The
