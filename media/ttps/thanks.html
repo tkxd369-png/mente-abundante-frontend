@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Truth Path — Carta de Agradecimiento</title>
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <style>
+    .tp-card{overflow:visible!important}
+    .tp-actions{display:flex;gap:12px;justify-content:center}
+    .tp-navbtn{min-width:220px;border-radius:999px;padding:10px 16px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82);text-decoration:none;text-align:center;cursor:pointer}
+    .tp-letter{margin-top:12px;padding:20px;border:1px solid rgba(176,141,69,.30);background:linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.48));border-radius:18px}
+    .tp-letter p{margin:0 0 14px}
+    .tp-letter p:last-child{margin:0}
+  </style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+  <div class="tp-brand">
+    <div class="tp-eyebrow">TMK</div>
+    <div class="tp-title">The Truth Path</div>
+    <div class="tp-subtitle">El Sendero de la Verdad</div>
+  </div>
+</header>
+<main class="tp-card">
+  <div class="tp-sticky">
+    <div class="tp-kicker">Cierre</div>
+    <div class="tp-meta">Carta de Agradecimiento</div>
+  </div>
+  <section class="tp-content">
+    <div class="tp-letter">
+      <p class="tp-muted">
+      Gracias.
+      </p>
+      <p class="tp-muted">
+      Gracias por tu tiempo, por tu silencio, por tu honestidad y por tu valentía.
+      Caminar este sendero no fue un acto automático, fue una decisión.
+      Y cada día que elegiste continuar, elegiste mirarte con verdad.
+      </p>
+      <p class="tp-muted">
+      No todos se detienen.
+      No todos cuestionan.
+      No todos están dispuestos a soltar ilusiones cómodas para abrazar una verdad más profunda.
+      Tú sí lo hiciste.
+      </p>
+      <p class="tp-muted">
+      Este sendero no pretendió enseñarte algo nuevo,
+      sino ayudarte a recordar lo que siempre estuvo en ti.
+      La vida.
+      La plenitud.
+      La fuente.
+      </p>
+      <p class="tp-muted">
+      A partir de hoy, no necesitas volver aquí para vivir en abundancia.
+      Lo que necesitabas ya fue activado:
+      claridad,
+      identidad,
+      dirección,
+      y una decisión consciente.
+      </p>
+      <p class="tp-muted">
+      Que recuerdes volver cuando el ruido aparezca.
+      Que recuerdes tu centro cuando la prisa quiera gobernar.
+      Que recuerdes que la abundancia no se persigue… se encarna.
+      </p>
+      <p class="tp-muted">
+      Gracias por permitir que este sendero cumpliera su propósito.
+      El resto del camino ahora te pertenece.
+      </p>
+      <p class="tp-muted">
+      — The Truth Path<br>
+      Yo Decido Ser Abundante
+      </p>
+    </div>
+    <div class="tp-actions">
+      <button class="tp-navbtn" onclick="location.href='/dashboard.html'">Ir al Dashboard</button>
+    </div>
+  </section>
+</main>
+</div>
+</body>
+</html>
