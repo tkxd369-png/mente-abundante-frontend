@@ -4,16 +4,148 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Media Vault — The Master Key</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:
+wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="media.css" />
 </head>
-<body>
-  <div class="fixed-bg"></div>
-  <header class="sticky-header">MEDIA VAULT</header>
-  <main>
-    <section class="panel hero" data-quote-es="Todo ya fue preparado." data-quote-en="Everything has already been prepared."></section>
-    <section class="panel cream"><div class="card">WebBook</div></section>
-    <section class="panel charcoal"><div class="card">Truth Path</div></section>
-    <section class="panel cream"><div class="card">Audiobook</div></section>
+<body class="ma-media">
+  <!-- FIXED BACKGROUND (does NOT scroll) -->
+  <div class="ma-fixed-bg" aria-hidden="true">
+    <div class="ma-paper-texture"></div>
+    <div class="ma-fixed-quote-wrap">
+      <h1 id="bgQuote" class="ma-fixed-quote"></h1>
+      <p id="bgSub" class="ma-fixed-sub"></p>
+    </div>
+  </div>
+  <!-- STICKY HEADER -->
+  <header class="ma-sticky">
+    <div class="ma-sticky-inner">
+      <div class="ma-left">
+        <span class="ma-dot"></span>
+        <div>
+          <div class="ma-title" id="hdrTitle">MEDIA VAULT</div>
+          <div class="ma-sub" id="hdrSub">The Master Key</div>
+        </div>
+      </div>
+      <nav class="ma-nav">
+        <a class="ma-link" href="../dashboard.html" id="dashLink">Dashboard</a>
+        <a class="ma-link" href="#book">WebBook</a>
+        <a class="ma-link" href="#truthpath">Truth Path</a>
+      </nav>
+    </div>
+  </header>
+  <!-- FLOATING CONTENT STACK -->
+  <main class="ma-stack">
+    <!-- HERO (quote is behind; card floats over it) -->
+    <section class="ma-panel ma-hero" id="top"
+      data-quote-es="Todo ya fue preparado."
+      data-sub-es="Abre tu bóveda. Lo que buscas ya está en ti."
+      data-quote-en="Everything has already been prepared."
+      data-sub-en="Open your vault. What you seek is already within you.">
+      <div class="ma-panel-inner">
+        <div class="ma-hero-spacer"></div>
+        <div class="ma-card ma-float">
+          <div class="ma-kicker" id="heroKicker">BIENVENIDO</div>
+          <h2 class="ma-card-title" id="heroTitle">Media Vault</h2>
+          <p class="ma-card-desc" id="heroDesc">Tu biblioteca privada de recursos. Desliza para 
+revelar cada sección.</p>
+          <div class="ma-actions">
+            <a class="ma-btn" href="#book" id="ctaBook">Entrar al WebBook</a>
+            <a class="ma-btn ma-btn-ghost" href="#truthpath" id="ctaTtp">Ver Truth Path</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- WEBBOOK -->
+    <section class="ma-panel ma-cream" id="book"
+      data-quote-es="La abundancia no es suerte: es alineación."
+      data-sub-es="Lee con intención. Observa tus leyes."
+      data-quote-en="Abundance isn't luck: it's alignment."
+      data-sub-en="Read with intention. Observe your laws.">
+      <div class="ma-panel-inner">
+        <div class="ma-card ma-float">
+          <div class="ma-toprow">
+            <span class="ma-badge" id="bookBadge">WEBBOOK</span>
+            <span class="ma-meta" id="bookMeta">Disponible</span>
+          </div>
+          <h2 class="ma-card-title" id="bookTitle">Yo Decido Ser Abundante</h2>
+          <p class="ma-card-desc" id="bookDesc">Lectura principal. Protegida con watermark y bloqueo
+ de copia.</p>
+          <div class="ma-grid">
+            <a class="ma-tile" href="../ebook/index.html" id="bookEs">
+              <div class="ma-tile-label">Español</div>
+              <div class="ma-tile-sub">/ebook/index.html</div>
+            </a>
+            <a class="ma-tile" href="../ebook.en/index.html" id="bookEn">
+              <div class="ma-tile-label">English</div>
+              <div class="ma-tile-sub">/ebook.en/index.html</div>
+            </a>
+          </div>
+          <div class="ma-note" id="bookNote">Tip: al terminar, desbloqueas el acceso al Truth 
+Path.</div>
+        </div>
+      </div>
+    </section>
+    <!-- TRUTH PATH -->
+    <section class="ma-panel ma-charcoal" id="truthpath"
+      data-quote-es="Tu verdad es una llave. Úsala con gratitud."
+      data-sub-es="El camino se abre cuando completas el libro y el quiz."
+      data-quote-en="Your truth is a key. Use it with gratitude."
+      data-sub-en="The path opens when you complete the book and quiz.">
+      <div class="ma-panel-inner">
+        <div class="ma-card ma-float ma-card-dark">
+          <div class="ma-toprow">
+            <span class="ma-badge" id="ttpBadge">TRUTH PATH</span>
+            <span class="ma-meta" id="ttpMeta">Bloqueado</span>
+          </div>
+          <h2 class="ma-card-title" id="ttpTitle">The Truth Path</h2>
+          <p class="ma-card-desc" id="ttpDesc">Devocional de 40 días. Se desbloquea al completar la 
+lectura y el quiz.</p>
+          <div class="ma-grid">
+            <a class="ma-tile ma-locked" href="#" id="ttpEs">
+              <div class="ma-tile-label">Español</div>
+              <div class="ma-tile-sub">/media/ttps/</div>
+            </a>
+            <a class="ma-tile ma-locked" href="#" id="ttpEn">
+              <div class="ma-tile-label">English</div>
+              <div class="ma-tile-sub">/media/ttps-en/</div>
+            </a>
+          </div>
+          <div class="ma-warn" id="ttpWarn">Aún no está desbloqueado. Termina el libro + quiz para 
+continuar.</div>
+        </div>
+      </div>
+    </section>
+    <!-- FUTURE -->
+    <section class="ma-panel ma-cream" id="coming"
+      data-quote-es="Lo que viene no es más contenido. Es más identidad."
+      data-sub-es="Aquí irá tu audiolibro y recursos futuros."
+      data-quote-en="What's coming isn't more content. It's more identity."
+      data-sub-en="Audiobook and future resources will live here.">
+      <div class="ma-panel-inner">
+        <div class="ma-card ma-float">
+          <div class="ma-toprow">
+            <span class="ma-badge">PRÓXIMAMENTE</span>
+            <span class="ma-meta">Vault expansion</span>
+          </div>
+          <h2 class="ma-card-title" id="soonTitle">Audiobook + Recursos</h2>
+          <p class="ma-card-desc" id="soonDesc">Esta sección está lista para crecer sin cambiar el 
+diseño.</p>
+          <div class="ma-note" id="soonNote">Mantendremos el estilo “fixed background + floating 
+cards”.</div>
+        </div>
+      </div>
+    </section>
+    <footer class="ma-footer">
+      <div class="ma-footer-inner">
+        <span>© Light &amp; Crown</span>
+        <span class="ma-footer-dot">•</span>
+        <span id="footerLang">ES</span>
+      </div>
+    </footer>
   </main>
+  <script src="media.js"></script>
 </body>
 </html>
