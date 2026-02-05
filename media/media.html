@@ -1,30 +1,54 @@
-<!doctype html>
+ <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Media — The Master Key</title>
 
-  <!-- Fonts (puedes quitar si ya las tienes globales) -->
+  <!-- TMK: Gate (require login) — mismo patrón que TTP -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) {
+        window.location.replace("/start.html");
+        return;
+      }
+    } catch (e) {
+      window.location.replace("/start.html");
+      return;
+    }
+  })();
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --cream-1:#f6f0e6;
       --cream-2:#efe6d7;
+
       --charcoal:#111114;
       --charcoal-2:#1a1a1f;
+
       --text-dark:#1f2226;
       --text-light:#f2f2f4;
-      --muted-dark:rgba(31,34,38,.62);
-      --muted-light:rgba(242,242,244,.72);
+
       --gold:rgba(190,156,86,.95);
       --line:rgba(190,156,86,.35);
-      --shadow: 0 20px 80px rgba(0,0,0,.20);
+
+      --shadow: 0 22px 90px rgba(0,0,0,.22);
       --radius: 22px;
+
+      --headerH: 64px;
+
+      /* Scroll “ritual” */
       --snap: 100vh;
+      --snapEase: cubic-bezier(.2,.9,.2,1);
     }
 
     *{box-sizing:border-box}
@@ -36,22 +60,32 @@
       scroll-snap-type:y mandatory;
       scroll-behavior:smooth;
       background:var(--cream-1);
+      color:var(--text-dark);
     }
 
-    /* Sticky Header */
+    /* Sticky Header (cambia según sección) */
     .header{
       position:fixed;
       top:0; left:0; right:0;
-      height:64px;
+      height:var(--headerH);
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding:0 18px;
       z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(246,240,230,.65);
       border-bottom:1px solid var(--line);
+      backdrop-filter:saturate(140%) blur(10px);
+      transition: background .25s ease, color .25s ease;
     }
+    .header[data-theme="cream"]{
+      background:rgba(246,240,230,.68);
+      color:rgba(31,34,38,.92);
+    }
+    .header[data-theme="charcoal"]{
+      background:rgba(17,17,20,.62);
+      color:rgba(242,242,244,.92);
+    }
+
     .brand{
       display:flex;
       gap:10px;
@@ -59,45 +93,35 @@
       letter-spacing:.08em;
       text-transform:uppercase;
       font-size:12px;
-      color:rgba(31,34,38,.78);
+      opacity:.92;
     }
     .brand strong{
       font-family:"Playfair Display",serif;
-      letter-spacing:.04em;
+      letter-spacing:.03em;
       font-size:18px;
       text-transform:none;
-      color:rgba(31,34,38,.95);
     }
-    .header-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+
     .btn{
       appearance:none;
       border:1px solid rgba(190,156,86,.55);
       background:transparent;
-      color:rgba(31,34,38,.92);
       padding:10px 14px;
       border-radius:999px;
       font-weight:600;
       letter-spacing:.02em;
       cursor:pointer;
-      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+      transition:transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
       text-decoration:none;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
       user-select:none;
+      color:inherit;
     }
-    .btn:hover{ transform:translateY(-1px); background:rgba(190,156,86,.08); border-color:rgba(190,156,86,.75); }
+    .btn:hover{ transform:translateY(-1px); background:rgba(190,156,86,.10); border-color:rgba(190,156,86,.75); }
     .btn:active{ transform:translateY(0px); }
-    .btn.light{
-      color:rgba(242,242,244,.95);
-      border-color:rgba(190,156,86,.55);
-    }
-    .btn.light:hover{ background:rgba(190,156,86,.14); border-color:rgba(190,156,86,.80); }
 
     /* Sections */
     .section{
@@ -108,7 +132,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 92px 18px 40px; /* top accounts for header */
+      padding: calc(var(--headerH) + 28px) 18px 40px;
       overflow:hidden;
     }
 
@@ -135,7 +159,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 90px 18px 40px;
+      padding: calc(var(--headerH) + 22px) 18px 40px;
       pointer-events:none;
       z-index:1;
     }
@@ -149,11 +173,12 @@
       font-size: clamp(34px, 5vw, 72px);
       text-align:center;
       opacity:.20;
+      transform: translateY(2px);
     }
-    .cream .quote p{ color:rgba(31,34,38,.85); }
+    .cream .quote p{ color:rgba(31,34,38,.86); }
     .charcoal .quote p{ color:rgba(242,242,244,.92); opacity:.16; }
 
-    /* Floating image card */
+    /* Floating “product” card */
     .float{
       position:relative;
       z-index:3;
@@ -162,16 +187,23 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      transform: translateY(0);
-      transition: transform .35s ease, filter .35s ease;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.06);
+
+      /* Editorial motion */
+      transform: translateY(0px);
+      transition:
+        transform .55s var(--snapEase),
+        filter .55s var(--snapEase);
+      will-change: transform;
     }
 
-    /* Make it feel like it floats */
-    .section:hover .float{ transform: translateY(-6px); }
+    /* Hover lift (desktop) */
+    @media (hover:hover){
+      .section:hover .float{ transform: translateY(-8px); }
+    }
 
-    /* Placeholder “hero image” looks premium without external files */
+    /* Premium placeholder hero (reemplazar luego con imágenes reales) */
     .media-hero{
       position:absolute;
       inset:0;
@@ -184,8 +216,7 @@
       content:"";
       position:absolute;
       inset:-40px;
-      background:
-        repeating-linear-gradient( 90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
       opacity:.25;
       transform:rotate(-6deg);
       pointer-events:none;
@@ -207,12 +238,10 @@
       padding:8px 12px;
       border-radius:999px;
       border:1px solid rgba(190,156,86,.55);
-      background: rgba(0,0,0,.08);
-      color: inherit;
       backdrop-filter: blur(10px);
     }
-    .cream .pill{ background: rgba(255,255,255,.38); color: rgba(31,34,38,.92); }
-    .charcoal .pill{ background: rgba(0,0,0,.20); color: rgba(242,242,244,.92); }
+    .cream .pill{ background: rgba(255,255,255,.40); color: rgba(31,34,38,.92); }
+    .charcoal .pill{ background: rgba(0,0,0,.22); color: rgba(242,242,244,.92); }
 
     .float-content{
       position:absolute;
@@ -251,25 +280,22 @@
       margin-top:6px;
     }
 
-    /* Locked state for TTP card */
-    .locked .float{
-      filter: blur(0px) saturate(.88);
-    }
-    .locked .lock-overlay{
+    /* Locked overlay for TTP */
+    .lock-overlay{
       position:absolute;
       inset:0;
       z-index:6;
-      display:flex;
+      display:none;
       align-items:center;
       justify-content:center;
-      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.60));
     }
     .lock-box{
       width:min(560px, 88%);
       border:1px solid rgba(190,156,86,.55);
       border-radius: 18px;
       padding:16px 16px 14px;
-      background: rgba(17,17,20,.55);
+      background: rgba(17,17,20,.58);
       backdrop-filter: blur(10px);
       color: rgba(242,242,244,.92);
       text-align:center;
@@ -288,7 +314,7 @@
       line-height:1.5;
     }
 
-    /* Final section center button */
+    /* Final section */
     .final-wrap{
       position:relative;
       z-index:3;
@@ -309,52 +335,19 @@
       line-height:1.6;
     }
 
-    /* Dev panel (for testing unlock flow) */
-    .dev-panel{
-      position:fixed;
-      left:12px;
-      bottom:12px;
-      z-index:90;
-      width: 240px;
-      border-radius:16px;
-      border:1px solid rgba(190,156,86,.35);
-      background: rgba(246,240,230,.82);
-      backdrop-filter: blur(10px);
-      padding:12px;
-      box-shadow: 0 14px 50px rgba(0,0,0,.18);
-      color: rgba(31,34,38,.92);
+    /* Small hint on bottom (optional) */
+    .scroll-hint{
+      position:absolute;
+      left:0; right:0; bottom:18px;
+      text-align:center;
       font-size:12px;
-    }
-    .dev-panel h4{
-      margin:0 0 8px;
-      font-size:12px;
-      letter-spacing:.10em;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      opacity:.75;
+      opacity:.55;
+      z-index:2;
+      pointer-events:none;
     }
-    .dev-row{
-      display:flex;
-      gap:8px;
-      margin-bottom:8px;
-      flex-wrap:wrap;
-    }
-    .dev-btn{
-      flex:1;
-      min-width: 100px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(190,156,86,.55);
-      background: rgba(255,255,255,.55);
-      cursor:pointer;
-      font-weight:700;
-    }
-    .dev-btn:hover{ background: rgba(190,156,86,.10); }
-    .dev-note{ opacity:.78; line-height:1.35; margin:0; }
 
-    /* Hide dev panel easily */
-    .dev-panel[data-hidden="true"]{ display:none; }
-
-    /* Responsive tweak */
     @media (max-width: 520px){
       .float{ height:min(58vh, 480px); }
       .desc{ font-size:14px; }
@@ -365,20 +358,18 @@
 
 <body>
   <!-- Sticky Header -->
-  <header class="header" id="stickyHeader">
+  <header class="header" id="stickyHeader" data-theme="cream">
     <div class="brand">
       <strong>Media</strong>
       <span>THE MASTER KEY</span>
     </div>
-
     <div class="header-actions">
-      <!-- Cambia el href a tu dashboard real -->
-      <a class="btn" href="index.html" id="dashboardTopBtn">Dashboard</a>
+      <a class="btn" href="/dashboard.html">Dashboard</a>
     </div>
   </header>
 
   <!-- SECTION 1: BOOK -->
-  <section class="section cream" id="sec-book" aria-label="Libro">
+  <section class="section cream" id="sec-book" data-theme="cream" aria-label="Libro">
     <div class="quote">
       <p>“Toda transformación comienza con una decisión.”</p>
     </div>
@@ -398,20 +389,20 @@
         </p>
 
         <div class="actions">
-          <!-- Cambia estos links cuando tengas las rutas finales -->
-          <a class="btn" href="webbook/index.html" id="readBookBtn">Leer ahora</a>
-          <button class="btn" type="button" id="markBookCompleteBtn" title="Solo para pruebas">Marcar como completado</button>
+          <a class="btn" href="/webbook/index.html">Leer ahora</a>
         </div>
 
         <div class="muted">
-          *Nota: El Truth Path se desbloquea al terminar el libro y completar el quiz.
+          *The Truth Path se revela al completar el libro y el quiz.
         </div>
       </div>
     </div>
+
+    <div class="scroll-hint">Desliza</div>
   </section>
 
   <!-- SECTION 2: TTP -->
-  <section class="section charcoal" id="sec-ttp" aria-label="The Truth Path">
+  <section class="section charcoal" id="sec-ttp" data-theme="charcoal" aria-label="The Truth Path">
     <div class="quote">
       <p>“La verdad no se lee. Se recorre.”</p>
     </div>
@@ -425,4 +416,164 @@
       </div>
 
       <div class="float-content">
-        <h2 class="title">The
+        <h2 class="title">The Truth Path (40 días)</h2>
+        <p class="desc" id="ttpDesc">
+          Un recorrido guiado de reflexión y verdad interior. Se revela cuando la base está completa.
+        </p>
+
+        <div class="actions" id="ttpActions">
+          <!-- Injected via JS -->
+        </div>
+
+        <div class="muted" id="ttpHint">
+          Completa el libro + quiz para desbloquearlo automáticamente.
+        </div>
+      </div>
+
+      <div class="lock-overlay" id="lockOverlay" aria-hidden="false">
+        <div class="lock-box">
+          <strong>Se revela después</strong>
+          <p>Completa el libro y el quiz para abrir este camino.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FUTURE + DASHBOARD BUTTON -->
+  <section class="section cream" id="sec-future" data-theme="cream" aria-label="Contenido en expansión">
+    <div class="quote">
+      <p>“La verdad se revela por capas.”</p>
+    </div>
+
+    <div class="final-wrap" role="group" aria-label="Cierre">
+      <h2>Esto es solo el comienzo.</h2>
+      <p>
+        Aquí vivirán los próximos audios, videos y series. Sin ruido. Sin prisa. Solo expansión continua.
+      </p>
+
+      <a class="btn" href="/dashboard.html">Dashboard</a>
+    </div>
+  </section>
+
+  <script>
+    // ====== Flags de desbloqueo (localStorage) ======
+    // Ajusta estas keys SOLO si ya tienes otras definidas en tu sistema.
+    const KEYS = {
+      bookComplete: "ma_book_complete",
+      quizComplete: "ma_quiz_complete"
+    };
+
+    // Progress del TTP (ya lo usas dentro de Truth Path)
+    const TTP_LAST_SEEN_KEY = "tp_day_last_seen";
+
+    const els = {
+      header: document.getElementById("stickyHeader"),
+      sections: Array.from(document.querySelectorAll(".section")),
+      bookStatusPill: document.getElementById("bookStatusPill"),
+      ttpStatusPill: document.getElementById("ttpStatusPill"),
+      ttpDesc: document.getElementById("ttpDesc"),
+      ttpHint: document.getElementById("ttpHint"),
+      ttpActions: document.getElementById("ttpActions"),
+      lockOverlay: document.getElementById("lockOverlay"),
+      floats: Array.from(document.querySelectorAll(".float")),
+    };
+
+    function getBool(key){ return localStorage.getItem(key) === "1"; }
+    function isTtpUnlocked(){
+      return getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete);
+    }
+
+    function getLastTtpDay(){
+      const v = (localStorage.getItem(TTP_LAST_SEEN_KEY) || "").trim();
+      const n = parseInt(v, 10);
+      if (!Number.isFinite(n) || n < 1) return null;
+      return n;
+    }
+
+    function renderUnlock(){
+      const bookDone = getBool(KEYS.bookComplete);
+      const quizDone = getBool(KEYS.quizComplete);
+      const unlocked = isTtpUnlocked();
+
+      // Libro pill
+      els.bookStatusPill.textContent = bookDone ? "Completado" : "Disponible";
+
+      // TTP
+      els.ttpActions.innerHTML = "";
+
+      if (unlocked){
+        els.ttpStatusPill.textContent = "Desbloqueado";
+        els.lockOverlay.style.display = "none";
+        els.ttpHint.textContent = "Tu progreso se guarda automáticamente.";
+
+        const lastDay = getLastTtpDay();
+        const href = lastDay ? `/truth-path/day${String(lastDay).padStart(2,"0")}.html` : "/truth-path/day01.html";
+
+        els.ttpDesc.textContent = "Ahora estás listo para recorrer el camino. Inicia o continúa donde te quedaste.";
+
+        const a = document.createElement("a");
+        a.className = "btn";
+        a.href = href;
+        a.textContent = lastDay ? `Continuar (Día ${lastDay})` : "Iniciar Truth Path";
+        els.ttpActions.appendChild(a);
+
+      } else {
+        els.ttpStatusPill.textContent = "Bloqueado";
+        els.lockOverlay.style.display = "flex";
+        els.ttpDesc.textContent = "Un recorrido guiado de reflexión y verdad interior. Se revela cuando la base está completa.";
+        els.ttpHint.textContent = "Completa el libro + quiz para desbloquearlo automáticamente.";
+
+        const info = document.createElement("button");
+        info.className = "btn";
+        info.type = "button";
+        info.textContent = "Ver requisitos";
+        info.addEventListener("click", () => {
+          const msg = [
+            "Para desbloquear The Truth Path:",
+            `• Libro completado: ${bookDone ? "✅" : "❌"}`,
+            `• Quiz completado: ${quizDone ? "✅" : "❌"}`
+          ].join("\n");
+          alert(msg);
+        });
+        els.ttpActions.appendChild(info);
+      }
+    }
+
+    // ====== B) Sensación “jala la siguiente” ======
+    // 1) Header cambia tema según sección visible
+    const io = new IntersectionObserver((entries) => {
+      // toma la entrada más “dominante”
+      let top = null;
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        if (!top || e.intersectionRatio > top.intersectionRatio) top = e;
+      }
+      if (!top) return;
+      const theme = top.target.getAttribute("data-theme") || "cream";
+      els.header.setAttribute("data-theme", theme);
+    }, { threshold: [0.25, 0.55, 0.75] });
+
+    els.sections.forEach(s => io.observe(s));
+
+    // 2) Parallax suave de la tarjeta (ligero, premium)
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+    function parallax(){
+      const vh = window.innerHeight || 1;
+      els.floats.forEach(card => {
+        const r = card.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const delta = (center - vh / 2) / (vh / 2); // -1..1
+        const y = clamp(delta * 12, -14, 14);
+        // No sobreescribir el hover lift: sumamos suave
+        card.style.transform = `translateY(${y}px)`;
+      });
+    }
+
+    window.addEventListener("scroll", parallax, { passive:true });
+
+    // Init
+    renderUnlock();
+    parallax();
+  </script>
+</body>
+</html>
