@@ -1,14 +1,14 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Media — The Master Key</title>
-  <!-- Fonts (optional) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wgh
-  t@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght
+  @400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
       --cream-1:#f6f0e6;
@@ -21,21 +21,22 @@
       --line:rgba(190,156,86,.35);
       --shadow: 0 18px 70px rgba(0,0,0,.22);
       --radius: 22px;
+      --header-h:64px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text-dark);
       background:var(--cream-1);
+      color:var(--text-dark);
       overflow-x:hidden;
     }
-    /* Sticky Header */
+    /* Sticky header */
     .header{
       position:fixed;
       top:0; left:0; right:0;
-      height:64px;
+      height:var(--header-h);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -45,19 +46,17 @@
       background:rgba(246,240,230,.60);
       border-bottom:1px solid var(--line);
     }
-    .header.dark{
-      background:rgba(17,17,20,.45);
-    }
+    .header.dark{ background:rgba(17,17,20,.45); }
     .brand{
       display:flex;
       gap:10px;
       align-items:baseline;
       letter-spacing:.08em;
       text-transform:uppercase;
+Page 1
+    }
       font-size:12px;
       color:rgba(31,34,38,.78);
-    }
-Page 1
     .header.dark .brand{ color:rgba(242,242,244,.75); }
     .brand strong{
       font-family:"Playfair Display",serif;
@@ -82,17 +81,18 @@ Page 1
       align-items:center;
       justify-content:center;
       gap:8px;
+      user-select:none;
     }
     .header.dark .btn{ color:rgba(242,242,244,.92); }
     .btn:active{ transform:translateY(1px); }
-    /* Sections (taller than screen so “sticky” feels like it drags next section) */
+    /* Sections */
     .section{
-      min-height:170vh;
       position:relative;
-      padding: 92px 18px 56px;
+      min-height:180vh; /* key for the “drag” feel */
+      padding: calc(var(--header-h) + 28px) 18px 60px;
       overflow:hidden;
     }
-    /* Backgrounds */
+    /* Background styles */
     .cream{
       background:
         radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
@@ -107,20 +107,20 @@ Page 1
         linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
       color:var(--text-light);
     }
-    /* Quote layer: sticky = “static background text” */
-    .quote{
+    /* Static “background” quote (sticky) */
+    .bg{
       position:sticky;
-      top:92px;
-      height:calc(100vh - 92px);
+      top: calc(var(--header-h) + 28px);
+      height: calc(100vh - (var(--header-h) + 28px));
       display:flex;
+Page 2
       align-items:center;
       justify-content:center;
       padding:18px;
       pointer-events:none;
-Page 2
-    }
       z-index:1;
-    .quote p{
+    }
+    .bg .quote{
       margin:0;
       max-width:980px;
       font-family:"Playfair Display",serif;
@@ -131,12 +131,12 @@ Page 2
       text-align:center;
       opacity:.12;
     }
-    .charcoal .quote p{ opacity:.10; }
-    /* Floating card wrapper: sticky = “card floats and drags the next section” */
-    .float-wrap{
+    .charcoal .bg .quote{ opacity:.10; }
+    /* Floating product card (sticky) */
+    .float{
       position:sticky;
-      top:120px;
-      height:calc(100vh - 140px);
+      top: calc(var(--header-h) + 56px);
+      height: calc(100vh - (var(--header-h) + 92px));
       display:flex;
       align-items:center;
       justify-content:center;
@@ -148,13 +148,13 @@ Page 2
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       overflow:hidden;
+      position:relative;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.06);
-      position:relative;
     }
     .cream .card{ background:rgba(255,255,255,.20); border:1px solid rgba(255,255,255,.35); }
     .charcoal .card{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); }
-    /* Premium placeholder “image” */
+    /* Premium placeholder image (replace later with real images) */
     .hero{
       position:absolute;
       inset:0;
@@ -172,16 +172,16 @@ Page 2
       transform:rotate(-6deg);
       pointer-events:none;
     }
-    /* Gentle readability layer so quote never “fights” the card text */
+    /* Readability layer so background quote never fights the text */
+Page 3
     .card::before{
       content:"";
       position:absolute;
       inset:0;
-Page 3
-    }
       background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.26));
       z-index:2;
       pointer-events:none;
+    }
     .cream .card::before{ background:linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.18)); }
     .label{
       position:absolute;
@@ -235,10 +235,10 @@ Page 3
     .muted{
       font-size:13px;
       opacity:.80;
-      margin-top:6px;
-    }
-    /* Lock overlay */
 Page 4
+    }
+      margin-top:6px;
+    /* Lock overlay */
     .lock-overlay{
       position:absolute;
       inset:0;
@@ -268,7 +268,7 @@ Page 4
     .lock-box p{ margin:0; font-size:14px; opacity:.92; line-height:1.5; }
     /* Final section */
     .final{
-      min-height:120vh;
+      min-height:130vh;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -292,15 +292,15 @@ Page 4
       opacity:.82;
       line-height:1.6;
     }
-    /* Tiny “scroll” hint (optional) */
+    /* Small hint */
     .scroll-hint{
       position:absolute;
       left:0; right:0;
+Page 5
       bottom:18px;
       text-align:center;
       font-size:12px;
       letter-spacing:.28em;
-Page 5
       text-transform:uppercase;
       opacity:.55;
       z-index:4;
@@ -311,6 +311,7 @@ Page 5
       .card{ height:min(58vh, 480px); }
       .desc{ font-size:14px; }
       .header{ padding:0 12px; }
+      .float{ top: calc(var(--header-h) + 44px); }
     }
   </style>
 </head>
@@ -321,15 +322,14 @@ Page 5
       <strong>Media</strong>
       <span>THE MASTER KEY</span>
     </div>
-    <!-- IMPORTANT: dashboard is at repo root, media.html is inside /media/ -->
     <a class="btn" href="../dashboard.html">Dashboard</a>
   </header>
   <!-- SECTION 1: BOOK -->
   <section class="section cream" id="sec-book">
-    <div class="quote">
-      <p>“Every transformation begins with a decision.”</p>
+    <div class="bg">
+      <p class="quote">“Every transformation begins with a decision.”</p>
     </div>
-    <div class="float-wrap">
+    <div class="float">
       <div class="card" role="group" aria-label="Book">
         <div class="hero" aria-hidden="true"></div>
         <div class="label">
@@ -340,7 +340,6 @@ Page 5
           <h1 class="title">I Decide To Be Abundant</h1>
           <p class="desc">The foundation. This is where the understanding begins.</p>
           <div class="actions">
-            <!-- Adjust to your real entry page -->
             <a class="btn" href="./pdfbook/pdf.html">Read now</a>
           </div>
           <div class="muted">
@@ -351,13 +350,13 @@ Page 5
     </div>
     <div class="scroll-hint">SCROLL</div>
   </section>
-  <!-- SECTION 2: TTP -->
 Page 6
+  <!-- SECTION 2: TTP -->
   <section class="section charcoal" id="sec-ttp">
-    <div class="quote">
-      <p>“Truth isn’t read. It’s walked.”</p>
+    <div class="bg">
+      <p class="quote">“Truth isn’t read. It’s walked.”</p>
     </div>
-    <div class="float-wrap">
+    <div class="float">
       <div class="card" id="ttpCard" role="group" aria-label="Truth Path">
         <div class="hero" aria-hidden="true"></div>
         <div class="label">
@@ -366,14 +365,14 @@ Page 6
         </div>
         <div class="content">
           <h2 class="title">The Truth Path (40 days)</h2>
-                    <p class="desc" id="ttpDesc">A guided journey of reflection and inner truth. It
-          appears when the foundation is complete.</p>
+          <p class="desc" id="ttpDesc">
+            A guided journey of reflection and inner truth. It appears when the foundation is complete.
+          </p>
           <div class="actions" id="ttpActions">
             <button class="btn" type="button" id="viewReq">View requirements</button>
           </div>
           <div class="muted">Finish the book + quiz to unlock automatically.</div>
         </div>
-        <!-- Locked overlay (hidden when unlocked) -->
         <div class="lock-overlay" id="lockOverlay">
           <div class="lock-box">
             <strong>Reveals after</strong>
@@ -385,8 +384,8 @@ Page 6
   </section>
   <!-- SECTION 3: FUTURE + DASHBOARD -->
   <section class="section cream final" id="sec-future">
-    <div class="quote">
-      <p>“Layer by layer.”</p>
+    <div class="bg">
+      <p class="quote">“Layer by layer.”</p>
     </div>
     <div class="wrap">
       <h2>This is only the beginning.</h2>
@@ -396,7 +395,6 @@ Page 6
   </section>
   <script>
     // ===== Unlock logic (simple front-end flags) =====
-    // Update these keys to match your real system if needed.
     const KEYS = {
       bookComplete: "ma_book_complete",
       quizComplete: "ma_quiz_complete"
@@ -405,18 +403,16 @@ Page 6
     function isUnlocked(){ return getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete); }
     const ttpStatus = document.getElementById("ttpStatus");
     const lockOverlay = document.getElementById("lockOverlay");
-    const ttpActions = document.getElementById("ttpActions");
 Page 7
-    const viewReq = document.getElementById("viewReq");
+    const ttpActions = document.getElementById("ttpActions");
     function renderTTP(){
       if(isUnlocked()){
         ttpStatus.textContent = "UNLOCKED";
         lockOverlay.style.display = "none";
         ttpActions.innerHTML = '<a class="btn" href="./ttps/day1.html">Start Truth Path</a>';
-      }else{
+      } else {
         ttpStatus.textContent = "LOCKED";
         lockOverlay.style.display = "flex";
-        // keep "View requirements"
         if(!document.getElementById("viewReq")){
                     ttpActions.innerHTML = '<button class="btn" type="button" id="viewReq">View
           requirements</button>';
@@ -427,9 +423,9 @@ Page 7
       if(e.target && e.target.id === "viewReq"){
         const msg = [
           "To unlock The Truth Path:",
-          `• Book completed: ${getBool(KEYS.bookComplete) ? "" : ""}`,
-          `• Quiz completed: ${getBool(KEYS.quizComplete) ? "" : ""}`
-        ].join("\\n");
+          "• Book completed: " + (getBool(KEYS.bookComplete) ? "" : ""),
+          "• Quiz completed: " + (getBool(KEYS.quizComplete) ? "" : "")
+        ].join("\n");
         alert(msg);
       }
     });
@@ -439,11 +435,8 @@ Page 7
     const ttpSection = document.getElementById("sec-ttp");
     const obs = new IntersectionObserver((entries)=>{
       entries.forEach(en=>{
-        if(en.isIntersecting){
-          header.classList.add("dark");
-        }else{
-          header.classList.remove("dark");
-        }
+        if(en.isIntersecting) header.classList.add("dark");
+        else header.classList.remove("dark");
       });
     }, { threshold: 0.2 });
     obs.observe(ttpSection);
@@ -451,4 +444,4 @@ Page 7
   <!-- Protection (you already created this file) -->
   <script src="./media-protect.js"></script>
 </body>
-</html> 
+</html>
