@@ -3,543 +3,158 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Media — The Master Key</title>
+  <title>TMK — Media Vault</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) { window.location.replace("/start.html"); return; }
+  })();
+  </script>
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght
-  @400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --cream-1:#f6f0e6;
-      --cream-2:#efe6d7;
-      --charcoal:#111114;
-      --charcoal-2:#1a1a1f;
-      --text-dark:#1f2226;
-      --text-light:#f2f2f4;
-      --line:rgba(190,156,86,.35);
-      --shadow: 0 18px 70px rgba(0,0,0,.22);
-      --radius: 22px;
-      --header-h:64px;
-      --gold: rgba(190,156,86,.95);
-      --pad:18px;
-    }
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--cream-1);
-      color:var(--text-dark);
-      overflow-x:hidden;
-    }
-    /* Sticky header */
-    .header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--header-h);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 var(--pad);
-      z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(246,240,230,.60);
-      border-bottom:1px solid var(--line);
-    }
-    .header.dark{ background:rgba(17,17,20,.45); }
-    .brand{
-      display:flex;
-      gap:10px;
-      align-items:baseline;
-      letter-spacing:.08em;
-Page 1
-    }
-      text-transform:uppercase;
-      font-size:12px;
-      color:rgba(31,34,38,.78);
-    .header.dark .brand{ color:rgba(242,242,244,.75); }
-    .brand strong{
-      font-family:"Playfair Display",serif;
-      letter-spacing:.04em;
-      font-size:20px;
-      text-transform:none;
-      color:rgba(31,34,38,.95);
-    }
-    .header.dark .brand strong{ color:rgba(242,242,244,.92); }
-    .btn{
-      appearance:none;
-      border:1px solid rgba(190,156,86,.55);
-      background:transparent;
-      color:rgba(31,34,38,.92);
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:600;
-      letter-spacing:.02em;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      user-select:none;
-    }
-    .header.dark .btn{ color:rgba(242,242,244,.92); }
-    .btn:active{ transform:translateY(1px); }
-    /* Section runway */
-    .section{
-      position:relative;
-      min-height: 190vh;
-      overflow:hidden;
-    }
-    /* Background styles */
-    .cream{
-      background:
-        radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
-        radial-gradient(900px 700px at 85% 85%, rgba(190,156,86,.16), transparent 60%),
-        linear-gradient(180deg, var(--cream-1), var(--cream-2));
-      color:var(--text-dark);
-    }
-    .charcoal{
-      background:
-        radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
-        radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
-      color:var(--text-light);
-    }
-    /* Pinned stage (fix: no padding here to avoid pushing card off-screen on mobile) */
-    .stage{
-      position: sticky;
-      top: var(--header-h);
-      height: calc(100vh - var(--header-h));
-      width: 100%;
-Page 2
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index: 1;
-      padding: 0;
-      /* establish containing block for absolute bg */
-      position: sticky;
-    }
-    .stage-inner{
-      position:relative;
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 0 var(--pad);
-    }
-    /* Static background quote layer */
-    .bg{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 0 var(--pad);
-      pointer-events:none;
-      z-index:1;
-    }
-    .quote{
-      margin:0;
-      max-width:980px;
-      font-family:"Playfair Display",serif;
-      font-weight:600;
-      line-height:1.05;
-      letter-spacing:.01em;
-      font-size:clamp(34px, 5vw, 72px);
-      text-align:center;
-      opacity:.12;
-    }
-    .charcoal .quote{ opacity:.10; }
-    /* Floating product card (always centered, never overflow) */
-    .float{
-      position:relative;
-      z-index:3;
-      width: min(980px, calc(100vw - (var(--pad) * 2)));
-      height: min(62vh, 520px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.06);
-      transform: translateY(-10px);
-      margin: 0 auto;
-    }
-    .cream .float{ background:rgba(255,255,255,.20); border:1px solid rgba(255,255,255,.35); }
-    .charcoal .float{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); }
-    .hero{
-      position:absolute;
-      inset:0;
-      background:
-Page 3
-    }
-        radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.22), transparent 55%),
-        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.22), transparent 60%),
-        linear-gradient(130deg, rgba(255,255,255,.06), rgba(0,0,0,.22));
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:-40px;
-      background:repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
-      opacity:.22;
-      transform:rotate(-6deg);
-      pointer-events:none;
-    }
-    .float::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.26));
-      z-index:2;
-      pointer-events:none;
-    }
-    .cream .float::before{ background:linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.18)); }
-    .label{
-      position:absolute;
-      left:18px; top:16px;
-      z-index:4;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      max-width: calc(100% - 36px);
-    }
-    .pill{
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(190,156,86,.55);
-      backdrop-filter: blur(10px);
-      white-space:nowrap;
-    }
-    .cream .pill{ background:rgba(255,255,255,.40); color:rgba(31,34,38,.92); }
-    .charcoal .pill{ background:rgba(0,0,0,.22); color:rgba(242,242,244,.92); }
-    .content{
-      position:absolute;
-      inset:0;
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      gap:10px;
-      z-index:5;
-    }
-    .title{
-      margin:0;
-      font-family:"Playfair Display",serif;
-      font-size:clamp(22px, 3.2vw, 34px);
-      letter-spacing:.01em;
-Page 4
-    }
-    .desc{
-      margin:0;
-      font-size:15px;
-      line-height:1.5;
-      opacity:.92;
-      max-width:62ch;
-    }
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:6px;
-    }
-    .muted{
-      font-size:13px;
-      opacity:.80;
-      margin-top:6px;
-    }
-    .lock-overlay{
-      position:absolute;
-      inset:0;
-      z-index:6;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.55));
-    }
-    .lock-box{
-      width:min(560px, 88%);
-      border:1px solid rgba(190,156,86,.55);
-      border-radius:18px;
-      padding:16px 16px 14px;
-      background:rgba(17,17,20,.55);
-      backdrop-filter: blur(10px);
-      color:rgba(242,242,244,.92);
-      text-align:center;
-    }
-    .lock-box strong{
-      display:block;
-      font-family:"Playfair Display",serif;
-      font-size:22px;
-      margin-bottom:6px;
-      color:rgba(242,242,244,.96);
-    }
-    .lock-box p{ margin:0; font-size:14px; opacity:.92; line-height:1.5; }
-    /* Final section */
-    .final-center{
-      position:relative;
-      z-index:3;
-      width:min(860px, calc(100vw - (var(--pad) * 2)));
-      text-align:center;
-      padding: 0;
-    }
-    .final-center h2{
-      font-family:"Playfair Display",serif;
-      font-size:clamp(28px, 4vw, 52px);
-      margin:0 0 10px;
-      letter-spacing:.01em;
-    }
-Page 5
-    .final-center p{
-      margin:0 auto 18px;
-      max-width:70ch;
-      opacity:.82;
-      line-height:1.6;
-    }
-    @media (max-width:520px){
-      .float{ height:min(58vh, 480px); transform: translateY(-6px); }
-      .desc{ font-size:14px; }
-      .header{ padding:0 12px; }
-      :root{ --pad:12px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+  rel="stylesheet">
+  <link rel="stylesheet" href="media.css" />
 </head>
-<body>
-  <header class="header" id="stickyHeader">
-    <div class="brand">
-      <strong id="hdrMedia">Media</strong>
-      <span>THE MASTER KEY</span>
+<body class="mv-body">
+  <!-- Watermark (same stamp logic as ebook/ttps) -->
+  <div class="mv-watermark" id="mvWatermark" aria-hidden="true"></div>
+  <!-- Sticky Header -->
+  <header class="mv-header" id="mvHeader">
+    <div class="mv-header-inner">
+      <div class="mv-brand">
+        <div class="mv-eyebrow">TMK · <span data-i18n="brand.vault">Media Vault</span></div>
+        <div class="mv-title">THE MASTER KEY</div>
+      </div>
+      <nav class="mv-nav">
+        <a class="mv-link" href="/dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+        <button class="mv-pill" id="mvLangBtn" type="button" aria-label="Language">
+          <span id="mvLangLabel">ES</span>
+        </button>
+      </nav>
     </div>
-    <a class="btn" id="btnDashboardTop" href="../dashboard.html">Dashboard</a>
   </header>
-  <!-- SECTION 1: BOOK -->
-  <section class="section cream" id="sec-book">
-    <div class="stage">
-      <div class="stage-inner">
-        <div class="bg">
-          <p class="quote" id="qBook">“Toda transformación comienza con una decisión.”</p>
-        </div>
-        <div class="float" role="group" aria-label="Book">
-          <div class="hero" aria-hidden="true"></div>
-          <div class="label">
-            <span class="pill" id="pillBook">LIBRO</span>
-            <span class="pill" id="bookStatus">DISPONIBLE</span>
-          </div>
-          <div class="content">
-            <h1 class="title" id="bookTitle">Yo Decido Ser Abundante</h1>
-                        <p class="desc" id="bookDesc">El fundamento. Aquí inicia la comprensión que
-            sostiene todo lo demás.</p>
-            <div class="actions">
-              <a class="btn" id="btnRead" href="./pdfbook/pdf.html">Leer ahora</a>
-            </div>
-            <div class="muted" id="bookNote">
-              *El Truth Path se desbloquea al terminar el libro y completar el quiz.
-            </div>
-          </div>
-        </div>
+  <!-- Fixed background “poster” -->
+  <div class="mv-backdrop" aria-hidden="true">
+    <div class="mv-backdrop-overlay"></div>
+    <div class="mv-backdrop-quote" id="mvQuote">
+      <div class="mv-quote-kicker" data-i18n="quote.kicker">FRASE</div>
+      <div class="mv-quote-text" id="mvQuoteText">
+        Tu decisión de hoy abre puertas que aún no imaginas.
       </div>
     </div>
-  </section>
-  <!-- SECTION 2: TTP -->
-  <section class="section charcoal" id="sec-ttp">
-    <div class="stage">
-      <div class="stage-inner">
-        <div class="bg">
-Page 6
-          <p class="quote" id="qTtp">“La verdad no se lee. Se recorre.”</p>
-        </div>
-        <div class="float" id="ttpCard" role="group" aria-label="Truth Path">
-          <div class="hero" aria-hidden="true"></div>
-          <div class="label">
-            <span class="pill" id="pillTtp">TRUTH PATH</span>
-            <span class="pill" id="ttpStatus">BLOQUEADO</span>
+  </div>
+  <!-- Content -->
+  <main class="mv-main">
+    <!-- HERO / BOOK -->
+    <section class="mv-section mv-cream" id="sec-book">
+      <div class="mv-wrap">
+        <div class="mv-float-card mv-book-card">
+          <div class="mv-card-top">
+            <div class="mv-chip" data-i18n="chip.available">Disponible</div>
+            <div class="mv-mini" data-i18n="book.kicker">WEBBOOK</div>
           </div>
-          <div class="content">
-            <h2 class="title" id="ttpTitle">The Truth Path (40 días)</h2>
-            <p class="desc" id="ttpDesc">
-              Un camino guiado de reflexión y verdad interior. Aparece cuando el fundamento está completo.
+          <h1 class="mv-h1" data-i18n="book.title">Yo Decido Ser Abundante</h1>
+          <p class="mv-sub" data-i18n="book.sub">
+            4 leyes. 1 decisión. Un nuevo comienzo.
+          </p>
+          <div class="mv-actions">
+            <button class="mv-btn primary" id="openBookBtn" type="button" data-i18n="book.cta">Leer ahora</button>
+            <button class="mv-btn ghost" id="howUnlockBtn" type="button" data-i18n="book.how">¿Cómo desbloquear más?</button>
+          </div>
+          <div class="mv-divider"></div>
+          <div class="mv-grid">
+            <div class="mv-metric">
+              <div class="mv-metric-num">4</div>
+              <div class="mv-metric-label" data-i18n="book.metric1">Leyes</div>
+            </div>
+            <div class="mv-metric">
+              <div class="mv-metric-num">1</div>
+              <div class="mv-metric-label" data-i18n="book.metric2">Decisión</div>
+            </div>
+            <div class="mv-metric">
+              <div class="mv-metric-num">∞</div>
+              <div class="mv-metric-label" data-i18n="book.metric3">Camino</div>
+            </div>
+          </div>
+        </div>
+        <div class="mv-scroll-hint" aria-hidden="true">
+          <span class="mv-scroll-dot"></span>
+        </div>
+      </div>
+    </section>
+    <!-- TRUTH PATH -->
+    <section class="mv-section mv-charcoal" id="sec-ttp">
+      <div class="mv-wrap">
+        <div class="mv-split">
+          <div class="mv-copy">
+            <div class="mv-kicker" data-i18n="ttp.kicker">The Truth Path</div>
+            <h2 class="mv-h2" data-i18n="ttp.title">Devocional de 40 días</h2>
+            <p class="mv-p" data-i18n="ttp.text">
+              Este camino se desbloquea cuando terminas el libro y completas el quiz.
+              Aquí lo personal se vuelve práctico: silencio, verdad, y dirección.
             </p>
-            <div class="actions" id="ttpActions">
-              <button class="btn" type="button" id="viewReq">Ver requisitos</button>
+            <div class="mv-actions">
+              <button class="mv-btn primary" id="openTtpBtn" type="button" data-i18n="ttp.cta">Entrar</button>
+              <a class="mv-btn ghost mv-btn-link" href="#sec-book" data-i18n="ttp.back">Volver arriba</a>
             </div>
-                        <div class="muted" id="ttpNote">Termina el libro + quiz para desbloquear
-            automáticamente.</div>
+            <div class="mv-note" id="ttpNote" role="status"></div>
           </div>
-          <div class="lock-overlay" id="lockOverlay">
-            <div class="lock-box">
-              <strong id="lockTitle">Se revela después</strong>
-              <p id="lockText">Termina el libro y el quiz para abrir este camino.</p>
+          <div class="mv-card mv-sidecard" id="ttpCard">
+            <div class="mv-side-top">
+              <div class="mv-lock" id="ttpLockIcon"> </div>
+              <div class="mv-side-title" data-i18n="ttp.cardTitle">Acceso protegido</div>
+            </div>
+            <div class="mv-side-text" data-i18n="ttp.cardText">
+              Completa el libro + quiz para desbloquear el Sendero.
+            </div>
+            <div class="mv-side-row">
+              <div class="mv-side-pill" data-i18n="ttp.step1">1 · Libro</div>
+              <div class="mv-side-pill" data-i18n="ttp.step2">2 · Quiz</div>
+              <div class="mv-side-pill" data-i18n="ttp.step3">3 · Acceso</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- SECTION 3: FUTURE + DASHBOARD -->
-  <section class="section cream" id="sec-future">
-    <div class="stage">
-      <div class="stage-inner">
-        <div class="bg">
-          <p class="quote" id="qFuture">“Capa por capa.”</p>
-        </div>
-        <div class="final-center">
-          <h2 id="futureTitle">Esto apenas comienza.</h2>
-                    <p id="futureDesc">Aquí vivirán los próximos audios, videos y series — elegante,
-          ligero y siempre creciendo.</p>
-          <a class="btn" id="btnDashboardBottom" href="../dashboard.html">Dashboard</a>
+    </section>
+    <!-- AUDIOBOOK (placeholder) -->
+    <section class="mv-section mv-cream2" id="sec-audio">
+      <div class="mv-wrap">
+        <div class="mv-float-card mv-simple-card">
+          <div class="mv-card-top">
+            <div class="mv-chip muted" data-i18n="chip.soon">Próximamente</div>
+            <div class="mv-mini" data-i18n="audio.kicker">AUDIOBOOK</div>
+          </div>
+          <h2 class="mv-h2" data-i18n="audio.title">Audiolibro</h2>
+          <p class="mv-p" data-i18n="audio.text">
+            Estamos preparando el audio con una experiencia premium.
+          </p>
+          <div class="mv-actions">
+            <button class="mv-btn ghost" type="button" id="notifyBtn" data-i18n="audio.cta">Notificarme</button>
+            <a class="mv-btn ghost mv-btn-link" href="/dashboard.html" data-i18n="audio.dash">Ir al Dashboard</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <script>
-    // ===== Language (best effort) =====
-    // Detect common keys. If none, default to Spanish.
-    function detectLang(){
-      const candidates = ["ma_lang","lang","language","tmk_lang"];
-      for(const k of candidates){
-        const v = localStorage.getItem(k);
-        if(v && typeof v === "string"){
-          const s = v.toLowerCase();
-Page 7
-      }
-        }
-          if(s.startsWith("en")) return "en";
-          if(s.startsWith("es")) return "es";
-      // fallback: if URL has -en
-      if(location.pathname.toLowerCase().includes("-en")) return "en";
-      return "es";
-    }
-    const STR = {
-      es:{
-        dashboard:"Dashboard",
-        bookPill:"LIBRO",
-        bookStatus:"DISPONIBLE",
-        bookTitle:"Yo Decido Ser Abundante",
-        bookDesc:"El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.",
-        readNow:"Leer ahora",
-        bookNote:"*El Truth Path se desbloquea al terminar el libro y completar el quiz.",
-        qBook:"“Toda transformación comienza con una decisión.”",
-        qTtp:"“La verdad no se lee. Se recorre.”",
-        ttpPill:"TRUTH PATH",
-        locked:"BLOQUEADO",
-        unlocked:"DESBLOQUEADO",
-        ttpTitle:"The Truth Path (40 días)",
-                ttpDesc:"Un camino guiado de reflexión y verdad interior. Aparece cuando el fundamento
-        está completo.",
-        viewReq:"Ver requisitos",
-        ttpNote:"Termina el libro + quiz para desbloquear automáticamente.",
-        lockTitle:"Se revela después",
-        lockText:"Termina el libro y el quiz para abrir este camino.",
-        qFuture:"“Capa por capa.”",
-        futureTitle:"Esto apenas comienza.",
-                futureDesc:"Aquí vivirán los próximos audios, videos y series — elegante, ligero y siempre
-        creciendo.",
-        startTtp:"Empezar Truth Path"
-      },
-      en:{
-        dashboard:"Dashboard",
-        bookPill:"BOOK",
-        bookStatus:"AVAILABLE",
-        bookTitle:"I Decide To Be Abundant",
-        bookDesc:"The foundation. This is where the understanding begins.",
-        readNow:"Read now",
-        bookNote:"*The Truth Path unlocks after finishing the book and the quiz.",
-        qBook:"“Every transformation begins with a decision.”",
-        qTtp:"“Truth isn’t read. It’s walked.”",
-        ttpPill:"TRUTH PATH",
-        locked:"LOCKED",
-        unlocked:"UNLOCKED",
-        ttpTitle:"The Truth Path (40 days)",
-                ttpDesc:"A guided journey of reflection and inner truth. It appears when the foundation is
-        complete.",
-        viewReq:"View requirements",
-        ttpNote:"Finish the book + quiz to unlock automatically.",
-        lockTitle:"Reveals after",
-        lockText:"Finish the book and the quiz to open this path.",
-        qFuture:"“Layer by layer.”",
-        futureTitle:"This is only the beginning.",
-                futureDesc:"Future audios, videos, and series will live here — clean, calm, and always
-        expanding.",
-        startTtp:"Start Truth Path"
-      }
-    };
-Page 8
-    const lang = detectLang();
-    const T = STR[lang] || STR.es;
-    // Apply language text
-    document.getElementById("btnDashboardTop").textContent = T.dashboard;
-    document.getElementById("btnDashboardBottom").textContent = T.dashboard;
-    document.getElementById("pillBook").textContent = T.bookPill;
-    document.getElementById("bookStatus").textContent = T.bookStatus;
-    document.getElementById("bookTitle").textContent = T.bookTitle;
-    document.getElementById("bookDesc").textContent = T.bookDesc;
-    document.getElementById("btnRead").textContent = T.readNow;
-    document.getElementById("bookNote").textContent = T.bookNote;
-    document.getElementById("qBook").textContent = T.qBook;
-    document.getElementById("qTtp").textContent = T.qTtp;
-    document.getElementById("pillTtp").textContent = T.ttpPill;
-    document.getElementById("ttpTitle").textContent = T.ttpTitle;
-    document.getElementById("ttpDesc").textContent = T.ttpDesc;
-    document.getElementById("viewReq").textContent = T.viewReq;
-    document.getElementById("ttpNote").textContent = T.ttpNote;
-    document.getElementById("lockTitle").textContent = T.lockTitle;
-    document.getElementById("lockText").textContent = T.lockText;
-    document.getElementById("qFuture").textContent = T.qFuture;
-    document.getElementById("futureTitle").textContent = T.futureTitle;
-    document.getElementById("futureDesc").textContent = T.futureDesc;
-    // ===== Unlock logic (same keys you were using) =====
-    const KEYS = {
-      bookComplete: "ma_book_complete",
-      quizComplete: "ma_quiz_complete"
-    };
-    function getBool(key){ return localStorage.getItem(key) === "1"; }
-    function isUnlocked(){ return getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete); }
-    const ttpStatus = document.getElementById("ttpStatus");
-    const lockOverlay = document.getElementById("lockOverlay");
-    const ttpActions = document.getElementById("ttpActions");
-    function renderTTP(){
-      if(isUnlocked()){
-        ttpStatus.textContent = T.unlocked;
-        lockOverlay.style.display = "none";
-        ttpActions.innerHTML = '<a class="btn" href="./ttps/day1.html">' + T.startTtp + '</a>';
-      } else {
-        ttpStatus.textContent = T.locked;
-        lockOverlay.style.display = "flex";
-      }
-    }
-    document.addEventListener("click", (e) => {
-      if(e.target && e.target.id === "viewReq"){
-        const msg = [
-          (lang==="en" ? "To unlock The Truth Path:" : "Para desbloquear The Truth Path:"),
-                    (lang==="en" ? "• Book completed: " : "• Libro completado: ") +
-          (getBool(KEYS.bookComplete) ? " " : ""),
-                    (lang==="en" ? "• Quiz completed: " : "• Quiz completado: ") +
-          (getBool(KEYS.quizComplete) ? " " : "")
-        ].join("\n");
-        alert(msg);
-      }
-    });
-Page 9
-    renderTTP();
-    // Header dark on charcoal
-    const header = document.getElementById("stickyHeader");
-    const ttpSection = document.getElementById("sec-ttp");
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{
-        if(en.isIntersecting) header.classList.add("dark");
-        else header.classList.remove("dark");
-      });
-    }, { threshold: 0.2 });
-    obs.observe(ttpSection);
-  </script>
-  <!-- Protection -->
-  <script src="./media-protect.js"></script>
+    </section>
+    <!-- FOOT -->
+    <footer class="mv-footer">
+      <div class="mv-footer-inner">
+        <div class="mv-footer-left">
+          <div class="mv-footer-brand">TMK</div>
+          <div class="mv-footer-meta" id="mvFooterMeta">—</div>
+        </div>
+        <div class="mv-footer-right">
+          <a class="mv-footlink" href="/dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+          <a class="mv-footlink" href="/start.html" data-i18n="nav.logout">Cerrar sesión</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+  <script src="media.js"></script>
 </body>
 </html>
