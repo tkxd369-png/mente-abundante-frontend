@@ -3,158 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TMK — Media Vault</title>
-  <!-- TMK: Gate (require login) -->
-  <script>
-  (function () {
-    try {
-      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
-      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
-      if (!hasSession) { window.location.replace("/start.html"); return; }
-    } catch (e) { window.location.replace("/start.html"); return; }
-  })();
-  </script>
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
-  rel="stylesheet">
+  <title>Media Vault — The Master Key</title>
   <link rel="stylesheet" href="media.css" />
 </head>
-<body class="mv-body">
-  <!-- Watermark (same stamp logic as ebook/ttps) -->
-  <div class="mv-watermark" id="mvWatermark" aria-hidden="true"></div>
-  <!-- Sticky Header -->
-  <header class="mv-header" id="mvHeader">
-    <div class="mv-header-inner">
-      <div class="mv-brand">
-        <div class="mv-eyebrow">TMK · <span data-i18n="brand.vault">Media Vault</span></div>
-        <div class="mv-title">THE MASTER KEY</div>
-      </div>
-      <nav class="mv-nav">
-        <a class="mv-link" href="/dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-        <button class="mv-pill" id="mvLangBtn" type="button" aria-label="Language">
-          <span id="mvLangLabel">ES</span>
-        </button>
-      </nav>
-    </div>
-  </header>
-  <!-- Fixed background “poster” -->
-  <div class="mv-backdrop" aria-hidden="true">
-    <div class="mv-backdrop-overlay"></div>
-    <div class="mv-backdrop-quote" id="mvQuote">
-      <div class="mv-quote-kicker" data-i18n="quote.kicker">FRASE</div>
-      <div class="mv-quote-text" id="mvQuoteText">
-        Tu decisión de hoy abre puertas que aún no imaginas.
-      </div>
-    </div>
-  </div>
-  <!-- Content -->
-  <main class="mv-main">
-    <!-- HERO / BOOK -->
-    <section class="mv-section mv-cream" id="sec-book">
-      <div class="mv-wrap">
-        <div class="mv-float-card mv-book-card">
-          <div class="mv-card-top">
-            <div class="mv-chip" data-i18n="chip.available">Disponible</div>
-            <div class="mv-mini" data-i18n="book.kicker">WEBBOOK</div>
-          </div>
-          <h1 class="mv-h1" data-i18n="book.title">Yo Decido Ser Abundante</h1>
-          <p class="mv-sub" data-i18n="book.sub">
-            4 leyes. 1 decisión. Un nuevo comienzo.
-          </p>
-          <div class="mv-actions">
-            <button class="mv-btn primary" id="openBookBtn" type="button" data-i18n="book.cta">Leer ahora</button>
-            <button class="mv-btn ghost" id="howUnlockBtn" type="button" data-i18n="book.how">¿Cómo desbloquear más?</button>
-          </div>
-          <div class="mv-divider"></div>
-          <div class="mv-grid">
-            <div class="mv-metric">
-              <div class="mv-metric-num">4</div>
-              <div class="mv-metric-label" data-i18n="book.metric1">Leyes</div>
-            </div>
-            <div class="mv-metric">
-              <div class="mv-metric-num">1</div>
-              <div class="mv-metric-label" data-i18n="book.metric2">Decisión</div>
-            </div>
-            <div class="mv-metric">
-              <div class="mv-metric-num">∞</div>
-              <div class="mv-metric-label" data-i18n="book.metric3">Camino</div>
-            </div>
-          </div>
-        </div>
-        <div class="mv-scroll-hint" aria-hidden="true">
-          <span class="mv-scroll-dot"></span>
-        </div>
-      </div>
-    </section>
-    <!-- TRUTH PATH -->
-    <section class="mv-section mv-charcoal" id="sec-ttp">
-      <div class="mv-wrap">
-        <div class="mv-split">
-          <div class="mv-copy">
-            <div class="mv-kicker" data-i18n="ttp.kicker">The Truth Path</div>
-            <h2 class="mv-h2" data-i18n="ttp.title">Devocional de 40 días</h2>
-            <p class="mv-p" data-i18n="ttp.text">
-              Este camino se desbloquea cuando terminas el libro y completas el quiz.
-              Aquí lo personal se vuelve práctico: silencio, verdad, y dirección.
-            </p>
-            <div class="mv-actions">
-              <button class="mv-btn primary" id="openTtpBtn" type="button" data-i18n="ttp.cta">Entrar</button>
-              <a class="mv-btn ghost mv-btn-link" href="#sec-book" data-i18n="ttp.back">Volver arriba</a>
-            </div>
-            <div class="mv-note" id="ttpNote" role="status"></div>
-          </div>
-          <div class="mv-card mv-sidecard" id="ttpCard">
-            <div class="mv-side-top">
-              <div class="mv-lock" id="ttpLockIcon"> </div>
-              <div class="mv-side-title" data-i18n="ttp.cardTitle">Acceso protegido</div>
-            </div>
-            <div class="mv-side-text" data-i18n="ttp.cardText">
-              Completa el libro + quiz para desbloquear el Sendero.
-            </div>
-            <div class="mv-side-row">
-              <div class="mv-side-pill" data-i18n="ttp.step1">1 · Libro</div>
-              <div class="mv-side-pill" data-i18n="ttp.step2">2 · Quiz</div>
-              <div class="mv-side-pill" data-i18n="ttp.step3">3 · Acceso</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- AUDIOBOOK (placeholder) -->
-    <section class="mv-section mv-cream2" id="sec-audio">
-      <div class="mv-wrap">
-        <div class="mv-float-card mv-simple-card">
-          <div class="mv-card-top">
-            <div class="mv-chip muted" data-i18n="chip.soon">Próximamente</div>
-            <div class="mv-mini" data-i18n="audio.kicker">AUDIOBOOK</div>
-          </div>
-          <h2 class="mv-h2" data-i18n="audio.title">Audiolibro</h2>
-          <p class="mv-p" data-i18n="audio.text">
-            Estamos preparando el audio con una experiencia premium.
-          </p>
-          <div class="mv-actions">
-            <button class="mv-btn ghost" type="button" id="notifyBtn" data-i18n="audio.cta">Notificarme</button>
-            <a class="mv-btn ghost mv-btn-link" href="/dashboard.html" data-i18n="audio.dash">Ir al Dashboard</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- FOOT -->
-    <footer class="mv-footer">
-      <div class="mv-footer-inner">
-        <div class="mv-footer-left">
-          <div class="mv-footer-brand">TMK</div>
-          <div class="mv-footer-meta" id="mvFooterMeta">—</div>
-        </div>
-        <div class="mv-footer-right">
-          <a class="mv-footlink" href="/dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
-          <a class="mv-footlink" href="/start.html" data-i18n="nav.logout">Cerrar sesión</a>
-        </div>
-      </div>
-    </footer>
+<body>
+  <div class="fixed-bg"></div>
+  <header class="sticky-header">MEDIA VAULT</header>
+  <main>
+    <section class="panel hero" data-quote-es="Todo ya fue preparado." data-quote-en="Everything has already been prepared."></section>
+    <section class="panel cream"><div class="card">WebBook</div></section>
+    <section class="panel charcoal"><div class="card">Truth Path</div></section>
+    <section class="panel cream"><div class="card">Audiobook</div></section>
   </main>
-  <script src="media.js"></script>
 </body>
 </html>
