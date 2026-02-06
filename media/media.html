@@ -19,8 +19,6 @@
       --text-light:#f2f2f4;
       --gold: rgba(190,156,86,.95);
       --line: rgba(190,156,86,.35);
-      --shadow: 0 22px 90px rgba(0,0,0,.28);
-      --radius: 22px;
       --header-h:64px;
       --pad:18px;
     }
@@ -62,9 +60,9 @@
       font-family:"Playfair Display",serif;
       letter-spacing:.04em;
       font-size:20px;
- }
       text-transform:none;
       color:rgba(31,34,38,.95);
+     }
     .header.dark .brand strong{ color:rgba(242,242,244,.92); }
     .btn{
       appearance:none;
@@ -105,7 +103,7 @@
     }
     .bg-layer.charcoal{
       background:
-    radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
+        radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
         radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
         linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
       color:var(--text-light);
@@ -135,7 +133,7 @@
       letter-spacing:.18em;
       text-transform:uppercase;
       opacity:.55;
-  }
+     }
     /* ===== Scroll content sits above fixed background ===== */
     main{
       position:relative;
@@ -151,179 +149,159 @@
       align-items:flex-start;
       justify-content:center;
     }
-/* Card stage: card floats and rises */
-.stage{
-  width: 100vw;
-  height: 100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:sticky;
-  top: var(--header-h);
-  padding: 18px 0;
-}
-
-.card{
-  width: 100%;
-  height: min(62vh, 540px);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.08);
-  position:relative;
-
-  /* SOFI effect: starts below, rises over background */
-  --p: 0;
-  opacity: calc(var(--p)); /* 0 al inicio (invisible) */
-  transform: translateY(calc((1 - var(--p)) * 78vh)); /* empieza más abajo */
-
-  transition:none;
-  will-change: transform, opacity;
-}
-
-.cream-card .card{
-  background: rgba(255,255,255,.22);
-  border:1px solid rgba(255,255,255,.35);
-}
-.charcoal-card .card{
-  background: rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.14);
-}
-
-.hero{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.22), transparent 55%),
-    radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.24), transparent 60%),
-    linear-gradient(130deg, rgba(255,255,255,.06), rgba(0,0,0,.22));
-}
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
-  opacity:.22;
-  transform:rotate(-6deg);
-  pointer-events:none;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.28));
-  z-index:2;
-  pointer-events:none;
-}
-.cream-card .card::before{
-  background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.20));
-}
-
-.label{
-  position:absolute;
-  left:18px; top:16px;
-  z-index:4;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
-  max-width:calc(100% - 36px);
-}
-.pill{
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(190,156,86,.55);
-  backdrop-filter: blur(10px);
-  white-space:nowrap;
-}
-.cream-card .pill{ background:rgba(255,255,255,.40); color:rgba(31,34,38,.92); }
-.charcoal-card .pill{ background:rgba(0,0,0,.22); color:rgba(242,242,244,.92); }
-
-.content{
-  position:absolute;
-  inset:0;
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  gap:10px;
-  z-index:5;
-  color: rgba(245,245,247,.92);
-}
-.cream-card .content{ color: rgba(31,34,38,.92); }
-
-.title{
-  margin:0;
-  font-family:"Playfair Display",serif;
-  font-size:clamp(24px, 3.2vw, 36px);
-  letter-spacing:.01em;
-}
-.desc{
-  margin:0;
-  font-size:15px;
-  line-height:1.55;
-  opacity:.92;
-  max-width:62ch;
-}
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:6px;
-}
-.muted{
-  font-size:13px;
-  opacity:.80;
-  margin-top:6px;
-}
-
-.lock-overlay{
-  position:absolute;
-  inset:0;
-  z-index:6;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.60));
-}
-
-.lock-box{
-  width:min(560px, 88%);
-  border:1px solid rgba(190,156,86,.55);
-  border-radius:18px;
-  padding:16px 16px 14px;
-  background:rgba(17,17,20,.55);
-  backdrop-filter: blur(10px);
-  color:rgba(242,242,244,.92);
-  text-align:center;
-}
-.lock-box strong{
-  display:block;
-  font-family:"Playfair Display",serif;
-  font-size:22px;
-  margin-bottom:6px;
-  color:rgba(242,242,244,.96);
-}
-.lock-box p{
-  margin:0;
-  font-size:14px;
-  opacity:.92;
-  line-height:1.5;
-}
-
-@media (max-width:520px){
-  :root{ --pad:12px; }
-  .card{ height:min(58vh, 500px); }
-  .header{ padding:0 12px; }
-  .bg-quote{ font-size:clamp(34px, 9vw, 68px); }
-}
-
+    /* Card stage: card floats and rises (FULL WIDTH) */
+    .stage{
+      width: 100vw;
+      height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:sticky;
+      top: var(--header-h);
+      padding: 18px 0;
+    }
+    /* Retail card (solid, full width, hidden at start) */
+    .card{
+      width: 100%;
+      height: min(66vh, 620px);
+      border-radius: 0; /* full-bleed retail */
+      overflow:hidden;
+      border:none;
+      box-shadow: 0 26px 110px rgba(0,0,0,.35);
+      position:relative;
+      /* SOFI effect: starts below, rises over background */
+      --p: 0;
+      opacity: calc(var(--p)); /* 0 al inicio (invisible) */
+      transform: translateY(calc((1 - var(--p)) * 78vh)); /* empieza más abajo */
+      transition:none;
+      will-change: transform, opacity;
+    }
+    .cream-card .card{ background:#f3eadc; }
+    .charcoal-card .card{ background:#0f0f12; }
+    .hero{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.18), transparent 55%),
+        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.22), transparent 60%),
+        linear-gradient(130deg, rgba(255,255,255,.04), rgba(0,0,0,.18));
+    }
+    .charcoal-card .hero{
+      background:
+        radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.18), transparent 60%),
+        linear-gradient(130deg, rgba(255,255,255,.02), rgba(0,0,0,.30));
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 18px);
+      opacity:.18;
+      transform:rotate(-6deg);
+      pointer-events:none;
+    }
+    .card::before{
+      content:"";
+       position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.38));
+      z-index:2;
+      pointer-events:none;
+    }
+    .cream-card .card::before{ background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.26)); }
+    .label{
+      position:absolute;
+      left:18px; top:16px;
+      z-index:4;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      max-width:calc(100% - 36px);
+    }
+    .pill{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(190,156,86,.55);
+      backdrop-filter: blur(10px);
+      white-space:nowrap;
+    }
+    .cream-card .pill{ background:rgba(255,255,255,.62); color:rgba(31,34,38,.92); }
+    .charcoal-card .pill{ background:rgba(0,0,0,.34); color:rgba(242,242,244,.92); }
+    .content{
+      position:absolute;
+      inset:0;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap:10px;
+      z-index:5;
+      color: rgba(245,245,247,.92);
+    }
+    .cream-card .content{ color: rgba(31,34,38,.92); }
+    .title{
+      margin:0;
+      font-family:"Playfair Display",serif;
+      font-size:clamp(24px, 3.2vw, 40px);
+      letter-spacing:.01em;
+    }
+    .desc{
+      margin:0;
+      font-size:15px;
+      line-height:1.55;
+      opacity:.92;
+      max-width:62ch;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .muted{
+      font-size:13px;
+      opacity:.80;
+      margin-top:6px;
+    }
+    .lock-overlay{
+      position:absolute;
+      inset:0;
+      z-index:6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+     }
+      background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.60));
+    .lock-box{
+      width:min(560px, 88%);
+      border:1px solid rgba(190,156,86,.55);
+      border-radius:18px;
+      padding:16px 16px 14px;
+      background:rgba(17,17,20,.55);
+      backdrop-filter: blur(10px);
+      color:rgba(242,242,244,.92);
+      text-align:center;
+    }
+    .lock-box strong{
+      display:block;
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      margin-bottom:6px;
+      color:rgba(242,242,244,.96);
+    }
+    .lock-box p{ margin:0; font-size:14px; opacity:.92; line-height:1.5; }
+    @media (max-width:520px){
+      :root{ --pad:12px; }
+      .card{ height:min(64vh, 560px); }
+      .header{ padding:0 12px; }
+      .bg-quote{ font-size:clamp(34px, 9vw, 68px); }
+    }
   </style>
 </head>
 <body>
@@ -334,6 +312,7 @@
     </div>
     <a class="btn" id="btnDashTop" href="../dashboard.html">Dashboard</a>
   </header>
+  <!-- FIXED BACKGROUND (SOFI trick) -->
   <div id="bgLayer" class="bg-layer cream">
     <div class="bg-inner">
       <p class="bg-kicker" id="bgKicker">Media</p>
@@ -342,6 +321,7 @@
     </div>
   </div>
   <main>
+    <!-- BOOK -->
     <section id="sec-book" class="cream-card" aria-label="Book Section">
       <div class="stage">
         <div class="card" role="group" aria-label="Book">
@@ -362,14 +342,15 @@
         </div>
       </div>
     </section>
+    <!-- TTP -->
     <section id="sec-ttp" class="charcoal-card" aria-label="Truth Path Section">
       <div class="stage">
         <div class="card" id="ttpCard" role="group" aria-label="Truth Path">
           <div class="hero" aria-hidden="true"></div>
           <div class="label">
-            <span class="pill" id="pillTtp">TRUTH PATH</span>
+           <span class="pill" id="pillTtp">TRUTH PATH</span>
             <span class="pill" id="ttpStatus">BLOQUEADO</span>
-   </div>
+          </div>
           <div class="content">
             <h2 class="title" id="ttpTitle">The Truth Path (40 días)</h2>
                         <p class="desc" id="ttpDesc">Un camino guiado de reflexión y verdad interior. Aparece cuando
@@ -388,6 +369,7 @@
         </div>
       </div>
     </section>
+    <!-- FUTURE -->
     <section id="sec-future" class="cream-card" aria-label="Future Section">
       <div class="stage">
         <div class="card" role="group" aria-label="Future">
@@ -408,6 +390,7 @@
     </section>
   </main>
   <script>
+    // ===== Language (best effort) =====
     function detectLang(){
       const keys = ["ma_lang","lang","language","tmk_lang"];
       for(const k of keys){
@@ -438,11 +421,11 @@
         bookDesc:"El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.",
         readNow:"Leer ahora",
         bookNote:"*El Truth Path se desbloquea al terminar el libro y completar el quiz.",
-        qBook:"“Toda transformación comienza con una decisión.”",
+  qBook:"“Toda transformación comienza con una decisión.”",
         qTtp:"“La verdad no se lee. Se recorre.”",
         qFuture:"“Capa por capa.”",
         ttpPill:"TRUTH PATH",
- locked:"BLOQUEADO",
+        locked:"BLOQUEADO",
         unlocked:"DESBLOQUEADO",
         ttpTitle:"The Truth Path (40 días)",
         ttpDesc:"Un camino guiado de reflexión y verdad interior. Aparece cuando el fundamento está completo.",
@@ -484,6 +467,7 @@
       }
     };
     const T = STR[lang] || STR.es;
+    // Apply language
     document.getElementById("hdrMedia").textContent = T.media;
     document.getElementById("bgKicker").textContent = T.media;
     document.getElementById("bgHint").textContent = T.scroll;
@@ -505,13 +489,14 @@
     document.getElementById("pillFuture").textContent = T.futurePill;
     document.getElementById("futureTitle").textContent = T.futureTitle;
     document.getElementById("futureDesc").textContent = T.futureDesc;
+    // ===== Unlock logic =====
     const KEYS = { bookComplete:"ma_book_complete", quizComplete:"ma_quiz_complete" };
     const getBool = (k) => localStorage.getItem(k) === "1";
     const isUnlocked = () => getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete);
-    const ttpStatus = document.getElementById("ttpStatus");
+  const ttpStatus = document.getElementById("ttpStatus");
     const lockOverlay = document.getElementById("lockOverlay");
     const ttpActions = document.getElementById("ttpActions");
-  function renderTTP(){
+    function renderTTP(){
       if(isUnlocked()){
         ttpStatus.textContent = T.unlocked;
         lockOverlay.style.display = "none";
@@ -531,6 +516,7 @@
         ].join("\n"));
       }
     });
+    // ===== SOFI background swap =====
     const bgLayer = document.getElementById("bgLayer");
     const bgQuote = document.getElementById("bgQuote");
     const header = document.getElementById("stickyHeader");
@@ -552,15 +538,15 @@
       });
     }, { threshold: 0.55 });
     [secBook, secTtp, secFut].forEach(s=> s && io.observe(s));
+    // ===== Card rise with DELAY (so it's hidden on page load) =====
     function clamp01(x){ return Math.max(0, Math.min(1, x)); }
     function tick(){
       const vh = window.innerHeight || 800;
-      [secBook, secTtp, secFut].forEach(sec=>{
+      [secBook, secTtp, secFut].forEach(sec => {
         if(!sec) return;
         const r = sec.getBoundingClientRect();
         const raw = (vh - r.top) / (vh * 1.25);
-const p = clamp01((raw - 0.18) / 0.82); // 18% de scroll antes de aparecer
-
+        const p = clamp01((raw - 0.18) / 0.82); // delay: start moving after 18%
         const card = sec.querySelector(".card");
         if(card) card.style.setProperty("--p", p.toFixed(4));
       });
@@ -568,6 +554,7 @@ const p = clamp01((raw - 0.18) / 0.82); // 18% de scroll antes de aparecer
     }
     requestAnimationFrame(tick);
   </script>
+  <!-- Protection (keep) -->
   <script src="./media-protect.js"></script>
 </body>
 </html>
