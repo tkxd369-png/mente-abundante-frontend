@@ -355,6 +355,57 @@ section { min-height: 220vh; } /* más “runway” para el efecto */
 
 /* Opcional: al inicio que no se vea nada hasta que empiece a subir */
 #sec-book .card{ opacity: calc(var(--p) * 1); }
+/* ===== Fixed background layer (the quote NEVER moves) ===== */
+.bg-layer{
+  position:fixed;
+  inset: var(--header-h) 0 0 0;
+  z-index:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 0 var(--pad);
+}
+
+.bg-layer.cream{
+  background:
+    radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
+    radial-gradient(900px 700px at 85% 85%, rgba(190,156,86,.16), transparent 60%),
+    linear-gradient(180deg, var(--cream-1), var(--cream-2));
+  color:var(--text-dark);
+}
+.bg-layer.charcoal{
+  background:
+    radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
+    radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
+  color:var(--text-light);
+}
+
+.bg-inner{ max-width:980px; text-align:center; }
+.bg-quote{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-weight:600;
+  line-height:1.05;
+  letter-spacing:.01em;
+  font-size:clamp(34px, 5vw, 72px);
+  opacity:.14; /* sube si quieres más “bold” */
+}
+
+/* Put content ABOVE the fixed background */
+section{ position:relative; z-index:2; background:transparent !important; }
+section{ min-height:220vh; } /* runway para que “jale” */
+
+/* Cards appear from below and rise */
+.card{
+  --p: 0;
+  transform: translateY(calc((1 - var(--p)) * 60vh));
+  opacity: calc(var(--p));
+  transition:none;
+}
+
+/* Start hidden on load (so you see ONLY the quote first) */
+#sec-book .card{ opacity: calc(var(--p)); }
 
   </style>
 </head>
@@ -626,7 +677,54 @@ function tick(){
 }
 requestAnimationFrame(tick);
 
-   
+   // ===== Fixed background quote swap + card rise =====
+const bgLayer = document.getElementById("bgLayer");
+const bgQuote = document.getElementById("bgQuote");
+
+const BG = {
+  book: { theme:"cream",   es:"“Toda transformación comienza con una decisión.”", en:"“Every transformation begins with a decision.”" },
+  ttp:  { theme:"charcoal",es:"“La verdad no se lee. Se recorre.”",              en:"“Truth isn’t read. It’s walked.”" },
+  fut:  { theme:"cream",   es:"“Capa por capa.”",                                 en:"“Layer by layer.”" }
+};
+
+function setBG(key){
+  const d = BG[key];
+  if(!d) return;
+  bgLayer.classList.remove("cream","charcoal");
+  bgLayer.classList.add(d.theme);
+  bgQuote.textContent = (lang==="en" ? d.en : d.es);
+}
+
+const secBook = document.getElementById("sec-book");
+const secTtp  = document.getElementById("sec-ttp");
+const secFut  = document.getElementById("sec-future");
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    if(e.target === secBook) setBG("book");
+    if(e.target === secTtp)  setBG("ttp");
+    if(e.target === secFut)  setBG("fut");
+  });
+},{ threshold: 0.45 });
+
+[secBook, secTtp, secFut].forEach(s=> s && io.observe(s));
+
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+
+function tick(){
+  const vh = window.innerHeight || 800;
+  [secBook, secTtp, secFut].forEach(sec=>{
+    if(!sec) return;
+    const r = sec.getBoundingClientRect();
+    const p = clamp01((vh - r.top) / (vh * 1.2));
+    const card = sec.querySelector(".card");
+    if(card) card.style.setProperty("--p", p.toFixed(4));
+  });
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
   </script>
 
   <!-- Protection -->
