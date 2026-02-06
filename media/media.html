@@ -4,45 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Media — The Master Key</title>
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600
+  &display=swap" rel="stylesheet">
   <style>
     :root{
       --cream-1:#f6f0e6;
       --cream-2:#efe6d7;
       --charcoal:#111114;
       --charcoal-2:#1a1a1f;
-
       --text-dark:#1f2226;
       --text-light:#f2f2f4;
-
       --gold: rgba(190,156,86,.95);
       --line: rgba(190,156,86,.35);
-      --shadow: 0 18px 70px rgba(0,0,0,.22);
+      --shadow: 0 22px 90px rgba(0,0,0,.28);
       --radius: 22px;
-
       --header-h:64px;
       --pad:18px;
-
-      --quote-top: calc(var(--header-h) + 28px);
-      --card-top:  calc(var(--header-h) + 56px);
-      --card-h:    calc(100vh - (var(--header-h) + 92px));
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
       font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--cream-1);
       color:var(--text-dark);
       overflow-x:hidden;
+      background:#000; /* background is handled by fixed layer */
     }
-
     /* Header */
     .header{
       position:fixed;
@@ -57,8 +47,7 @@
       background:rgba(246,240,230,.60);
       border-bottom:1px solid var(--line);
     }
-    .header.dark{ background:rgba(17,17,20,.45); }
-
+    .header.dark{ background:rgba(17,17,20,.45); border-bottom:1px solid rgba(190,156,86,.22); }
     .brand{
       display:flex;
       gap:10px;
@@ -69,16 +58,14 @@
       color:rgba(31,34,38,.78);
     }
     .header.dark .brand{ color:rgba(242,242,244,.75); }
-
     .brand strong{
       font-family:"Playfair Display",serif;
       letter-spacing:.04em;
       font-size:20px;
+ }
       text-transform:none;
       color:rgba(31,34,38,.95);
-    }
     .header.dark .brand strong{ color:rgba(242,242,244,.92); }
-
     .btn{
       appearance:none;
       border:1px solid rgba(190,156,86,.55);
@@ -98,87 +85,113 @@
     }
     .header.dark .btn{ color:rgba(242,242,244,.92); }
     .btn:active{ transform:translateY(1px); }
-
-    /* Sections */
-    section{
-      min-height:170vh;
-      position:relative;
-      padding: calc(var(--header-h) + 28px) var(--pad) 56px;
-      overflow:hidden;
+    /* ===== SOFI-style fixed background layer ===== */
+    .bg-layer{
+      position:fixed;
+      inset: var(--header-h) 0 0 0;
+      z-index:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 0 var(--pad);
+      transition: background 260ms ease, color 260ms ease;
     }
-
-    /* Backgrounds */
-    .cream{
+    .bg-layer.cream{
       background:
         radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
         radial-gradient(900px 700px at 85% 85%, rgba(190,156,86,.16), transparent 60%),
         linear-gradient(180deg, var(--cream-1), var(--cream-2));
       color:var(--text-dark);
     }
-    .charcoal{
+    .bg-layer.charcoal{
       background:
-        radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
+    radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
         radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
         linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
       color:var(--text-light);
     }
-
-    /* Quote layer: sticky = “static background text” */
-    .quote{
-      position:sticky;
-      top:var(--quote-top);
-      height:calc(100vh - var(--quote-top));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      pointer-events:none;
-      z-index:1;
+    .bg-inner{ max-width:980px; text-align:center; }
+    .bg-kicker{
+      margin:0 0 14px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-weight:700;
+      font-size:12px;
+      opacity:.75;
     }
-    .quote p{
+    .bg-quote{
       margin:0;
-      max-width:980px;
       font-family:"Playfair Display",serif;
       font-weight:600;
-      line-height:1.05;
+      line-height:1.02;
       letter-spacing:.01em;
-      font-size:clamp(34px, 5vw, 72px);
-      text-align:center;
-      opacity:.12;
+      font-size:clamp(36px, 5.4vw, 78px);
+      opacity:.16; /* bold but still background */
     }
-    .charcoal .quote p{ opacity:.10; }
-
-    /* Floating card wrapper: sticky = “card floats and drags the next section” */
-    .float-wrap{
-      position:sticky;
-      top:var(--card-top);
-      height:var(--card-h);
+    .bg-layer.charcoal .bg-quote{ opacity:.12; }
+    .bg-cta{
+      margin:18px 0 0;
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      opacity:.55;
+  }
+    /* ===== Scroll content sits above fixed background ===== */
+    main{
+      position:relative;
+      z-index:2;
+      padding-top: var(--header-h);
+    }
+    section{
+      position:relative;
+      background:transparent; /* critical: background is fixed layer */
+      min-height: 240vh;      /* runway -> makes the floating feel */
+      padding: 0 var(--pad);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+    /* Card stage: card floats and rises */
+    .stage{
+      width: min(980px, 92vw);
+      height: 100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      z-index:3;
+      position:sticky;
+      top: var(--header-h);
+      padding: 18px 0;
     }
-
     .card{
-      width:min(980px, 92vw);
-      height:min(62vh, 520px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      width: 100%;
+      height: min(62vh, 540px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
       position:relative;
+      /* SOFI effect: starts below, rises over background */
+      --p: 0;
+      transform: translateY(calc((1 - var(--p)) * 62vh));
+      opacity: calc(0.04 + (var(--p) * 0.96));
+      transition:none;
+      will-change: transform, opacity;
     }
-    .cream .card{ background:rgba(255,255,255,.20); border:1px solid rgba(255,255,255,.35); }
-    .charcoal .card{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); }
-
-    /* Premium placeholder “image” */
+    .cream-card .card{
+      background: rgba(255,255,255,.22);
+      border:1px solid rgba(255,255,255,.35);
+    }
+    .charcoal-card .card{
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
+    }
     .hero{
       position:absolute;
       inset:0;
       background:
         radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.22), transparent 55%),
-        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.22), transparent 60%),
+        radial-gradient(700px 500px at 80% 70%, rgba(190,156,86,.24), transparent 60%),
         linear-gradient(130deg, rgba(255,255,255,.06), rgba(0,0,0,.22));
     }
     .hero::after{
@@ -190,18 +203,15 @@
       transform:rotate(-6deg);
       pointer-events:none;
     }
-
-    /* Readability layer */
-    .card::before{
+  .card::before{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.26));
+      background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.28));
       z-index:2;
       pointer-events:none;
     }
-    .cream .card::before{ background:linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.18)); }
-
+    .cream-card .card::before{ background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.20)); }
     .label{
       position:absolute;
       left:18px; top:16px;
@@ -223,9 +233,8 @@
       backdrop-filter: blur(10px);
       white-space:nowrap;
     }
-    .cream .pill{ background:rgba(255,255,255,.40); color:rgba(31,34,38,.92); }
-    .charcoal .pill{ background:rgba(0,0,0,.22); color:rgba(242,242,244,.92); }
-
+    .cream-card .pill{ background:rgba(255,255,255,.40); color:rgba(31,34,38,.92); }
+    .charcoal-card .pill{ background:rgba(0,0,0,.22); color:rgba(242,242,244,.92); }
     .content{
       position:absolute;
       inset:0;
@@ -235,17 +244,19 @@
       justify-content:flex-end;
       gap:10px;
       z-index:5;
+      color: rgba(245,245,247,.92);
     }
+    .cream-card .content{ color: rgba(31,34,38,.92); }
     .title{
       margin:0;
       font-family:"Playfair Display",serif;
-      font-size:clamp(22px, 3.2vw, 34px);
+      font-size:clamp(24px, 3.2vw, 36px);
       letter-spacing:.01em;
     }
     .desc{
       margin:0;
       font-size:15px;
-      line-height:1.5;
+      line-height:1.55;
       opacity:.92;
       max-width:62ch;
     }
@@ -260,17 +271,15 @@
       opacity:.80;
       margin-top:6px;
     }
-
-    /* Lock overlay */
     .lock-overlay{
       position:absolute;
       inset:0;
       z-index:6;
       display:flex;
       align-items:center;
+  }
       justify-content:center;
-      background:linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.55));
-    }
+      background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.60));
     .lock-box{
       width:min(560px, 88%);
       border:1px solid rgba(190,156,86,.55);
@@ -289,220 +298,97 @@
       color:rgba(242,242,244,.96);
     }
     .lock-box p{ margin:0; font-size:14px; opacity:.92; line-height:1.5; }
-
-    /* Final section center */
-    .final{
-      min-height:120vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .final .wrap{
-      width:min(860px, 92vw);
-      text-align:center;
-      position:relative;
-      z-index:3;
-      padding:10px 0;
-    }
-    .final h2{
-      font-family:"Playfair Display",serif;
-      font-size:clamp(28px, 4vw, 52px);
-      margin:0 0 10px;
-      letter-spacing:.01em;
-    }
-    .final p{
-      margin:0 auto 18px;
-      max-width:70ch;
-      opacity:.82;
-      line-height:1.6;
-    }
-
-    .scroll-hint{
-      position:absolute;
-      left:0; right:0;
-      bottom:18px;
-      text-align:center;
-      font-size:12px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      opacity:.55;
-      z-index:4;
-      user-select:none;
-      pointer-events:none;
-    }
-
     @media (max-width:520px){
       :root{ --pad:12px; }
-      .card{ height:min(58vh, 480px); }
-      .desc{ font-size:14px; }
+      .card{ height:min(58vh, 500px); }
       .header{ padding:0 12px; }
+      .bg-quote{ font-size:clamp(34px, 9vw, 68px); }
     }
-   /* --- Sofi-style: card rises over a pinned background --- */
-section { min-height: 220vh; } /* más “runway” para el efecto */
-
-.float-wrap { 
-  /* ya es sticky; solo aseguramos que no se mueva el fondo */
-  z-index: 3;
-}
-
-/* La tarjeta inicia abajo/oculta y sube conforme al scroll */
-.card{
-  --p: 0; /* progreso 0..1, lo setea JS */
-  transform: translateY(calc((1 - var(--p)) * 55vh));
-  opacity: calc(0.15 + (var(--p) * 0.85));
-  transition: none; /* importante: no transiciones, debe ser directo al scroll */
-}
-
-/* Opcional: al inicio que no se vea nada hasta que empiece a subir */
-#sec-book .card{ opacity: calc(var(--p) * 1); }
-/* ===== Fixed background layer (the quote NEVER moves) ===== */
-.bg-layer{
-  position:fixed;
-  inset: var(--header-h) 0 0 0;
-  z-index:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 0 var(--pad);
-}
-
-.bg-layer.cream{
-  background:
-    radial-gradient(1200px 900px at 15% 10%, rgba(255,255,255,.55), transparent 55%),
-    radial-gradient(900px 700px at 85% 85%, rgba(190,156,86,.16), transparent 60%),
-    linear-gradient(180deg, var(--cream-1), var(--cream-2));
-  color:var(--text-dark);
-}
-.bg-layer.charcoal{
-  background:
-    radial-gradient(1200px 900px at 15% 10%, rgba(190,156,86,.12), transparent 55%),
-    radial-gradient(900px 700px at 85% 85%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(180deg, var(--charcoal), var(--charcoal-2));
-  color:var(--text-light);
-}
-
-.bg-inner{ max-width:980px; text-align:center; }
-.bg-quote{
-  margin:0;
-  font-family:"Playfair Display",serif;
-  font-weight:600;
-  line-height:1.05;
-  letter-spacing:.01em;
-  font-size:clamp(34px, 5vw, 72px);
-  opacity:.14; /* sube si quieres más “bold” */
-}
-
-/* Put content ABOVE the fixed background */
-section{ position:relative; z-index:2; background:transparent !important; }
-section{ min-height:220vh; } /* runway para que “jale” */
-
-/* Cards appear from below and rise */
-.card{
-  --p: 0;
-  transform: translateY(calc((1 - var(--p)) * 60vh));
-  opacity: calc(var(--p));
-  transition:none;
-}
-
-/* Start hidden on load (so you see ONLY the quote first) */
-#sec-book .card{ opacity: calc(var(--p)); }
-
   </style>
 </head>
-
 <body>
-  <!-- Sticky Header -->
   <header class="header" id="stickyHeader">
     <div class="brand">
       <strong id="hdrMedia">Media</strong>
       <span>THE MASTER KEY</span>
     </div>
-    <!-- IMPORTANT: dashboard is at repo root, media.html is inside /media/ -->
     <a class="btn" id="btnDashTop" href="../dashboard.html">Dashboard</a>
   </header>
-
-  <!-- SECTION 1: BOOK -->
-  <section class="cream" id="sec-book">
-    <div class="quote"><p id="qBook">“Toda transformación comienza con una decisión.”</p></div>
-
-    <div class="float-wrap">
-      <div class="card" role="group" aria-label="Book">
-        <div class="hero" aria-hidden="true"></div>
-
-        <div class="label">
-          <span class="pill" id="pillBook">LIBRO</span>
-          <span class="pill" id="bookStatus">DISPONIBLE</span>
-        </div>
-
-        <div class="content">
-          <h1 class="title" id="bookTitle">Yo Decido Ser Abundante</h1>
-          <p class="desc" id="bookDesc">El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.</p>
-
-          <div class="actions">
-            <!-- Book page (inside /media/) -->
-            <a class="btn" id="btnRead" href="./pdfbook/pdf.html">Leer ahora</a>
+  <div id="bgLayer" class="bg-layer cream">
+    <div class="bg-inner">
+      <p class="bg-kicker" id="bgKicker">Media</p>
+      <p class="bg-quote" id="bgQuote">“Toda transformación comienza con una decisión.”</p>
+      <p class="bg-cta" id="bgHint">SCROLL</p>
+    </div>
+  </div>
+  <main>
+    <section id="sec-book" class="cream-card" aria-label="Book Section">
+      <div class="stage">
+        <div class="card" role="group" aria-label="Book">
+          <div class="hero" aria-hidden="true"></div>
+          <div class="label">
+            <span class="pill" id="pillBook">LIBRO</span>
+            <span class="pill" id="bookStatus">DISPONIBLE</span>
           </div>
-
-          <div class="muted" id="bookNote">
-            *El Truth Path se desbloquea al terminar el libro y completar el quiz.
+          <div class="content">
+            <h1 class="title" id="bookTitle">Yo Decido Ser Abundante</h1>
+            <p class="desc" id="bookDesc">El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.</p>
+            <div class="actions">
+              <a class="btn" id="btnRead" href="./pdfbook/pdf.html">Leer ahora</a>
+            </div>
+                        <div class="muted" id="bookNote">*El Truth Path se desbloquea al terminar el libro y completar
+            el quiz.</div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="scroll-hint" id="hintScroll">SCROLL</div>
-  </section>
-
-  <!-- SECTION 2: TTP -->
-  <section class="charcoal" id="sec-ttp">
-    <div class="quote"><p id="qTtp">“La verdad no se lee. Se recorre.”</p></div>
-
-    <div class="float-wrap">
-      <div class="card" id="ttpCard" role="group" aria-label="Truth Path">
-        <div class="hero" aria-hidden="true"></div>
-
-        <div class="label">
-          <span class="pill" id="pillTtp">TRUTH PATH</span>
-          <span class="pill" id="ttpStatus">BLOQUEADO</span>
-        </div>
-
-        <div class="content">
-          <h2 class="title" id="ttpTitle">The Truth Path (40 días)</h2>
-          <p class="desc" id="ttpDesc">Un camino guiado de reflexión y verdad interior. Aparece cuando el fundamento está completo.</p>
-
-          <div class="actions" id="ttpActions">
-            <button class="btn" type="button" id="viewReq">Ver requisitos</button>
+    </section>
+    <section id="sec-ttp" class="charcoal-card" aria-label="Truth Path Section">
+      <div class="stage">
+        <div class="card" id="ttpCard" role="group" aria-label="Truth Path">
+          <div class="hero" aria-hidden="true"></div>
+          <div class="label">
+            <span class="pill" id="pillTtp">TRUTH PATH</span>
+            <span class="pill" id="ttpStatus">BLOQUEADO</span>
+   </div>
+          <div class="content">
+            <h2 class="title" id="ttpTitle">The Truth Path (40 días)</h2>
+                        <p class="desc" id="ttpDesc">Un camino guiado de reflexión y verdad interior. Aparece cuando
+            el fundamento está completo.</p>
+            <div class="actions" id="ttpActions">
+              <button class="btn" type="button" id="viewReq">Ver requisitos</button>
+            </div>
+            <div class="muted" id="ttpNote">Termina el libro + quiz para desbloquear automáticamente.</div>
           </div>
-
-          <div class="muted" id="ttpNote">Termina el libro + quiz para desbloquear automáticamente.</div>
-        </div>
-
-        <!-- Locked overlay (hidden when unlocked) -->
-        <div class="lock-overlay" id="lockOverlay">
-          <div class="lock-box">
-            <strong id="lockTitle">Se revela después</strong>
-            <p id="lockText">Termina el libro y el quiz para abrir este camino.</p>
+          <div class="lock-overlay" id="lockOverlay">
+            <div class="lock-box">
+              <strong id="lockTitle">Se revela después</strong>
+              <p id="lockText">Termina el libro y el quiz para abrir este camino.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: FUTURE + DASHBOARD -->
-  <section class="cream final" id="sec-future">
-    <div class="quote"><p id="qFuture">“Capa por capa.”</p></div>
-
-    <div class="wrap">
-      <h2 id="futureTitle">Esto apenas comienza.</h2>
-      <p id="futureDesc">Aquí vivirán los próximos audios, videos y series — elegante, ligero y siempre creciendo.</p>
-      <a class="btn" id="btnDashBottom" href="../dashboard.html">Dashboard</a>
-    </div>
-  </section>
-
+    </section>
+    <section id="sec-future" class="cream-card" aria-label="Future Section">
+      <div class="stage">
+        <div class="card" role="group" aria-label="Future">
+          <div class="hero" aria-hidden="true"></div>
+          <div class="label">
+            <span class="pill" id="pillFuture">PRÓXIMAMENTE</span>
+          </div>
+          <div class="content">
+            <h2 class="title" id="futureTitle">Esto apenas comienza.</h2>
+                        <p class="desc" id="futureDesc">Aquí vivirán los próximos audios, videos y series — elegante,
+            ligero y siempre creciendo.</p>
+            <div class="actions">
+              <a class="btn" id="btnDashBottom" href="../dashboard.html">Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
   <script>
-    // ===== Language: detect your saved preference (best effort) =====
     function detectLang(){
-      // 1) common keys
       const keys = ["ma_lang","lang","language","tmk_lang"];
       for(const k of keys){
         const v = localStorage.getItem(k);
@@ -512,7 +398,6 @@ section{ min-height:220vh; } /* runway para que “jale” */
           if(s.startsWith("es")) return "es";
         }
       }
-      // 2) ma_user.lang (you already use ma_user elsewhere in the project)
       try{
         const u = JSON.parse(localStorage.getItem("ma_user") || "{}");
         const v = (u.lang || u.language || u.idioma || "").toString().toLowerCase();
@@ -521,22 +406,23 @@ section{ min-height:220vh; } /* runway para que “jale” */
       }catch(e){}
       return "es";
     }
-
+    const lang = detectLang();
     const STR = {
       es:{
-        dashboard:"Dashboard",
-        hint:"SCROLL",
-        qBook:"“Toda transformación comienza con una decisión.”",
+        media:"Media",
+        scroll:"SCROLL",
+        dash:"Dashboard",
         bookPill:"LIBRO",
         bookStatus:"DISPONIBLE",
         bookTitle:"Yo Decido Ser Abundante",
         bookDesc:"El fundamento. Aquí inicia la comprensión que sostiene todo lo demás.",
         readNow:"Leer ahora",
         bookNote:"*El Truth Path se desbloquea al terminar el libro y completar el quiz.",
-
+        qBook:"“Toda transformación comienza con una decisión.”",
         qTtp:"“La verdad no se lee. Se recorre.”",
+        qFuture:"“Capa por capa.”",
         ttpPill:"TRUTH PATH",
-        locked:"BLOQUEADO",
+ locked:"BLOQUEADO",
         unlocked:"DESBLOQUEADO",
         ttpTitle:"The Truth Path (40 días)",
         ttpDesc:"Un camino guiado de reflexión y verdad interior. Aparece cuando el fundamento está completo.",
@@ -545,23 +431,23 @@ section{ min-height:220vh; } /* runway para que “jale” */
         lockTitle:"Se revela después",
         lockText:"Termina el libro y el quiz para abrir este camino.",
         startTtp:"Empezar Truth Path",
-
-        qFuture:"“Capa por capa.”",
+        futurePill:"PRÓXIMAMENTE",
         futureTitle:"Esto apenas comienza.",
         futureDesc:"Aquí vivirán los próximos audios, videos y series — elegante, ligero y siempre creciendo."
       },
       en:{
-        dashboard:"Dashboard",
-        hint:"SCROLL",
-        qBook:"“Every transformation begins with a decision.”",
+        media:"Media",
+        scroll:"SCROLL",
+        dash:"Dashboard",
         bookPill:"BOOK",
         bookStatus:"AVAILABLE",
         bookTitle:"I Decide To Be Abundant",
         bookDesc:"The foundation. This is where the understanding begins.",
         readNow:"Read now",
         bookNote:"*The Truth Path unlocks after finishing the book and the quiz.",
-
+        qBook:"“Every transformation begins with a decision.”",
         qTtp:"“Truth isn’t read. It’s walked.”",
+        qFuture:"“Layer by layer.”",
         ttpPill:"TRUTH PATH",
         locked:"LOCKED",
         unlocked:"UNLOCKED",
@@ -572,30 +458,23 @@ section{ min-height:220vh; } /* runway para que “jale” */
         lockTitle:"Reveals after",
         lockText:"Finish the book and the quiz to open this path.",
         startTtp:"Start Truth Path",
-
-        qFuture:"“Layer by layer.”",
+        futurePill:"COMING SOON",
         futureTitle:"This is only the beginning.",
         futureDesc:"Future audios, videos, and series will live here — clean, calm, and always expanding."
       }
     };
-
-    const lang = detectLang();
     const T = STR[lang] || STR.es;
-
-    // Apply language
-    document.getElementById("btnDashTop").textContent = T.dashboard;
-    document.getElementById("btnDashBottom").textContent = T.dashboard;
-    document.getElementById("hintScroll").textContent = T.hint;
-
-    document.getElementById("qBook").textContent = T.qBook;
+    document.getElementById("hdrMedia").textContent = T.media;
+    document.getElementById("bgKicker").textContent = T.media;
+    document.getElementById("bgHint").textContent = T.scroll;
+    document.getElementById("btnDashTop").textContent = T.dash;
+    document.getElementById("btnDashBottom").textContent = T.dash;
     document.getElementById("pillBook").textContent = T.bookPill;
     document.getElementById("bookStatus").textContent = T.bookStatus;
     document.getElementById("bookTitle").textContent = T.bookTitle;
     document.getElementById("bookDesc").textContent = T.bookDesc;
     document.getElementById("btnRead").textContent = T.readNow;
     document.getElementById("bookNote").textContent = T.bookNote;
-
-    document.getElementById("qTtp").textContent = T.qTtp;
     document.getElementById("pillTtp").textContent = T.ttpPill;
     document.getElementById("ttpTitle").textContent = T.ttpTitle;
     document.getElementById("ttpDesc").textContent = T.ttpDesc;
@@ -603,24 +482,16 @@ section{ min-height:220vh; } /* runway para que “jale” */
     document.getElementById("ttpNote").textContent = T.ttpNote;
     document.getElementById("lockTitle").textContent = T.lockTitle;
     document.getElementById("lockText").textContent = T.lockText;
-
-    document.getElementById("qFuture").textContent = T.qFuture;
+    document.getElementById("pillFuture").textContent = T.futurePill;
     document.getElementById("futureTitle").textContent = T.futureTitle;
     document.getElementById("futureDesc").textContent = T.futureDesc;
-
-    // ===== Unlock logic (same keys you already use) =====
-    const KEYS = {
-      bookComplete: "ma_book_complete",
-      quizComplete: "ma_quiz_complete"
-    };
-    function getBool(key){ return localStorage.getItem(key) === "1"; }
-    function isUnlocked(){ return getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete); }
-
+    const KEYS = { bookComplete:"ma_book_complete", quizComplete:"ma_quiz_complete" };
+    const getBool = (k) => localStorage.getItem(k) === "1";
+    const isUnlocked = () => getBool(KEYS.bookComplete) && getBool(KEYS.quizComplete);
     const ttpStatus = document.getElementById("ttpStatus");
     const lockOverlay = document.getElementById("lockOverlay");
     const ttpActions = document.getElementById("ttpActions");
-
-    function renderTTP(){
+  function renderTTP(){
       if(isUnlocked()){
         ttpStatus.textContent = T.unlocked;
         lockOverlay.style.display = "none";
@@ -630,104 +501,51 @@ section{ min-height:220vh; } /* runway para que “jale” */
         lockOverlay.style.display = "flex";
       }
     }
-
-    document.addEventListener("click", (e) => {
+    renderTTP();
+    document.addEventListener("click", (e)=>{
       if(e.target && e.target.id === "viewReq"){
-        const msg = [
+        alert([
           (lang==="en" ? "To unlock The Truth Path:" : "Para desbloquear The Truth Path:"),
-          (lang==="en" ? "• Book completed: " : "• Libro completado: ") + (getBool(KEYS.bookComplete) ? "✅" : "❌"),
-          (lang==="en" ? "• Quiz completed: " : "• Quiz completado: ") + (getBool(KEYS.quizComplete) ? "✅" : "❌")
-        ].join("\\n");
-        alert(msg);
+          (lang==="en" ? "• Book completed: " : "• Libro completado: ") + (getBool(KEYS.bookComplete) ? "" : ""),
+          (lang==="en" ? "• Quiz completed: " : "• Quiz completado: ") + (getBool(KEYS.quizComplete) ? "" : "")
+        ].join("\n"));
       }
     });
-
-    renderTTP();
-
-    // Header dark on charcoal
+    const bgLayer = document.getElementById("bgLayer");
+    const bgQuote = document.getElementById("bgQuote");
     const header = document.getElementById("stickyHeader");
-    const ttpSection = document.getElementById("sec-ttp");
-    const obs = new IntersectionObserver((entries)=>{
+    const secBook = document.getElementById("sec-book");
+    const secTtp  = document.getElementById("sec-ttp");
+    const secFut  = document.getElementById("sec-future");
+    function setBg(theme, quote){
+      bgLayer.classList.remove("cream","charcoal");
+      bgLayer.classList.add(theme);
+      bgQuote.textContent = quote;
+      header.classList.toggle("dark", theme === "charcoal");
+    }
+    const io = new IntersectionObserver((entries)=>{
       entries.forEach(en=>{
-        if(en.isIntersecting) header.classList.add("dark");
-        else header.classList.remove("dark");
+        if(!en.isIntersecting) return;
+        if(en.target === secBook) setBg("cream", T.qBook);
+        if(en.target === secTtp)  setBg("charcoal", T.qTtp);
+        if(en.target === secFut)  setBg("cream", T.qFuture);
       });
-    }, { threshold: 0.2 });
-    obs.observe(ttpSection);
-// --- Scroll-driven rise (sets --p on each section card) ---
-const sections = [document.getElementById("sec-book"), document.getElementById("sec-ttp")];
-
-function clamp01(x){ return Math.max(0, Math.min(1, x)); }
-
-function tick(){
-  const vh = window.innerHeight || 800;
-
-  sections.forEach(sec => {
-    if(!sec) return;
-    const r = sec.getBoundingClientRect();
-
-    // Progreso: 0 cuando la sección apenas entra, 1 cuando ya avanzaste ~1 pantalla
-    const p = clamp01((vh - r.top) / (vh * 1.15));
-    // Aplica a la tarjeta dentro de esa sección
-    const card = sec.querySelector(".card");
-    if(card) card.style.setProperty("--p", p.toFixed(4));
-  });
-
-  requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
-
-   // ===== Fixed background quote swap + card rise =====
-const bgLayer = document.getElementById("bgLayer");
-const bgQuote = document.getElementById("bgQuote");
-
-const BG = {
-  book: { theme:"cream",   es:"“Toda transformación comienza con una decisión.”", en:"“Every transformation begins with a decision.”" },
-  ttp:  { theme:"charcoal",es:"“La verdad no se lee. Se recorre.”",              en:"“Truth isn’t read. It’s walked.”" },
-  fut:  { theme:"cream",   es:"“Capa por capa.”",                                 en:"“Layer by layer.”" }
-};
-
-function setBG(key){
-  const d = BG[key];
-  if(!d) return;
-  bgLayer.classList.remove("cream","charcoal");
-  bgLayer.classList.add(d.theme);
-  bgQuote.textContent = (lang==="en" ? d.en : d.es);
-}
-
-const secBook = document.getElementById("sec-book");
-const secTtp  = document.getElementById("sec-ttp");
-const secFut  = document.getElementById("sec-future");
-
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting) return;
-    if(e.target === secBook) setBG("book");
-    if(e.target === secTtp)  setBG("ttp");
-    if(e.target === secFut)  setBG("fut");
-  });
-},{ threshold: 0.45 });
-
-[secBook, secTtp, secFut].forEach(s=> s && io.observe(s));
-
-function clamp01(x){ return Math.max(0, Math.min(1, x)); }
-
-function tick(){
-  const vh = window.innerHeight || 800;
-  [secBook, secTtp, secFut].forEach(sec=>{
-    if(!sec) return;
-    const r = sec.getBoundingClientRect();
-    const p = clamp01((vh - r.top) / (vh * 1.2));
-    const card = sec.querySelector(".card");
-    if(card) card.style.setProperty("--p", p.toFixed(4));
-  });
-  requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
-
+    }, { threshold: 0.55 });
+    [secBook, secTtp, secFut].forEach(s=> s && io.observe(s));
+    function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+    function tick(){
+      const vh = window.innerHeight || 800;
+      [secBook, secTtp, secFut].forEach(sec=>{
+        if(!sec) return;
+        const r = sec.getBoundingClientRect();
+        const p = clamp01((vh - r.top) / (vh * 1.25));
+        const card = sec.querySelector(".card");
+        if(card) card.style.setProperty("--p", p.toFixed(4));
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   </script>
-
-  <!-- Protection -->
   <script src="./media-protect.js"></script>
 </body>
 </html>
