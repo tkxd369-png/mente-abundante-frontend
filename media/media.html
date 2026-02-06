@@ -337,6 +337,25 @@
       .desc{ font-size:14px; }
       .header{ padding:0 12px; }
     }
+   /* --- Sofi-style: card rises over a pinned background --- */
+section { min-height: 220vh; } /* más “runway” para el efecto */
+
+.float-wrap { 
+  /* ya es sticky; solo aseguramos que no se mueva el fondo */
+  z-index: 3;
+}
+
+/* La tarjeta inicia abajo/oculta y sube conforme al scroll */
+.card{
+  --p: 0; /* progreso 0..1, lo setea JS */
+  transform: translateY(calc((1 - var(--p)) * 55vh));
+  opacity: calc(0.15 + (var(--p) * 0.85));
+  transition: none; /* importante: no transiciones, debe ser directo al scroll */
+}
+
+/* Opcional: al inicio que no se vea nada hasta que empiece a subir */
+#sec-book .card{ opacity: calc(var(--p) * 1); }
+
   </style>
 </head>
 
@@ -584,6 +603,30 @@
       });
     }, { threshold: 0.2 });
     obs.observe(ttpSection);
+// --- Scroll-driven rise (sets --p on each section card) ---
+const sections = [document.getElementById("sec-book"), document.getElementById("sec-ttp")];
+
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+
+function tick(){
+  const vh = window.innerHeight || 800;
+
+  sections.forEach(sec => {
+    if(!sec) return;
+    const r = sec.getBoundingClientRect();
+
+    // Progreso: 0 cuando la sección apenas entra, 1 cuando ya avanzaste ~1 pantalla
+    const p = clamp01((vh - r.top) / (vh * 1.15));
+    // Aplica a la tarjeta dentro de esa sección
+    const card = sec.querySelector(".card");
+    if(card) card.style.setProperty("--p", p.toFixed(4));
+  });
+
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+   
   </script>
 
   <!-- Protection -->
