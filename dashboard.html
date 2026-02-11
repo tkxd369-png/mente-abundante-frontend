@@ -1,4 +1,4 @@
-===== NUEVO dashboard.html (reemplaza/guarda como dashboard.html) =====
+ 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -479,86 +479,4 @@ here.",
   </script>
 </body>
 </html>
-===== PATCH para styles.css (pegar al FINAL de tu styles.css) =====
-/* =========================================================
-   VAULT (BANNERS) — FIX para Classic + Dark (pegar al FINAL)
-   ========================================================= */
-/* Layout */
-.ma-vault-section{ padding: 18px 16px; }
-.ma-vault-grid{ display:grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
-.ma-vault-banner{
-  display:block;
-  text-decoration:none;
-  border-radius: 18px;
-  padding: 16px 16px 14px;
-  overflow:hidden;
-  position:relative;
-  transform: translateZ(0);
-}
-/* --------- Classic (crema) --------- */
-body:not(.ma-theme-dark) .ma-vault-banner{
-  border: 1px solid rgba(0,0,0,0.08);
-  background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(250,245,238,0.78));
-  box-shadow: 0 14px 34px rgba(0,0,0,0.06);
-}
-body:not(.ma-theme-dark) .ma-vault-kicker{ color: rgba(58,48,39,0.70); }
-body:not(.ma-theme-dark) .ma-vault-title{ color: rgba(58,48,39,0.95); }
-body:not(.ma-theme-dark) .ma-vault-sub{ color: rgba(58,48,39,0.72); }
-body:not(.ma-theme-dark) .ma-vault-cta{
-  border: 1px solid rgba(199,159,91,0.55);
-}
-  background: linear-gradient(135deg, #e2ba6b, #c79f5b);
-  color: #ffffff;
-/* --------- Dark (Black Edition) --------- */
-.ma-theme-dark .ma-vault-banner{
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 12px 34px rgba(0,0,0,0.42);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.ma-theme-dark .ma-vault-kicker{ color: rgba(255,255,255,0.72); }
-.ma-theme-dark .ma-vault-title{ color: rgba(255,255,255,0.94); }
-.ma-theme-dark .ma-vault-sub{ color: rgba(255,255,255,0.72); }
-.ma-theme-dark .ma-vault-cta{
-  border: 1px solid rgba(212,175,55,0.35);
-  background: linear-gradient(180deg, rgba(232,198,120,0.92), rgba(214,168,70,0.88));
-  color: #111111;
-}
-/* Shared typography */
-.ma-vault-top{ display:flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.ma-vault-kicker{
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-.ma-vault-title{
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  letter-spacing: 0.06em;
-}
-.ma-vault-sub{
-  margin-top: 6px;
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.35;
-}
-.ma-vault-cta{
-  margin-top: 12px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-.ma-vault-banner:active{ transform: translateY(1px); }
-===== NOTA de desbloqueo TTP (keys de localStorage) =====
-El banner de TTP aparece si en localStorage existe cualquiera de estas keys con valor true/1: 
-ttp_unlocked, ma_ttp_unlocked, truth_path_unlocked, tp_unlocked, ttpUnlocked.\nSi tu quiz ya 
-marca otra key, solo agrega ese nombre en el array 'keys' dentro del script 
-window.maRefreshVault en dashboard.html. 
+
