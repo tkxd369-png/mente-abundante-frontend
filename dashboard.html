@@ -311,10 +311,40 @@
             "footer.logout": "LOG OUT",
             "qr.title": "Your invitation code",
             "qr.help":
-              "Ask them to scan this QR or share your personal link.",
+         
+            "Ask them to scan this QR or share your personal link.",
+         
+          // 1) Dentro de DASH_TRANSLATIONS.es agrega:
+"vault.title": "TU VAULT",
+"vault.webbookKicker": "LECTURA",
+"vault.webbookTitle": "WEBBOOK",
+"vault.webbookSub": "Continúa tu lectura",
+"vault.pathKicker": "SENDERO",
+"vault.pathTitle": "THE TRUTH PATH",
+"vault.pathSub": "Tu jornada de 40 días",
+"vault.toolsKicker": "GUÍAS",
+"vault.toolsTitle": "HERRAMIENTAS",
+"vault.toolsSub": "Recursos para compartir",
+"vault.open": "ABRIR",
+"vault.note": "Todo aquí se mantiene protegido dentro del dashboard.",
+// 2) Dentro de DASH_TRANSLATIONS.en agrega:
+"vault.title": "YOUR VAULT",
+"vault.webbookKicker": "READ",
+"vault.webbookTitle": "WEBBOOK",
+"vault.webbookSub": "Continue reading",
+"vault.pathKicker": "PATH",
+"vault.pathTitle": "THE TRUTH PATH",
+"vault.pathSub": "Your 40-day journey",
+"vault.toolsKicker": "GUIDES",
+"vault.toolsTitle": "TOOLS",
+"vault.toolsSub": "Shareable resources",
+"vault.open": "OPEN",
+"vault.note": "Everything here stays protected inside your dashboard.",
+          
           },
         };
 
+       
         function getCurrentLang() {
           const stored = localStorage.getItem(LANG_KEY);
           if (stored === "en" || stored === "es") return stored;
