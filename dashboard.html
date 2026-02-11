@@ -1,664 +1,564 @@
- <!DOCTYPE html>
+===== NUEVO dashboard.html (reemplaza/guarda como dashboard.html) =====
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>The Master Key - Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Fuentes -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body class="ma-body ma-dashboard">
-    <div class="ma-page-wrapper ma-dashboard-wrapper">
-      <!-- HEADER -->
-      <header id="dashboardHeader" class="ma-dashboard-header">
-        <div class="ma-dashboard-brand-row">
-          <h1 class="ma-logo">THE MASTER KEY</h1>
-        </div>
-
-        <div class="ma-dashboard-user-row">
-          <div class="ma-dashboard-user-name">
-            <span id="dashName" class="ma-user-name">Nombre</span>
-          </div>
-
-          <div class="ma-dashboard-user-meta">
-            <!-- Badge referidos + estimado (JS escribe el texto) -->
-            <button id="dashRefBadge" class="ma-ref-badge" type="button">
-              <span id="dashReferralsText">0 REFS</span>
-              <span id="dashEstimateText">$0 USD EST</span>
-            </button>
-            <button class="ma-icon-button" id="dashMenuBtn" type="button">
-              ⋮
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <!-- CONTENIDO SCROLL -->
-      <main class="ma-dashboard-main">
-        <!-- Bloque 1: Frase AI -->
-        <section class="ma-card ma-block ma-block-phrase">
-          <h2 class="ma-section-label" data-i18n="phrase.title">
-            TU FRASE DE HOY
-          </h2>
-          <p id="aiPhraseText" class="ma-phrase-text">
-            “Tu decisión de hoy abre puertas que aún no imaginas.”
-          </p>
-        </section>
-
-        <!-- Bloque 2: Pinterest -->
-        <section class="ma-card">
-          <h2 class="ma-section-label" data-i18n="pinterest.title">
-            INSPIRACIÓN VISUAL
-          </h2>
-          <div id="pinterestEmbed" class="ma-embed-box">
-            <a
-              data-pin-do="embedBoard"
-              data-pin-board-width="420"
-              data-pin-scale-height="320"
-              data-pin-scale-width="120"
-              href="https://www.pinterest.com/agconst/mente-abundante/"
-            >
-            </a>
-          </div>
-        </section>
-
-        <!-- Bloque 3: TikTok -->
-        <section class="ma-card">
-          <h2 class="ma-section-label" data-i18n="tiktok.title">
-            VIDEOS TIKTOK / REELS
-          </h2>
-          <div class="ma-embed-box ma-embed-elfsight">
-            <div
-              class="elfsight-app-c7aa3b7a-2625-4e48-932a-c5a323679564"
-              data-elfsight-app-lazy
-            ></div>
-          </div>
-        </section>
-
-        <!-- === TUS ACCESOS RÁPIDOS === -->
-        <section class="ma-card ma-quick-section">
-          <div class="ma-section-label" data-i18n="quick.title">
-            TUS ACCESOS RÁPIDOS
-          </div>
-
-          <div class="ma-quick-row">
-            <!-- E-BOOK -->
-             <button type="button" id="ebookBtn" class="ma-quick-card ma-quick-card-ebook">
-
-              <span class="ma-quick-icon">📘</span>
-              <span class="ma-quick-label">E-BOOK</span>
-              <span class="ma-quick-cta" data-i18n="quick.ebookCta">
-                Leer ahora
-              </span>
-            </button>
-
-            <!-- HERRAMIENTAS (por ahora a la versión en español) -->
-            <a
-              href="herramientas.html"
-              class="ma-quick-card ma-quick-card-tools ma-quick-card-link"
-            >
-              <span class="ma-quick-icon ma-quick-icon-money">$</span>
-              <span class="ma-quick-label" data-i18n="quick.toolsTitle">
-                HERRAMIENTAS
-              </span>
-              <span class="ma-quick-cta" data-i18n="quick.toolsCta">
-                Guías para compartir
-              </span>
-            </a>
-
-            <!-- TU QR -->
-            <button type="button" class="ma-quick-card ma-quick-card-qr">
-              <canvas id="dashQrSmall"></canvas>
-              <span class="ma-quick-label" data-i18n="quick.qrTitle">
-                TU QR
-              </span>
-              <span class="ma-quick-cta" data-i18n="quick.qrCta">
-                Compartir
-              </span>
-            </button>
-          </div>
-
-          <p class="ma-quick-note" data-i18n="quick.note">
-            Comparte tu QR para que tus invitados lleguen directo a tu
-            página de inicio.
-          </p>
-        </section>
-<!-- === VAULT (BANNERS) === -->
-<section class="ma-card ma-vault-section">
-  <h2 class="ma-section-label" data-i18n="vault.title">TU VAULT</h2>
-  <div class="ma-vault-grid">
-    <!-- WEBBOOK -->
-    <a href="ebook/index.html" id="vaultWebbookBtn" class="ma-vault-banner">
-      <div class="ma-vault-top">
-        <div class="ma-vault-kicker" data-i18n="vault.webbookKicker">LECTURA</div>
-        <div class="ma-vault-title" data-i18n="vault.webbookTitle">WEBBOOK</div>
+<head>
+  <meta charset="UTF-8" />
+  <title>The Master Key - Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+S
+ans:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="ma-body ma-dashboard">
+  <div class="ma-page-wrapper ma-dashboard-wrapper">
+    <!-- HEADER -->
+    <header id="dashboardHeader" class="ma-dashboard-header">
+      <div class="ma-dashboard-brand-row">
+        <h1 class="ma-logo">THE MASTER KEY</h1>
       </div>
-      <div class="ma-vault-sub" data-i18n="vault.webbookSub">Continúa tu lectura</div>
-      <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
-    </a>
-    <!-- TRUTH PATH -->
-    <a href="truth-path/day01.html" class="ma-vault-banner">
-      <div class="ma-vault-top">
-        <div class="ma-vault-kicker" data-i18n="vault.pathKicker">SENDERO</div>
-        <div class="ma-vault-title" data-i18n="vault.pathTitle">THE TRUTH PATH</div>
-      </div>
-      <div class="ma-vault-sub" data-i18n="vault.pathSub">Tu jornada de 40 días</div>
-      <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
-    </a>
-    <!-- HERRAMIENTAS -->
-    <a href="herramientas.html" class="ma-vault-banner">
-      <div class="ma-vault-top">
-        <div class="ma-vault-kicker" data-i18n="vault.toolsKicker">GUÍAS</div>
-        <div class="ma-vault-title" data-i18n="vault.toolsTitle">HERRAMIENTAS</div>
-      </div>
-      <div class="ma-vault-sub" data-i18n="vault.toolsSub">Recursos para compartir</div>
-      <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
-    </a>
-  </div>
-  <p class="ma-vault-note" data-i18n="vault.note">
-    Todo aquí se mantiene protegido dentro del dashboard.
-  </p>
-</section>
-        <!-- Bloque 5: Newsletter / anuncios -->
-        <section class="ma-card ma-block ma-block-news">
-          <h2 class="ma-section-label" data-i18n="news.title">
-            NEWSLETTER & ANUNCIOS
-          </h2>
-          <p class="ma-news-text" data-i18n="news.text">
-            Próximos lanzamientos, noticias de la comunidad y recordatorios
-            importantes aparecerán aquí.
-          </p>
-        </section>
-      </main>
-
-      <!-- FOOTER -->
-      <footer class="ma-dashboard-footer">
-        <div class="ma-footer-refid" id="footerRefId">
-          CÓDIGO: ———
+      <div class="ma-dashboard-user-row">
+        <div class="ma-dashboard-user-name">
+          <span id="dashName" class="ma-user-name">Nombre</span>
         </div>
-
-        <div class="ma-footer-btn-row">
-          <button
-            type="button"
-            class="ma-footer-btn"
-            id="footerNewBooksBtn"
-            data-i18n="footer.newBooks"
-          >
-            NUEVOS LIBROS
+        <div class="ma-dashboard-user-meta">
+          <!-- Badge referidos + estimado (JS escribe el texto) -->
+          <button id="dashRefBadge" class="ma-ref-badge" type="button">
+            <span id="dashReferralsText">0 REFS</span>
+            <span id="dashEstimateText">$0 USD EST</span>
           </button>
-          <button
-            type="button"
-            class="ma-footer-btn"
-            id="footerNewsBtn"
-            data-i18n="footer.news"
-          >
-            NOVEDADES
+          <button class="ma-icon-button" id="dashMenuBtn" type="button"> </button>
+        </div>
+      </div>
+    </header>
+    <!-- CONTENIDO -->
+    <main class="ma-dashboard-main">
+      <!-- Bloque: Frase -->
+      <section class="ma-card ma-block ma-block-phrase">
+        <h2 class="ma-section-label" data-i18n="phrase.title">TU FRASE DE HOY</h2>
+        <p id="aiPhraseText" class="ma-phrase-text">“Tu decisión de hoy abre puertas que aún no 
+imaginas.”</p>
+      </section>
+      <!-- Pinterest -->
+      <section class="ma-card">
+        <h2 class="ma-section-label" data-i18n="pinterest.title">INSPIRACIÓN VISUAL</h2>
+        <div id="pinterestEmbed" class="ma-embed-box">
+          <a
+            data-pin-do="embedBoard"
+            data-pin-board-width="420"
+            data-pin-scale-height="320"
+            data-pin-scale-width="120"
+            href="https://www.pinterest.com/agconst/mente-abundante/">
+          </a>
+        </div>
+      </section>
+      <!-- TikTok / Reels -->
+      <section class="ma-card">
+        <h2 class="ma-section-label" data-i18n="tiktok.title">VIDEOS TIKTOK / REELS</h2>
+        <div class="ma-embed-box ma-embed-elfsight">
+          <div class="elfsight-app-c7aa3b7a-2625-4e48-932a-c5a323679564" data-elfsight-app
+lazy></div>
+        </div>
+      </section>
+      <!-- === TUS ACCESOS RÁPIDOS === -->
+      <section class="ma-card ma-quick-section">
+        <div class="ma-section-label" data-i18n="quick.title">TUS ACCESOS RÁPIDOS</div>
+        <div class="ma-quick-row">
+          <!-- E-BOOK -->
+          <button type="button" id="ebookBtn" class="ma-quick-card ma-quick-card-ebook">
+            <span class="ma-quick-icon"></span>
+            <span class="ma-quick-label">E-BOOK</span>
+            <span class="ma-quick-cta" data-i18n="quick.ebookCta">Leer ahora</span>
           </button>
-          <button
-            type="button"
-            class="ma-footer-btn"
-            id="footerExtraBtn"
-            data-i18n="footer.extra"
-          >
-            ANUNCIOS
+          <!-- HERRAMIENTAS -->
+          <a href="herramientas.html" class="ma-quick-card ma-quick-card-tools ma-quick-card
+link">
+            <span class="ma-quick-icon ma-quick-icon-money">$</span>
+            <span class="ma-quick-label" data-i18n="quick.toolsTitle">HERRAMIENTAS</span>
+            <span class="ma-quick-cta" data-i18n="quick.toolsCta">Guías para compartir</span>
+          </a>
+          <!-- TU QR -->
+          <button type="button" class="ma-quick-card ma-quick-card-qr">
+            <canvas id="dashQrSmall"></canvas>
+            <span class="ma-quick-label" data-i18n="quick.qrTitle">TU QR</span>
+            <span class="ma-quick-cta" data-i18n="quick.qrCta">Compartir</span>
           </button>
         </div>
-
-        <!-- Botón para cambiar estilo del dashboard -->
-        <button
-          type="button"
-          class="ma-footer-style"
-          id="styleToggleBtn"
-        >
-          ESTILO: CLÁSICO
-        </button>
-
-        <button
-          type="button"
-          class="ma-footer-logout"
-          id="logoutBtn"
-          data-i18n="footer.logout"
-        >
-          CERRAR SESIÓN
-        </button>
-      </footer>
-    </div>
-
-    <!-- Toast -->
-    <div id="maToast" class="ma-toast">Copiado</div>
-
-    <!-- Popup QR grande (único) -->
-    <div class="ma-qr-modal" id="qrModal">
-      <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
-      <div class="ma-qr-modal-content">
-        <button class="ma-qr-modal-close" id="qrModalClose" type="button">
-          &times;
-        </button>
-        <h2 class="ma-qr-modal-title" data-i18n="qr.title">
-          Tu código de invitación
-        </h2>
-        <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
-        <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
-        <p class="ma-qr-modal-help" data-i18n="qr.help">
-          Pide que escaneen este QR o comparte tu enlace personal.
+        <p class="ma-quick-note" data-i18n="quick.note">
+          Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.
         </p>
+      </section>
+      <!-- === VAULT (BANNERS) === -->
+      <section class="ma-card ma-vault-section" id="vaultSection">
+        <h2 class="ma-section-label" data-i18n="vault.title">TU VAULT</h2>
+        <div class="ma-vault-grid">
+          <!-- WEBBOOK (siempre visible) -->
+          <a href="/ebook/index.html" id="vaultWebbookBtn" class="ma-vault-banner">
+            <div class="ma-vault-top">
+              <div class="ma-vault-kicker" data-i18n="vault.webbookKicker">LECTURA</div>
+              <div class="ma-vault-title" data-i18n="vault.webbookTitle">WEBBOOK</div>
+            </div>
+            <div class="ma-vault-sub" data-i18n="vault.webbookSub">Continúa tu lectura</div>
+            <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
+          </a>
+          <!-- TRUTH PATH (solo cuando esté desbloqueado) -->
+          <a href="/media/ttps/index.html" id="vaultTtpBtn" class="ma-vault-banner" 
+style="display:none">
+            <div class="ma-vault-top">
+              <div class="ma-vault-kicker" data-i18n="vault.pathKicker">SENDERO</div>
+              <div class="ma-vault-title" data-i18n="vault.pathTitle">THE TRUTH PATH</div>
+            </div>
+            <div class="ma-vault-sub" data-i18n="vault.pathSub">Tu jornada de 40 días</div>
+            <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
+          </a>
+          <!-- HERRAMIENTAS (siempre visible) -->
+          <a href="herramientas.html" class="ma-vault-banner">
+            <div class="ma-vault-top">
+              <div class="ma-vault-kicker" data-i18n="vault.toolsKicker">GUÍAS</div>
+              <div class="ma-vault-title" data-i18n="vault.toolsTitle">HERRAMIENTAS</div>
+            </div>
+            <div class="ma-vault-sub" data-i18n="vault.toolsSub">Recursos para compartir</div>
+            <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
+          </a>
+        </div>
+        <p class="ma-vault-note" data-i18n="vault.note">
+          Todo aquí se mantiene protegido dentro del dashboard.
+        </p>
+      </section>
+      <!-- Newsletter -->
+      <section class="ma-card ma-block ma-block-news">
+        <h2 class="ma-section-label" data-i18n="news.title">NEWSLETTER & ANUNCIOS</h2>
+        <p class="ma-news-text" data-i18n="news.text">
+          Próximos lanzamientos, noticias de la comunidad y recordatorios importantes aparecerán
+ aquí.
+        </p>
+      </section>
+    </main>
+    <!-- FOOTER -->
+    <footer class="ma-dashboard-footer">
+      <div class="ma-footer-refid" id="footerRefId">CÓDIGO: ———</div>
+      <div class="ma-footer-btn-row">
+        <button type="button" class="ma-footer-btn" id="footerNewBooksBtn" 
+data-i18n="footer.newBooks">NUEVOS LIBROS</button>
+        <button type="button" class="ma-footer-btn" id="footerNewsBtn" 
+data-i18n="footer.news">NOVEDADES</button>
+        <button type="button" class="ma-footer-btn" id="footerExtraBtn" 
+data-i18n="footer.extra">ANUNCIOS</button>
       </div>
+      <!-- Botón para cambiar estilo del dashboard -->
+      <button type="button" class="ma-footer-style" id="styleToggleBtn">ESTILO: CLÁSICO</button>
+      <button type="button" class="ma-footer-logout" id="logoutBtn" 
+data-i18n="footer.logout">CERRAR SESIÓN</button>
+    </footer>
+  </div>
+  <!-- Toast -->
+  <div id="maToast" class="ma-toast">Copiado</div>
+  <!-- Modal QR -->
+  <div class="ma-qr-modal" id="qrModal">
+    <div class="ma-qr-modal-backdrop" id="qrModalBackdrop"></div>
+    <div class="ma-qr-modal-content">
+      <button class="ma-qr-modal-close" id="qrModalClose" type="button">&times;</button>
+      <h2 class="ma-qr-modal-title" data-i18n="qr.title">Tu código de invitación</h2>
+      <p class="ma-qr-modal-ref" id="qrModalRefText">CÓDIGO: ———</p>
+      <canvas id="qrModalCanvas" class="ma-qr-modal-canvas"></canvas>
+      <p class="ma-qr-modal-help" data-i18n="qr.help">Pide que escaneen este QR o comparte tu 
+enlace personal.</p>
     </div>
-
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-    <script src="app.js"></script>
-    <script
-      async
-      defer
-      src="https://assets.pinterest.com/js/pinit.js"
-    ></script>
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-
-    <!-- Sistema de idioma ES / EN para el dashboard -->
-    <script>
-      (function () {
-        const LANG_KEY = "ma_lang";
-
-        const DASH_TRANSLATIONS = {
-          es: {
-            "phrase.title": "TU FRASE DE HOY",
-            "pinterest.title": "INSPIRACIÓN VISUAL",
-            "tiktok.title": "VIDEOS TIKTOK / REELS",
-            "quick.title": "TUS ACCESOS RÁPIDOS",
-            "quick.ebookCta": "Leer ahora",
-            "quick.toolsTitle": "HERRAMIENTAS",
-            "quick.toolsCta": "Guías para compartir",
-            "quick.qrTitle": "TU QR",
-            "quick.qrCta": "Compartir",
-            "quick.note":
-              "Comparte tu QR para que tus invitados lleguen directo a tu página de inicio.",
-            "news.title": "NEWSLETTER & ANUNCIOS",
-            "news.text":
-              "Próximos lanzamientos, noticias de la comunidad y recordatorios importantes aparecerán aquí.",
-            "footer.newBooks": "NUEVOS LIBROS",
-            "footer.news": "NOVEDADES",
-            "footer.extra": "ANUNCIOS",
-            "footer.logout": "CERRAR SESIÓN",
-            "qr.title": "Tu código de invitación",
-            "qr.help":
-              "Pide que escaneen este QR o comparte tu enlace personal.",
-          },
-          en: {
-            "phrase.title": "YOUR PHRASE FOR TODAY",
-            "pinterest.title": "VISUAL INSPIRATION",
-            "tiktok.title": "TIKTOK / REELS VIDEOS",
-            "quick.title": "YOUR QUICK ACCESS",
-            "quick.ebookCta": "Read now",
-            "quick.toolsTitle": "TOOLS",
-            "quick.toolsCta": "Sharing guides",
-            "quick.qrTitle": "YOUR QR",
-            "quick.qrCta": "Share",
-            "quick.note":
-              "Share your QR so your guests go directly to your start page.",
-            "news.title": "NEWSLETTER & ANNOUNCEMENTS",
-            "news.text":
-              "Upcoming launches, community news and important reminders will appear here.",
-            "footer.newBooks": "NEW BOOKS",
-            "footer.news": "UPDATES",
-            "footer.extra": "ANNOUNCEMENTS",
-            "footer.logout": "LOG OUT",
-            "qr.title": "Your invitation code",
-            "qr.help":
-         
-            "Ask them to scan this QR or share your personal link.",
-         
-          // 1) Dentro de DASH_TRANSLATIONS.es agrega:
-"vault.title": "TU VAULT",
-"vault.webbookKicker": "LECTURA",
-"vault.webbookTitle": "WEBBOOK",
-"vault.webbookSub": "Continúa tu lectura",
-"vault.pathKicker": "SENDERO",
-"vault.pathTitle": "THE TRUTH PATH",
-"vault.pathSub": "Tu jornada de 40 días",
-"vault.toolsKicker": "GUÍAS",
-"vault.toolsTitle": "HERRAMIENTAS",
-"vault.toolsSub": "Recursos para compartir",
-"vault.open": "ABRIR",
-"vault.note": "Todo aquí se mantiene protegido dentro del dashboard.",
-// 2) Dentro de DASH_TRANSLATIONS.en agrega:
-"vault.title": "YOUR VAULT",
-"vault.webbookKicker": "READ",
-"vault.webbookTitle": "WEBBOOK",
-"vault.webbookSub": "Continue reading",
-"vault.pathKicker": "PATH",
-"vault.pathTitle": "THE TRUTH PATH",
-"vault.pathSub": "Your 40-day journey",
-"vault.toolsKicker": "GUIDES",
-"vault.toolsTitle": "TOOLS",
-"vault.toolsSub": "Shareable resources",
-"vault.open": "OPEN",
-"vault.note": "Everything here stays protected inside your dashboard.",
-          
-          },
-        };
-
-       
-        function getCurrentLang() {
-          const stored = localStorage.getItem(LANG_KEY);
-          if (stored === "en" || stored === "es") return stored;
-          return "es"; // por defecto español
-        }
-
-        function setCurrentLang(lang) {
-          localStorage.setItem(LANG_KEY, lang);
-        }
-
-        function applyDashboardLanguage() {
-          const lang = getCurrentLang();
-          const dict = DASH_TRANSLATIONS[lang];
-
-          // Textos con data-i18n
-          document.querySelectorAll("[data-i18n]").forEach((el) => {
-            const key = el.getAttribute("data-i18n");
-            if (dict[key]) {
-              el.textContent = dict[key];
-            }
-          });
-
-          // Frase por defecto según idioma (por ahora sin AI)
-          const phraseEl = document.getElementById("aiPhraseText");
-          if (phraseEl) {
-            if (lang === "en") {
-              phraseEl.textContent =
-                "“Your decision today opens doors you can't yet imagine.”";
-            } else {
-              phraseEl.textContent =
-                "“Tu decisión de hoy abre puertas que aún no imaginas.”";
-            }
-          }
-
-          // Actualizar textos de referidos si está disponible el helper
-          if (window.maUpdateReferralTexts) {
-            window.maUpdateReferralTexts();
-          }
-
-          // Actualizar etiqueta de CÓDIGO / CODE en footer y modal
-          const codeLabel = lang === "en" ? "CODE: " : "CÓDIGO: ";
-          const footerRef = document.getElementById("footerRefId");
-          const modalRefText = document.getElementById("qrModalRefText");
-
-          let user = null;
-          try {
-            user = JSON.parse(localStorage.getItem("ma_user") || "{}");
-          } catch (e) {
-            user = {};
-          }
-          const refid = user.refid || user.refId || "———";
-
-          if (footerRef) {
-            footerRef.textContent = codeLabel + (refid || "———");
-          }
-          if (modalRefText) {
-            modalRefText.textContent = codeLabel + (refid || "———");
-          }
-        }
-
-        // Exponer función para otros scripts
-        window.maGetLang = getCurrentLang;
-        window.maApplyDashboardLanguage = applyDashboardLanguage;
-
-        document.addEventListener("DOMContentLoaded", function () {
-          if (!document.body.classList.contains("ma-dashboard")) return;
-          applyDashboardLanguage();
-        });
-      })();
-    </script>
-
-    <!-- Header compact al hacer scroll -->
-    <script>
-      (function () {
-        const header = document.getElementById("dashboardHeader");
-        if (!header) return;
-        function onScroll() {
-          const y = window.scrollY || document.documentElement.scrollTop;
-          if (y > 24) {
-            header.classList.add("ma-header-compact");
-          } else {
-            header.classList.remove("ma-header-compact");
-          }
-        }
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
-      })();
-    </script>
-
-    <!-- QR pequeño + modal QR grande -->
-    <script>
-      (function () {
-        // Tarjeta QR pequeña
-        const qrTile = document.querySelector(".ma-quick-card-qr");
-        const qrCanvasSmall = document.getElementById("dashQrSmall");
-
-        // Modal QR grande
-        const modal = document.getElementById("qrModal");
-        const modalBackdrop = document.getElementById("qrModalBackdrop");
-        const modalClose = document.getElementById("qrModalClose");
-        const modalCanvas = document.getElementById("qrModalCanvas");
-        const modalRefText = document.getElementById("qrModalRefText");
-
-        if (!qrTile || !qrCanvasSmall || !modal || !modalCanvas) {
-          return;
-        }
-
-        // Obtener usuario y refid desde localStorage
-        let user = null;
-        try {
-          user = JSON.parse(localStorage.getItem("ma_user") || "{}");
-        } catch (e) {
-          user = {};
-        }
-
-        const refid = user.refid || user.refId || "———";
-
-        // Construir link personal: https://TU-DOMINIO/index.html?ref=REFID
-        const baseUrl = window.location.origin + "/index.html";
-        const personalLink =
-          refid && refid !== "———"
-            ? baseUrl + "?ref=" + encodeURIComponent(refid)
-            : baseUrl;
-
-        // Pequeño QR en la tarjeta
-        try {
-          new QRious({
-            element: qrCanvasSmall,
-            value: personalLink,
-            size: 68,
-          });
-        } catch (e) {
-          console.warn("No se pudo generar el QR pequeño:", e);
-        }
-
-        // QR grande en el modal
-        try {
-          new QRious({
-            element: modalCanvas,
-            value: personalLink,
-            size: 220,
-          });
-        } catch (e) {
-          console.warn("No se pudo generar el QR grande:", e);
-        }
-
-        // Etiqueta CÓDIGO / CODE según idioma
-        const lang = window.maGetLang ? window.maGetLang() : "es";
-        const codeLabel = lang === "en" ? "CODE: " : "CÓDIGO: ";
-
-        if (modalRefText) {
-          modalRefText.textContent = codeLabel + (refid || "———");
-        }
-        const footerRef = document.getElementById("footerRefId");
-        if (footerRef) {
-          footerRef.textContent = codeLabel + (refid || "———");
-        }
-
-        // Funciones para abrir/cerrar modal
-        function openModal() {
-          modal.classList.add("is-visible");
-        }
-
-        function closeModal() {
-          modal.classList.remove("is-visible");
-        }
-
-        // Conectar eventos
-        qrTile.addEventListener("click", openModal);
-        if (modalBackdrop) {
-          modalBackdrop.addEventListener("click", closeModal);
-        }
-        if (modalClose) {
-          modalClose.addEventListener("click", closeModal);
-        }
-      })();
-    </script>
-
-    <!-- Ajuste de textos del botón de referidos según idioma -->
-    <script>
-      (function () {
-        function updateReferralTexts() {
-          const lang = window.maGetLang ? window.maGetLang() : "es";
-          const refEl = document.getElementById("dashReferralsText");
-          const estEl = document.getElementById("dashEstimateText");
-
-          if (refEl) {
-            const text = refEl.textContent.trim();
-            const parts = text.split(" ");
-            const num = parts[0] || "0";
-            if (lang === "en") {
-              refEl.textContent = num + " REFERRALS";
-            } else {
-              refEl.textContent = num + " REFERIDOS";
-            }
-          }
-
-          if (estEl) {
-            const text = estEl.textContent.trim();
-            const tokens = text.split(" ");
-            const amount = tokens[0] || "$0";
-            const currency = tokens[1] || "USD";
-            const label = lang === "en" ? "EST" : "EST";
-            estEl.textContent = amount + " " + currency + " " + label;
-          }
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-          updateReferralTexts();
-          setTimeout(updateReferralTexts, 800);
-        });
-
-        window.maUpdateReferralTexts = updateReferralTexts;
-      })();
-    </script>
- 
- <!-- Tema visual: clásico / Black Edition + glow dorado en el título -->
-<script>
+  </div>
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script src="app.js"></script>
+  <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <!-- Idioma ES/EN -->
+  <script>
+  (function () {
+    const LANG_KEY = "ma_lang";
+    const DASH_TRANSLATIONS = {
+      es: {
+        "phrase.title": "TU FRASE DE HOY",
+        "pinterest.title": "INSPIRACIÓN VISUAL",
+        "tiktok.title": "VIDEOS TIKTOK / REELS",
+        "quick.title": "TUS ACCESOS RÁPIDOS",
+        "quick.ebookCta": "Leer ahora",
+        "quick.toolsTitle": "HERRAMIENTAS",
+        "quick.toolsCta": "Guías para compartir",
+        "quick.qrTitle": "TU QR",
+        "quick.qrCta": "Compartir",
+        "quick.note": "Comparte tu QR para que tus invitados lleguen directo a tu página de 
+inicio.",
+        "vault.title": "TU VAULT",
+        "vault.webbookKicker": "LECTURA",
+        "vault.webbookTitle": "WEBBOOK",
+        "vault.webbookSub": "Continúa tu lectura",
+        "vault.pathKicker": "SENDERO",
+        "vault.pathTitle": "THE TRUTH PATH",
+        "vault.pathSub": "Tu jornada de 40 días",
+        "vault.toolsKicker": "GUÍAS",
+        "vault.toolsTitle": "HERRAMIENTAS",
+        "vault.toolsSub": "Recursos para compartir",
+        "vault.open": "ABRIR",
+        "vault.note": "Todo aquí se mantiene protegido dentro del dashboard.",
+        "news.title": "NEWSLETTER & ANUNCIOS",
+        "news.text": "Próximos lanzamientos, noticias de la comunidad y recordatorios 
+importantes aparecerán aquí.",
+        "footer.newBooks": "NUEVOS LIBROS",
+        "footer.news": "NOVEDADES",
+        "footer.extra": "ANUNCIOS",
+        "footer.logout": "CERRAR SESIÓN",
+        "qr.title": "Tu código de invitación",
+        "qr.help": "Pide que escaneen este QR o comparte tu enlace personal."
+      },
+      en: {
+        "phrase.title": "YOUR PHRASE FOR TODAY",
+        "pinterest.title": "VISUAL INSPIRATION",
+        "tiktok.title": "TIKTOK / REELS VIDEOS",
+        "quick.title": "YOUR QUICK ACCESS",
+        "quick.ebookCta": "Read now",
+        "quick.toolsTitle": "TOOLS",
+        "quick.toolsCta": "Sharing guides",
+        "quick.qrTitle": "YOUR QR",
+        "quick.qrCta": "Share",
+        "quick.note": "Share your QR so your guests go directly to your start page.",
+        "vault.title": "YOUR VAULT",
+        "vault.webbookKicker": "READ",
+        "vault.webbookTitle": "WEBBOOK",
+        "vault.webbookSub": "Continue reading",
+        "vault.pathKicker": "PATH",
+        "vault.pathTitle": "THE TRUTH PATH",
+        "vault.pathSub": "Your 40-day journey",
+        "vault.toolsKicker": "GUIDES",
+        "vault.toolsTitle": "TOOLS",
+        "vault.toolsSub": "Shareable resources",
+        "vault.open": "OPEN",
+        "vault.note": "Everything here stays protected inside your dashboard.",
+        "news.title": "NEWSLETTER & ANNOUNCEMENTS",
+        "news.text": "Upcoming launches, community news and important reminders will appear 
+here.",
+      }
+    };
+        "footer.newBooks": "NEW BOOKS",
+        "footer.news": "UPDATES",
+        "footer.extra": "ANNOUNCEMENTS",
+        "footer.logout": "LOG OUT",
+        "qr.title": "Your invitation code",
+        "qr.help": "Ask them to scan this QR or share your personal link."
+    function getCurrentLang() {
+      const stored = localStorage.getItem(LANG_KEY);
+      if (stored === "en" || stored === "es") return stored;
+      return "es";
+    }
+    function applyDashboardLanguage() {
+      const lang = getCurrentLang();
+      const dict = DASH_TRANSLATIONS[lang];
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+      const phraseEl = document.getElementById("aiPhraseText");
+      if (phraseEl) {
+        phraseEl.textContent = (lang === "en")
+          ? "“Your decision today opens doors you can't yet imagine.”"
+          : "“Tu decisión de hoy abre puertas que aún no imaginas.”";
+      }
+      if (window.maUpdateReferralTexts) window.maUpdateReferralTexts();
+      const codeLabel = (lang === "en") ? "CODE: " : "CÓDIGO: ";
+      const footerRef = document.getElementById("footerRefId");
+      const modalRefText = document.getElementById("qrModalRefText");
+      let user = {};
+      try { user = JSON.parse(localStorage.getItem("ma_user") || "{}"); } catch(e) {}
+      const refid = user.refid || user.refId || "———";
+      if (footerRef) footerRef.textContent = codeLabel + (refid || "———");
+      if (modalRefText) modalRefText.textContent = codeLabel + (refid || "———");
+    }
+    window.maGetLang = getCurrentLang;
+    window.maApplyDashboardLanguage = applyDashboardLanguage;
+    document.addEventListener("DOMContentLoaded", function () {
+      if (!document.body.classList.contains("ma-dashboard")) return;
+      applyDashboardLanguage();
+    });
+  })();
+  </script>
+  <!-- Header compact -->
+  <script>
+  (function () {
+    const header = document.getElementById("dashboardHeader");
+    if (!header) return;
+    function onScroll() {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      header.classList.toggle("ma-header-compact", y > 24);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
+  <!-- QR pequeño + modal -->
+  <script>
+  (function () {
+    const qrTile = document.querySelector(".ma-quick-card-qr");
+    const qrCanvasSmall = document.getElementById("dashQrSmall");
+    const modal = document.getElementById("qrModal");
+    const modalBackdrop = document.getElementById("qrModalBackdrop");
+    const modalClose = document.getElementById("qrModalClose");
+    const modalCanvas = document.getElementById("qrModalCanvas");
+    const modalRefText = document.getElementById("qrModalRefText");
+    if (!qrTile || !qrCanvasSmall || !modal || !modalCanvas) return;
+    let user = {};
+    try { user = JSON.parse(localStorage.getItem("ma_user") || "{}"); } catch(e) {}
+    const refid = user.refid || user.refId || "———";
+    const baseUrl = window.location.origin + "/index.html";
+    const personalLink = (refid && refid !== "———")
+      ? baseUrl + "?ref=" + encodeURIComponent(refid)
+      : baseUrl;
+    try { new QRious({ element: qrCanvasSmall, value: personalLink, size: 68 }); } catch(e) {}
+    try { new QRious({ element: modalCanvas, value: personalLink, size: 220 }); } catch(e) {}
+    const lang = (window.maGetLang && window.maGetLang()) || "es";
+    const codeLabel = (lang === "en") ? "CODE: " : "CÓDIGO: ";
+    if (modalRefText) modalRefText.textContent = codeLabel + (refid || "———");
+    const footerRef = document.getElementById("footerRefId");
+    if (footerRef) footerRef.textContent = codeLabel + (refid || "———");
+    function openModal() { modal.classList.add("is-visible"); }
+    function closeModal() { modal.classList.remove("is-visible"); }
+    qrTile.addEventListener("click", openModal);
+    if (modalBackdrop) modalBackdrop.addEventListener("click", closeModal);
+    if (modalClose) modalClose.addEventListener("click", closeModal);
+  })();
+  </script>
+  <!-- Ajuste de textos de referidos -->
+  <script>
+  (function () {
+    function updateReferralTexts() {
+      const lang = (window.maGetLang && window.maGetLang()) || "es";
+      const refEl = document.getElementById("dashReferralsText");
+      const estEl = document.getElementById("dashEstimateText");
+      if (refEl) {
+        const parts = refEl.textContent.trim().split(" ");
+        const num = parts[0] || "0";
+        refEl.textContent = (lang === "en") ? (num + " REFERRALS") : (num + " REFERIDOS");
+      }
+      if (estEl) {
+        const tokens = estEl.textContent.trim().split(" ");
+        const amount = tokens[0] || "$0";
+        const currency = tokens[1] || "USD";
+        estEl.textContent = amount + " " + currency + " EST";
+      }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      updateReferralTexts();
+      setTimeout(updateReferralTexts, 800);
+    });
+    window.maUpdateReferralTexts = updateReferralTexts;
+  })();
+  </script>
+  <!-- Tema: clásico / Black Edition -->
+  <script>
   (function () {
     const THEME_KEY = "ma_theme";
-
     function applyTheme(theme, skipSave) {
       const body = document.body;
       const btn = document.getElementById("styleToggleBtn");
       const logo = document.querySelector(".ma-logo");
-
       if (theme === "dark") {
         body.classList.add("ma-theme-dark");
         if (btn) btn.textContent = "ESTILO: BLACK EDITION";
-
-        // 💡 Glow dorado flotante en el título
         if (logo) {
           logo.style.color = "#fdfaf0";
           logo.style.textShadow =
-            "0 0 4px rgba(0,0,0,0.9)," +       // sombra cerca
-            "0 10px 20px rgba(0,0,0,0.95)," +  // caída hacia abajo (flotando)
-            "0 0 16px rgba(212,175,55,0.9)," + // glow dorado fuerte
-            "0 0 40px rgba(212,175,55,0.65)";  // halo dorado amplio
+            "0 0 4px rgba(0,0,0,0.9)," +
+            "0 10px 20px rgba(0,0,0,0.95)," +
+            "0 0 16px rgba(212,175,55,0.9)," +
+            "0 0 40px rgba(212,175,55,0.65)";
           logo.style.transform = "translateY(1px)";
         }
       } else {
         body.classList.remove("ma-theme-dark");
         if (btn) btn.textContent = "ESTILO: CLÁSICO";
-        theme = "classic";
-
-        // Volver al estilo normal del logo (sin glow)
-        if (logo) {
-          logo.style.color = "";
-          logo.style.textShadow = "";
-          logo.style.transform = "";
-        }
-      }
-
-      if (!skipSave) {
-        try {
-          localStorage.setItem(THEME_KEY, theme);
-        } catch (e) {}
-      }
+        if (logo) { logo.style.color = ""; logo.style.textShadow = ""; logo.style.transform = 
+""; }
     }
-
+        theme = "classic";
+      }
+      if (!skipSave) {
+        try { localStorage.setItem(THEME_KEY, theme); } catch(e) {}
+      }
     document.addEventListener("DOMContentLoaded", function () {
-      // Leer tema guardado
       let saved = "classic";
       try {
         const stored = localStorage.getItem(THEME_KEY);
-        if (stored === "dark" || stored === "classic") {
-          saved = stored;
-        }
-      } catch (e) {}
-
-      // Aplicar tema inicial sin sobre-escribir
+        if (stored === "dark" || stored === "classic") saved = stored;
+      } catch(e) {}
       applyTheme(saved, true);
-
       const styleBtn = document.getElementById("styleToggleBtn");
       if (!styleBtn) return;
-
       styleBtn.addEventListener("click", function () {
         const isDark = document.body.classList.contains("ma-theme-dark");
         applyTheme(isDark ? "classic" : "dark", false);
       });
     });
   })();
-</script>
-   
- <script>
- (function () {
-  const btn = document.getElementById("ebookBtn");
-  if (!btn) return;
-
-  btn.addEventListener("click", function () {
-    // Idioma guardado (si no existe, ES)
-    const lang = (window.maGetLang && window.maGetLang()) || "es";
-
-    // Rutas base del WebBook
-    const baseIndex = (lang === "en")
-      ? "/ebook.en/index.html"
-      : "/ebook/index.html";
-
-    // 1) Si hay progreso guardado, abre donde se quedó
-    try {
-      const last = localStorage.getItem("wb_last_chapter") || "";
-      if (last) {
-        window.location.href = last; // debe ser ruta absoluta tipo /ebook/cap07.html
-        return;
+  </script>
+  <!-- Botón E-BOOK: abre última lectura o index por idioma -->
+  <script>
+  (function () {
+    const btn = document.getElementById("ebookBtn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      const lang = (window.maGetLang && window.maGetLang()) || "es";
+      const baseIndex = (lang === "en") ? "/ebook.en/index.html" : "/ebook/index.html";
+      try {
+        const last = localStorage.getItem("wb_last_chapter") || "";
+        if (last) { window.location.href = last; return; }
+      } catch(e) {}
+      window.location.href = baseIndex;
+    });
+  })();
+  </script>
+  <!-- VAULT links + TTP unlock -->
+  <script>
+  (function () {
+    function isTruthy(v) {
+      if (v === true) return true;
+      if (typeof v === "string") return 
+["1","true","yes","y","on"].includes(v.toLowerCase().trim());
+      return false;
+    }
+    function getUnlockState() {
+      const keys = [
+        "ttp_unlocked",
+        "ma_ttp_unlocked",
+        "truth_path_unlocked",
+        "tp_unlocked",
+        "ttpUnlocked"
+      ];
+      for (const k of keys) {
+        try {
+          const v = localStorage.getItem(k);
+          if (isTruthy(v)) return true;
+        } catch(e) {}
       }
-    } catch (e) {}
-
-    // 2) Si no hay progreso, abre el index correcto por idioma
-    window.location.href = baseIndex;
-  });
- })();
-</script>
-
-
-
-  </body>
+      // Si guardas en ma_user (opcional)
+      try {
+        const user = JSON.parse(localStorage.getItem("ma_user") || "{}");
+        if (isTruthy(user.ttpUnlocked) || isTruthy(user.ttp_unlocked)) return true;
+      } catch(e) {}
+      return false;
+    }
+    function applyVaultLinks() {
+      const lang = (window.maGetLang && window.maGetLang()) || "es";
+      // WebBook banner: apunta al progreso o al index según idioma
+      const wb = document.getElementById("vaultWebbookBtn");
+      if (wb) {
+        const baseIndex = (lang === "en") ? "/ebook.en/index.html" : "/ebook/index.html";
+        let href = baseIndex;
+        try {
+          const last = localStorage.getItem("wb_last_chapter") || "";
+          if (last) href = last;
+        } catch(e) {}
+        wb.setAttribute("href", href);
+      }
+      // TTP: solo visible si está desbloqueado
+      const ttp = document.getElementById("vaultTtpBtn");
+      if (ttp) {
+        const unlocked = getUnlockState();
+        if (unlocked) {
+          ttp.style.display = "";
+          const ttpHref = (lang === "en") ? "/media/ttpe/index.html" : "/media/ttps/index.html";
+          ttp.setAttribute("href", ttpHref);
+        } else {
+          ttp.style.display = "none";
+        }
+      }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      applyVaultLinks();
+      if (window.maApplyDashboardLanguage) window.maApplyDashboardLanguage();
+    });
+    // Si tu quiz desbloquea el TTP al vuelo, puedes llamar esto:
+    window.maRefreshVault = applyVaultLinks;
+  })();
+  </script>
+</body>
 </html>
+===== PATCH para styles.css (pegar al FINAL de tu styles.css) =====
+/* =========================================================
+   VAULT (BANNERS) — FIX para Classic + Dark (pegar al FINAL)
+   ========================================================= */
+/* Layout */
+.ma-vault-section{ padding: 18px 16px; }
+.ma-vault-grid{ display:grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+.ma-vault-banner{
+  display:block;
+  text-decoration:none;
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  overflow:hidden;
+  position:relative;
+  transform: translateZ(0);
+}
+/* --------- Classic (crema) --------- */
+body:not(.ma-theme-dark) .ma-vault-banner{
+  border: 1px solid rgba(0,0,0,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(250,245,238,0.78));
+  box-shadow: 0 14px 34px rgba(0,0,0,0.06);
+}
+body:not(.ma-theme-dark) .ma-vault-kicker{ color: rgba(58,48,39,0.70); }
+body:not(.ma-theme-dark) .ma-vault-title{ color: rgba(58,48,39,0.95); }
+body:not(.ma-theme-dark) .ma-vault-sub{ color: rgba(58,48,39,0.72); }
+body:not(.ma-theme-dark) .ma-vault-cta{
+  border: 1px solid rgba(199,159,91,0.55);
+}
+  background: linear-gradient(135deg, #e2ba6b, #c79f5b);
+  color: #ffffff;
+/* --------- Dark (Black Edition) --------- */
+.ma-theme-dark .ma-vault-banner{
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.42);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.ma-theme-dark .ma-vault-kicker{ color: rgba(255,255,255,0.72); }
+.ma-theme-dark .ma-vault-title{ color: rgba(255,255,255,0.94); }
+.ma-theme-dark .ma-vault-sub{ color: rgba(255,255,255,0.72); }
+.ma-theme-dark .ma-vault-cta{
+  border: 1px solid rgba(212,175,55,0.35);
+  background: linear-gradient(180deg, rgba(232,198,120,0.92), rgba(214,168,70,0.88));
+  color: #111111;
+}
+/* Shared typography */
+.ma-vault-top{ display:flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.ma-vault-kicker{
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.ma-vault-title{
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+}
+.ma-vault-sub{
+  margin-top: 6px;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.ma-vault-cta{
+  margin-top: 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.ma-vault-banner:active{ transform: translateY(1px); }
+===== NOTA de desbloqueo TTP (keys de localStorage) =====
+El banner de TTP aparece si en localStorage existe cualquiera de estas keys con valor true/1: 
+ttp_unlocked, ma_ttp_unlocked, truth_path_unlocked, tp_unlocked, ttpUnlocked.\nSi tu quiz ya 
+marca otra key, solo agrega ese nombre en el array 'keys' dentro del script 
+window.maRefreshVault en dashboard.html. 
