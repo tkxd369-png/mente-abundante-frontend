@@ -634,6 +634,64 @@ No rompe nada existente.
       ttpBtn.setAttribute("href", "#");
       ttpBtn.setAttribute("aria-disabled", "true");
     }
+   /* =========================================
+TMK — PATCH: Frase del día + WebBook por idioma
+Pegar dentro de dashboard.html
+(EN EL MISMO <script> del dashboard)
+Justo ANTES del cierre final:  </script>
+========================================= */
+(function(){
+  // Idioma real del dashboard (usa tu sistema)
+  const lang = (window.maGetLang && window.maGetLang())
+    || (function(){
+      const v = localStorage.getItem("ma_lang") || localStorage.getItem("lang") || "es";
+      return (v === "en" || v === "es") ? v : "es";
+    })();
+  // ---------- FRASE DEL DÍA (respeta idioma) ---------
+  const phraseEl = document.getElementById("aiPhraseText");
+  if (phraseEl) {
+    const pool = {
+      es: [
+        "“Tu decisión de hoy abre puertas que aún no imaginas.”",
+        "“La abundancia comienza cuando eliges la verdad sobre el miedo.”",
+        "“Hoy siembras; mañana cosechas.”",
+        "“Tu paz interior es tu mayor riqueza.”",
+        "“Lo que honras, crece.”"
+      ],
+      en: [
+        "“Your decision today opens doors you can’t yet imagine.”",
+        "“Abundance begins when you choose truth over fear.”",
+        "“You sow today; you reap tomorrow.”",
+        "“Your inner peace is your greatest wealth.”",
+        "“What you honor, grows.”"
+      ]
+    };
+    // Selección determinística por día (no cambia cada refresh)
+    const d = new Date();
+    const seed = (d.getFullYear()*10000) + ((d.getMonth()+1)*100) + d.getDate();
+    const arr = pool[lang] || pool.es;
+    phraseEl.textContent = arr[ seed % arr.length ];
+  }
+  // ---------- WEBBOOK (abre ES/EN correcto + progreso) ---------
+  const webBtn = document.getElementById("vaultWebbookBtn");
+  if (webBtn) {
+    const baseIndex = (lang === "en") ? "/ebook.en/index.html" : "/ebook/index.html";
+    let target = baseIndex;
+    try {
+      const last = localStorage.getItem("wb_last_chapter") || localStorage.getItem("wb_last") || "";
+      if (last) {
+        // Si ya es ruta completa:
+        if (last.includes("/") || last.includes(".html")) {
+          target = last.startsWith("/") ? last : ("/" + last);
+        } else {
+          // Si solo es algo como "cap08", deja index para evitar romper
+      }
+        }
+          target = baseIndex;
+    } catch(e){}
+    webBtn.setAttribute("href", target);
+  }
+})();
   }
 })();
 </script>
