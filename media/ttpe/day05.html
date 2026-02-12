@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Truth Path — Day 05</title>
+<script>
+(function(){
+ try{
+  var u=JSON.parse(localStorage.getItem("ma_user")||"{}");
+  var ok=!!(u&&(u.email||u.mail||u.id||u.refid||u.refId||u.nombre||u.name));
+  if(!ok){window.location.replace("/start.html");return;}
+ }catch(e){window.location.replace("/start.html");return;}
+})();
+</script>
+<link rel="stylesheet" href="styles-ivorygold.css" />
+<style>
+.tp-card{overflow:visible!important}
+.tp-actions{display:flex;gap:12px}
+.tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
+.tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
+/* Same mini blocks + gold break style */
+.tp-mini{
+  margin-top:12px;
+  padding:12px 14px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(255,255,255,.55);
+  border-radius:14px;
+}
+.tp-mini-title{
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,.55);
+  margin:0 0 8px 0;
+}
+.tp-quote{
+  margin-top:12px;
+  padding:14px 14px;
+  border-left:3px solid rgba(176,141,69,.55);
+  background:rgba(255,255,255,.50);
+  border-radius:14px;
+}
+</style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+ <div class="tp-brand">
+  <div class="tp-eyebrow">TMK</div>
+  <div class="tp-title">The Truth Path</div>
+ </div>
+ <a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+<div class="tp-sticky">
+ <div class="tp-kicker">Cycle 1 · Day 05</div>
+ <div class="tp-meta">Evaluation</div>
+</div>
+<section class="tp-content">
+<div class="tp-note">
+ <div class="tp-note-title">Phrase of the day</div>
+ <p class="tp-muted" style="margin:0;">
+ Pause is not losing time.<br>
+ Pause is choosing truth.
+ </p>
+</div>
+<hr class="tp-divider">
+<div class="tp-q">
+<p class="tp-q-title"><strong>Focus of the day</strong></p>
+<p class="tp-muted">
+Today we do not add new concepts.
+Today we <strong>stop</strong>—and we gather what has already touched you.
+Because transformation is not information.
+Transformation is what you keep, what you practice, and what you protect.
+</p>
+<p class="tp-muted">
+Go back through Days 01–04.
+Move slowly.
+Underline what pierced through the noise.
+Circle what brought you peace.
+Mark what exposed a lie that has been shaping you.
+This is your inner work—private, honest, sacred.
+</p>
+<div class="tp-mini">
+  <p class="tp-mini-title">How to evaluate</p>
+  <p class="tp-muted" style="margin:0;">
+    Where did I feel release? <strong>Keep that.</strong><br>
+    Where did I feel clarity? <strong>Keep that.</strong><br>
+    Where did I feel conviction to grow? <strong>Keep that.</strong><br>
+    Where did I feel resistance? <strong>Look closer.</strong>
+  </p>
+</div>
+<p class="tp-muted">
+You are not broken.
+You are being awakened.
+And as you awaken, you begin to choose.
+Not by pressure—by clarity.
+</p>
+<div class="tp-quote">
+  <p class="tp-muted" style="margin:0;">
+    You are the creator of your life.<br>
+    You are the artist of your destiny.<br>
+    Today you pick up the brush—quietly, intentionally.
+  </p>
+</div>
+<p class="tp-muted" style="margin-bottom:0;">
+Let your heart fill with truth.
+Let your journal become a map.
+</p>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Evaluation (private)</strong></p>
+<div class="tp-note">
+<div class="tp-note-title">Return &amp; Review</div>
+<p class="tp-muted" style="margin:0;">
+Re-read Days 01–04 and your notes.<br>
+Then answer these questions in your journal:
+</p>
+</div>
+<ul class="tp-muted" style="padding-left:18px;line-height:1.8;margin-top:12px;">
+<li>The illusion I can now name is…</li>
+<li>The cage I can now see is…</li>
+<li>The lie I was calling “life” is…</li>
+<li>The vision I choose to protect is…</li>
+<li>The tool of success I need to strengthen first is…</li>
+</ul>
+<div class="tp-note" style="margin-top:12px;">
+<div class="tp-note-title">Taste the truth</div>
+<p class="tp-muted" style="margin:0;">
+Write one sentence that you want to carry forward.<br>
+Make it simple. Make it yours.
+</p>
+</div>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Closing</strong></p>
+<p class="tp-muted" style="margin-bottom:0;">
+Tomorrow is your commitment day.
+Not performance. Not announcement.
+A private decision that becomes a new path.
+</p>
+</div>
+<div class="tp-actions">
+<a class="tp-navbtn" href="./day04.html">Day 04</a>
+<button id="continueBtn" class="tp-navbtn primary" type="button">Day 06 →</button>
+</div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+ document.getElementById("continueBtn").addEventListener("click",function(){
+  localStorage.setItem("tp_last_completed","5");
+  window.location.href="./day06.html";
+ })
+})();
+</script>
+</body>
+</html>
