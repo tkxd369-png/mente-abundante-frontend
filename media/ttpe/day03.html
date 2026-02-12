@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Day 03</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <!-- TTPE: Sequential progress gate (prevents skipping ahead) -->
+  <script>
+  (function () {
+    try {
+      var completed = parseInt(localStorage.getItem("tp_last_completed") || "0", 10);
+      var required = 2;
+      if (completed < required) {
+        window.location.replace("./day02.html");
+        return;
+      }
+    } catch (e) {}
+  })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <style>
+    .tp-card{overflow:visible!important}
+    .tp-actions{display:flex;gap:12px}
+    .tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
+    .tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
+    .tp-no-select,.tp-no-select *{-webkit-user-select:none!important;-moz-user-select:none!important;user-select:none!important}
+    .tp-watermark{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;transform:rotate(-18deg);display:grid;grid-template-columns:repeat(2,1fr);gap:70px 26px;padding:110px 24px;mix-blend-mode:multiply}
+    .tp-watermark span{font-family:"DM Sans",sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55);white-space:nowrap}
+  </style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+  <div class="tp-brand">
+    <div class="tp-eyebrow">TMK</div>
+    <div class="tp-title">The Truth Path</div>
+  </div>
+  <a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+  <div class="tp-sticky">
+    <div class="tp-kicker">Cycle 1</div>
+    <div class="tp-meta">Day 03 · What Others Call “Life”</div>
+  </div>
+  <section class="tp-content">
+    <div class="tp-note">
+      <div class="tp-note-title">Anchor phrase</div>
+      <p style="margin:0;"><strong>Don’t confuse motion with life.</strong><br>Being busy is not the same as being alive.</p>
+    </div>
+    <hr class="tp-divider">
+    <div class="tp-q">
+      <p class="tp-q-title"><strong>Focus of the day</strong></p>
+      <p class="tp-muted">
+What most people call “life” is often a schedule.
+A loop of obligations, payments, deadlines, and the constant pressure to keep up.
+It looks normal because everyone is doing it.
+But normal doesn’t mean true.
+</p>
+<p class="tp-muted">
+Here is the subtle trap: <strong>success, achievement, and wealth are not evil</strong>.
+They are tools—neutral instruments.
+The danger is not having them; the danger is <em>worshiping</em> them.
+When you place your true value in what is temporary, you will live anxious—even when things go well.
+You will always feel one step away from losing yourself.
+</p>
+<div class="tp-note" style="margin-top:12px;">
+  <div class="tp-note-title">A clean distinction</div>
+  <p class="tp-muted" style="margin:0;">
+    • <strong>Tools</strong> (useful): skill, discipline, strategy, money, influence.<br>
+    • <strong>Truth</strong> (essential): identity, life, purpose, integrity, love.<br><br>
+    Tools can improve your life.<br>
+    Truth is what makes your life worth living.
+  </p>
+</div>
+<p class="tp-muted">
+When tools replace truth, life becomes performance.
+You start living for outcomes, for image, for approval, for “more.”
+You may look successful—while quietly starving inside.
+That’s why people can “arrive” and still feel empty.
+They didn’t lose the race.
+They just discovered the race was never life.
+</p>
+<p class="tp-muted">
+The auxiliary works behind this path all point to the same foundation:
+what you consistently hold in mind becomes the pattern of your experience.
+If your mind is trained to obsess over lack, comparison, and status,
+you will create a life that feels tight—even with resources.
+But if your mind is trained to return to truth—identity, purpose, and clean intention—
+your outer world becomes ordered and your inner world becomes stable.
+</p>
+<div class="tp-panel">
+  <h4>A question that exposes the lie</h4>
+  <p class="tp-muted" style="margin:0;">
+    If I removed achievements, possessions, and approval…<br>
+    what would still be true about me?
+  </p>
+</div>
+<p class="tp-muted" style="margin-bottom:0;">
+Today is not about rejecting success.
+It’s about restoring the correct order:
+<strong>truth first</strong>, then tools.
+Life first, then outcomes.
+Identity first, then achievements.
+</p>
+    </div>
+    <div class="tp-q">
+      <p class="tp-q-title"><strong>Inner reflection</strong></p>
+      <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.65;">
+        <li>Where am I “performing life” instead of living it?</li>
+        <li>What tool (money, status, achievement) has been trying to become my identity?</li>
+        <li>What is one truth I know… but I’ve been postponing?</li>
+        <li>If I lived from truth first, what would I change this week?</li>
+      </ul>
+    </div>
+    <div class="tp-q">
+      <p class="tp-q-title"><strong>Practical exercise — Restore the order</strong></p>
+      <div class="tp-note" style="margin-top:12px;">
+        <div class="tp-note-title">12 minutes</div>
+        <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+          <li>Write 3 “tools” you’ve been chasing (example: money, influence, recognition).</li>
+          <li>Next to each, write what you secretly hoped it would give you (peace, worth, love, safety).</li>
+          <li>Now write a truth you can practice today that gives that same need from within.</li>
+        </ol>
+        <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+          Close with: <strong>“Truth first. Tools second. Life now.”</strong>
+        </p>
+      </div>
+    </div>
+    <div class="tp-q">
+      <p class="tp-q-title"><strong>Journal</strong></p>
+      <div class="tp-note" style="margin-top:12px;">
+        <div class="tp-note-title">Write it down</div>
+        <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+          <li>The tool I’ve been confusing with life is…</li>
+          <li>What I was truly seeking is…</li>
+          <li>My truth-practice today is…</li>
+          <li>One sign I’m returning to life is…</li>
+        </ol>
+      </div>
+    </div>
+    <div class="tp-q">
+      <p class="tp-q-title"><strong>Closing</strong></p>
+      <p class="tp-muted" style="margin-bottom:0;">
+        Success becomes clean when it serves truth.
+        Wealth becomes safe when it is guided by integrity.
+        Tomorrow we move to the turning point:
+        <strong>your vision determines your destiny</strong>.
+      </p>
+    </div>
+    <div class="tp-actions">
+      <a class="tp-navbtn" href="./day02.html">Day 02</a>
+      <button id="continueBtn" class="tp-navbtn primary" type="button">Day 04 →</button>
+    </div>
+  </section>
+</main>
+</div>
+<script>
+(function(){
+  try{localStorage.setItem("tp_day_last_seen","3")}catch(e){}
+  document.getElementById("continueBtn").addEventListener("click",function(){
+    try{
+      localStorage.setItem("tp_last_completed","3")
+      localStorage.setItem("tp_day_last_seen","4")
+    }catch(e){}
+    window.location.href="./day04.html"
+  })
+})();
+</script>
+<script>
+(function(){
+  document.documentElement.classList.add("tp-no-select");
+  document.addEventListener("contextmenu", function(e){e.preventDefault();});
+  document.addEventListener("keydown", function(e){
+    var key=(e.key||"").toLowerCase();
+    var ctrl=e.ctrlKey||e.metaKey;
+    if(ctrl && (key==="c"||key==="x"||key==="a"||key==="p"||key==="s")) e.preventDefault();
+  });
+  document.addEventListener("copy", function(e){e.preventDefault();});
+  function getUserStamp(){
+    try{
+      var u=JSON.parse(localStorage.getItem("ma_user")||"{}");
+      var name=(u.name||u.nombre||u.fullname||"").toString().trim();
+      var refid=(u.refid||u.refId||"").toString().trim();
+      var who=name?name:"TMK Member";
+      var code=refid?(" · "+refid):"";
+      return (who+code+" · TMK").toUpperCase();
+    }catch(e){return "TMK MEMBER · TMK";}
+  }
+  function addWatermark(){
+    if(document.getElementById("tpWatermark")) return;
+    var wm=document.createElement("div");
+    wm.id="tpWatermark";
+    wm.className="tp-watermark";
+    var stamp=getUserStamp();
+    for(var i=0;i<10;i++){var s=document.createElement("span");s.textContent=stamp;wm.appendChild(s);}
+    document.body.appendChild(wm);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", addWatermark);
+  else addWatermark();
+})();
+</script>
+</body>
+</html>
