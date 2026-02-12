@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Truth Path — Day 02</title>
+<script>
+(function () {
+  try {
+    var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+    var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+    if (!hasSession) { window.location.replace("/start.html"); return; }
+  } catch (e) {
+    window.location.replace("/start.html"); return;
+  }
+})();
+</script>
+<script>
+(function () {
+  try {
+    var completed = parseInt(localStorage.getItem("tp_last_completed") || "0", 10);
+    var required = 1;
+    if (completed < required) {
+      window.location.replace("./day01.html");
+      return;
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles-ivorygold.css" />
+<style>
+.tp-card{overflow:visible!important}
+.tp-actions{display:flex;gap:12px}
+.tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
+.tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
+.tp-no-select,.tp-no-select *{user-select:none!important}
+.tp-watermark{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;transform:rotate(-18deg);display:grid;grid-template-columns:repeat(2,1fr);gap:70px 26px;padding:110px 24px;mix-blend-mode:multiply}
+.tp-watermark span{font-family:"DM Sans",sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55)}
+</style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+  <div class="tp-brand">
+    <div class="tp-eyebrow">TMK</div>
+    <div class="tp-title">The Truth Path</div>
+  </div>
+  <a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+<div class="tp-sticky">
+  <div class="tp-kicker">Cycle 1</div>
+  <div class="tp-meta">Day 02 · The Cage</div>
+</div>
+<section class="tp-content">
+<div class="tp-note">
+<div class="tp-note-title">Anchor phrase</div>
+<p style="margin:0;"><strong>You don’t see the cage…</strong> until you stop running inside it.</p>
+</div>
+<hr class="tp-divider">
+<div class="tp-q">
+<p class="tp-q-title"><strong>Focus of the day</strong></p>
+<p class="tp-muted">
+Illusion becomes a cage when it shapes your habits.
+At first, it feels like freedom—you choose your goals, you chase your vision, you build your image.
+But slowly, the structure hardens.
+You wake up not because you are inspired—but because you must maintain what you created.
+</p>
+<p class="tp-muted">
+A cage is not made of iron first. It is made of repetition.
+Repeated thoughts.
+Repeated fears.
+Repeated comparisons.
+Repeated pressure to “be more.”
+</p>
+<p class="tp-muted">
+When abundance is misunderstood, life turns into survival disguised as ambition.
+You measure your value by performance.
+You measure your peace by outcomes.
+You measure your identity by reaction.
+And the more you chase, the less present you become.
+</p>
+<p class="tp-muted" style="margin-bottom:0;">
+Today you don’t fight the cage.
+You simply notice its walls.
+</p>
+</div>
+<div class="tp-actions">
+<a class="tp-navbtn" href="./day01.html">Day 01</a>
+<button id="continueBtn" class="tp-navbtn primary" type="button">Day 03 →</button>
+</div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+ try{localStorage.setItem("tp_day_last_seen","2")}catch(e){}
+ document.getElementById("continueBtn").addEventListener("click",function(){
+   try{
+     localStorage.setItem("tp_last_completed","2")
+     localStorage.setItem("tp_day_last_seen","3")
+   }catch(e){}
+   window.location.href="./day03.html"
+ })
+})();
+</script>
+<script>
+(function(){
+ document.documentElement.classList.add("tp-no-select")
+ function getUserStamp(){
+   try{
+     var u=JSON.parse(localStorage.getItem("ma_user")||"{}")
+     var name=(u.name||u.nombre||"TMK Member").toUpperCase()
+     return name+" · TMK"
+   }catch(e){return "TMK MEMBER · TMK"}
+ }
+ function addWatermark(){
+   var wm=document.createElement("div")
+   wm.className="tp-watermark"
+   var stamp=getUserStamp()
+   for(var i=0;i<8;i++){var s=document.createElement("span");s.textContent=stamp;wm.appendChild(s)}
+   document.body.appendChild(wm)
+ }
+ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",addWatermark)}else{addWatermark()}
+})();
+</script>
+</body>
+</html>
