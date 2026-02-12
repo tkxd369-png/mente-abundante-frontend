@@ -1586,3 +1586,19 @@ El banner de TTP aparece si en localStorage existe cualquiera de estas keys con 
 ttp_unlocked, ma_ttp_unlocked, truth_path_unlocked, tp_unlocked, ttpUnlocked.\nSi tu quiz ya 
 marca otra key, solo agrega ese nombre en el array 'keys' dentro del script 
 window.maRefreshVault en dashboard.html. 
+
+/* ===============================
+TMK — VAULT visual patch (Classic + locked)
+Pega AL FINAL de styles.css
+================================ */
+/* Classic (crema): texto oscuro para que se vea */
+body:not(.ma-theme-dark) .ma-vault-kicker{ color: rgba(58,48,39,.72) !important; }
+body:not(.ma-theme-dark) .ma-vault-title{ color: rgba(32,28,24,.92) !important; }
+body:not(.ma-theme-dark) .ma-vault-sub{ color: rgba(58,48,39,.72) !important; }
+body:not(.ma-theme-dark) .ma-vault-cta{ color: rgba(199,159,91,.98) !important; }
+/* Locked */
+.ma-vault-banner.ma-vault-locked{
+  opacity: .55;
+  filter: grayscale(.35);
+  pointer-events: none;
+}
