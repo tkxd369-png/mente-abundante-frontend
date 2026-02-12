@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Truth Path — Day 06</title>
+<script>
+(function(){
+ try{
+  var u=JSON.parse(localStorage.getItem("ma_user")||"{}");
+  var ok=!!(u&&(u.email||u.mail||u.id||u.refid||u.refId||u.nombre||u.name));
+  if(!ok){window.location.replace("/start.html");return;}
+ }catch(e){window.location.replace("/start.html");return;}
+})();
+</script>
+<link rel="stylesheet" href="styles-ivorygold.css" />
+<style>
+.tp-card{overflow:visible!important}
+.tp-actions{display:flex;gap:12px}
+.tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
+.tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
+.tp-mini{margin-top:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.55);border-radius:14px;}
+.tp-mini-title{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55);margin:0 0 8px 0;}
+.tp-quote{margin-top:12px;padding:14px 14px;border-left:3px solid rgba(176,141,69,.55);background:rgba(255,255,255,.50);border-radius:14px;}
+</style>
+</head>
+<body class="tp-body">
+<div class="tp-shell">
+<header class="tp-topbar">
+ <div class="tp-brand">
+  <div class="tp-eyebrow">TMK</div>
+  <div class="tp-title">The Truth Path</div>
+ </div>
+ <a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+<div class="tp-sticky">
+ <div class="tp-kicker">Cycle 1 · Day 06</div>
+ <div class="tp-meta">My Commitment</div>
+</div>
+<section class="tp-content">
+<div class="tp-note">
+ <div class="tp-note-title">Phrase of the day</div>
+ <p class="tp-muted" style="margin:0;">
+ Truth becomes power when it becomes practice.
+ </p>
+</div>
+<hr class="tp-divider">
+<div class="tp-q">
+<p class="tp-q-title"><strong>Focus of the day</strong></p>
+<p class="tp-muted">
+You can read many books. You can learn many truths.
+But without a personal commitment, knowledge stays powerless.
+The difference between “knowing” and “living” is decision.
+</p>
+<p class="tp-muted">
+There is an ancient warning that remains painfully accurate:
+to know what is right and still not do it creates inner fracture.
+We harm ourselves while pretending we are fine.
+We betray our peace while saying we want peace.
+Not because we are evil—because we lack a private commitment to ourselves.
+</p>
+<div class="tp-mini">
+  <p class="tp-mini-title">A truth most people skip</p>
+  <p class="tp-muted" style="margin:0;">
+    You cannot give your best to others<br>
+    while you quietly destroy yourself.
+  </p>
+</div>
+<p class="tp-muted">
+Many people say they love others, yet the people they hurt most are the ones closest to them—
+because they have not learned to love themselves with truth.
+Self-love is not indulgence.
+Self-love is refusing self-betrayal.
+It is choosing integrity with your own life.
+</p>
+<div class="tp-quote">
+  <p class="tp-muted" style="margin:0;">
+    Today is not about appearance or announcement.<br>
+    Today is recognition.<br>
+    Today is decision.<br>
+    Today is a private commitment.
+  </p>
+</div>
+<p class="tp-muted" style="margin-bottom:0;">
+This day does not add more reading.
+It turns your evaluation into a vow.
+Your journal becomes your witness.
+</p>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>My Commitment (private)</strong></p>
+<div class="tp-note">
+<div class="tp-note-title">Write it in your journal</div>
+<p class="tp-muted" style="margin:0;">
+Take what you discovered yesterday and write your commitment clearly.
+Keep it simple. Keep it real.
+</p>
+</div>
+<div class="tp-note" style="margin-top:12px;">
+<div class="tp-note-title">A commitment template</div>
+<p class="tp-muted" style="margin:0; line-height:1.8;">
+<strong>Today I commit to myself.</strong><br>
+I commit to stop returning to the illusion.<br>
+I commit to stop building the cage.<br>
+I commit to protect truth in my mind and in my choices.<br>
+I commit to practice one life-giving action every day.<br>
+I commit to build something real.
+</p>
+</div>
+<div class="tp-mini">
+  <p class="tp-mini-title">Seal it</p>
+  <p class="tp-muted" style="margin:0;">
+    Write one sentence at the end, in your own words:<br>
+    <strong>“Today I do not go back.”</strong>
+  </p>
+</div>
+<p class="tp-muted" style="margin-top:12px;margin-bottom:0;">
+Do not rush this.
+Let it land.
+Let it become yours.
+</p>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Closing</strong></p>
+<p class="tp-muted" style="margin-bottom:0;">
+You have completed Cycle 1.
+You can now name the illusion, see the cage, and choose direction.
+Tomorrow, we begin Cycle 2: <strong>The Law of Life</strong>.
+</p>
+</div>
+<div class="tp-actions">
+<a class="tp-navbtn" href="./day05.html">Day 05</a>
+<button id="continueBtn" class="tp-navbtn primary" type="button">Day 07 →</button>
+</div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+ document.getElementById("continueBtn").addEventListener("click",function(){
+  localStorage.setItem("tp_last_completed","6");
+  window.location.href="./day07.html";
+ })
+})();
+</script>
+</body>
+</html>
