@@ -121,7 +121,7 @@ página de inicio.
 <h2 class="ma-section-label" data-i18n="vault.title">TU VAULT</h2>
 <div class="ma-vault-grid">
 <!-- WEBBOOK -->
-<a href="#" id="vaultWebbookBtn" class="ma-vault-banner">
+<a href="ebook/index.html" id="vaultWebbookBtn" class="ma-vault-banner">
 <div class="ma-vault-top">
 <div class="ma-vault-kicker" data-i18n="vault.webbookKicker">LECTURA</div>
 <div class="ma-vault-title" data-i18n="vault.webbookTitle">WEBBOOK</div>
@@ -130,7 +130,7 @@ página de inicio.
 <div class="ma-vault-cta" data-i18n="vault.open">ABRIR</div>
 </a>
 <!-- TRUTH PATH -->
-<a href="#" id="vaultTtpBtn" class="ma-vault-banner ma-vault-locked">
+<a href="#" id="vaultTtpBtn" class="ma-vault-banner">
 <div class="ma-vault-top">
 <div class="ma-vault-kicker" data-i18n="vault.pathKicker">SENDERO</div>
 <div class="ma-vault-title" data-i18n="vault.pathTitle">THE TRUTH PATH</div>
@@ -586,110 +586,29 @@ return;
 window.location.href = baseIndex;
 });
 })();
-/* ===============================
-TMK — VAULT wiring (idioma + unlock)
-No rompe nada existente.
-================================ */
+</script>
+<!-- TMK: TTP Vault gating + rutas ES/EN (solo esto) -->
+<script>
 (function(){
-  // Idioma actual (usa tu helper si existe)
-  const lang = (window.maGetLang && window.maGetLang()) || localStorage.getItem("ma_lang") || localStorage.getItem("lang") || "es";
-  // --- WEBBOOK (respeta progreso) --
-  const webBtn = document.getElementById("vaultWebbookBtn");
-  if (webBtn) {
-    const baseIndex = (lang === "en") ? "/ebook.en/index.html" : "/ebook/index.html";
-    let target = baseIndex;
-    try {
-      const last = localStorage.getItem("wb_last_chapter") || localStorage.getItem("wb_last") || "";
-      if (last) {
-        // Si last ya es una ruta, úsala; si es solo capXX, forma ruta dentro del ebook
-        if (last.includes("/") || last.includes(".html")) {
-          target = last.startsWith("/") ? last : ("/" + last);
-        } else {
-          // fallback: abre index si no sabemos estructura exacta del capítulo
-          target = baseIndex;
-        }
-      }
-    } catch(e){}
-    webBtn.setAttribute("href", target);
+  var btn = document.getElementById("vaultTtpBtn");
+  if(!btn) return;
+  // Detecta idioma usando tu sistema existente
+  var lang = (window.maGetLang && window.maGetLang()) || localStorage.getItem("ma_lang") || localStorage.getItem("lang") || "es";
+  lang = (lang === "en") ? "en" : "es";
+  // Detecta unlock (pon aquí la key real si usas otra)
+  var keys = ["ttp_unlocked","ma_ttp_unlocked","truth_path_unlocked","ttpUnlocked","ttp_access","ma_ttp_access"];
+  var unlocked = false;
+  for (var i=0; i<keys.length; i++){
   }
-  // --- TTP (solo si desbloqueado) --
-  const ttpBtn = document.getElementById("vaultTtpBtn");
-  if (ttpBtn) {
-    const keys = [
-      "ttp_unlocked","ttpUnlocked","ma_ttp_unlocked","truth_path_unlocked","ttp_access",
-      "ma_ttp_access","ttp_enabled","ttpEnabled","ttp_ok","ttpOK"
-    ];
-    let unlocked = false;
-    for (const k of keys) {
-      const v = localStorage.getItem(k);
-      if (v === "true" || v === "1" || v === "yes" || v === "enabled") { unlocked = true; break; }
-    }
-    if (unlocked) {
-      ttpBtn.classList.remove("ma-vault-locked");
-      const href = (lang === "en") ? "/media/ttpe/index.html" : "/media/ttps/index.html";
-      ttpBtn.setAttribute("href", href);
-      ttpBtn.removeAttribute("aria-disabled");
-    } else {
-      ttpBtn.classList.add("ma-vault-locked");
-      ttpBtn.setAttribute("href", "#");
-      ttpBtn.setAttribute("aria-disabled", "true");
-    }
-   /* =========================================
-TMK — PATCH: Frase del día + WebBook por idioma
-Pegar dentro de dashboard.html
-(EN EL MISMO <script> del dashboard)
-Justo ANTES del cierre final:  </script>
-========================================= */
-(function(){
-  // Idioma real del dashboard (usa tu sistema)
-  const lang = (window.maGetLang && window.maGetLang())
-    || (function(){
-      const v = localStorage.getItem("ma_lang") || localStorage.getItem("lang") || "es";
-      return (v === "en" || v === "es") ? v : "es";
-    })();
-  // ---------- FRASE DEL DÍA (respeta idioma) ---------
-  const phraseEl = document.getElementById("aiPhraseText");
-  if (phraseEl) {
-    const pool = {
-      es: [
-        "“Tu decisión de hoy abre puertas que aún no imaginas.”",
-        "“La abundancia comienza cuando eliges la verdad sobre el miedo.”",
-        "“Hoy siembras; mañana cosechas.”",
-        "“Tu paz interior es tu mayor riqueza.”",
-        "“Lo que honras, crece.”"
-      ],
-      en: [
-        "“Your decision today opens doors you can’t yet imagine.”",
-        "“Abundance begins when you choose truth over fear.”",
-        "“You sow today; you reap tomorrow.”",
-        "“Your inner peace is your greatest wealth.”",
-        "“What you honor, grows.”"
-      ]
-    };
-    // Selección determinística por día (no cambia cada refresh)
-    const d = new Date();
-    const seed = (d.getFullYear()*10000) + ((d.getMonth()+1)*100) + d.getDate();
-    const arr = pool[lang] || pool.es;
-    phraseEl.textContent = arr[ seed % arr.length ];
-  }
-  // ---------- WEBBOOK (abre ES/EN correcto + progreso) ---------
-  const webBtn = document.getElementById("vaultWebbookBtn");
-  if (webBtn) {
-    const baseIndex = (lang === "en") ? "/ebook.en/index.html" : "/ebook/index.html";
-    let target = baseIndex;
-    try {
-      const last = localStorage.getItem("wb_last_chapter") || localStorage.getItem("wb_last") || "";
-      if (last) {
-        // Si ya es ruta completa:
-        if (last.includes("/") || last.includes(".html")) {
-          target = last.startsWith("/") ? last : ("/" + last);
-        } else {
-          // Si solo es algo como "cap08", deja index para evitar romper
-      }
-        }
-          target = baseIndex;
-    } catch(e){}
-    webBtn.setAttribute("href", target);
+    var v = localStorage.getItem(keys[i]);
+    if (v === "true" || v === "1" || v === "yes" || v === "enabled"){ unlocked = true; break; }
+  if (unlocked){
+    btn.style.display = "";
+    btn.href = (lang === "en") ? "/media/ttpe/index.html" : "/media/ttps/index.html";
+  } else {
+    // NO aparece hasta que se desbloquee
+    btn.style.display = "none";
+    btn.href = "#";
   }
 })();
 </script>
