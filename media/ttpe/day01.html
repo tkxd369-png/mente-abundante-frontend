@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -23,7 +23,6 @@
       var completed = parseInt(localStorage.getItem("tp_last_completed") || "0", 10);
       var required = 0;
       if (completed < required) {
-        // Not allowed to jump ahead; go to TTPE index (or Day 01 if missing)
         window.location.replace("./index.html");
         return;
       }
@@ -36,11 +35,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <!-- Ivory Gold -->
   <link rel="stylesheet" href="styles-ivorygold.css" />
-  <!-- Fixes + Buttons + Protection + Watermark (same logic as TTPS) -->
   <style>
-    /* Sticky fix */
     .tp-card { overflow: visible !important; }
-    /* Buttons */
     .tp-actions {
       display: flex !important;
       gap: 12px !important;
@@ -78,13 +74,11 @@
       .tp-actions { gap: 10px !important; }
       .tp-actions .tp-navbtn { padding: 8px 10px; font-size: 11px; }
     }
-    /* Protection: no selection */
     .tp-no-select, .tp-no-select *{
       -webkit-user-select: none !important;
       -moz-user-select: none !important;
       user-select: none !important;
     }
-    /* Watermark (user stamp) */
     .tp-watermark{
       position:fixed;
       inset:0;
@@ -111,7 +105,6 @@
 </head>
 <body class="tp-body">
 <div class="tp-shell">
-  <!-- Topbar -->
   <header class="tp-topbar">
     <div class="tp-brand">
       <div class="tp-eyebrow">TMK</div>
@@ -120,15 +113,12 @@
     </div>
     <a class="tp-link" href="/dashboard.html">Dashboard</a>
   </header>
-  <!-- Card -->
   <main class="tp-card">
-    <!-- Sticky header -->
     <div class="tp-sticky">
       <div class="tp-kicker">Cycle 1</div>
       <div class="tp-meta">Day 01 · The Illusion</div>
     </div>
     <section class="tp-content">
-      <!-- Anchor -->
       <div class="tp-note">
         <div class="tp-note-title">Anchor phrase</div>
         <p style="margin:0;">
@@ -137,46 +127,79 @@
         </p>
       </div>
       <hr class="tp-divider">
-      <!-- Focus -->
       <div class="tp-q">
         <p class="tp-q-title"><strong>Focus of the day</strong></p>
         <p class="tp-muted">
-          An illusion is not just “something fake.” It’s something that feels real enough to organize your life around it.
-          It can motivate you, discipline you, and keep you moving—while quietly draining what you were trying to protect:
-          <strong>your life</strong>.
-        </p>
-        <p class="tp-muted">
-          Most people don’t waste their lives on obvious lies. They waste them on <strong>borrowed values</strong>.
-          They inherit definitions of success, happiness, and worth—then chase them like nomads, convinced that “life is over there.”
-          The tragedy is that you can reach what you were told to reach… and still feel the same hollow hunger.
-        </p>
-        <div class="tp-note" style="margin-top:12px;">
-          <div class="tp-note-title">How the illusion works</div>
-          <p class="tp-muted" style="margin:0;">
-            • It promises: “When you get it, you’ll finally be okay.”<br>
-            • It turns your present into a hallway, never a home.<br>
-            • It makes you measure yourself by comparison and appearance.<br>
-            • It keeps you busy enough to avoid silence.
-          </p>
-        </div>
-        <p class="tp-muted">
-          This is why The Truth Path begins here. Before you build anything, you must see what you’ve been obeying.
-          Not with anger—<strong>with clarity</strong>.
-        </p>
-        <p class="tp-muted" style="margin-bottom:0;">
-          Today is not about fixing everything. It’s about naming the illusion—so it stops naming you.
-        </p>
+An illusion is not simply “something fake.” It is a <strong>false center</strong>—a belief that feels real enough to govern your choices.
+An illusion can give you structure, urgency, even discipline… while quietly pulling you away from what is living inside you.
+It doesn’t have to be dramatic. Most illusions are respectable. They look like ambition, responsibility, and “being productive.”
+But if you watch closely, they all share one feature: <strong>they postpone life</strong>.
+</p>
+<p class="tp-muted">
+The illusion says: “Later.”
+Later you’ll be at peace. Later you’ll feel worthy. Later you’ll breathe.
+Later—when the numbers change, when the title arrives, when the image is secured, when the approval is guaranteed.
+So your present becomes a hallway. You keep walking. You keep chasing.
+And even when you reach the next door, you discover the same emptiness waiting inside.
+That’s not because you failed. It’s because the illusion was never designed to satisfy a living soul.
+</p>
+<div class="tp-note" style="margin-top:12px;">
+  <div class="tp-note-title">Three common illusions</div>
+  <p class="tp-muted" style="margin:0;">
+    • <strong>The success illusion:</strong> “If I achieve enough, I will finally be okay.”<br>
+    • <strong>The possession illusion:</strong> “If I own enough, I will finally be safe.”<br>
+    • <strong>The approval illusion:</strong> “If I’m validated, I will finally belong.”
+  </p>
+</div>
+<p class="tp-muted">
+Notice what these illusions do: they turn your inner life into a negotiation.
+They make peace conditional. They make worth conditional. They make joy conditional.
+And once life becomes conditional, you become easy to control—because you can be kept hungry.
+This is why the world can offer you endless “formulas” and still leave you thirsty.
+</p>
+<p class="tp-muted">
+The auxiliary works behind this path all point to the same correction:
+your outer world is shaped by inner alignment—by what you habitually hold, expect, consent to, and live from.
+But an illusion hijacks that mechanism.
+It teaches you to use your creative power to chase shadows:
+to hold images instead of truth, to rehearse lack instead of life, to live from pressure instead of purpose.
+</p>
+<div class="tp-panel">
+  <h4>How the illusion captures your creative power</h4>
+  <p class="tp-muted" style="margin:0;">
+    • It trains your attention to scatter (so you never gather strength).<br>
+    • It trains your mind to compare (so you never settle into identity).<br>
+    • It trains your body to rush (so you never hear the voice within).<br>
+    • It trains your heart to fear (so you confuse survival with living).
+  </p>
+</div>
+<p class="tp-muted">
+True abundance begins when you return to the real center:
+<strong>Life is within you</strong>—and life carries its own principle of fullness.
+When you align your being with the Creator, lack loses its authority,
+because your identity is no longer built on “getting.”
+It is built on <strong>being</strong>—and from being, you create.
+</p>
+<div class="tp-quote">
+  <p class="tp-muted" style="margin:0;">
+    The illusion’s greatest trick is making you believe your life starts after you “arrive.”<br>
+    Truth restores the present—and the present restores you.
+  </p>
+</div>
+<p class="tp-muted" style="margin-bottom:0;">
+Today, do not try to win anything. Just see clearly.
+Name the illusion—so it stops naming you.
+</p>
       </div>
-      <!-- Reflection -->
       <div class="tp-q">
         <p class="tp-q-title"><strong>Inner reflection</strong></p>
         <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.65;">
           <li>What “promise” have I been chasing that keeps moving the finish line?</li>
-          <li>What did I believe would finally make me feel complete?</li>
-          <li>What part of me has been ignored while I stayed busy?</li>
+          <li>Where did I learn that “life is over there” instead of within me?</li>
+          <li>What has this illusion cost me—quietly, consistently?</li>
+          <li>If I stopped chasing today, what part of life would return immediately?</li>
         </ul>
       </div>
-      <!-- Exercise -->
       <div class="tp-q">
         <p class="tp-q-title"><strong>Practical exercise — Name the illusion</strong></p>
         <div class="tp-note" style="margin-top:12px;">
@@ -185,25 +208,25 @@
             <li>Write one illusion you’ve been chasing (status, number, image, a “when I…”).</li>
             <li>Write what it promised you would feel once you got it.</li>
             <li>Write what it has cost you (time, peace, relationships, health, honesty).</li>
+            <li>Write one truth you will practice today that breaks the spell.</li>
           </ol>
           <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
-            Close with one sentence: <strong>“Life is not over there. Life is within me.”</strong>
+            Close with: <strong>“Life is not over there. Life is within me.”</strong>
           </p>
         </div>
       </div>
-      <!-- Journal -->
       <div class="tp-q">
         <p class="tp-q-title"><strong>Journal</strong></p>
         <div class="tp-note" style="margin-top:12px;">
           <div class="tp-note-title">Write it down</div>
           <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
             <li>The illusion I’m releasing is…</li>
-            <li>What it promised me was…</li>
-            <li>Today I choose to value…</li>
+            <li>It promised me…</li>
+            <li>It has cost me…</li>
+            <li>My truth-practice today is…</li>
           </ol>
         </div>
       </div>
-      <!-- Closing -->
       <div class="tp-q">
         <p class="tp-q-title"><strong>Closing</strong></p>
         <p class="tp-muted" style="margin-bottom:0;">
@@ -212,7 +235,6 @@
           Tomorrow we name the cage.
         </p>
       </div>
-      <!-- Buttons -->
       <div class="tp-actions">
         <a class="tp-navbtn" href="/dashboard.html">Dashboard</a>
         <button id="continueBtn" class="tp-navbtn primary" type="button">Day 02 →</button>
@@ -220,13 +242,11 @@
     </section>
   </main>
 </div>
-<!-- Save progress (last seen + last completed) -->
 <script>
 (function () {
   try { localStorage.setItem("tp_day_last_seen", "1"); } catch (e) {}
   document.getElementById("continueBtn").addEventListener("click", function () {
     try {
-      // Mark completion of this day and unlock next day
       localStorage.setItem("tp_last_completed", "1");
       localStorage.setItem("tp_day_last_seen", "2");
     } catch (e) {}
@@ -234,7 +254,6 @@
   });
 })();
 </script>
-<!-- Protection + watermark -->
 <script>
 (function () {
   document.documentElement.classList.add("tp-no-select");
@@ -266,7 +285,7 @@
     wm.setAttribute("aria-hidden", "true");
     wm.className = "tp-watermark";
     var stamp = getUserStamp();
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 10; i++) {
       var s = document.createElement("span");
       s.textContent = stamp;
       wm.appendChild(s);
