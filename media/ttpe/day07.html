@@ -1,190 +1,180 @@
  <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Truth Path — Day 07</title>
-  <!-- TMK: Gate (require login) -->
-  <script>
-  (function () {
-    try {
-      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
-      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
-      if (!hasSession) { window.location.replace("/start.html"); return; }
-    } catch (e) {
-      window.location.replace("/start.html"); return;
-    }
-  })();
-  </script>
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <!-- Ivory Gold -->
-  <link rel="stylesheet" href="styles-ivorygold.css" />
-  <style>
-    /* Sticky fix */
-    .tp-card { overflow: visible !important; }
-    /* Buttons (thin, book-like, side-by-side) */
-    .tp-actions{display:flex !important;gap:12px !important;align-items:center !important;}
-    .tp-actions .tp-navbtn{
-      flex:1 1 0;border-radius:999px;padding:9px 12px;font-size:12px;
-      letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,10);
-      background:rgba(255,255,255,55);color:rgba(0,0,0,58);
-      text-decoration:none;text-align:center;cursor:pointer;
-    }
-    .tp-actions .tp-navbtn.primary{
-      border:1px solid rgba(176,141,69,45);
-      background:linear-gradient(180deg, rgba(232,198,120,92), rgba(214,170,84,92));
-      color:rgba(40,30,14,82);
-    }
-    /* Helper blocks */
-    .tp-mini{
-      margin-top:12px;padding:14px;border:1px solid rgba(0,0,0,08);
-      background:rgba(255,255,255,55);border-radius:14px;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Truth Path — Day 07</title>
+<script>
+(function () {
+try {
+var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+if (!hasSession) { window.location.replace("/start.html"); return; }
+} catch (e) {
+window.location.replace("/start.html"); return;
+}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet" href="styles-ivorygold.css" />
+<style>
+.tp-card { overflow: visible !important; }
+.tp-actions{display:flex !important;gap:12px !important;align-items:center !important;}
+.tp-actions .tp-navbtn{
+flex:1 1 0;border-radius:999px;padding:9px 12px;font-size:12px;
+letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);
+background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);
+text-decoration:none;text-align:center;cursor:pointer;
+}
+.tp-actions .tp-navbtn.primary{
+border:1px solid rgba(176,141,69,.45);
+background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+color:rgba(40,30,14,.82);
+}
+.tp-mini{
+margin-top:12px;padding:14px;border:1px solid rgba(0,0,0,.08);
+background:rgba(255,255,255,.55);border-radius:14px;
+}
+</style>
 </head>
 <body class="tp-body">
-  <div class="tp-shell">
-    <header class="tp-topbar">
-      <div class="tp-brand">
-        <div class="tp-eyebrow">TMK</div>
-        <div class="tp-title">The Truth Path</div>
-      </div>
-      <a class="tp-link" href="/dashboard.html">Dashboard</a>
-    </header>
-    <main class="tp-card">
-      <div class="tp-sticky">
-        <div class="tp-kicker">Cycle 2 · Day 07</div>
-        <div class="tp-meta">Life is a gift</div>
-      </div>
-      <section class="tp-content">
-        <!-- Phrase of the day -->
-        <div class="tp-note">
-          <div class="tp-note-title">Phrase of the day</div>
-          <p class="tp-muted" style="margin:0;">
-            Life does not begin in lack.<br>
-            It is born complete… and it moves forward.
-          </p>
-        </div>
-        <hr class="tp-divider">
-        <!-- Focus of the day -->
-        <div class="tp-q">
-          <p class="tp-q-title"><strong>Focus of the day</strong></p>
-          <p class="tp-muted">
-            Everything that has life moves forward.
-            Not because it is pushed.
-            Not because it is forced.
-            But because <strong>that is its nature</strong>.
-          </p>
-          <p class="tp-muted">
-            Life does not begin incomplete.
-            It does not begin searching.
-            It does not begin chasing.
-            It begins from fullness… and it moves toward more fullness.
-          </p>
-          <p class="tp-muted">
-            Look at nature:
-            the seed does not panic about growing,
-            the tree does not strain to produce fruit,
-            the river does not stop to ask if it will arrive.
-            Life flows, aligns, fulfills its purpose
-            and then… spreads more life.
-          </p>
-          <p class="tp-muted">
-            At no point is life “missing” something.
-            It changes form,
-            it passes through processes,
-            but it never loses its origin.
-            Everything alive is designed to move
-            from what it is… toward what it can express.
-          </p>
-          <p class="tp-muted">
-            The idea of lack does not come from life.
-            It comes from a learned perception.
-            When we forget that life has already been given,
-            we begin to live as if something is missing.
-          </p>
-          <p class="tp-muted">
-            But life is not received in pieces.
-            It does not arrive halfway.
-            It is not delivered with conditions.
-            <strong>Life is a complete gift.</strong>
-          </p>
-          <div class="tp-mini">
-            <p class="tp-muted" style="margin:0;">
-              When life flows within you,
-              you don’t have to chase fullness.
-              You only have to allow it to express itself.
-            </p>
-          </div>
-          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
-            Today we are not going to learn how to “attract.”
-            Today we are going to remember.
-            Because what is alive in you
-            already knows how to move forward.
-          </p>
-        </div>
-        <!-- Inner Reflection -->
-        <div class="tp-q">
-          <p class="tp-q-title"><strong>Inner Reflection</strong></p>
-          <ul class="tp-muted" style="line-height:1.7;">
-            <li>Where have I lived as if life “owes” me something?</li>
-            <li>In what area did I forget that life already flows within me?</li>
-            <li>What part of me needs permission to move forward?</li>
-          </ul>
-        </div>
-        <!-- Practical Exercise -->
-        <div class="tp-q">
-          <p class="tp-q-title"><strong>Practical Exercise</strong></p>
-          <div class="tp-mini">
-            <p class="tp-muted" style="margin:0;">
-              Today, pause three times during your day.<br><br>
-              Take a deep breath and repeat silently:<br>
-              <strong>“Life moves forward in me.”</strong><br><br>
-              Don’t try to feel anything special.
-              Just observe.
-            </p>
-          </div>
-        </div>
-        <!-- Journal -->
-        <div class="tp-q">
-          <p class="tp-q-title"><strong>Journal</strong></p>
-          <div class="tp-mini">
-            <ol class="tp-muted" style="line-height:1.8;margin:0;padding-left:18px;">
-              <li>Today I recognize life in…</li>
-              <li>The fullness that already exists in me is…</li>
-              <li>A simple way life wants to express itself today is…</li>
-            </ol>
-          </div>
-        </div>
-        <!-- Closing -->
-        <div class="tp-q">
-          <p class="tp-q-title"><strong>Closing</strong></p>
-          <p class="tp-muted" style="margin-bottom:0;">
-            Life is not forced.
-            Life is honored.
-            And when it is honored,
-            it moves forward.
-          </p>
-        </div>
-        <!-- Buttons -->
-        <div class="tp-actions">
-          <a class="tp-navbtn" href="./day06.html">Day 06</a>
-          <button id="continueBtn" class="tp-navbtn primary" type="button">Day 08 →</button>
-        </div>
-      </section>
-    </main>
-  </div>
-  <script>
-  (function () {
-    try { localStorage.setItem("tp_day_last_seen", "7"); } catch (e) {}
-    document.getElementById("continueBtn").addEventListener("click", function () {
-      try { localStorage.setItem("tp_day_last_seen", "8"); } catch (e) {}
-      window.location.href = "./day08.html";
-    });
-  })();
-  </script>
+<div class="tp-shell">
+<header class="tp-topbar">
+<div class="tp-brand">
+<div class="tp-eyebrow">TMK</div>
+<div class="tp-title">The Truth Path</div>
+<div class="tp-subtitle"></div>
+</div>
+<a class="tp-link" href="/dashboard.html">Dashboard</a>
+</header>
+<main class="tp-card">
+<div class="tp-sticky">
+<div class="tp-kicker">Cycle 2 · Day 07</div>
+<div class="tp-meta">Life is a gift</div>
+</div>
+<section class="tp-content">
+<div class="tp-note">
+<div class="tp-note-title">Phrase of the day</div>
+<p class="tp-muted" style="margin:0;">
+Life does not begin in lack.<br>
+It is born complete… and it moves forward.
+</p>
+</div>
+<hr class="tp-divider">
+<div class="tp-q">
+<p class="tp-q-title"><strong>Focus of the day</strong></p>
+<p class="tp-muted">
+Everything that has life moves forward.
+Not because it is pushed.
+Not because it is forced.
+But because <strong>that is its nature</strong>.
+</p>
+<p class="tp-muted">
+Life does not begin incomplete.
+It does not begin searching.
+It does not begin chasing.
+It begins from fullness… and it moves toward more fullness.
+</p>
+<p class="tp-muted">
+Look at nature:
+the seed does not panic about growing,
+the tree does not strain to bear fruit,
+the river does not pause to ask if it will arrive.
+Life flows, aligns, fulfills its purpose,
+and then… spreads more life.
+</p>
+<p class="tp-muted">
+At no point does life “lack.”
+It changes form,
+passes through processes,
+but it never loses its origin.
+Everything alive is designed to move forward
+from what it is… toward what it can express.
+</p>
+<p class="tp-muted">
+The idea of lack does not come from life.
+It comes from a learned perception.
+When we forget that life has already been given,
+we start living as if something is missing.
+</p>
+<p class="tp-muted">
+Pero la vida no se recibe por partes.
+No llega a medias.
+No se entrega con condición.
+<strong>Life is a gift completo.</strong>
+</p>
+<div class="tp-mini">
+<p class="tp-muted" style="margin:0;">
+When life flows within you,
+you don’t have to chase fullness.
+You only have to allow it to express itself.
+</p>
+</div>
+<p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+Today we are not learning how to attract.
+Today we are remembering.
+Because what is alive in you
+already knows how to move forward.
+</p>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Inner Reflection</strong></p>
+<ul class="tp-muted" style="line-height:1.7;">
+<li>Where have I lived as if life owes me something?</li>
+<li>In what area did I forget that life already flows within me?</li>
+<li>What part of me is waiting for permission to move forward?</li>
+</ul>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Practical Exercise</strong></p>
+<div class="tp-mini">
+<p class="tp-muted" style="margin:0;">
+Today, pause three times during your day.<br><br>
+Take a deep breath and repeat silently:<br>
+<strong>“Life moves forward in me.”</strong><br><br>
+Don’t try to feel anything special.
+Just observe.
+</p>
+</div>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Journal</strong></p>
+<div class="tp-mini">
+<ol class="tp-muted" style="line-height:1.8;margin:0;padding-left:18px;">
+<li>Today I recognize life in…</li>
+<li>The fullness that already exists in me is…</li>
+<li>A simple way life wants to express itself today is…</li>
+</ol>
+</div>
+</div>
+<div class="tp-q">
+<p class="tp-q-title"><strong>Closing</strong></p>
+<p class="tp-muted" style="margin-bottom:0;">
+Life is not forced.
+Life is honored.
+And when it is honored,
+it moves forward.
+</p>
+</div>
+<div class="tp-actions">
+<a class="tp-navbtn" href="./day06.html">Day 06</a>
+<button id="continueBtn" class="tp-navbtn primary" type="button">Day 08 →</button>
+</div>
+</section>
+</main>
+</div>
+<script>
+(function () {
+try { localStorage.setItem("tp_day_last_seen", "7"); } catch (e) {}
+document.getElementById("continueBtn").addEventListener("click", function () {
+try { localStorage.setItem("tp_day_last_seen", "8"); } catch (e) {}
+window.location.href = "./day08.html";
+});
+})();
+</script>
 </body>
 </html>
