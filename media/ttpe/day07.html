@@ -1,154 +1,242 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Truth Path — Day 07</title>
-<script>
-(function(){
- try{
-  var u=JSON.parse(localStorage.getItem("ma_user")||"{}");
-  var ok=!!(u&&(u.email||u.mail||u.id||u.refid||u.refId||u.nombre||u.name));
-  if(!ok){window.location.replace("/start.html");return;}
- }catch(e){window.location.replace("/start.html");return;}
-})();
-</script>
-<link rel="stylesheet" href="styles-ivorygold.css" />
-<style>
-.tp-card{overflow:visible!important}
-.tp-actions{display:flex;gap:12px}
-.tp-navbtn{flex:1;border-radius:999px;padding:9px 12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.55);color:rgba(0,0,0,.58);text-decoration:none;text-align:center;cursor:pointer}
-.tp-navbtn.primary{border:1px solid rgba(176,141,69,.45);background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));color:rgba(40,30,14,.82)}
-.tp-mini{margin-top:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.55);border-radius:14px;}
-.tp-mini-title{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.55);margin:0 0 8px 0;}
-.tp-quote{margin-top:12px;padding:14px 14px;border-left:3px solid rgba(176,141,69,.55);background:rgba(255,255,255,.50);border-radius:14px;}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Truth Path — Day 07</title>
+  <!-- TMK: Gate (require login) -->
+  <script>
+  (function () {
+    try {
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || u.name));
+      if (!hasSession) { window.location.replace("/start.html"); return; }
+    } catch (e) {
+      window.location.replace("/start.html"); return;
+    }
+  })();
+  </script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Ivory Gold -->
+  <link rel="stylesheet" href="styles-ivorygold.css" />
+  <!-- Fixes locales (template base) -->
+  <style>
+    .tp-card { overflow: visible !important; }
+    .tp-subtitle{
+      font-size:.7rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.45);
+      margin-top:2px;
+    }
+    .tp-actions{
+      display:flex !important;
+      gap:12px !important;
+      flex-wrap:nowrap !important;
+      align-items:center !important;
+    }
+    .tp-actions .tp-navbtn{
+      flex:1 1 0;
+      min-width:0;
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);
+      color:rgba(0,0,0,.58);
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
+    }
+    .tp-actions .tp-navbtn.primary{
+      border:1px solid rgba(176,141,69,.45);
+      background:linear-gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));
+      color:rgba(40,30,14,.82);
+    }
+    /* Golden bracket break */
+    .tp-quote{
+      margin-top:12px;
+      padding:14px 14px;
+      border-left:3px solid rgba(176,141,69,.55);
+      background:rgba(255,255,255,.50);
+      border-radius:14px;
+    }
+    /* Mini block */
+    .tp-mini{
+      margin-top:12px;
+      padding:12px 14px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);
+      border-radius:14px;
+    }
+    .tp-mini-title{
+      font-size:.72rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.55);
+      margin:0 0 8px 0;
+    }
+  </style>
 </head>
 <body class="tp-body">
-<div class="tp-shell">
-<header class="tp-topbar">
- <div class="tp-brand">
-  <div class="tp-eyebrow">TMK</div>
-  <div class="tp-title">The Truth Path</div>
- </div>
- <a class="tp-link" href="/dashboard.html">Dashboard</a>
-</header>
-<main class="tp-card">
-<div class="tp-sticky">
- <div class="tp-kicker">Cycle 2 · Day 07</div>
- <div class="tp-meta">The Law of Life</div>
-</div>
-<section class="tp-content">
-<div class="tp-note">
- <div class="tp-note-title">Phrase of the day</div>
- <p class="tp-muted" style="margin:0;">
- Life is not something you chase.<br>
- Life is something you recognize.
- </p>
-</div>
-<hr class="tp-divider">
-<div class="tp-q">
-<p class="tp-q-title"><strong>Focus of the day</strong></p>
-<p class="tp-muted">
-Cycle 1 exposed the illusion — the false chase, the borrowed vision, the inherited scarcity.
-Now we move into something foundational: <strong>the Law of Life</strong>.
-</p>
-<p class="tp-muted">
-Life itself carries abundance.
-Not luxury. Not applause. Not image.
-Life.
-</p>
-<p class="tp-muted">
-Everything alive unfolds toward growth.
-A seed does not force itself into becoming a tree.
-It aligns with design, draws what it needs, and grows.
-The power is not in anxiety — the power is in alignment.
-</p>
-<div class="tp-mini">
-  <p class="tp-mini-title">What Life Reveals</p>
-  <p class="tp-muted" style="margin:0;">
-    Life is a gift.<br>
-    What has life flows.<br>
-    Life moves from fullness to fullness.
-  </p>
-</div>
-<p class="tp-muted">
-The world teaches that abundance must be attracted, negotiated, or proven.
-But life teaches something deeper:
-what is alive already carries provision within its design.
-</p>
-<p class="tp-muted">
-When you recognize that life is already present in you,
-you stop living as if you are empty.
-You stop performing for worth.
-You stop chasing validation as oxygen.
-</p>
-<div class="tp-quote">
-  <p class="tp-muted" style="margin:0;">
-    Abundance is not added to life.<br>
-    Abundance is revealed when life is no longer strangled by fear.
-  </p>
-</div>
-<p class="tp-muted" style="margin-bottom:0;">
-Today is about recognition.
-Recognition stabilizes the mind.
-And a stabilized mind becomes fertile ground for growth.
-</p>
-</div>
-<div class="tp-q">
-<p class="tp-q-title"><strong>Inner Reflection</strong></p>
-<ul class="tp-muted" style="padding-left:18px;line-height:1.7;">
-<li>Where do I live as if I am lacking something essential?</li>
-<li>When do I feel most aligned with life instead of pressure?</li>
-<li>What belief makes me think abundance must be earned externally?</li>
-<li>What changes if I accept that life is already in me?</li>
-</ul>
-</div>
-<div class="tp-q">
-<p class="tp-q-title"><strong>Practical Exercise — Align with Life</strong></p>
-<div class="tp-note">
-<div class="tp-note-title">Step 1 — Observe</div>
-<p class="tp-muted" style="margin:0;">
-Spend 2 minutes observing your breath. Do nothing else.
-</p>
-</div>
-<div class="tp-note" style="margin-top:12px;">
-<div class="tp-note-title">Step 2 — Identify Flow</div>
-<p class="tp-muted" style="margin:0;">
-Write 3 areas where life feels natural (ideas, relationships, creativity, peace).
-</p>
-</div>
-<div class="tp-note" style="margin-top:12px;">
-<div class="tp-note-title">Step 3 — Remove Interference</div>
-<p class="tp-muted" style="margin:0;">
-Name one fear, comparison, or pressure habit that interrupts your flow.
-</p>
-</div>
-<div class="tp-note" style="margin-top:12px;">
-<div class="tp-note-title">Step 4 — Support Life</div>
-<p class="tp-muted" style="margin:0;">
-Choose one action today that supports life instead of fear.
-</p>
-</div>
-<p class="tp-muted" style="margin-top:12px;margin-bottom:0;">
-Life is not waiting to be earned.
-It is waiting to be honored.
-</p>
-</div>
-<div class="tp-actions">
-<a class="tp-navbtn" href="./day06.html">Day 06</a>
-<button id="continueBtn" class="tp-navbtn primary" type="button">Day 08 →</button>
-</div>
-</section>
-</main>
-</div>
-<script>
-(function(){
- document.getElementById("continueBtn").addEventListener("click",function(){
-  localStorage.setItem("tp_last_completed","7");
-  window.location.href="./day08.html";
- })
-})();
-</script>
+  <div class="tp-shell">
+    <header class="tp-topbar">
+      <div class="tp-brand">
+        <div class="tp-eyebrow">TMK</div>
+        <div class="tp-title">The Truth Path</div>
+        <div class="tp-subtitle">Private devotional · Day 07</div>
+      </div>
+      <a class="tp-link" href="/dashboard.html">Dashboard</a>
+    </header>
+    <main class="tp-card">
+      <div class="tp-sticky">
+        <div class="tp-kicker">Cycle 2</div>
+        <div class="tp-meta">The Law of Life</div>
+      </div>
+      <section class="tp-content">
+        <!-- Phrase -->
+        <div class="tp-note">
+          <div class="tp-note-title">Phrase of the day</div>
+          <p class="tp-muted" style="margin:0;">
+            Life is not something you chase.<br>
+            Life is something you recognize.
+          </p>
+        </div>
+        <hr class="tp-divider">
+        <!-- Focus -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Focus of the day</strong></p>
+          <p class="tp-muted">
+            Cycle 1 exposed the illusion and the cage: the borrowed values, the endless chase,
+            and the subtle belief that “life is out there.”
+            Today we begin Cycle 2 with a foundational truth:
+            <strong>life itself carries abundance</strong>.
+          </p>
+          <p class="tp-muted">
+            Not abundance as luxury. Not abundance as image.
+            Abundance as <strong>life</strong>—alive, moving, designed to grow.
+          </p>
+          <p class="tp-muted">
+            Everything alive unfolds toward growth.
+            A seed does not panic into becoming a tree.
+            It aligns with design, draws what it needs, and grows.
+            The power is not in anxiety—the power is in alignment.
+          </p>
+          <div class="tp-mini">
+            <p class="tp-mini-title">What life reveals</p>
+            <p class="tp-muted" style="margin:0;">
+              Life is a gift.<br>
+              What has life <strong>flows</strong>.<br>
+              Life moves from <strong>fullness to fullness</strong>.
+            </p>
+          </div>
+          <p class="tp-muted">
+            Culture teaches that abundance must be attracted, negotiated, or proven.
+            But life teaches something deeper:
+            what is alive already carries provision within its design.
+            When you recognize that life is already present in you,
+            you stop living as if you are empty.
+          </p>
+          <div class="tp-quote">
+            <p class="tp-muted" style="margin:0;">
+              Abundance is not added to life.<br>
+              Abundance is revealed when life is no longer strangled by fear.
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            Today is about recognition.
+            Recognition stabilizes the mind.
+            A stabilized mind becomes fertile ground for growth.
+          </p>
+        </div>
+        <!-- Reflection -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Inner Reflection</strong></p>
+          <ul class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+            <li>Where do I live as if I am lacking something essential?</li>
+            <li>When do I feel most aligned with life instead of pressure?</li>
+            <li>What belief makes me think abundance must be earned externally?</li>
+            <li>What changes if I accept that life is already in me?</li>
+          </ul>
+        </div>
+        <!-- Practical Exercise -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Practical Exercise</strong></p>
+          <div class="tp-note">
+            <div class="tp-note-title">Step 1 — Observe</div>
+            <p class="tp-muted" style="margin:0;">
+              Spend 2 minutes observing your breath. Do nothing else.
+            </p>
+          </div>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Step 2 — Identify Flow</div>
+            <p class="tp-muted" style="margin:0;">
+              Write 3 areas where life feels natural (ideas, relationships, creativity, peace).
+            </p>
+          </div>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Step 3 — Remove Interference</div>
+            <p class="tp-muted" style="margin:0;">
+              Name one fear, comparison, or pressure habit that interrupts your flow.
+            </p>
+          </div>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Step 4 — Support Life</div>
+            <p class="tp-muted" style="margin:0;">
+              Choose one action today that supports life instead of fear.
+            </p>
+          </div>
+          <p class="tp-muted" style="margin-top:12px; margin-bottom:0;">
+            Life is not waiting to be earned.<br>
+            It is waiting to be honored.
+          </p>
+        </div>
+        <!-- Journal -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Journal (personal map)</strong></p>
+          <div class="tp-note" style="margin-top:12px;">
+            <div class="tp-note-title">Your personal map (today)</div>
+            <ol class="tp-muted" style="margin:0; padding-left:18px; line-height:1.8;">
+              <li>The clearest sign of life within me is…</li>
+              <li>The fear that blocks my flow is…</li>
+              <li>The life-giving action I choose today is…</li>
+              <li>Fullness for me (today) means…</li>
+            </ol>
+          </div>
+        </div>
+        <!-- Closing -->
+        <div class="tp-q">
+          <p class="tp-q-title"><strong>Closing</strong></p>
+          <p class="tp-muted" style="margin-bottom:0;">
+            Today I choose to honor life within me.
+            And I choose to align with fullness… today.
+          </p>
+        </div>
+        <!-- Buttons -->
+        <div class="tp-actions">
+          <a class="tp-navbtn" href="./day06.html">Day 06</a>
+          <button id="continueBtn" class="tp-navbtn primary" type="button">Day 08 →</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+  (function () {
+    document.getElementById("continueBtn").addEventListener("click", function () {
+      localStorage.setItem("tp_last_completed", "7");
+      window.location.href = "./day08.html";
+    });
+  })();
+  </script>
 </body>
-</html> 
+</html>
