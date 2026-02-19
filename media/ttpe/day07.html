@@ -1,92 +1,298 @@
- <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Truth Path — Day 07</title>
-<link rel="stylesheet" href="styles-ivorygold.css" />
-</head>
-<body class="tp-body">
-<div class="tp-shell">
-<header class="tp-topbar">
- <div class="tp-brand">
-  <div class="tp-eyebrow">TMK</div>
-  <div class="tp-title">The Truth Path</div>
- </div>
- <a class="tp-link" href="/dashboard.html">Dashboard</a>
-</header>
-<main class="tp-card">
-<div class="tp-sticky">
- <div class="tp-kicker">Cycle 2 · Day 07</div>
- <div class="tp-meta">Life Is a Gift</div>
-</div>
-<section class="tp-content">
-<div class="tp-note">
-<div class="tp-note-title">Phrase of the day</div>
-<p class="tp-muted" style="margin:0;">
-Life is not something you chase.<br>
-Life is something already alive within you.
-</p>
-</div>
-<hr class="tp-divider">
-<div class="tp-q">
-<p class="tp-q-title"><strong>Focus of the day</strong></p>
-<p class="tp-muted">
-Everything that has life moves forward — not because it is pushed,
-but because movement is its nature.
-</p>
-<p class="tp-muted">
-Life does not begin in lack. It begins whole.
-And from that wholeness it unfolds.
-</p>
-<p class="tp-muted">
-A seed does not doubt growth.
-A river does not doubt arrival.
-Life aligns with what it is.
-</p>
-<div class="tp-mini">
-<p class="tp-muted" style="margin:0;">
-Life is already given.<br>
-What has life flows.<br>
-Fullness moves toward expression.
-</p>
-</div>
-<p class="tp-muted">
-The belief that something is missing
-is learned — not real.
-</p>
-<p class="tp-muted" style="margin-bottom:0;">
-You are not empty. You are already in motion.
-</p>
-</div>
-<div class="tp-q">
-<p class="tp-q-title"><strong>Inner Reflection</strong></p>
-<ul class="tp-muted">
-<li>Where have I believed life was incomplete?</li>
-<li>Where do I feel life already moving?</li>
-</ul>
-</div>
-<div class="tp-q">
-<p class="tp-q-title"><strong>Journal</strong></p>
-<div class="tp-mini">
-<ol class="tp-muted">
-<li>Life is moving in me through…</li>
-<li>Today I allow life by…</li>
-</ol>
-</div>
-</div>
-<div class="tp-q">
-<p class="tp-q-title"><strong>Closing</strong></p>
-<p class="tp-muted" style="margin-bottom:0;">
-Life unfolds when trusted.
-</p>
-</div>
-<div class="tp-actions">
-<a class="tp-navbtn" href="./day06.html">Day 06</a>
-<button class="tp-navbtn primary" onclick="location.href='./day08.html'">Day 08 →</button>
-</div>
-</section>
-</main>
-</div>
-</body>
-</html>
+ <!doctype html>  
+<html lang="en">  
+<head>  
+  <meta charset="utf -8" />  
+  <meta name="viewport" content="width=device -width,initial -scale=1" />  
+  <title>The Truth Path — Day 07</title>  
+  <!-- TMK: Gate (require login) --> 
+  <script>  
+  (function () {  
+    try {  
+      var u = JSON.parse(localStorage.getItem("ma_user") || "{}");  
+      var hasSession = !!(u && (u.email || u.mail || u.id || u.refid || u.refId || u.nombre || 
+u.name));  
+      if (!hasSession) { window.location.replace("/start.html"); return; }  
+    } catch (e) {  
+      window.location.replace("/start.html"); return;  
+    } 
+  })(); 
+  </script>  
+  <!-- Fonts --> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+  <link  
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Pla
+yfair+Display:wght@500;600;700&display=swap"  
+    rel="stylesheet">  
+  <!-- Ivory Gold --> 
+  <link rel="stylesheet" href="styles -ivorygold.css" />  
+  <!-- Fixes locales (template base) --> 
+  <style>  
+    .tp-card { overflow: visible !important; }  
+    .tp-subtitle{  
+      font-size:.7rem;  
+      letter-spacing:.22em;  
+      text-transform:uppercase;  
+      color:rgba(0,0,0,.45);  
+      margin-top:2px;  
+    } 
+    .tp-actions{  
+      display:flex !important;  
+      gap:12px !important;  
+      flex-wrap:nowrap !important;  
+      align-items:center !important;  
+    } 
+    .tp-actions .tp -navbtn{  
+      flex:1 1 0;  
+      min-width:0;  
+      border-radius:999px;  
+      padding:9px 12px;  
+      font-size:12px;  
+      letter-spacing:.18em;  
+      text-transform:uppercase;  
+      line-height:1;  
+      display:inline -flex;  
+      align-items:center;  
+      justify-content:center;  
+      text-decoration:none;  
+      cursor:pointer;  
+      border:1px solid rgba(0,0,0,.10);  
+      background:rgba(255,255,255,.55);  
+      color:rgba(0,0,0,.58);  
+      -webkit-tap-highlight-color:transparent;  
+      user-select:none;  
+    } 
+    .tp-actions .tp -navbtn:hover{ background:rgba(255,255,255,.70); }  
+    .tp-actions .tp -navbtn:active{ transform:translateY(1px); }  
+    .tp-actions .tp -navbtn.primary{  
+      border:1px solid rgba(176,141,69,.45);  
+      background:linear -gradient(180deg, rgba(232,198,120,.92), rgba(214,170,84,.92));  
+      color:rgba(40,30,14,.82);  
+    } 
+    @media (max -width: 420px){  
+      .tp-actions{ gap:10px !important; }  
+      .tp-actions .tp -navbtn{ padding:8px 10px; font -size:11px; }  
+    } 
+    .tp-no-select, .tp -no-select *{  
+      -webkit-user-select:none !important;  
+      -moz-user-select:none !important;  
+      user-select:none !important;  
+    } 
+    .tp-watermark{  
+      position:fixed;  
+      inset:0;  
+      pointer-events:none;  
+      z-index:9999;  
+      opacity:0.05;  
+      transform:rotate( -18deg);  
+      transform -origin:center;  
+      display:grid;  
+      grid-template -columns:repeat(2,1fr);  
+      gap:70px 26px;  
+      padding:110px 24px;  
+      mix-blend-mode:multiply;  
+    } 
+    .tp-watermark span{  
+      font-family:"DM Sans", system -ui, -apple-system, Segoe UI, Roboto, Arial, sans -serif;  
+      font-size:11px;  
+      letter-spacing:.22em;  
+      text-transform:uppercase;  
+      white-space:nowrap;  
+      color:rgba(0,0,0,.55);  
+    } 
+    /* Helper blocks */  
+    .tp-mini{  
+      margin-top:10px;  
+      padding:12px 14px;  
+      border:1px solid rgba(0,0,0,.08);  
+      background:rgba(255,255,255,.55);  
+      border-radius:14px;  
+    } 
+    .tp-mini-title{  
+      font-size:.72rem;  
+      letter-spacing:.22em;  
+      text-transform:uppercase;  
+      color:rgba(0,0,0,.55);  
+      margin:0 0 8px 0;  
+    } 
+  </style>  
+</head>  
+<body class="tp -body">  
+  <div class="tp -shell">  
+    <!-- Topbar --> 
+    <header class="tp -topbar">  
+      <div class="tp -brand">  
+        <div class="tp -eyebrow">TMK</div>  
+        <div class="tp -title">The Truth Path</div>  
+        <div class="tp -subtitle">El Sendero de la Verdad</div>  
+      </div>  
+      <a class="tp -link" href="/dashboard.html">Dashboard</a>  
+    </header>  
+    <main class="tp -card">  
+      <!-- Sticky header --> 
+      <div class="tp -sticky">  
+        <div class="tp -kicker">Cycle 2 · Day 07</div>  
+        <div class="tp -meta">Life is a gift</div>  
+      </div>  
+      <section class="tp -content">  
+        <!-- Phrase of the day --> 
+        <div class="tp -note">  
+          <div class="tp -note-title">Phrase of the day</div>  
+          <p class="tp -muted" style="margin:0;">Life is not something you chase.<br>
+Life is something already alive within you.</p>  
+        </div>  
+        <hr class="tp -divider">  
+        <!-- Focus of the day -->
+        <div class="tp -q"> 
+          <p class="tp -q-title"><strong>Focus of the day</strong></p>  
+          <p class="tp -muted">  
+            Everything that has life moves forward — not because it is pushed, but because movement is its nature.  
+          </p>  
+          <p class="tp -muted">  
+            Life does not begin in lack. It begins whole. And from that wholeness it unfolds.  
+          </p>  
+          <p class="tp -muted">  
+            A seed does not doubt growth. A river does not doubt arrival. Life aligns with what it is. When it is alive, it carries direction inside it.  
+          </p>  
+          <p class="tp -muted">  
+            What we call “lack” is often a borrowed perception — repeated until it feels like truth. But life itself does not teach scarcity. Life teaches flow.  
+          </p>  
+          <p class="tp -muted">  
+            The works that inspired this path all point to the same center: the creative power is not in strain, but in alignment. Not in chasing, but in allowing what is already within you to express itself.  
+          </p>  
+          <div class="tp -mini">  
+            <p class="tp -muted" style="margin:0;">  
+              Life is already given.<br>  
+              What has life flows.<br>  
+              Fullness moves toward expression.  
+            </p>  
+          </div>  
+          <p class="tp -muted">  
+            If you have been living as if you are empty, you will exhaust yourself chasing what was never missing. But when you remember that life is already in you, you stop performing for worth — and you start cultivating what is real.  
+          </p>  
+          <p class="tp -muted">  
+            Today is not about learning how to “attract.” Today is about remembering. Because what is alive in you already knows how to move forward.  
+          </p>  
+        </div>  
+        <!-- Inner Reflection -->
+        <div class="tp -q">  
+          <p class="tp -q-title"><strong>Inner Reflection</strong></p>  
+          <ul class="tp -muted">  
+            <li>Where have I been living as if life is incomplete?</li>  
+            <li>What belief makes me feel I must “earn” the right to feel whole?</li>  
+            <li>Where do I feel life already moving within me — quietly, naturally?</li>  
+            <li>What would change today if I trusted that movement?</li>  
+          </ul>  
+        </div>  
+        <!-- Ejercicio -->
+        <div class="tp -q">  
+          <p class="tp -q-title"><strong>Practical Exercise (private) — let life lead</strong></p>  
+          <div class="tp -note">  
+            <div class="tp -note-title">Step 1 — One sentence of truth</div>  
+            <p class="tp -muted" style="margin:0;">  
+              Write one sentence: “Life is already moving in me through…”  
+            </p>  
+          </div>  
+          <div class="tp -note" style="margin-top:12px;">  
+            <div class="tp -note-title">Step 2 — A signal of life</div>  
+            <p class="tp -muted" style="margin:0;">  
+              Name one small place where you feel peace, clarity, love, or fullness — even if it’s quiet.  
+            </p>  
+          </div>  
+          <div class="tp -note" style="margin-top:12px;">  
+            <div class="tp -note-title">Step 3 — 5 minutes of real life</div>  
+            <p class="tp -muted" style="margin:0;">  
+              Take 5 minutes today with no screen, no rush, no goal. Just be present. Breathe. Notice.  
+              At the end, write one line: “This is also life.”  
+            </p>  
+          </div>  
+          <p class="tp -muted" style="margin-top:12px;margin-bottom:0;">  
+            You don’t have to abandon your goals. You just can’t let your goals abandon you.  
+          </p>  
+        </div>  
+        <!-- Libreta -->
+        <div class="tp -q">  
+          <p class="tp -q-title"><strong>Journal (personal map)</strong></p>  
+          <div class="tp -mini">  
+            <p class="tp -muted"><strong>Your personal map (today)</strong></p>  
+            <ol class="tp -muted">  
+              <li>What I used to call “life” was…</li>  
+              <li>For me, real life feels like…</li>  
+              <li>A false measure of my value today has been…</li>  
+              <li>A signal of life I want to recover is…</li>  
+            </ol>  
+          </div>  
+        </div>  
+        <!-- Closing -->
+        <div class="tp -q">  
+          <p class="tp -q-title"><strong>Closing</strong></p>  
+          <p class="tp -muted" style="margin-bottom:0;">  
+            Today I remember something simple: life is not “out there.” Life is here.  
+            And I can return to it — quietly, honestly, without running.  
+          </p>  
+        </div>  
+        <!-- Buttons --> 
+        <div class="tp -actions">  
+          <a class="tp -navbtn" href="./day06.html">Day 06</a>  
+          <button id="continueBtn" class="tp -navbtn primary" type="button">Day 08 
+→</button>  
+        </div>  
+      </section>  
+    </main>  
+  </div>  
+  <!-- Save progress --> 
+  <script>  
+  (function () {  
+    try { localStorage.setItem("tp_day_last_seen", "7"); } catch (e) {}  
+    document.getElementById("continueBtn").addEventListener("click", function () {  
+      try { localStorage.setItem("tp_day_last_seen", "8"); } catch (e) {}  
+      window.location.href = "./day08.html";  
+    }); 
+  })(); 
+  </script>  
+  <!-- Protección + watermark --> 
+  <script>  
+  (function () {  
+    document.documentElement.classList.add("tp -no-select");  
+    document.addEventListener("contextmenu", function (e) { e.preventDefault(); });  
+    document.addEventListener("keydown", function (e) {  
+      var key = (e.key || "").toLowerCase();  
+      var ctrl = e.ctrlKey || e.metaKey;  
+      if (ctrl && (key === "c" || key === "x" || key === "a" || key === "p" || key === "s"))  
+        e.preventDefault();  
+    }); 
+    document.addEventListener("copy", function (e) { e.preventDefault(); });  
+    function getUserStamp() {  
+      try {  
+        var u = JSON.parse(localStorage.getItem("ma_user") || "{}");  
+        var name = (u.name || u.nombre || u.fullname || "").toString().trim();  
+        var refid = (u.refid || u.refId || u.ref || u.id || "").toString().trim();  
+        var who = name ? name : "TMK Member";  
+        var code = refid ? (" · " + refid) : "";  
+        return (who + code + " · THE TRUTH PATH").toUpperCase();  
+      } catch (e) {  
+        return "TMK MEMBER · THE TRUTH PATH";  
+      } 
+    } 
+    function addWatermark() {  
+      if (document.getElementById("tpWatermark")) return;  
+      var wm = document.createElement("div");  
+      wm.id = "tpWatermark";  
+      wm.setAttribute("aria -hidden", "true");  
+      wm.className = "tp -watermark";  
+      var stamp = getUserStamp();  
+      for (var i = 0; i < 8; i++) {  
+        var s = document.createElement("span");  
+        s.textContent = stamp;  
+        wm.appendChild(s);  
+      } 
+      document.body.appendChild(wm);  
+    } 
+    if (document.readyState === "loading") {  
+      document.addEventListener("DOMContentLoaded", addWatermark);  
+    } else {  
+      addWatermark();  
+    } 
+  })(); 
+  </script>  
+</body>  
